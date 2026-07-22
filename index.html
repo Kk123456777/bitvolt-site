@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BitVolt | فروشگاه لوکس الکترونیک</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fc;
+            color: #1a1a2e;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f2f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ffb300, #f5a000);
+            border-radius: 10px;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: linear-gradient(90deg, #0a1628, #1a2a4a, #0a1628);
+            color: #ffb300;
+            padding: 6px 0;
+            font-size: 0.75rem;
+            border-bottom: 1px solid rgba(255, 179, 0, 0.1);
+            overflow: hidden;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .top-bar .marquee {
+            display: flex;
+            gap: 30px;
+            color: #8ab4d6;
+        }
+        .top-bar .marquee span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .top-bar .marquee i {
+            color: #ffb300;
+        }
+        .top-bar .social-top {
+            display: flex;
+            gap: 10px;
+        }
+        .top-bar .social-top a {
+            color: #8ab4d6;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+        .top-bar .social-top a:hover {
+            color: #ffb300;
+            transform: scale(1.1);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: rgba(10, 22, 40, 0.88);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 179, 0, 0.08);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .header .logo:hover {
+            transform: scale(1.02);
+        }
+        .header .logo .logo-icon {
+            font-size: 2.8rem;
+            color: #ffb300;
+            filter: drop-shadow(0 0 25px rgba(255, 179, 0, 0.3));
+            animation: glowPulse 2.5s infinite;
+        }
+        @keyframes glowPulse {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px rgba(255, 179, 0, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 45px rgba(255, 179, 0, 0.6));
+            }
+        }
+        .header .logo h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffb300, #f5a000, #ffb300);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+        .header .logo h1 span {
+            background: linear-gradient(135deg, #fff, #e0e5ec);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header .logo small {
+            display: block;
+            font-size: 0.6rem;
+            color: #8ab4d6;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        .header .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .header .header-actions .cart-btn {
+            background: linear-gradient(135deg, #ffb300, #f5a000);
+            color: #0a1628;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 30px rgba(255, 179, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .header .header-actions .cart-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+            animation: btnShine 4s infinite;
+        }
+        @keyframes btnShine {
+            0% {
+                transform: translateX(-100%) rotate(0deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(0deg);
+            }
+        }
+        .header .header-actions .cart-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 40px rgba(255, 179, 0, 0.5);
+        }
+        .header .header-actions .cart-btn .badge {
+            background: #0a1628;
+            color: #ffb300;
+            border-radius: 50%;
+            padding: 0 12px;
+            font-weight: 800;
+            min-width: 24px;
+            text-align: center;
+        }
+        .header .header-actions .auth-links a {
+            color: #c8dcec;
+            margin: 0 3px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 50px;
+            border: 1px solid transparent;
+        }
+        .header .header-actions .auth-links a:hover {
+            color: #ffb300;
+            border-color: rgba(255, 179, 0, 0.2);
+            background: rgba(255, 179, 0, 0.05);
+        }
+        .header .header-actions .auth-links a i {
+            margin-left: 5px;
+        }
+        .header .header-actions .user-info {
+            display: none;
+            color: #ffb300;
+            font-weight: 600;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 179, 0, 0.15);
+            transition: 0.3s;
+        }
+        .header .header-actions .user-info:hover {
+            background: rgba(255, 179, 0, 0.05);
+        }
+        .header .header-actions .user-info .user-dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .header .header-actions .user-info .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 35px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            min-width: 210px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            padding: 8px 0;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .header .header-actions .user-info .user-dropdown:hover .user-dropdown-content {
+            display: block;
+            animation: fadeDown 0.3s ease;
+        }
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header .header-actions .user-info .user-dropdown-content a {
+            display: block;
+            padding: 10px 22px;
+            color: #1a1a2e;
+            font-weight: 400;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            border-right: 3px solid transparent;
+        }
+        .header .header-actions .user-info .user-dropdown-content a:hover {
+            background: #f5f7fc;
+            color: #ffb300;
+            border-right-color: #ffb300;
+        }
+        .header .header-actions .user-info .user-dropdown-content a i {
+            margin-left: 12px;
+            width: 20px;
+            text-align: center;
+            color: #ffb300;
+        }
+
+        /* ===== SEARCH BAR ===== */
+        .search-bar {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 10px 0;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        .search-bar .container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 179, 0, 0.08);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.7);
+            font-family: inherit;
+        }
+        .search-bar input:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 8px rgba(255, 179, 0, 0.06);
+            background: #fff;
+        }
+        .search-bar .seller-btn {
+            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+            color: #ffb300;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 179, 0, 0.2);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .search-bar .seller-btn:hover {
+            background: #ffb300;
+            color: #0a1628;
+            transform: scale(1.02);
+            box-shadow: 0 4px 30px rgba(255, 179, 0, 0.25);
+        }
+
+        /* ===== PAGES ===== */
+        .page {
+            display: none;
+            padding: 30px 0 80px;
+            min-height: 60vh;
+            animation: pageFade 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pageFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            background: linear-gradient(145deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
+            padding: 60px 0 50px;
+            margin: 10px 0 30px;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+        .hero-content .badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 179, 0, 0.1);
+            color: #ffb300;
+            padding: 6px 22px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 179, 0, 0.15);
+            margin-bottom: 22px;
+            animation: fadeInUp 0.8s ease;
+            backdrop-filter: blur(5px);
+        }
+        .hero-content h2 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.02;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        .hero-content h2 .highlight {
+            background: linear-gradient(135deg, #ffb300, #f5a000, #ffb300);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #c8dcec;
+            margin: 20px 0 30px;
+            max-width: 500px;
+            line-height: 1.9;
+            animation: fadeInUp 0.8s ease 0.4s both;
+            font-weight: 300;
+        }
+        .hero-content .hero-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        .hero-content .hero-badges span {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #d0e4f5;
+            border: 1px solid rgba(255, 179, 0, 0.08);
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hero-content .hero-badges i {
+            color: #ffb300;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 35px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 22px 38px;
+            border-radius: 28px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+        .hero-stats div {
+            text-align: center;
+            position: relative;
+        }
+        .hero-stats .number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffb300, #f5a000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+        .hero-stats .label {
+            font-size: 0.8rem;
+            color: #8ab4d6;
+            font-weight: 400;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== CATEGORIES & PRODUCTS (خلاصه) ===== */
+        .categories-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 20px 0 25px;
+            scrollbar-width: thin;
+        }
+        .categories-scroll .cat-item {
+            background: rgba(255,  ‌255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 12px 28px;
+            border-radius: 50px;
+            white-space: nowrap;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a4a6a;
+        }
+        .categories-scroll .cat-item.active {
+            border-color: #ffb300;
+            background: linear-gradient(135deg, #fff8e1, #fff3cd);
+            color: #0a1628;
+            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.12);
+        }
+        .categories-scroll .cat-item i {
+            color: #ffb300;
+            font-size: 1.1rem;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin: 30px 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #0a1628;
+        }
+        .section-title i {
+            color: #ffb300;
+            font-size: 2.2rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 28px;
+        }
+        .product-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(18px);
+            border-radius: 28px;
+            padding: 22px 20px 24px;
+            box-shadow: 0 8px 45px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card:hover {
+            transform: translateY(-14px) scale(1.01);
+            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.06);
+            border-color: rgba(255, 179, 0, 0.15);
+        }
+        .product-card .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: linear-gradient(145deg, #f8fafc, #f0f2f8);
+            border-radius: 20px;
+            margin-bottom: 14px;
+            transition: 0.5s;
+            padding: 12px;
+        }
+        .product-card .product-badge {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+            color: #ffb300;
+            padding: 4px 18px;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .product-card .product-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 5px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: #0a1628;
+        }
+        .product-card .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffb300;
+            font-size: 0.85rem;
+            margin: 4px 0;
+        }
+        .product-card .product-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0a1628;
+            margin: 8px 0 12px;
+        }
+        .product-card .product-price small {
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        .product-card .add-to-cart {
+            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-family: inherit;
+        }
+        .product-card .add-to-cart:hover {
+            background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
+            transform: scale(1.02);
+        }
+        .product-card .add-to-cart i {
+            color: #ffb300;
+        }
+
+        /* ============================================================
+           CHECKOUT MODAL (دریافت آدرس و اطلاعات قبل از پرداخت)
+           ============================================================ */
+        .checkout-modal .modal-content {
+            max-width: 500px;
+            text-align: center;
+        }
+        .checkout-modal .checkout-icon {
+            font-size: 4rem;
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        .checkout-modal .checkout-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0a1628;
+        }
+        .checkout-modal .checkout-sub {
+            color: #888;
+            margin: 5px 0 20px;
+        }
+        .checkout-modal .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .checkout-modal .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .checkout-modal .form-group input,
+        .checkout-modal .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: 14px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .checkout-modal .form-group input:focus,
+        .checkout-modal .form-group textarea:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.06);
+        }
+        .checkout-modal .form-group textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+        .checkout-modal .checkout-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .checkout-modal .checkout-actions .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-family: inherit;
+        }
+        .checkout-modal .checkout-actions .btn-primary {
+            background: linear-gradient(135deg, #ffb300, #f5a000);
+            color: #0a1628;
+            box-shadow: 0 4px 25px rgba(255, 179, 0, 0.2);
+        }
+        .checkout-modal .checkout-actions .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.3);
+        }
+        .checkout-modal .checkout-actions .btn-secondary {
+            background: rgba(0, 0, 0, 0.05);
+            color: #555;
+        }
+        .checkout-modal .checkout-actions .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        /* ============================================================
+           ZARINPAL MODAL
+           ============================================================ */
+        .zarinpal-modal .modal-content {
+            max-width: 480px;
+            text-align: center;
+        }
+        .zarinpal-modal .zarinpal-logo {
+            font-size: 5rem;
+            color: #1a7c3e;
+            margin: 5px 0;
+        }
+        .zarinpal-modal .zarinpal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a7c3e;
+        }
+        .zarinpal-modal .zarinpal-amount {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #0a1628;
+            margin: 10px 0;
+        }
+        .zarinpal-modal .zarinpal-status {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 18px;
+            margin: 15px 0;
+            color: #555;
+        }
+        .zarinpal-modal .zarinpal-status .success {
+            color: #2e7d32;
+        }
+        .zarinpal-modal .zarinpal-btn {
+            background: linear-gradient(135deg, #1a7c3e, #145c2e);
+            color: #fff;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+            font-family: inherit;
+        }
+        .zarinpal-modal .zarinpal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(26, 124, 62, 0.2);
+        }
+        .zarinpal-modal .zarinpal-btn.secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #555;
+        }
+        .zarinpal-modal .zarinpal-btn.secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        .zarinpal-modal .zarinpal-loading {
+            display: none;
+            padding: 20px;
+        }
+        .zarinpal-modal .zarinpal-loading.show {
+            display: block;
+        }
+        .zarinpal-modal .zarinpal-loading i {
+            font-size: 4rem;
+            color: #1a7c3e;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+           MODAL OVERLAY
+           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-overlay.show {
+            display: flex;
+        }
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            border-radius: 36px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            animation: modalIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.12);
+        }
+        @keyframes modalIn {
+            from {
+                transform: scale(0.85) translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-content .close-modal {
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            background: rgba(0, 0, 0, 0.04);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #888;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content .close-modal:hover {
+            background: #e74c3c;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        /* ============================================================
+           BOTTOM NAV
+           ============================================================ */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px);
+            display: flex;
+            justify-content: space-around;
+            padding: 6px 0 12px;
+            z-index: 1000;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.65rem;
+            color: #888;
+            transition: 0.3s;
+            padding: 4px 12px;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+            gap: 2px;
+        }
+        .bottom-nav a i {
+            font-size: 1.6rem;
+            transition: 0.3s;
+        }
+        .bottom-nav a:hover,
+        .bottom-nav a.active {
+            color: #ffb300;
+        }
+        .bottom-nav a.active i {
+            transform: scale(1.1);
+        }
+        .bottom-nav a .nav-badge {
+            position: absolute;
+            top: -2px;
+            right: 2px;
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.55rem;
+            padding: 2px 7px;
+            font-weight: 700;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer-section {
+            background: linear-gradient(145deg, #0a1628, #1a2a4a);
+            color: #c8dcec;
+            padding: 45px 0 25px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 40px;
+        }
+        .footer-section .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        .footer-section h4 {
+            color: #ffb300;
+            margin-bottom: 14px;
+            font-size: 1.1rem;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin: 6px 0;
+        }
+        .footer-section ul li a {
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0.6;
+        }
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: #ffb300;
+        }
+        .footer-section .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .footer-section .footer-logo i {
+            font-size: 3rem;
+            color: #ffb300;
+        }
+        .footer-section .footer-logo h3 {
+            color: #ffb300;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .footer-section .footer-logo h3 span {
+            color: #fff;
+        }
+        .footer-section .electronic-badge {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 14px 22px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 179, 0, 0.06);
+            margin-top: 15px;
+        }
+        .footer-section .electronic-badge i {
+            font-size: 3rem;
+            color: #ffb300;
+        }
+        .footer-section .electronic-badge .badge-text {
+            font-size: 0.9rem;
+        }
+        .footer-section .electronic-badge .badge-text strong {
+            color: #ffb300;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            margin-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.8rem;
+            opacity: 0.4;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 15px 25px;
+                gap: 20px;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+                gap: 16px;
+            }
+            .modal-content {
+                padding: 22px;
+                margin: 10px;
+            }
+            .bottom-nav a {
+                font-size: 0.55rem;
+                padding: 2px 8px;
+            }
+            .bottom-nav a i {
+                font-size: 1.2rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .product-card {
+                padding: 14px 12px 16px;
+                border-radius: 18px;
+            }
+            .product-card .product-img {
+                height: 140px;
+            }
+            .product-card .product-price {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .checkout-modal .checkout-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    TOP BAR
+    ============================================================ -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="marquee">
+                <span><i class="fas fa-bolt"></i> ارسال رایگان برای سفارشات بالای ۵۰۰ هزار تومان</span>
+                <span><i class="fas fa-gift"></i> ۷ روز ضمانت بازگشت کالا</span>
+                <span><i class="fas fa-headset"></i> پشتیبانی ۲۴/۷</span>
+            </div>
+            <div class="social-top">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="navigateTo('home')">
+                <i class="fas fa-bolt logo-icon"></i>
+                <div>
+                    <h1>Bit<span>Volt</span></h1>
+                    <small><i class="fas fa-microchip"></i> الکترونیک دیجیتال</small>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="auth-links" id="authLinks">
+                    <a onclick="openAuthModal('login')"><i class="fas fa-user"></i> ورود</a>
+                    <a onclick="openAuthModal('register')"><i class="fas fa-user-plus"></i> ثبت‌نام</a>
+                </div>
+                <div class="user-info" id="userInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="user-dropdown">
+                        <span id="userDisplayName">کاربر</span>
+                        <i class="fas fa-chevron-down" style="font-size:0.6rem; color:#888;"></i>
+                        <div class="user-dropdown-content">
+                            <a onclick="navigateTo('dashboard')"><i class="fas fa-user"></i> حساب کاربری</a>
+                            <a onclick="navigateTo('dashboard')"><i class="fas fa-box"></i> سفارشات</a>
+                            <a onclick="navigateTo('dashboard')"><i class="fas fa-map-marker-alt"></i> آدرس‌ها</a>
+                            <a onclick="logoutUser()" style="color:#e74c3c;"><i class="fas fa-sign-out-alt"></i> خروج</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="cart-btn" onclick="toggleCart(true)">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    SEARCH BAR
+    ============================================================ -->
+    <div class="search-bar">
+        <div class="container">
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." oninput="filterProducts()" />
+            <button class="seller-btn" onclick="openSellerPanel()">
+                <i class="fas fa-store-alt"></i>
+                <span>پنل فروشنده</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PAGE: HOME (خلاصه)
+    ============================================================ -->
+    <div class="page active" id="page-home">
+        <div class="container">
+            <section class="hero-section">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="badge-top"><i class="fas fa-bolt"></i> برند GG Volt</div>
+                        <h2>الکترونیک با <span class="highlight">کیفیت</span> و <span class="highlight">اعتماد</span></h2>
+                        <p>تأمین کننده قطعات الکترونیک، ماژول‌های هوشمند و تجهیزات دیجیتال با بهترین قیمت</p>
+                        <div class="hero-badges">
+                            <span><i class="fas fa-shield-alt"></i> ضمانت اصالت</span>
+                            <span><i class="fas fa-truck"></i> ارسال رایگان</span>
+                            <span><i class="fas fa-undo"></i> بازگشت ۷ روزه</span>
+                            <span><i class="fas fa-headset"></i> پشتیبانی ۲۴/۷</span>
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div><span class="number" id="statProducts">۰</span><span class="label">محصول</span></div>
+                        <div><span class="number">۲٬۱۰۰</span><span class="label">مشتری</span></div>
+                        <div><span class="number">۹۸٪</span><span class="label">رضایت</span></div>
+                        <div><span class="number">⭐ ۴.۸</span><span class="label">امتیاز</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="categories-scroll" id="categoriesContainer">
+                <div class="cat-item active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-list"></i> همه</div>
+                <div class="cat-item" data-cat="میکروکنترلر" onclick="setCategory('میکروکنترلر')"><i class="fas fa-microchip"></i> میکروکنترلر</div>
+                <div class="cat-item" data-cat="ماژول ولت" onclick="setCategory('ماژول ولت')"><i class="fas fa-bolt"></i> ماژول ولت</div>
+                <div class="cat-item" data-cat="رباتیک" onclick="setCategory('رباتیک')"><i class="fas fa-robot"></i> رباتیک</div>
+                <div class="cat-item" data-cat="سنسور" onclick="setCategory('سنسور')"><i class="fas fa-thermometer-half"></i> سنسور</div>
+                <div class="cat-item" data-cat="ابزار دقیق" onclick="setCategory('ابزار دقیق')"><i class="fas fa-tools"></i> ابزار دقیق</div>
+                <div class="cat-item" data-cat="منبع تغذیه" onclick="setCategory('منبع تغذیه')"><i class="fas fa-plug"></i> منبع تغذیه</div>
+            </div>
+
+            <div class="section-title">
+                <i class="fas fa-bolt"></i> محصولات <span style="color:#ffb300;">BitVolt</span>
+                <span class="title-line"></span>
+                <span class="title-count" id="productCount">(۰ محصول)</span>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PAGE: ABOUT (خلاصه)
+    ============================================================ -->
+    <div class="page" id="page-about">
+        <div class="container">
+            <div class="about-section" style="background:rgba(255,255,255,0.85); backdrop-filter:blur(18px); border-radius:36px; padding:38px;">
+                <h2 style="display:flex; align-items:center; gap:16px; color:#0a1628; font-size:2rem;"><i class="fas fa-info-circle" style="color:#ffb300;"></i> درباره BitVolt</h2>
+                <div class="about-grid" style="display:grid; grid-template-columns:2fr 1fr; gap:30px;">
+                    <div>
+                        <p style="font-size:1.05rem; margin-bottom:12px; line-height:1.8;"><strong>BitVolt</strong> با برند <strong>GG Volt</strong>، یک فروشگاه تخصصی در حوزه <strong>الکترونیک و قطعات دیجیتال</strong> است.</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:15px; margin:12px 0;">
+                            <span><i class="fas fa-check-circle" style="color:#2e7d32;"></i> ضمانت اصالت</span>
+                            <span><i class="fas fa-truck" style="color:#e67e22;"></i> ارسال سریع</span>
+                            <span><i class="fas fa-headset" style="color:#0a1628;"></i> پشتیبانی ۲۴/۷</span>
+                            <span><i class="fas fa-undo" style="color:#e67e22;"></i> بازگشت ۷ روزه</span>
+                        </div>
+                        <p><i class="fas fa-map-marker-alt" style="color:#ffb300;"></i> <strong>آدرس:</strong> قزوین، تاکستان، خیابان حافظ، پلاک ۱۲</p>
+                        <p><i class="fas fa-phone" style="color:#ffb300;"></i> <strong>تلفن:</strong> ۰۹۱۰-۷۴۸۴۲۱۴</p>
+                    </div>
+                    <div class="social-links" style="display:flex; flex-direction:column; gap:10px;">
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-instagram"></i> bitvolt.mtv</a>
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-telegram"></i> bitvolt.mtv</a>
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-youtube"></i> bitvolt.mtv</a>
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-twitter"></i> bitvolt.mtv</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <div class="container">
+        <div class="footer-section">
+            <div class="container">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Bit<span>Volt</span></h3>
+                    </div>
+                    <p style="margin:10px 0; opacity:0.5;">فروشگاه تخصصی الکترونیک و دیجیتال</p>
+                    <div class="electronic-badge">
+                        <i class="fas fa-microchip"></i>
+                        <div class="badge-text">
+                            <strong>نماد الکترونیک</strong><br />
+                            <span style="font-size:0.7rem; opacity:0.4;">مجوز رسمی از سازمان صنعت</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4>دسترسی سریع</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('home')">خانه</a></li>
+                        <li><a onclick="navigateTo('products')">محصولات</a></li>
+                        <li><a onclick="alert('📝 بلاگ به زودی راه‌اندازی می‌شود!')">بلاگ</a></li>
+                        <li><a onclick="navigateTo('about')">درباره ما</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>اطلاعات تماس</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="color:#ffb300; margin-left:8px;"></i> قزوین، تاکستان، خیابان حافظ</li>
+                        <li><i class="fas fa-phone" style="color:#ffb300; margin-left:8px;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</li>
+                        <li><i class="fab fa-instagram" style="color:#ffb300; margin-left:8px;"></i> bitvolt.mtv</li>
+                        <li><i class="fab fa-telegram" style="color:#ffb300; margin-left:8px;"></i> bitvolt.mtv</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>شبکه‌های اجتماعی</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-instagram"></i> bitvolt.mtv</a></li>
+                        <li><a href="#"><i class="fab fa-telegram"></i> bitvolt.mtv</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> bitvolt.mtv</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> bitvolt.mtv</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© ۲۰۲۶ BitVolt | تمامی حقوق محفوظ است | <i class="fas fa-bolt" style="color:#ffb300;"></i> GG Volt</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    BOTTOM NAV
+    ============================================================ -->
+    <nav class="bottom-nav">
+        <a class="active" onclick="navigateTo('home')" data-page="home"><i class="fas fa-home"></i> خانه</a>
+        <a onclick="navigateTo('products')" data-page="products"><i class="fas fa-microchip"></i> محصولات</a>
+        <a onclick="navigateTo('about')" data-page="about"><i class="fas fa-info-circle"></i> درباره ما</a>
+        <a onclick="navigateTo('dashboard')" data-page="dashboard"><i class="fas fa-user"></i> حساب من</a>
+        <a onclick="toggleCart(true)">
+            <i class="fas fa-shopping-cart"></i> سبد
+            <span class="nav-badge" id="navCartBadge" style="display:none;">0</span>
+        </a>
+    </nav>
+
+    <!-- ============================================================
+    AUTH MODAL
+    ============================================================ -->
+    <div class="modal-overlay auth-modal" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <div class="auth-logo"><i class="fas fa-bolt"></i></div>
+            <div class="auth-title" id="authTitle">ورود به BitVolt</div>
+            <div class="auth-sub" id="authSub">شماره موبایل خود را وارد کنید</div>
+            <div id="authStep1">
+                <input class="auth-input" type="tel" id="authPhone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11" />
+                <div class="auth-error" id="authError">شماره موبایل معتبر نیست</div>
+                <button class="auth-btn" id="authSendCodeBtn"><i class="fas fa-paper-plane"></i> ارسال کد تایید</button>
+            </div>
+            <div class="auth-otp-section" id="authStep2">
+                <div style="background:rgba(0,0,0,0.02); padding:16px; border-radius:16px; margin:15px 0; border:2px dashed rgba(255,179,0,0.15);">
+                    <p style="font-size:0.9rem; color:#555;"><i class="fas fa-check-circle" style="color:#2e7d32;"></i> کد تایید به شماره <strong id="displayPhone" style="color:#0a1628;">۰۹۱۲۳۴۵۶۷۸۹</strong> ارسال شد</p>
+                </div>
+                <input class="auth-input" type="text" id="authOtp" placeholder="کد ۶ رقمی را وارد کنید" maxlength="6" />
+                <div class="auth-otp-timer">⏱️ زمان باقی‌مانده: <span id="otpTimer">۱۲۰</span> ثانیه</div>
+                <div class="auth-error" id="authOtpError">کد اشتباه است</div>
+                <div class="auth-success" id="authOtpSuccess">✅ کد تایید صحیح است!</div>
+                <button class="auth-btn" id="authVerifyBtn"><i class="fas fa-check-circle"></i> تایید و ورود</button>
+                <div class="auth-switch"><a id="authResendBtn">🔄 ارسال مجدد کد</a></div>
+            </div>
+            <div class="auth-switch" id="authSwitch">
+                <span id="authSwitchText">حساب کاربری ندارید؟</span>
+                <a id="authSwitchLink">ثبت‌نام کنید</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PRODUCT DETAIL MODAL
+    ============================================================ -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <img class="modal-img" id="modalImg" src="" alt="" />
+            <div class="modal-name" id="modalName"></div>
+            <div class="modal-price" id="modalPrice"></div>
+            <div class="modal-meta" id="modalMeta"></div>
+            <div class="modal-desc" id="modalDesc"></div>
+            <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد خرید</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    CHECKOUT MODAL (دریافت اطلاعات قبل از پرداخت)
+    ============================================================ -->
+    <div class="modal-overlay checkout-modal" id="checkoutModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <div class="checkout-icon"><i class="fas fa-truck"></i></div>
+            <div class="checkout-title">تکمیل اطلاعات ارسال</div>
+            <div class="checkout-sub">لطفاً اطلاعات تماس و آدرس خود را وارد کنید</div>
+
+            <div class="form-group">
+                <label>📱 شماره تماس</label>
+                <input type="tel" id="checkoutPhone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" />
+            </div>
+            <div class="form-group">
+                <label>👤 نام گیرنده</label>
+                <input type="text" id="checkoutName" placeholder="نام و نام خانوادگی" />
+            </div>
+            <div class="form-group">
+                <label>📍 آدرس کامل</label>
+                <textarea id="checkoutAddress" placeholder="استان، شهر، خیابان، پلاک، کد پستی"></textarea>
+            </div>
+
+            <div class="checkout-actions">
+                <button class="btn btn-secondary" onclick="closeAllModals()">انصراف</button>
+                <button class="btn btn-primary" onclick="confirmCheckout()"><i class="fas fa-credit-card"></i> ادامه به پرداخت</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    ZARINPAL MODAL
+    ============================================================ -->
+    <div class="modal-overlay zarinpal-modal" id="zarinpalModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <div class="zarinpal-logo"><i class="fas fa-credit-card"></i></div>
+            <div class="zarinpal-title">زرین‌پال</div>
+            <p style="color:#888;">پرداخت امن و سریع</p>
+            <div class="zarinpal-amount" id="zarinpalAmount">۰ تومان</div>
+            <div class="zarinpal-status">
+                <p><i class="fas fa-check-circle success"></i> اتصال به درگاه زرین‌پال برقرار است</p>
+                <p style="font-size:0.9rem; margin-top:5px;">شماره تراکنش: <strong id="zarinpalCode">ZP-2026-XXXX</strong></p>
+            </div>
+            <div class="zarinpal-loading" id="zarinpalLoading">
+                <i class="fas fa-spinner"></i>
+                <p style="margin-top:10px;">در حال اتصال به درگاه زرین‌پال...</p>
+            </div>
+            <div id="zarinpalButtons">
+                <button class="zarinpal-btn" onclick="processPayment()"><i class="fas fa-check"></i> پرداخت با زرین‌پال</button>
+                <button class="zarinpal-btn secondary" onclick="closeAllModals()">انصراف</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    CART PANEL
+    ============================================================ -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart" style="color:#ffb300;"></i> سبد خرید</h2>
+                <button class="close-cart" onclick="toggleCart(false)">&times;</button>
+            </div>
+            <div id="cartItemsContainer">
+                <div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>سبد خرید خالی است</p></div>
+            </div>
+            <div class="cart-total" id="cartTotal">مجموع: ۰ تومان</div>
+            <button class="checkout-btn" onclick="openCheckoutModal()"><i class="fas fa-credit-card"></i> تکمیل خرید</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 🔑 تنظیمات
+        // ============================================================
+        const KAVENEGAR_CONFIG = {
+            apiKey: '', // <--- API Key خود را اینجا بگذارید
+            template: 'verify'
+        };
+        const SELLER_PASSWORD = 'BitVolt@2026#Secure$GGVolt!';
+
+        // ============================================================
+        // 📦 داده‌ها
+        // ============================================================
+        let products = [];
+        let cart = [];
+        let users = {};
+        let orders = {};
+        let userAddresses = {};
+        let currentCategory = 'all';
+        let currentProductId = null;
+        let isLoggedIn = false;
+        let currentUser = null;
+        let generatedCode = '';
+        let otpTimerInterval = null;
+        let otpSeconds = 120;
+        let currentPage = 'home';
+        let pendingTotal = 0;
+
+        // ============================================================
+        // 💾 بارگذاری داده‌ها
+        // ============================================================
+        function loadProducts() {
+            const saved = localStorage.getItem('bitvolt_products');
+            if (saved) {
+                try { products = JSON.parse(saved); } catch (e) { products = []; }
+            }
+            if (products.length === 0) {
+                products = [
+                    { id: 1, name: 'ماژول ولت GG-1000', category: 'ماژول ولت', price: 145000, description: 'ماژول ولت سنج با دقت بالا و صفحه نمایش OLED...', image: 'https://via.placeholder.com/400x300?text=GG+Volt+1000', rating: 4.8 },
+                    { id: 2, name: 'برد آردوینو مگا ۲۵۶۰', category: 'میکروکنترلر', price: 320000, description: 'برد آردوینو مگا با ۵۴ پایه ورودی/خروجی...', image: 'https://via.placeholder.com/400x300?text=Arduino+Mega', rating: 4.9 },
+                    { id: 3, name: 'سنسور دما DS18B20', category: 'سنسور', price: 65000, description: 'سنسور دمای دیجیتال با دقت ۰.۵ درجه سانتیگراد...', image: 'https://via.placeholder.com/400x300?text=DS18B20', rating: 4.6 },
+                    { id: 4, name: 'پاوربانک ۳۰۰۰۰mAh GG', category: 'منبع تغذیه', price: 490000, description: 'پاوربانک با ظرفیت ۳۰۰۰۰ میلی‌آمپر ساعت...', image: 'https://via.placeholder.com/400x300?text=PowerBank+GG', rating: 4.7 },
+                    { id: 5, name: 'مولتی‌متر حرفه‌ای BM-990', category: 'ابزار دقیق', price: 780000, description: 'مولتی‌متر دیجیتال با دقت بالا و صفحه نمایش بزرگ...', image: 'https://via.placeholder.com/400x300?text=Multimeter+Pro', rating: 4.9 },
+                    { id: 6, name: 'کیت آموزشی الکترونیک GG', category: 'رباتیک', price: 630000, description: 'کیت کامل آموزشی شامل آردوینو، سنسورها و...', image: 'https://via.placeholder.com/400x300?text=Education+Kit', rating: 4.5 }
+                ];
+                saveProducts();
+            }
+            updateStatProducts();
+        }
+
+        function saveProducts() {
+            localStorage.setItem('bitvolt_products', JSON.stringify(products));
+            updateStatProducts();
+        }
+
+        function updateStatProducts() {
+            document.getElementById('statProducts').textContent = products.length;
+        }
+
+        function loadUserData() {
+            const savedUsers = localStorage.getItem('bitvolt_users');
+            if (savedUsers) { try { users = JSON.parse(savedUsers); } catch (e) { users = {}; } }
+            const savedOrders = localStorage.getItem('bitvolt_orders');
+            if (savedOrders) { try { orders = JSON.parse(savedOrders); } catch (e) { orders = {}; } }
+            const savedAddresses = localStorage.getItem('bitvolt_addresses');
+            if (savedAddresses) { try { userAddresses = JSON.parse(savedAddresses); } catch (e) { userAddresses = {}; } }
+        }
+
+        function saveUserData() {
+            localStorage.setItem('bitvolt_users', JSON.stringify(users));
+            localStorage.setItem('bitvolt_orders', JSON.stringify(orders));
+            localStorage.setItem('bitvolt_addresses', JSON.stringify(userAddresses));
+        }
+
+        // ============================================================
+        // 📨 تابع ارسال پیامک
+        // ============================================================
+        async function sendRealSms(phone, code) {
+            if (!KAVENEGAR_CONFIG.apiKey) {
+                return { success: false, message: 'API Key وارد نشده است' };
+            }
+            try {
+                const response = await fetch(`https://api.kavenegar.com/v1/${KAVENEGAR_CONFIG.apiKey}/verify/lookup.json`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        receptor: phone,
+                        token: code,
+                        template: KAVENEGAR_CONFIG.template
+                    })
+                });
+                const data = await response.json();
+                if (data.return.status === 200) {
+                    return { success: true, message: 'پیامک ارسال شد' };
+                } else {
+                    return { success: false, message: data.return.message };
+                }
+            } catch (error) {
+                return { success: false, message: error.message };
+            }
+        }
+
+        // ============================================================
+        // 🧭 ناوبری
+        // ============================================================
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const targetPage = document.getElementById('page-' + page);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = page;
+            }
+            document.querySelectorAll('.bottom-nav a[data-page]').forEach(el => {
+                el.classList.toggle('active', el.dataset.page === page);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // 📦 محصولات
+        // ============================================================
+        function renderProducts(filter = '', category = 'all') {
+            const grid = document.getElementById('productGrid');
+            let filtered = products;
+            if (category !== 'all') filtered = filtered.filter(p => p.category === category);
+            if (filter.trim()) filtered = filtered.filter(p =>
+                p.name.toLowerCase().includes(filter.toLowerCase()) ||
+                p.category.toLowerCase().includes(filter.toLowerCase())
+            );
+            const productCount = document.getElementById('productCount');
+            if (filtered.length === 0) {
+                grid.innerHTML =
+                    `<div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#888;">
+                        <i class="fas fa-box-open" style="font-size:3rem; color:#ddd; display:block; margin-bottom:15px;"></i>
+                        <p style="font-size:1.2rem;">محصولی یافت نشد</p>
+                    </div>`;
+                productCount.textContent = '(۰ محصول)';
+                return;
+            }
+            productCount.textContent = `(${filtered.length} محصول)`;
+            grid.innerHTML = '';
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                const stars = '★'.repeat(Math.floor(p.rating || 4)) + '☆'.repeat(5 - Math.floor(p.rating || 4));
+                card.innerHTML = `
+                    <span class="product-badge"><i class="fas fa-bolt"></i> ${p.category}</span>
+                    <img class="product-img" src="${p.image || 'https://via.placeholder.com/400x300?text=No+Image'}" alt="${p.name}" />
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-rating"><span class="stars">${stars}</span><span class="rate-text">(${p.rating || 4.5})</span></div>
+                    <div class="product-price">${p.price.toLocaleString()} <small>تومان</small></div>
+                    <button class="add-to-cart" data-id="${p.id}"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
+                `;
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('.add-to-cart')) return;
+                    openProductModal(p.id);
+                });
+                grid.appendChild(card);
+            });
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    addToCart(id);
+                });
+            });
+        }
+
+        function filterProducts() {
+            const search = document.getElementById('searchInput').value;
+            renderProducts(search, currentCategory);
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.cat === cat);
+            });
+            renderProducts(document.getElementById('searchInput').value, cat);
+        }
+
+        // ============================================================
+        // 🛒 سبد خرید
+        // ============================================================
+        function addToCart(productId) {
+            if (!isLoggedIn) { openAuthModal('login'); return; }
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            const existing = cart.find(item => item.id === productId);
+            if (existing) { existing.qty += 1; } else { cart.push({ ...product, qty: 1 }); }
+            updateCartUI();
+            const btn = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
+            if (btn) {
+                btn.classList.add('in-cart');
+                btn.innerHTML = '<i class="fas fa-check"></i> اضافه شد';
+                setTimeout(() => {
+                    btn.classList.remove('in-cart');
+                    btn.innerHTML = '<i class="fas fa-cart-plus"></i> افزودن به سبد';
+                }, 1000);
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+            const navBadge = document.getElementById('navCartBadge');
+            if (totalItems > 0) {
+                navBadge.style.display = 'inline';
+                navBadge.textContent = totalItems;
+            } else {
+                navBadge.style.display = 'none';
+            }
+            const container = document.getElementById('cartItemsContainer');
+            const totalEl = document.getElementById('cartTotal');
+            if (cart.length === 0) {
+                container.innerHTML =
+                    `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>سبد خرید خالی است</p></div>`;
+                totalEl.textContent = 'مجموع: ۰ تومان';
+                return;
+            }
+            let html = '';
+            let totalPrice = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                totalPrice += itemTotal;
+                html += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <h4>${item.name}</h4>
+                            <small>${item.qty} × ${item.price.toLocaleString()} تومان</small>
+                        </div>
+                        <div>
+                            <span class="item-total">${itemTotal.toLocaleString()}</span>
+                            <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            totalEl.textContent = `مجموع: ${totalPrice.toLocaleString()} تومان`;
+            pendingTotal = totalPrice;
+        }
+
+        function toggleCart(show) {
+            document.getElementById('cartOverlay').classList.toggle('show', show);
+            document.body.style.overflow = show ? 'hidden' : '';
+        }
+
+        // ============================================================
+        // 💳 فرایند پرداخت کامل
+        // ============================================================
+
+        // 1. باز کردن مودال دریافت اطلاعات
+        function openCheckoutModal() {
+            if (!isLoggedIn) {
+                openAuthModal('login');
+                return;
+            }
+            if (cart.length === 0) {
+                alert('سبد خرید خالی است!');
+                return;
+            }
+            // پر کردن اطلاعات قبلی اگر وجود دارد
+            if (userAddresses[currentUser]) {
+                document.getElementById('checkoutPhone').value = userAddresses[currentUser].phone || '';
+                document.getElementById('checkoutName').value = userAddresses[currentUser].name || '';
+                document.getElementById('checkoutAddress').value = userAddresses[currentUser].full || '';
+            } else {
+                document.getElementById('checkoutPhone').value = '';
+                document.getElementById('checkoutName').value = '';
+                document.getElementById('checkoutAddress').value = '';
+            }
+            document.getElementById('checkoutModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 2. تایید اطلاعات و رفتن به پرداخت
+        function confirmCheckout() {
+            const phone = document.getElementById('checkoutPhone').value.trim();
+            const name = document.getElementById('checkoutName').value.trim();
+            const address = document.getElementById('checkoutAddress').value.trim();
+
+            if (!phone || phone.length < 11) {
+                alert('⚠️ لطفاً شماره تماس معتبر وارد کنید');
+                return;
+            }
+            if (!name) {
+                alert('⚠️ لطفاً نام گیرنده را وارد کنید');
+                return;
+            }
+            if (!address) {
+                alert('⚠️ لطفاً آدرس کامل را وارد کنید');
+                return;
+            }
+
+            // ذخیره اطلاعات کاربر
+            userAddresses[currentUser] = {
+                phone: phone,
+                name: name,
+                full: address
+            };
+            saveUserData();
+
+            // بستن مودال اطلاعات
+            document.getElementById('checkoutModal').classList.remove('show');
+
+            // باز کردن زرین‌پال
+            openZarinpal(pendingTotal);
+        }
+
+        // 3. باز کردن زرین‌پال
+        function openZarinpal(total) {
+            document.getElementById('zarinpalAmount').textContent = `${total.toLocaleString()} تومان`;
+            const code = 'ZP-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
+            document.getElementById('zarinpalCode').textContent = code;
+            document.getElementById('zarinpalLoading').classList.remove('show');
+            document.getElementById('zarinpalButtons').style.display = 'block';
+            document.getElementById('zarinpalModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 4. پرداخت
+        function processPayment() {
+            document.getElementById('zarinpalButtons').style.display = 'none';
+            document.getElementById('zarinpalLoading').classList.add('show');
+
+            setTimeout(() => {
+                document.getElementById('zarinpalLoading').classList.remove('show');
+                if (isLoggedIn && cart.length > 0) {
+                    const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
+                    if (!orders[currentUser]) orders[currentUser] = [];
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                    orders[currentUser].push({
+                        id: orderId,
+                        items: JSON.parse(JSON.stringify(cart)),
+                        total: total,
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        status: 'processing',
+                        address: userAddresses[currentUser] || {}
+                    });
+                    saveUserData();
+                    cart = [];
+                    updateCartUI();
+                    toggleCart(false);
+                }
+                alert('✅ پرداخت با زرین‌پال با موفقیت انجام شد!\nسفارش شما ثبت گردید.');
+                closeAllModals();
+                navigateTo('dashboard');
+            }, 3000);
+        }
+
+        // ============================================================
+        // 📱 احراز هویت
+        // ============================================================
+        let authMode = 'login';
+
+        function openAuthModal(mode = 'login') {
+            authMode = mode;
+            const title = document.getElementById('authTitle');
+            const sub = document.getElementById('authSub');
+            const switchText = document.getElementById('authSwitchText');
+            const switchLink = document.getElementById('authSwitchLink');
+            if (mode === 'login') {
+                title.textContent = 'ورود به BitVolt';
+                sub.textContent = 'شماره موبایل خود را وارد کنید';
+                switchText.textContent = 'حساب کاربری ندارید؟';
+                switchLink.textContent = 'ثبت‌نام کنید';
+            } else {
+                title.textContent = 'ثبت‌نام در BitVolt';
+                sub.textContent = 'شماره موبایل خود را وارد کنید';
+                switchText.textContent = 'قبلاً ثبت‌نام کرده‌اید؟';
+                switchLink.textContent = 'ورود کنید';
+            }
+            document.getElementById('authStep1').style.display = 'block';
+            document.getElementById('authStep2').classList.remove('show');
+            document.getElementById('authStep2').style.display = 'none';
+            document.getElementById('authPhone').value = '';
+            document.getElementById('authOtp').value = '';
+            document.getElementById('authError').style.display = 'none';
+            document.getElementById('authOtpError').style.display = 'none';
+            document.getElementById('authOtpSuccess').style.display = 'none';
+            document.getElementById('authSendCodeBtn').disabled = false;
+            document.getElementById('authSendCodeBtn').innerHTML = '<i class="fas fa-paper-plane"></i> ارسال کد تایید';
+            document.getElementById('authModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.getElementById('authSendCodeBtn').addEventListener('click', async function() {
+            const phone = document.getElementById('authPhone').value.trim();
+            if (!phone || phone.length !== 11) {
+                document.getElementById('authError').style.display = 'block';
+                document.getElementById('authError').textContent = 'شماره موبایل معتبر نیست (۱۱ رقم)';
+                return;
+            }
+            document.getElementById('authError').style.display = 'none';
+            generatedCode = String(Math.floor(100000 + Math.random() * 900000));
+            const result = await sendRealSms(phone, generatedCode);
+            if (result.success) {
+                document.getElementById('displayPhone').textContent = phone;
+                document.getElementById('authStep1').style.display = 'none';
+                document.getElementById('authStep2').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('authStep2').classList.add('show');
+                }, 50);
+                document.getElementById('authOtp').value = '';
+                document.getElementById('authOtpError').style.display = 'none';
+                document.getElementById('authOtpSuccess').style.display = 'none';
+                otpSeconds = 120;
+                document.getElementById('otpTimer').textContent = otpSeconds;
+                if (otpTimerInterval) clearInterval(otpTimerInterval);
+                otpTimerInterval = setInterval(() => {
+                    otpSeconds--;
+                    document.getElementById('otpTimer').textContent = otpSeconds;
+                    if (otpSeconds <= 0) {
+                        clearInterval(otpTimerInterval);
+                        document.getElementById('authResendBtn').style.color = '#ffb300';
+                        document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
+                        document.getElementById('authOtpError').style.display = 'block';
+                        document.getElementById('authOtpError').textContent = 'زمان کد منقضی شد. مجدداً درخواست کنید.';
+                    }
+                }, 1000);
+            } else {
+                document.getElementById('authError').style.display = 'block';
+                document.getElementById('authError').textContent = '❌ خطا: ' + result.message;
+            }
+        });
+
+        document.getElementById('authVerifyBtn').addEventListener('click', function() {
+            const otp = document.getElementById('authOtp').value.trim();
+            if (otp === generatedCode) {
+                document.getElementById('authOtpError').style.display = 'none';
+                document.getElementById('authOtpSuccess').style.display = 'block';
+                if (otpTimerInterval) clearInterval(otpTimerInterval);
+                const phone = document.getElementById('authPhone').value.trim();
+                if (!users[phone]) {
+                    users[phone] = { phone: phone, registeredAt: new Date().toISOString() };
+                }
+                isLoggedIn = true;
+                currentUser = phone;
+                document.getElementById('authLinks').style.display = 'none';
+                document.getElementById('userInfo').style.display = 'flex';
+                const displayName = phone.slice(0, 4) + '***' + phone.slice(-4);
+                document.getElementById('userDisplayName').textContent = displayName;
+                localStorage.setItem('bitvolt_user', phone);
+                saveUserData();
+                setTimeout(() => {
+                    closeAllModals();
+                    alert('✅ به BitVolt خوش آمدید!\nشماره: ' + phone);
+                }, 500);
+            } else {
+                document.getElementById('authOtpError').style.display = 'block';
+                document.getElementById('authOtpError').textContent = 'کد وارد شده اشتباه است';
+                document.getElementById('authOtpSuccess').style.display = 'none';
+            }
+        });
+
+        document.getElementById('authResendBtn').addEventListener('click', async function() {
+            const phone = document.getElementById('authPhone').value.trim();
+            if (otpSeconds > 0 && generatedCode) {
+                const result = await sendRealSms(phone, generatedCode);
+                if (result.success) {
+                    document.getElementById('authOtpError').style.display = 'none';
+                    document.getElementById('authOtpSuccess').style.display = 'block';
+                    document.getElementById('authOtpSuccess').textContent = '✅ کد مجدداً ارسال شد';
+                    setTimeout(() => {
+                        document.getElementById('authOtpSuccess').style.display = 'none';
+                    }, 3000);
+                }
+            } else {
+                generatedCode = String(Math.floor(100000 + Math.random() * 900000));
+                const result = await sendRealSms(phone, generatedCode);
+                if (result.success) {
+                    otpSeconds = 120;
+                    document.getElementById('otpTimer').textContent = otpSeconds;
+                    if (otpTimerInterval) clearInterval(otpTimerInterval);
+                    otpTimerInterval = setInterval(() => {
+                        otpSeconds--;
+                        document.getElementById('otpTimer').textContent = otpSeconds;
+                        if (otpSeconds <= 0) {
+                            clearInterval(otpTimerInterval);
+                            document.getElementById('authResendBtn').style.color = '#ffb300';
+                            document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
+                        }
+                    }, 1000);
+                    document.getElementById('authOtpSuccess').style.display = 'block';
+                    document.getElementById('authOtpSuccess').textContent = '✅ کد جدید ارسال شد';
+                    setTimeout(() => {
+                        document.getElementById('authOtpSuccess').style.display = 'none';
+                    }, 3000);
+                } else {
+                    alert('❌ خطا در ارسال مجدد: ' + result.message);
+                }
+            }
+            document.getElementById('authOtpError').style.display = 'none';
+        });
+
+        document.getElementById('authSwitchLink').addEventListener('click', function() {
+            if (authMode === 'login') { openAuthModal('register'); } else { openAuthModal('login'); }
+        });
+
+        // ============================================================
+        // 🔄 خروج
+        // ============================================================
+        function logoutUser() {
+            isLoggedIn = false;
+            currentUser = null;
+            document.getElementById('authLinks').style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+            localStorage.removeItem('bitvolt_user');
+            cart = [];
+            updateCartUI();
+            navigateTo('home');
+            alert('✅ از حساب کاربری خود خارج شدید.');
+        }
+
+        // ============================================================
+        // 📋 بررسی وضعیت ورود
+        // ============================================================
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('bitvolt_user');
+            if (savedUser && users[savedUser]) {
+                isLoggedIn = true;
+                currentUser = savedUser;
+                document.getElementById('authLinks').style.display = 'none';
+                document.getElementById('userInfo').style.display = 'flex';
+                const displayName = savedUser.slice(0, 4) + '***' + savedUser.slice(-4);
+                document.getElementById('userDisplayName').textContent = displayName;
+            }
+        }
+
+        // ============================================================
+        // 🖼️ مودال محصول
+        // ============================================================
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            currentProductId = id;
+            document.getElementById('modalImg').src = product.image || 'https://via.placeholder.com/400x300?text=No+Image';
+            document.getElementById('modalName').textContent = product.name;
+            document.getElementById('modalPrice').textContent = `${product.price.toLocaleString()} تومان`;
+            document.getElementById('modalDesc').textContent = product.description || 'توضیحاتی برای این محصول ثبت نشده است.';
+            document.getElementById('modalMeta').innerHTML = `
+                <span><i class="fas fa-tag"></i> دسته: ${product.category}</span>
+                <span><i class="fas fa-bolt"></i> برند: GG Volt</span>
+                <span><i class="fas fa-microchip"></i> کد: BTV-${String(product.id).padStart(4, '0')}</span>
+                <span><i class="fas fa-star"></i> امتیاز: ${product.rating || 4.5}</span>
+            `;
+            document.getElementById('modalAddBtn').dataset.id = product.id;
+            document.getElementById('productModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.getElementById('modalAddBtn').addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            addToCart(id);
+        });
+
+        // ============================================================
+        // 🏪 پنل فروشنده (ساده شده)
+        // ============================================================
+        function openSellerPanel() {
+            const password = prompt('🔑 برای ورود به پنل فروشنده، رمز عبور را وارد کنید:');
+            if (password === SELLER_PASSWORD) {
+                const name = prompt('📝 نام محصول:');
+                if (!name) return;
+                const category = prompt('📂 دسته‌بندی (میکروکنترلر/ماژول ولت/رباتیک/سنسور/ابزار دقیق/منبع تغذیه):') || 'ماژول ولت';
+                const price = parseInt(prompt('💰 قیمت (تومان):'));
+                if (!price) return;
+                const description = prompt('📝 توضیحات:') || 'توضیحاتی برای این محصول';
+                const image = prompt('🖼️ آدرس تصویر:') || 'https://via.placeholder.com/400x300?text=New+Product';
+
+                const newProduct = {
+                    id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+                    name: name,
+                    category: category,
+                    price: price,
+                    description: description,
+                    image: image,
+                    rating: 4.5
+                };
+                products.push(newProduct);
+                saveProducts();
+                renderProducts(document.getElementById('searchInput').value, currentCategory);
+                alert('✅ محصول جدید با موفقیت اضافه شد!');
+            } else if (password !== null) {
+                alert('❌ رمز عبور اشتباه است!');
+            }
+        }
+
+        // ============================================================
+        // ❌ بستن مودال‌ها
+        // ============================================================
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) closeAllModals();
+            });
+        });
+
+        // ============================================================
+        // 🚀 مقداردهی اولیه
+        // ============================================================
+        loadProducts();
+        loadUserData();
+        renderProducts();
+        updateCartUI();
+        checkLoginStatus();
+
+        console.log('⚡ BitVolt | فروشگاه الکترونیک لوکس');
+        console.log('🔑 رمز پنل فروشنده:', SELLER_PASSWORD);
+        console.log('📱 شماره تماس: 09107484214');
+
+        if (KAVENEGAR_CONFIG.apiKey) {
+            console.log('✅ سرویس پیامک: کاوه‌نگار فعال');
+        } else {
+            console.log('⚠️ API Key کاوه‌نگار وارد نشده!');
+            console.log('📱 برای فعال‌سازی، API Key را در KAVENEGAR_CONFIG.apiKey قرار دهید.');
+        }
+    </script>
+
+</body>
+</html>
