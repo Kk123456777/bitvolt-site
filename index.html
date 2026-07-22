@@ -7,26 +7,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fc;
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, sans-serif;
+            background: #f0f2f8;
             color: #1a1a2e;
-            padding-bottom: 80px;
             overflow-x: hidden;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 0 20px;
         }
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #f0f2f8;
@@ -36,53 +35,9 @@
             border-radius: 10px;
         }
 
-        /* ===== TOP BAR ===== */
-        .top-bar {
-            background: linear-gradient(90deg, #0a1628, #1a2a4a, #0a1628);
-            color: #ffb300;
-            padding: 6px 0;
-            font-size: 0.75rem;
-            border-bottom: 1px solid rgba(255, 179, 0, 0.1);
-            overflow: hidden;
-        }
-        .top-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .top-bar .marquee {
-            display: flex;
-            gap: 30px;
-            color: #8ab4d6;
-        }
-        .top-bar .marquee span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-        }
-        .top-bar .marquee i {
-            color: #ffb300;
-        }
-        .top-bar .social-top {
-            display: flex;
-            gap: 10px;
-        }
-        .top-bar .social-top a {
-            color: #8ab4d6;
-            transition: 0.3s;
-            font-size: 0.85rem;
-        }
-        .top-bar .social-top a:hover {
-            color: #ffb300;
-            transform: scale(1.1);
-        }
-
         /* ===== HEADER ===== */
         .header {
-            background: rgba(10, 22, 40, 0.88);
+            background: rgba(10, 22, 40, 0.92);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border-bottom: 1px solid rgba(255, 179, 0, 0.08);
@@ -101,7 +56,7 @@
         .header .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -109,7 +64,7 @@
             transform: scale(1.02);
         }
         .header .logo .logo-icon {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: #ffb300;
             filter: drop-shadow(0 0 25px rgba(255, 179, 0, 0.3));
             animation: glowPulse 2.5s infinite;
@@ -130,7 +85,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: 1px;
         }
         .header .logo h1 span {
             background: linear-gradient(135deg, #fff, #e0e5ec);
@@ -145,13 +99,34 @@
             font-weight: 300;
             letter-spacing: 2px;
         }
+
+        /* ===== HEADER ACTIONS ===== */
         .header .header-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
-        .header .header-actions .cart-btn {
+        .header .header-actions .auth-links a {
+            color: #c8dcec;
+            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .header .header-actions .auth-links a:hover {
+            color: #ffb300;
+            border-color: rgba(255, 179, 0, 0.2);
+            background: rgba(255, 179, 0, 0.05);
+        }
+        .header .header-actions .auth-links a i {
+            margin-left: 5px;
+        }
+
+        /* ===== CART BUTTON (در کنار هدر) ===== */
+        .header .cart-btn {
             background: linear-gradient(135deg, #ffb300, #f5a000);
             color: #0a1628;
             padding: 10px 22px;
@@ -168,7 +143,7 @@
             position: relative;
             overflow: hidden;
         }
-        .header .header-actions .cart-btn::before {
+        .header .cart-btn::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -186,11 +161,11 @@
                 transform: translateX(100%) rotate(0deg);
             }
         }
-        .header .header-actions .cart-btn:hover {
+        .header .cart-btn:hover {
             transform: scale(1.05) translateY(-2px);
             box-shadow: 0 8px 40px rgba(255, 179, 0, 0.5);
         }
-        .header .header-actions .cart-btn .badge {
+        .header .cart-btn .badge {
             background: #0a1628;
             color: #ffb300;
             border-radius: 50%;
@@ -199,60 +174,43 @@
             min-width: 24px;
             text-align: center;
         }
-        .header .header-actions .auth-links a {
-            color: #c8dcec;
-            margin: 0 3px;
-            font-size: 0.8rem;
-            transition: 0.3s;
-            cursor: pointer;
-            padding: 6px 14px;
-            border-radius: 50px;
-            border: 1px solid transparent;
-        }
-        .header .header-actions .auth-links a:hover {
-            color: #ffb300;
-            border-color: rgba(255, 179, 0, 0.2);
-            background: rgba(255, 179, 0, 0.05);
-        }
-        .header .header-actions .auth-links a i {
-            margin-left: 5px;
-        }
-        .header .header-actions .user-info {
+
+        /* ===== USER INFO ===== */
+        .header .user-info {
             display: none;
             color: #ffb300;
             font-weight: 600;
             font-size: 0.85rem;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
             padding: 6px 16px;
             border-radius: 50px;
             border: 1px solid rgba(255, 179, 0, 0.15);
+            cursor: pointer;
             transition: 0.3s;
         }
-        .header .header-actions .user-info:hover {
+        .header .user-info:hover {
             background: rgba(255, 179, 0, 0.05);
         }
-        .header .header-actions .user-info .user-dropdown {
+        .header .user-info .user-dropdown {
             position: relative;
             display: inline-block;
-            cursor: pointer;
         }
-        .header .header-actions .user-info .user-dropdown-content {
+        .header .user-info .user-dropdown-content {
             display: none;
             position: absolute;
             right: 0;
             top: 35px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            min-width: 210px;
+            min-width: 200px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
             border-radius: 16px;
             padding: 8px 0;
             z-index: 1001;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .header .header-actions .user-info .user-dropdown:hover .user-dropdown-content {
+        .header .user-info .user-dropdown:hover .user-dropdown-content {
             display: block;
             animation: fadeDown 0.3s ease;
         }
@@ -266,7 +224,7 @@
                 transform: translateY(0);
             }
         }
-        .header .header-actions .user-info .user-dropdown-content a {
+        .header .user-info .user-dropdown-content a {
             display: block;
             padding: 10px 22px;
             color: #1a1a2e;
@@ -274,28 +232,95 @@
             font-size: 0.85rem;
             transition: 0.2s;
             border-right: 3px solid transparent;
+            cursor: pointer;
         }
-        .header .header-actions .user-info .user-dropdown-content a:hover {
+        .header .user-info .user-dropdown-content a:hover {
             background: #f5f7fc;
             color: #ffb300;
             border-right-color: #ffb300;
         }
-        .header .header-actions .user-info .user-dropdown-content a i {
+        .header .user-info .user-dropdown-content a i {
             margin-left: 12px;
             width: 20px;
             text-align: center;
             color: #ffb300;
         }
 
+        /* ===== MORE BUTTON (سه‌نقطه) ===== */
+        .header .more-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #c8dcec;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header .more-btn:hover {
+            background: rgba(255, 179, 0, 0.1);
+            border-color: rgba(255, 179, 0, 0.2);
+            color: #ffb300;
+        }
+        .header .more-btn span {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ===== MORE DROPDOWN ===== */
+        .more-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            padding: 8px 0;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .more-dropdown.show {
+            display: block;
+            animation: fadeDown 0.3s ease;
+        }
+        .more-dropdown a {
+            display: block;
+            padding: 10px 22px;
+            color: #1a1a2e;
+            font-weight: 400;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            border-right: 3px solid transparent;
+            cursor: pointer;
+        }
+        .more-dropdown a:hover {
+            background: #f5f7fc;
+            color: #ffb300;
+            border-right-color: #ffb300;
+        }
+        .more-dropdown a i {
+            margin-left: 12px;
+            width: 22px;
+            text-align: center;
+            color: #ffb300;
+        }
+        .more-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
         /* ===== SEARCH BAR ===== */
         .search-bar {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            padding: 10px 0;
-            position: sticky;
-            top: 72px;
-            z-index: 99;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 12px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.03);
         }
         .search-bar .container {
@@ -321,68 +346,23 @@
             box-shadow: 0 0 0 8px rgba(255, 179, 0, 0.06);
             background: #fff;
         }
-        .search-bar .seller-btn {
-            background: linear-gradient(135deg, #0a1628, #1a2a4a);
-            color: #ffb300;
-            padding: 12px 24px;
-            border-radius: 50px;
-            border: 2px solid rgba(255, 179, 0, 0.2);
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-        .search-bar .seller-btn:hover {
-            background: #ffb300;
-            color: #0a1628;
-            transform: scale(1.02);
-            box-shadow: 0 4px 30px rgba(255, 179, 0, 0.25);
-        }
-
-        /* ===== PAGES ===== */
-        .page {
-            display: none;
-            padding: 30px 0 80px;
-            min-height: 60vh;
-            animation: pageFade 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes pageFade {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .page.active {
-            display: block;
-        }
 
         /* ===== HERO ===== */
         .hero-section {
             background: linear-gradient(145deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
-            padding: 60px 0 50px;
-            margin: 10px 0 30px;
+            padding: 50px 0 40px;
+            margin: 15px 0 25px;
             border-radius: 40px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
         }
         .hero-section .container {
-            position: relative;
-            z-index: 1;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 30px;
         }
         .hero-content {
             flex: 1;
@@ -399,16 +379,13 @@
             font-size: 0.8rem;
             font-weight: 600;
             border: 1px solid rgba(255, 179, 0, 0.15);
-            margin-bottom: 22px;
-            animation: fadeInUp 0.8s ease;
-            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
         }
         .hero-content h2 {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 900;
             color: #fff;
             line-height: 1.02;
-            animation: fadeInUp 0.8s ease 0.2s both;
         }
         .hero-content h2 .highlight {
             background: linear-gradient(135deg, #ffb300, #f5a000, #ffb300);
@@ -417,19 +394,17 @@
             background-clip: text;
         }
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #c8dcec;
-            margin: 20px 0 30px;
+            margin: 15px 0 25px;
             max-width: 500px;
-            line-height: 1.9;
-            animation: fadeInUp 0.8s ease 0.4s both;
+            line-height: 1.8;
             font-weight: 300;
         }
         .hero-content .hero-badges {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s both;
         }
         .hero-content .hero-badges span {
             background: rgba(255, 255, 255, 0.04);
@@ -439,30 +414,33 @@
             color: #d0e4f5;
             border: 1px solid rgba(255, 179, 0, 0.08);
             backdrop-filter: blur(10px);
-            transition: 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: 0.3s;
+        }
+        .hero-content .hero-badges span:hover {
+            background: rgba(255, 179, 0, 0.08);
+            border-color: rgba(255, 179, 0, 0.25);
+            transform: translateY(-3px);
         }
         .hero-content .hero-badges i {
             color: #ffb300;
         }
         .hero-stats {
             display: flex;
-            gap: 35px;
+            gap: 30px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 22px 38px;
+            padding: 20px 35px;
             border-radius: 28px;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            animation: fadeInUp 0.8s ease 0.8s both;
         }
         .hero-stats div {
             text-align: center;
-            position: relative;
         }
         .hero-stats .number {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 900;
             background: linear-gradient(135deg, #ffb300, #f5a000);
             -webkit-background-clip: text;
@@ -471,37 +449,35 @@
             display: block;
         }
         .hero-stats .label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #8ab4d6;
             font-weight: 400;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        /* ===== CATEGORIES & PRODUCTS (خلاصه) ===== */
+        /* ===== CATEGORIES ===== */
         .categories-scroll {
             display: flex;
             gap: 12px;
             overflow-x: auto;
-            padding: 20px 0 25px;
+            padding: 15px 0 20px;
             scrollbar-width: thin;
         }
+        .categories-scroll::-webkit-scrollbar {
+            height: 3px;
+        }
+        .categories-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #ffb300, #f5a000);
+            border-radius: 10px;
+        }
         .categories-scroll .cat-item {
-            background: rgba(255,  ‌255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
-            padding: 12px 28px;
+            padding: 10px 26px;
             border-radius: 50px;
             white-space: nowrap;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             cursor: pointer;
             transition: all 0.3s;
             border: 2px solid transparent;
@@ -509,6 +485,10 @@
             align-items: center;
             gap: 8px;
             color: #4a4a6a;
+        }
+        .categories-scroll .cat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
         }
         .categories-scroll .cat-item.active {
             border-color: #ffb300;
@@ -518,33 +498,51 @@
         }
         .categories-scroll .cat-item i {
             color: #ffb300;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
+
+        /* ===== PRODUCTS GRID ===== */
         .section-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin: 30px 0 25px;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 25px 0 20px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             color: #0a1628;
         }
         .section-title i {
             color: #ffb300;
-            font-size: 2.2rem;
+            font-size: 2rem;
         }
+        .section-title .title-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, #ffb30022, #ffb30055, #ffb30022);
+            border-radius: 10px;
+        }
+        .section-title .count {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #888;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 4px 16px;
+            border-radius: 50px;
+        }
+
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
         }
+
         .product-card {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(18px);
             border-radius: 28px;
-            padding: 22px 20px 24px;
-            box-shadow: 0 8px 45px rgba(0, 0, 0, 0.04);
-            transition: all 0.5s;
+            padding: 20px 18px 22px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             display: flex;
@@ -552,35 +550,55 @@
             position: relative;
             overflow: hidden;
         }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffb300, #f5a000, #ffb300);
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .product-card:hover::before {
+            opacity: 1;
+        }
         .product-card:hover {
-            transform: translateY(-14px) scale(1.01);
-            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.06);
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.06);
             border-color: rgba(255, 179, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
         }
         .product-card .product-img {
             width: 100%;
-            height: 200px;
+            height: 190px;
             object-fit: contain;
             background: linear-gradient(145deg, #f8fafc, #f0f2f8);
-            border-radius: 20px;
-            margin-bottom: 14px;
+            border-radius: 18px;
+            margin-bottom: 12px;
             transition: 0.5s;
-            padding: 12px;
+            padding: 10px;
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.04);
         }
         .product-card .product-badge {
             align-self: flex-start;
             background: linear-gradient(135deg, #0a1628, #1a2a4a);
             color: #ffb300;
-            padding: 4px 18px;
+            padding: 3px 16px;
             border-radius: 50px;
             font-size: 0.6rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         .product-card .product-name {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin: 5px 0;
+            margin: 4px 0;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -592,211 +610,202 @@
             align-items: center;
             gap: 6px;
             color: #ffb300;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin: 4px 0;
         }
+        .product-card .product-rating .rate-text {
+            color: #888;
+            font-size: 0.7rem;
+        }
         .product-card .product-price {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 900;
             color: #0a1628;
             margin: 8px 0 12px;
         }
         .product-card .product-price small {
             font-weight: 400;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #999;
         }
         .product-card .add-to-cart {
             background: linear-gradient(135deg, #0a1628, #1a2a4a);
             color: #fff;
             border: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s;
             margin-top: auto;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-family: inherit;
         }
         .product-card .add-to-cart:hover {
             background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
             transform: scale(1.02);
+            box-shadow: 0 4px 25px rgba(10, 22, 40, 0.15);
+        }
+        .product-card .add-to-cart.in-cart {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
         }
         .product-card .add-to-cart i {
             color: #ffb300;
         }
 
         /* ============================================================
-           CHECKOUT MODAL (دریافت آدرس و اطلاعات قبل از پرداخت)
+           CART PANEL (مودال سبد خرید)
            ============================================================ */
-        .checkout-modal .modal-content {
-            max-width: 500px;
-            text-align: center;
-        }
-        .checkout-modal .checkout-icon {
-            font-size: 4rem;
-            color: #ffb300;
-            margin-bottom: 10px;
-        }
-        .checkout-modal .checkout-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0a1628;
-        }
-        .checkout-modal .checkout-sub {
-            color: #888;
-            margin: 5px 0 20px;
-        }
-        .checkout-modal .form-group {
-            margin-bottom: 15px;
-            text-align: right;
-        }
-        .checkout-modal .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #333;
-            font-size: 0.9rem;
-        }
-        .checkout-modal .form-group input,
-        .checkout-modal .form-group textarea {
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid rgba(0, 0, 0, 0.06);
-            border-radius: 14px;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-            font-family: inherit;
-            background: rgba(255, 255, 255, 0.8);
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: none;
+            justify-content: flex-end;
         }
-        .checkout-modal .form-group input:focus,
-        .checkout-modal .form-group textarea:focus {
-            border-color: #ffb300;
-            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.06);
-        }
-        .checkout-modal .form-group textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
-        .checkout-modal .checkout-actions {
+        .cart-overlay.show {
             display: flex;
+        }
+        .cart-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            width: 450px;
+            max-width: 95%;
+            height: 100%;
+            padding: 30px 25px;
+            overflow-y: auto;
+            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(80px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .cart-panel .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .cart-panel .cart-header h2 {
+            display: flex;
+            align-items: center;
             gap: 10px;
-            margin-top: 15px;
+            font-size: 1.4rem;
+            color: #0a1628;
         }
-        .checkout-modal .checkout-actions .btn {
-            flex: 1;
-            padding: 14px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
+        .cart-panel .cart-header h2 i {
+            color: #ffb300;
+        }
+        .cart-panel .cart-header .close-cart {
+            background: rgba(0, 0, 0, 0.04);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.6rem;
             cursor: pointer;
+            color: #888;
             transition: 0.3s;
-            border: none;
-            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .checkout-modal .checkout-actions .btn-primary {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
-            color: #0a1628;
-            box-shadow: 0 4px 25px rgba(255, 179, 0, 0.2);
-        }
-        .checkout-modal .checkout-actions .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.3);
-        }
-        .checkout-modal .checkout-actions .btn-secondary {
-            background: rgba(0, 0, 0, 0.05);
-            color: #555;
-        }
-        .checkout-modal .checkout-actions .btn-secondary:hover {
-            background: rgba(0, 0, 0, 0.08);
-        }
-
-        /* ============================================================
-           ZARINPAL MODAL
-           ============================================================ */
-        .zarinpal-modal .modal-content {
-            max-width: 480px;
-            text-align: center;
-        }
-        .zarinpal-modal .zarinpal-logo {
-            font-size: 5rem;
-            color: #1a7c3e;
-            margin: 5px 0;
-        }
-        .zarinpal-modal .zarinpal-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #1a7c3e;
-        }
-        .zarinpal-modal .zarinpal-amount {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #0a1628;
-            margin: 10px 0;
-        }
-        .zarinpal-modal .zarinpal-status {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 18px;
-            margin: 15px 0;
-            color: #555;
-        }
-        .zarinpal-modal .zarinpal-status .success {
-            color: #2e7d32;
-        }
-        .zarinpal-modal .zarinpal-btn {
-            background: linear-gradient(135deg, #1a7c3e, #145c2e);
+        .cart-panel .cart-header .close-cart:hover {
+            background: #e74c3c;
             color: #fff;
-            border: none;
-            padding: 14px 40px;
-            border-radius: 50px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            align-items: center;
+        }
+        .cart-item .item-info h4 {
+            font-size: 0.95rem;
+            color: #0a1628;
+        }
+        .cart-item .item-info small {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .cart-item .item-total {
             font-weight: 700;
+            color: #0a1628;
+        }
+        .cart-item .remove-item {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+        .cart-item .remove-item:hover {
+            background: rgba(231, 76, 60, 0.05);
+        }
+        .cart-total {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin: 20px 0 15px;
+            color: #0a1628;
+        }
+        .checkout-btn {
+            background: linear-gradient(135deg, #ffb300, #f5a000);
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 50px;
+            font-weight: 800;
             font-size: 1.05rem;
             cursor: pointer;
             transition: 0.3s;
-            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 30px rgba(255, 179, 0, 0.2);
             font-family: inherit;
+            color: #0a1628;
         }
-        .zarinpal-modal .zarinpal-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 35px rgba(26, 124, 62, 0.2);
+        .checkout-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 40px rgba(255, 179, 0, 0.3);
         }
-        .zarinpal-modal .zarinpal-btn.secondary {
-            background: rgba(0, 0, 0, 0.04);
-            color: #555;
+        .empty-cart {
+            text-align: center;
+            padding: 50px 0;
+            color: #999;
         }
-        .zarinpal-modal .zarinpal-btn.secondary:hover {
-            background: rgba(0, 0, 0, 0.08);
-        }
-        .zarinpal-modal .zarinpal-loading {
-            display: none;
-            padding: 20px;
-        }
-        .zarinpal-modal .zarinpal-loading.show {
-            display: block;
-        }
-        .zarinpal-modal .zarinpal-loading i {
+        .empty-cart i {
             font-size: 4rem;
-            color: #1a7c3e;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            color: #e8ecf1;
+            display: block;
+            margin-bottom: 15px;
         }
 
         /* ============================================================
-           MODAL OVERLAY
+           MODALS
            ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -823,7 +832,7 @@
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 40px;
+            padding: 35px;
             animation: modalIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -841,12 +850,12 @@
         }
         .modal-content .close-modal {
             position: absolute;
-            top: 18px;
-            left: 22px;
+            top: 15px;
+            left: 20px;
             background: rgba(0, 0, 0, 0.04);
             border: none;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             font-size: 1.6rem;
             cursor: pointer;
@@ -862,61 +871,256 @@
             transform: rotate(90deg);
         }
 
-        /* ============================================================
-           BOTTOM NAV
-           ============================================================ */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(25px);
-            display: flex;
-            justify-content: space-around;
-            padding: 6px 0 12px;
-            z-index: 1000;
-            border-top: 1px solid rgba(0, 0, 0, 0.03);
-        }
-        .bottom-nav a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            color: #888;
-            transition: 0.3s;
-            padding: 4px 12px;
-            border-radius: 14px;
-            position: relative;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-family: inherit;
-            gap: 2px;
-        }
-        .bottom-nav a i {
-            font-size: 1.6rem;
-            transition: 0.3s;
-        }
-        .bottom-nav a:hover,
-        .bottom-nav a.active {
-            color: #ffb300;
-        }
-        .bottom-nav a.active i {
-            transform: scale(1.1);
-        }
-        .bottom-nav a .nav-badge {
-            position: absolute;
-            top: -2px;
-            right: 2px;
-            background: #e74c3c;
-            color: #fff;
-            border-radius: 50%;
-            font-size: 0.55rem;
-            padding: 2px 7px;
-            font-weight: 700;
-            min-width: 18px;
+        /* ===== AUTH MODAL ===== */
+        .auth-modal .modal-content {
+            max-width: 460px;
             text-align: center;
+        }
+        .auth-modal .auth-logo {
+            font-size: 4.5rem;
+            color: #ffb300;
+            margin-bottom: 5px;
+        }
+        .auth-modal .auth-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0a1628;
+        }
+        .auth-modal .auth-sub {
+            color: #888;
+            margin: 5px 0 18px;
+        }
+        .auth-modal .auth-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            outline: none;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            font-family: inherit;
+            background: rgba(0, 0, 0, 0.02);
+        }
+        .auth-modal .auth-input:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 8px rgba(255, 179, 0, 0.05);
+            background: #fff;
+        }
+        .auth-modal .auth-btn {
+            background: linear-gradient(135deg, #ffb300, #f5a000);
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            color: #0a1628;
+            box-shadow: 0 4px 25px rgba(255, 179, 0, 0.15);
+        }
+        .auth-modal .auth-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.25);
+        }
+        .auth-modal .auth-otp-section {
+            display: none;
+        }
+        .auth-modal .auth-otp-section.show {
+            display: block;
+        }
+        .auth-modal .auth-otp-timer {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+        .auth-modal .auth-otp-timer span {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+        .auth-modal .auth-switch {
+            margin-top: 12px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .auth-modal .auth-switch a {
+            color: #ffb300;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .auth-modal .auth-error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin: 8px 0;
+            display: none;
+        }
+        .auth-modal .auth-success {
+            color: #2e7d32;
+            font-size: 0.9rem;
+            margin: 8px 0;
+            display: none;
+        }
+
+        /* ===== CHECKOUT MODAL ===== */
+        .checkout-modal .modal-content {
+            max-width: 480px;
+            text-align: center;
+        }
+        .checkout-modal .checkout-icon {
+            font-size: 4rem;
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+        .checkout-modal .checkout-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0a1628;
+        }
+        .checkout-modal .form-group {
+            margin-bottom: 14px;
+            text-align: right;
+        }
+        .checkout-modal .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #333;
+            font-size: 0.85rem;
+        }
+        .checkout-modal .form-group input,
+        .checkout-modal .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+            border-radius: 14px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .checkout-modal .form-group input:focus,
+        .checkout-modal .form-group textarea:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.05);
+        }
+        .checkout-modal .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .checkout-modal .checkout-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .checkout-modal .checkout-actions .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-family: inherit;
+        }
+        .checkout-modal .checkout-actions .btn-primary {
+            background: linear-gradient(135deg, #ffb300, #f5a000);
+            color: #0a1628;
+            box-shadow: 0 4px 25px rgba(255, 179, 0, 0.2);
+        }
+        .checkout-modal .checkout-actions .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.3);
+        }
+        .checkout-modal .checkout-actions .btn-secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #555;
+        }
+        .checkout-modal .checkout-actions .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== ZARINPAL MODAL ===== */
+        .zarinpal-modal .modal-content {
+            max-width: 460px;
+            text-align: center;
+        }
+        .zarinpal-modal .zarinpal-logo {
+            font-size: 4.5rem;
+            color: #1a7c3e;
+        }
+        .zarinpal-modal .zarinpal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1a7c3e;
+        }
+        .zarinpal-modal .zarinpal-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #0a1628;
+            margin: 10px 0;
+        }
+        .zarinpal-modal .zarinpal-status {
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 16px;
+            margin: 15px 0;
+            color: #555;
+        }
+        .zarinpal-modal .zarinpal-status .success {
+            color: #2e7d32;
+        }
+        .zarinpal-modal .zarinpal-btn {
+            background: linear-gradient(135deg, #1a7c3e, #145c2e);
+            color: #fff;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+            font-family: inherit;
+        }
+        .zarinpal-modal .zarinpal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(26, 124, 62, 0.2);
+        }
+        .zarinpal-modal .zarinpal-btn.secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #555;
+        }
+        .zarinpal-modal .zarinpal-btn.secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        .zarinpal-modal .zarinpal-loading {
+            display: none;
+            padding: 20px;
+        }
+        .zarinpal-modal .zarinpal-loading.show {
+            display: block;
+        }
+        .zarinpal-modal .zarinpal-loading i {
+            font-size: 3.5rem;
+            color: #1a7c3e;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* ============================================================
@@ -925,30 +1129,31 @@
         .footer-section {
             background: linear-gradient(145deg, #0a1628, #1a2a4a);
             color: #c8dcec;
-            padding: 45px 0 25px;
+            padding: 40px 0 25px;
             border-radius: 40px 40px 0 0;
             margin-top: 40px;
         }
         .footer-section .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
         }
         .footer-section h4 {
             color: #ffb300;
-            margin-bottom: 14px;
-            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-size: 1rem;
         }
         .footer-section ul {
             list-style: none;
         }
         .footer-section ul li {
-            margin: 6px 0;
+            margin: 5px 0;
         }
         .footer-section ul li a {
             cursor: pointer;
             transition: 0.3s;
             opacity: 0.6;
+            font-size: 0.9rem;
         }
         .footer-section ul li a:hover {
             opacity: 1;
@@ -960,12 +1165,12 @@
             gap: 12px;
         }
         .footer-section .footer-logo i {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #ffb300;
         }
         .footer-section .footer-logo h3 {
             color: #ffb300;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
         }
         .footer-section .footer-logo h3 span {
@@ -974,29 +1179,29 @@
         .footer-section .electronic-badge {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 14px 22px;
-            border-radius: 18px;
+            padding: 12px 20px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 179, 0, 0.06);
-            margin-top: 15px;
+            margin-top: 12px;
         }
         .footer-section .electronic-badge i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #ffb300;
         }
         .footer-section .electronic-badge .badge-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .footer-section .electronic-badge .badge-text strong {
             color: #ffb300;
         }
         .footer-bottom {
             text-align: center;
-            padding-top: 25px;
-            margin-top: 25px;
+            padding-top: 20px;
+            margin-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             opacity: 0.4;
         }
 
@@ -1004,6 +1209,9 @@
            RESPONSIVE
            ============================================================ */
         @media (max-width: 768px) {
+            .header .logo h1 {
+                font-size: 1.5rem;
+            }
             .hero-content h2 {
                 font-size: 2.2rem;
             }
@@ -1011,41 +1219,18 @@
                 flex-wrap: wrap;
                 justify-content: center;
                 padding: 15px 25px;
-                gap: 20px;
+                gap: 15px;
+            }
+            .hero-stats .number {
+                font-size: 1.5rem;
             }
             .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-                gap: 16px;
-            }
-            .modal-content {
-                padding: 22px;
-                margin: 10px;
-            }
-            .bottom-nav a {
-                font-size: 0.55rem;
-                padding: 2px 8px;
-            }
-            .bottom-nav a i {
-                font-size: 1.2rem;
-            }
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        @media (max-width: 480px) {
-            .hero-content h2 {
-                font-size: 1.8rem;
-            }
-            .product-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
             }
             .product-card {
                 padding: 14px 12px 16px;
-                border-radius: 18px;
+                border-radius: 20px;
             }
             .product-card .product-img {
                 height: 140px;
@@ -1053,35 +1238,79 @@
             .product-card .product-price {
                 font-size: 1.2rem;
             }
+            .cart-panel {
+                width: 100%;
+                max-width: 100%;
+            }
+            .modal-content {
+                padding: 22px;
+                margin: 10px;
+            }
+            .header .header-actions .auth-links a {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+            .header .cart-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            .header .more-btn span {
+                display: none;
+            }
             .section-title {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
             .checkout-modal .checkout-actions {
                 flex-direction: column;
+            }
+            .footer-section .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-section .electronic-badge {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .header .container {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .header .header-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-content h2 {
+                font-size: 1.6rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .product-card .product-img {
+                height: 120px;
+            }
+            .product-card .product-name {
+                font-size: 0.85rem;
+            }
+            .product-card .product-price {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .section-title .count {
+                display: none;
+            }
+            .categories-scroll .cat-item {
+                padding: 8px 18px;
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- ============================================================
-    TOP BAR
-    ============================================================ -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="marquee">
-                <span><i class="fas fa-bolt"></i> ارسال رایگان برای سفارشات بالای ۵۰۰ هزار تومان</span>
-                <span><i class="fas fa-gift"></i> ۷ روز ضمانت بازگشت کالا</span>
-                <span><i class="fas fa-headset"></i> پشتیبانی ۲۴/۷</span>
-            </div>
-            <div class="social-top">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </div>
 
     <!-- ============================================================
     HEADER
@@ -1095,28 +1324,46 @@
                     <small><i class="fas fa-microchip"></i> الکترونیک دیجیتال</small>
                 </div>
             </div>
+
             <div class="header-actions">
                 <div class="auth-links" id="authLinks">
                     <a onclick="openAuthModal('login')"><i class="fas fa-user"></i> ورود</a>
                     <a onclick="openAuthModal('register')"><i class="fas fa-user-plus"></i> ثبت‌نام</a>
                 </div>
+
                 <div class="user-info" id="userInfo">
                     <i class="fas fa-user-circle"></i>
                     <div class="user-dropdown">
                         <span id="userDisplayName">کاربر</span>
                         <i class="fas fa-chevron-down" style="font-size:0.6rem; color:#888;"></i>
                         <div class="user-dropdown-content">
-                            <a onclick="navigateTo('dashboard')"><i class="fas fa-user"></i> حساب کاربری</a>
-                            <a onclick="navigateTo('dashboard')"><i class="fas fa-box"></i> سفارشات</a>
-                            <a onclick="navigateTo('dashboard')"><i class="fas fa-map-marker-alt"></i> آدرس‌ها</a>
+                            <a onclick="showDashboard()"><i class="fas fa-user"></i> حساب کاربری</a>
+                            <a onclick="showDashboard()"><i class="fas fa-box"></i> سفارشات</a>
+                            <a onclick="showDashboard()"><i class="fas fa-map-marker-alt"></i> آدرس‌ها</a>
                             <a onclick="logoutUser()" style="color:#e74c3c;"><i class="fas fa-sign-out-alt"></i> خروج</a>
                         </div>
                     </div>
                 </div>
+
+                <!-- دکمه سبد خرید (کنار هدر) -->
                 <button class="cart-btn" onclick="toggleCart(true)">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="badge" id="cartCount">0</span>
                 </button>
+
+                <!-- دکمه سه‌نقطه (پنل فروشنده و بیشتر) -->
+                <div class="more-wrapper">
+                    <button class="more-btn" onclick="toggleMoreDropdown()">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <span>بیشتر</span>
+                    </button>
+                    <div class="more-dropdown" id="moreDropdown">
+                        <a onclick="openSellerPanel()"><i class="fas fa-store-alt"></i> پنل فروشنده</a>
+                        <a onclick="navigateTo('about')"><i class="fas fa-info-circle"></i> درباره ما</a>
+                        <a onclick="alert('📝 بلاگ به زودی راه‌اندازی می‌شود!')"><i class="fas fa-blog"></i> بلاگ</a>
+                        <a onclick="showDashboard()"><i class="fas fa-address-card"></i> پروفایل</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -1127,18 +1374,15 @@
     <div class="search-bar">
         <div class="container">
             <input type="text" id="searchInput" placeholder="جستجوی محصولات..." oninput="filterProducts()" />
-            <button class="seller-btn" onclick="openSellerPanel()">
-                <i class="fas fa-store-alt"></i>
-                <span>پنل فروشنده</span>
-            </button>
         </div>
     </div>
 
     <!-- ============================================================
-    PAGE: HOME (خلاصه)
+    PAGE: HOME
     ============================================================ -->
     <div class="page active" id="page-home">
         <div class="container">
+            <!-- HERO -->
             <section class="hero-section">
                 <div class="container">
                     <div class="hero-content">
@@ -1161,6 +1405,7 @@
                 </div>
             </section>
 
+            <!-- CATEGORIES -->
             <div class="categories-scroll" id="categoriesContainer">
                 <div class="cat-item active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-list"></i> همه</div>
                 <div class="cat-item" data-cat="میکروکنترلر" onclick="setCategory('میکروکنترلر')"><i class="fas fa-microchip"></i> میکروکنترلر</div>
@@ -1171,39 +1416,38 @@
                 <div class="cat-item" data-cat="منبع تغذیه" onclick="setCategory('منبع تغذیه')"><i class="fas fa-plug"></i> منبع تغذیه</div>
             </div>
 
+            <!-- PRODUCTS -->
             <div class="section-title">
                 <i class="fas fa-bolt"></i> محصولات <span style="color:#ffb300;">BitVolt</span>
                 <span class="title-line"></span>
-                <span class="title-count" id="productCount">(۰ محصول)</span>
+                <span class="count" id="productCount">(۰ محصول)</span>
             </div>
             <div class="product-grid" id="productGrid"></div>
         </div>
     </div>
 
     <!-- ============================================================
-    PAGE: ABOUT (خلاصه)
+    PAGE: ABOUT (مخفف)
     ============================================================ -->
     <div class="page" id="page-about">
         <div class="container">
-            <div class="about-section" style="background:rgba(255,255,255,0.85); backdrop-filter:blur(18px); border-radius:36px; padding:38px;">
-                <h2 style="display:flex; align-items:center; gap:16px; color:#0a1628; font-size:2rem;"><i class="fas fa-info-circle" style="color:#ffb300;"></i> درباره BitVolt</h2>
-                <div class="about-grid" style="display:grid; grid-template-columns:2fr 1fr; gap:30px;">
+            <div style="background:rgba(255,255,255,0.85); backdrop-filter:blur(18px); border-radius:36px; padding:35px;">
+                <h2 style="display:flex; align-items:center; gap:14px; color:#0a1628; font-size:1.8rem;"><i class="fas fa-info-circle" style="color:#ffb300;"></i> درباره BitVolt</h2>
+                <div style="display:grid; grid-template-columns:2fr 1fr; gap:25px;">
                     <div>
-                        <p style="font-size:1.05rem; margin-bottom:12px; line-height:1.8;"><strong>BitVolt</strong> با برند <strong>GG Volt</strong>، یک فروشگاه تخصصی در حوزه <strong>الکترونیک و قطعات دیجیتال</strong> است.</p>
-                        <div style="display:flex; flex-wrap:wrap; gap:15px; margin:12px 0;">
+                        <p style="font-size:1rem; line-height:1.8;"><strong>BitVolt</strong> با برند <strong>GG Volt</strong>، فروشگاه تخصصی الکترونیک و قطعات دیجیتال.</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:12px; margin:12px 0;">
                             <span><i class="fas fa-check-circle" style="color:#2e7d32;"></i> ضمانت اصالت</span>
                             <span><i class="fas fa-truck" style="color:#e67e22;"></i> ارسال سریع</span>
                             <span><i class="fas fa-headset" style="color:#0a1628;"></i> پشتیبانی ۲۴/۷</span>
-                            <span><i class="fas fa-undo" style="color:#e67e22;"></i> بازگشت ۷ روزه</span>
                         </div>
-                        <p><i class="fas fa-map-marker-alt" style="color:#ffb300;"></i> <strong>آدرس:</strong> قزوین، تاکستان، خیابان حافظ، پلاک ۱۲</p>
-                        <p><i class="fas fa-phone" style="color:#ffb300;"></i> <strong>تلفن:</strong> ۰۹۱۰-۷۴۸۴۲۱۴</p>
+                        <p><i class="fas fa-map-marker-alt" style="color:#ffb300;"></i> قزوین، تاکستان، خیابان حافظ، پلاک ۱۲</p>
+                        <p><i class="fas fa-phone" style="color:#ffb300;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</p>
                     </div>
-                    <div class="social-links" style="display:flex; flex-direction:column; gap:10px;">
-                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-instagram"></i> bitvolt.mtv</a>
-                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-telegram"></i> bitvolt.mtv</a>
-                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-youtube"></i> bitvolt.mtv</a>
-                        <a href="#" style="background:rgba(0,0,0,0.02); padding:12px 18px; border-radius:16px; display:flex; align-items:center; gap:12px;"><i class="fab fa-twitter"></i> bitvolt.mtv</a>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:10px 16px; border-radius:14px; display:flex; align-items:center; gap:10px;"><i class="fab fa-instagram"></i> bitvolt.mtv</a>
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:10px 16px; border-radius:14px; display:flex; align-items:center; gap:10px;"><i class="fab fa-telegram"></i> bitvolt.mtv</a>
+                        <a href="#" style="background:rgba(0,0,0,0.02); padding:10px 16px; border-radius:14px; display:flex; align-items:center; gap:10px;"><i class="fab fa-youtube"></i> bitvolt.mtv</a>
                     </div>
                 </div>
             </div>
@@ -1221,12 +1465,12 @@
                         <i class="fas fa-bolt"></i>
                         <h3>Bit<span>Volt</span></h3>
                     </div>
-                    <p style="margin:10px 0; opacity:0.5;">فروشگاه تخصصی الکترونیک و دیجیتال</p>
+                    <p style="margin:8px 0; opacity:0.5; font-size:0.85rem;">فروشگاه تخصصی الکترونیک</p>
                     <div class="electronic-badge">
                         <i class="fas fa-microchip"></i>
                         <div class="badge-text">
                             <strong>نماد الکترونیک</strong><br />
-                            <span style="font-size:0.7rem; opacity:0.4;">مجوز رسمی از سازمان صنعت</span>
+                            <span style="font-size:0.7rem; opacity:0.4;">مجوز رسمی</span>
                         </div>
                     </div>
                 </div>
@@ -1235,17 +1479,16 @@
                     <ul>
                         <li><a onclick="navigateTo('home')">خانه</a></li>
                         <li><a onclick="navigateTo('products')">محصولات</a></li>
-                        <li><a onclick="alert('📝 بلاگ به زودی راه‌اندازی می‌شود!')">بلاگ</a></li>
+                        <li><a onclick="alert('📝 به زودی')">بلاگ</a></li>
                         <li><a onclick="navigateTo('about')">درباره ما</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4>اطلاعات تماس</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt" style="color:#ffb300; margin-left:8px;"></i> قزوین، تاکستان، خیابان حافظ</li>
-                        <li><i class="fas fa-phone" style="color:#ffb300; margin-left:8px;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</li>
-                        <li><i class="fab fa-instagram" style="color:#ffb300; margin-left:8px;"></i> bitvolt.mtv</li>
-                        <li><i class="fab fa-telegram" style="color:#ffb300; margin-left:8px;"></i> bitvolt.mtv</li>
+                        <li><i class="fas fa-map-marker-alt" style="color:#ffb300; margin-left:6px;"></i> قزوین، تاکستان، حافظ</li>
+                        <li><i class="fas fa-phone" style="color:#ffb300; margin-left:6px;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</li>
+                        <li><i class="fab fa-instagram" style="color:#ffb300; margin-left:6px;"></i> bitvolt.mtv</li>
                     </ul>
                 </div>
                 <div>
@@ -1254,7 +1497,6 @@
                         <li><a href="#"><i class="fab fa-instagram"></i> bitvolt.mtv</a></li>
                         <li><a href="#"><i class="fab fa-telegram"></i> bitvolt.mtv</a></li>
                         <li><a href="#"><i class="fab fa-youtube"></i> bitvolt.mtv</a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i> bitvolt.mtv</a></li>
                     </ul>
                 </div>
             </div>
@@ -1263,20 +1505,6 @@
             </div>
         </div>
     </div>
-
-    <!-- ============================================================
-    BOTTOM NAV
-    ============================================================ -->
-    <nav class="bottom-nav">
-        <a class="active" onclick="navigateTo('home')" data-page="home"><i class="fas fa-home"></i> خانه</a>
-        <a onclick="navigateTo('products')" data-page="products"><i class="fas fa-microchip"></i> محصولات</a>
-        <a onclick="navigateTo('about')" data-page="about"><i class="fas fa-info-circle"></i> درباره ما</a>
-        <a onclick="navigateTo('dashboard')" data-page="dashboard"><i class="fas fa-user"></i> حساب من</a>
-        <a onclick="toggleCart(true)">
-            <i class="fas fa-shopping-cart"></i> سبد
-            <span class="nav-badge" id="navCartBadge" style="display:none;">0</span>
-        </a>
-    </nav>
 
     <!-- ============================================================
     AUTH MODAL
@@ -1293,8 +1521,8 @@
                 <button class="auth-btn" id="authSendCodeBtn"><i class="fas fa-paper-plane"></i> ارسال کد تایید</button>
             </div>
             <div class="auth-otp-section" id="authStep2">
-                <div style="background:rgba(0,0,0,0.02); padding:16px; border-radius:16px; margin:15px 0; border:2px dashed rgba(255,179,0,0.15);">
-                    <p style="font-size:0.9rem; color:#555;"><i class="fas fa-check-circle" style="color:#2e7d32;"></i> کد تایید به شماره <strong id="displayPhone" style="color:#0a1628;">۰۹۱۲۳۴۵۶۷۸۹</strong> ارسال شد</p>
+                <div style="background:rgba(0,0,0,0.02); padding:14px; border-radius:14px; margin:12px 0; border:2px dashed rgba(255,179,0,0.15);">
+                    <p style="font-size:0.85rem; color:#555;"><i class="fas fa-check-circle" style="color:#2e7d32;"></i> کد تایید به شماره <strong id="displayPhone" style="color:#0a1628;">۰۹۱۲۳۴۵۶۷۸۹</strong> ارسال شد</p>
                 </div>
                 <input class="auth-input" type="text" id="authOtp" placeholder="کد ۶ رقمی را وارد کنید" maxlength="6" />
                 <div class="auth-otp-timer">⏱️ زمان باقی‌مانده: <span id="otpTimer">۱۲۰</span> ثانیه</div>
@@ -1316,25 +1544,24 @@
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
-            <img class="modal-img" id="modalImg" src="" alt="" />
-            <div class="modal-name" id="modalName"></div>
-            <div class="modal-price" id="modalPrice"></div>
-            <div class="modal-meta" id="modalMeta"></div>
-            <div class="modal-desc" id="modalDesc"></div>
-            <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد خرید</button>
+            <img class="modal-img" id="modalImg" src="" alt="" style="width:100%; max-height:300px; object-fit:contain; background:#f8fafc; border-radius:18px; padding:15px;" />
+            <div class="modal-name" id="modalName" style="font-size:1.8rem; font-weight:800; color:#0a1628;"></div>
+            <div class="modal-price" id="modalPrice" style="font-size:2.2rem; font-weight:900; color:#0a1628; margin:8px 0;"></div>
+            <div class="modal-meta" id="modalMeta" style="display:flex; gap:15px; flex-wrap:wrap; background:rgba(0,0,0,0.02); padding:14px 18px; border-radius:16px; margin:12px 0;"></div>
+            <div class="modal-desc" id="modalDesc" style="color:#555; line-height:1.8; font-size:1rem;"></div>
+            <button class="modal-add-btn" id="modalAddBtn" style="background:linear-gradient(135deg,#ffb300,#f5a000); border:none; padding:16px; width:100%; border-radius:50px; font-weight:800; font-size:1.1rem; cursor:pointer; transition:0.3s; display:flex; justify-content:center; align-items:center; gap:10px; margin-top:12px; font-family:inherit; color:#0a1628; box-shadow:0 4px 25px rgba(255,179,0,0.2);"><i class="fas fa-cart-plus"></i> افزودن به سبد خرید</button>
         </div>
     </div>
 
     <!-- ============================================================
-    CHECKOUT MODAL (دریافت اطلاعات قبل از پرداخت)
+    CHECKOUT MODAL
     ============================================================ -->
     <div class="modal-overlay checkout-modal" id="checkoutModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
             <div class="checkout-icon"><i class="fas fa-truck"></i></div>
             <div class="checkout-title">تکمیل اطلاعات ارسال</div>
-            <div class="checkout-sub">لطفاً اطلاعات تماس و آدرس خود را وارد کنید</div>
-
+            <p style="color:#888; margin-bottom:15px;">لطفاً اطلاعات تماس و آدرس خود را وارد کنید</p>
             <div class="form-group">
                 <label>📱 شماره تماس</label>
                 <input type="tel" id="checkoutPhone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" />
@@ -1347,7 +1574,6 @@
                 <label>📍 آدرس کامل</label>
                 <textarea id="checkoutAddress" placeholder="استان، شهر، خیابان، پلاک، کد پستی"></textarea>
             </div>
-
             <div class="checkout-actions">
                 <button class="btn btn-secondary" onclick="closeAllModals()">انصراف</button>
                 <button class="btn btn-primary" onclick="confirmCheckout()"><i class="fas fa-credit-card"></i> ادامه به پرداخت</button>
@@ -1367,7 +1593,7 @@
             <div class="zarinpal-amount" id="zarinpalAmount">۰ تومان</div>
             <div class="zarinpal-status">
                 <p><i class="fas fa-check-circle success"></i> اتصال به درگاه زرین‌پال برقرار است</p>
-                <p style="font-size:0.9rem; margin-top:5px;">شماره تراکنش: <strong id="zarinpalCode">ZP-2026-XXXX</strong></p>
+                <p style="font-size:0.85rem; margin-top:5px;">شماره تراکنش: <strong id="zarinpalCode">ZP-2026-XXXX</strong></p>
             </div>
             <div class="zarinpal-loading" id="zarinpalLoading">
                 <i class="fas fa-spinner"></i>
@@ -1381,7 +1607,7 @@
     </div>
 
     <!-- ============================================================
-    CART PANEL
+    CART PANEL (سبد خرید)
     ============================================================ -->
     <div class="cart-overlay" id="cartOverlay">
         <div class="cart-panel">
@@ -1509,10 +1735,8 @@
                 targetPage.classList.add('active');
                 currentPage = page;
             }
-            document.querySelectorAll('.bottom-nav a[data-page]').forEach(el => {
-                el.classList.toggle('active', el.dataset.page === page);
-            });
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            closeMoreDropdown();
         }
 
         // ============================================================
@@ -1529,9 +1753,9 @@
             const productCount = document.getElementById('productCount');
             if (filtered.length === 0) {
                 grid.innerHTML =
-                    `<div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#888;">
-                        <i class="fas fa-box-open" style="font-size:3rem; color:#ddd; display:block; margin-bottom:15px;"></i>
-                        <p style="font-size:1.2rem;">محصولی یافت نشد</p>
+                    `<div style="grid-column:1/-1; text-align:center; padding:50px 20px; color:#888;">
+                        <i class="fas fa-box-open" style="font-size:3rem; color:#ddd; display:block; margin-bottom:12px;"></i>
+                        <p style="font-size:1.1rem;">محصولی یافت نشد</p>
                     </div>`;
                 productCount.textContent = '(۰ محصول)';
                 return;
@@ -1607,13 +1831,6 @@
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             document.getElementById('cartCount').textContent = totalItems;
-            const navBadge = document.getElementById('navCartBadge');
-            if (totalItems > 0) {
-                navBadge.style.display = 'inline';
-                navBadge.textContent = totalItems;
-            } else {
-                navBadge.style.display = 'none';
-            }
             const container = document.getElementById('cartItemsContainer');
             const totalEl = document.getElementById('cartTotal');
             if (cart.length === 0) {
@@ -1651,20 +1868,11 @@
         }
 
         // ============================================================
-        // 💳 فرایند پرداخت کامل
+        // 💳 فرایند پرداخت
         // ============================================================
-
-        // 1. باز کردن مودال دریافت اطلاعات
         function openCheckoutModal() {
-            if (!isLoggedIn) {
-                openAuthModal('login');
-                return;
-            }
-            if (cart.length === 0) {
-                alert('سبد خرید خالی است!');
-                return;
-            }
-            // پر کردن اطلاعات قبلی اگر وجود دارد
+            if (!isLoggedIn) { openAuthModal('login'); return; }
+            if (cart.length === 0) { alert('سبد خرید خالی است!'); return; }
             if (userAddresses[currentUser]) {
                 document.getElementById('checkoutPhone').value = userAddresses[currentUser].phone || '';
                 document.getElementById('checkoutName').value = userAddresses[currentUser].name || '';
@@ -1676,43 +1884,22 @@
             }
             document.getElementById('checkoutModal').classList.add('show');
             document.body.style.overflow = 'hidden';
+            toggleCart(false);
         }
 
-        // 2. تایید اطلاعات و رفتن به پرداخت
         function confirmCheckout() {
             const phone = document.getElementById('checkoutPhone').value.trim();
             const name = document.getElementById('checkoutName').value.trim();
             const address = document.getElementById('checkoutAddress').value.trim();
-
-            if (!phone || phone.length < 11) {
-                alert('⚠️ لطفاً شماره تماس معتبر وارد کنید');
-                return;
-            }
-            if (!name) {
-                alert('⚠️ لطفاً نام گیرنده را وارد کنید');
-                return;
-            }
-            if (!address) {
-                alert('⚠️ لطفاً آدرس کامل را وارد کنید');
-                return;
-            }
-
-            // ذخیره اطلاعات کاربر
-            userAddresses[currentUser] = {
-                phone: phone,
-                name: name,
-                full: address
-            };
+            if (!phone || phone.length < 11) { alert('⚠️ شماره تماس معتبر وارد کنید'); return; }
+            if (!name) { alert('⚠️ نام گیرنده را وارد کنید'); return; }
+            if (!address) { alert('⚠️ آدرس کامل را وارد کنید'); return; }
+            userAddresses[currentUser] = { phone, name, full: address };
             saveUserData();
-
-            // بستن مودال اطلاعات
             document.getElementById('checkoutModal').classList.remove('show');
-
-            // باز کردن زرین‌پال
             openZarinpal(pendingTotal);
         }
 
-        // 3. باز کردن زرین‌پال
         function openZarinpal(total) {
             document.getElementById('zarinpalAmount').textContent = `${total.toLocaleString()} تومان`;
             const code = 'ZP-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
@@ -1723,11 +1910,9 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // 4. پرداخت
         function processPayment() {
             document.getElementById('zarinpalButtons').style.display = 'none';
             document.getElementById('zarinpalLoading').classList.add('show');
-
             setTimeout(() => {
                 document.getElementById('zarinpalLoading').classList.remove('show');
                 if (isLoggedIn && cart.length > 0) {
@@ -1749,7 +1934,7 @@
                 }
                 alert('✅ پرداخت با زرین‌پال با موفقیت انجام شد!\nسفارش شما ثبت گردید.');
                 closeAllModals();
-                navigateTo('dashboard');
+                showDashboard();
             }, 3000);
         }
 
@@ -1803,9 +1988,7 @@
                 document.getElementById('displayPhone').textContent = phone;
                 document.getElementById('authStep1').style.display = 'none';
                 document.getElementById('authStep2').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('authStep2').classList.add('show');
-                }, 50);
+                setTimeout(() => { document.getElementById('authStep2').classList.add('show'); }, 50);
                 document.getElementById('authOtp').value = '';
                 document.getElementById('authOtpError').style.display = 'none';
                 document.getElementById('authOtpSuccess').style.display = 'none';
@@ -1836,9 +2019,7 @@
                 document.getElementById('authOtpSuccess').style.display = 'block';
                 if (otpTimerInterval) clearInterval(otpTimerInterval);
                 const phone = document.getElementById('authPhone').value.trim();
-                if (!users[phone]) {
-                    users[phone] = { phone: phone, registeredAt: new Date().toISOString() };
-                }
+                if (!users[phone]) { users[phone] = { phone: phone, registeredAt: new Date().toISOString() }; }
                 isLoggedIn = true;
                 currentUser = phone;
                 document.getElementById('authLinks').style.display = 'none';
@@ -1866,9 +2047,7 @@
                     document.getElementById('authOtpError').style.display = 'none';
                     document.getElementById('authOtpSuccess').style.display = 'block';
                     document.getElementById('authOtpSuccess').textContent = '✅ کد مجدداً ارسال شد';
-                    setTimeout(() => {
-                        document.getElementById('authOtpSuccess').style.display = 'none';
-                    }, 3000);
+                    setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
                 }
             } else {
                 generatedCode = String(Math.floor(100000 + Math.random() * 900000));
@@ -1888,9 +2067,7 @@
                     }, 1000);
                     document.getElementById('authOtpSuccess').style.display = 'block';
                     document.getElementById('authOtpSuccess').textContent = '✅ کد جدید ارسال شد';
-                    setTimeout(() => {
-                        document.getElementById('authOtpSuccess').style.display = 'none';
-                    }, 3000);
+                    setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
                 } else {
                     alert('❌ خطا در ارسال مجدد: ' + result.message);
                 }
@@ -1933,6 +2110,34 @@
         }
 
         // ============================================================
+        // 📊 داشبورد
+        // ============================================================
+        function showDashboard() {
+            if (!isLoggedIn) { openAuthModal('login'); return; }
+            let msg = '👤 حساب کاربری\n\n';
+            msg += '📱 شماره: ' + currentUser + '\n\n';
+            if (userAddresses[currentUser]) {
+                msg += '📍 آدرس:\n';
+                msg += 'نام: ' + (userAddresses[currentUser].name || '') + '\n';
+                msg += 'تلفن: ' + (userAddresses[currentUser].phone || '') + '\n';
+                msg += 'آدرس: ' + (userAddresses[currentUser].full || '') + '\n\n';
+            } else {
+                msg += '⚠️ آدرسی ثبت نشده است\n\n';
+            }
+            const userOrders = orders[currentUser] || [];
+            if (userOrders.length > 0) {
+                msg += '📦 سفارشات:\n';
+                userOrders.slice().reverse().forEach((order, i) => {
+                    msg += (i + 1) + '. ' + order.id + ' - ' + order.total.toLocaleString() + ' تومان - ' + order.date +
+                        '\n';
+                });
+            } else {
+                msg += '📦 سفارشی ثبت نشده است';
+            }
+            alert(msg);
+        }
+
+        // ============================================================
         // 🖼️ مودال محصول
         // ============================================================
         function openProductModal(id) {
@@ -1957,17 +2162,20 @@
         document.getElementById('modalAddBtn').addEventListener('click', function() {
             const id = parseInt(this.dataset.id);
             addToCart(id);
+            closeAllModals();
         });
 
         // ============================================================
-        // 🏪 پنل فروشنده (ساده شده)
+        // 🏪 پنل فروشنده (در سه‌نقطه)
         // ============================================================
         function openSellerPanel() {
+            closeMoreDropdown();
             const password = prompt('🔑 برای ورود به پنل فروشنده، رمز عبور را وارد کنید:');
             if (password === SELLER_PASSWORD) {
                 const name = prompt('📝 نام محصول:');
                 if (!name) return;
-                const category = prompt('📂 دسته‌بندی (میکروکنترلر/ماژول ولت/رباتیک/سنسور/ابزار دقیق/منبع تغذیه):') || 'ماژول ولت';
+                const category = prompt('📂 دسته‌بندی (میکروکنترلر/ماژول ولت/رباتیک/سنسور/ابزار دقیق/منبع تغذیه):') ||
+                'ماژول ولت';
                 const price = parseInt(prompt('💰 قیمت (تومان):'));
                 if (!price) return;
                 const description = prompt('📝 توضیحات:') || 'توضیحاتی برای این محصول';
@@ -1992,11 +2200,30 @@
         }
 
         // ============================================================
+        // 🔽 سه‌نقطه
+        // ============================================================
+        function toggleMoreDropdown() {
+            document.getElementById('moreDropdown').classList.toggle('show');
+        }
+
+        function closeMoreDropdown() {
+            document.getElementById('moreDropdown').classList.remove('show');
+        }
+
+        // بستن سه‌نقطه با کلیک خارج
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.more-wrapper')) {
+                closeMoreDropdown();
+            }
+        });
+
+        // ============================================================
         // ❌ بستن مودال‌ها
         // ============================================================
         function closeAllModals() {
             document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
             document.body.style.overflow = '';
+            closeMoreDropdown();
         }
 
         document.querySelectorAll('.modal-overlay').forEach(modal => {
