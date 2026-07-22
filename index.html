@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== تمام استایل‌های قبلی مثل قبل ===== */
+        /* برای اختصار، استایل‌ها رو از نسخه قبلی استفاده کنید */
         * {
             margin: 0;
             padding: 0;
@@ -2189,20 +2190,27 @@
 
     <script>
         // ============================================================
-        // 🔑 تنظیمات
+        // 🔑 تنظیمات متمرکز - تمام API Key ها اینجا
         // ============================================================
-        const KAVENEGAR_CONFIG = {
-            apiKey: '', // <--- API Key کاوه‌نگار خود را اینجا بگذارید
-            template: 'verify'
+
+        // ---------- تنظیمات پیامک (sms.ir) ----------
+        const SMS_CONFIG = {
+            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // <--- کلید sms.ir خود را اینجا بگذارید
+            templateId: 958264, // <--- آیدی قالب sms.ir خود را وارد کنید
+            sender: '09107484214' // <--- شماره خط sms.ir خود را وارد کنید
         };
 
+        // ---------- تنظیمات زرین‌پال ----------
         const ZARINPAL_CONFIG = {
-            merchantId: '', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
-            callbackUrl: window.location.href + '?payment=callback',
-            sandbox: true // true = تست | false = واقعی
+            merchantId: 'YOUR_MERCHANT_ID', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
+            sandbox: true, // true = تست | false = واقعی
+            callbackUrl: window.location.href + '?payment=callback'
         };
 
+        // ---------- رمز پنل فروشنده ----------
         const SELLER_PASSWORD = 'BitVolt@2026#Secure$GGVolt!';
+
+        // ---------- هزینه ارسال ----------
         const SHIPPING_COST = 120000; // هزینه پست ۱۲۰ هزار تومان
         const FREE_SHIPPING_MIN = 1000000; // ارسال رایگان بالای ۱ میلیون
 
@@ -2271,28 +2279,36 @@
         }
 
         // ============================================================
-        // 📨 تابع ارسال پیامک
+        // 📨 تابع ارسال پیامک با sms.ir
         // ============================================================
-        async function sendRealSms(phone, code) {
-            if (!KAVENEGAR_CONFIG.apiKey) {
-                console.log('⚠️ API Key وارد نشده! کد:', code);
+        async function sendSmsIr(phone, code) {
+            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'YOUR_SMS_IR_API_KEY') {
+                console.log('⚠️ API Key sms.ir وارد نشده! کد:', code);
                 return { success: true, message: 'شبیه‌سازی شده' };
             }
+
             try {
-                const response = await fetch(`https://api.kavenegar.com/v1/${KAVENEGAR_CONFIG.apiKey}/verify/lookup.json`, {
+                const response = await fetch('https://api.sms.ir/v1/send/verify', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({
-                        receptor: phone,
-                        token: code,
-                        template: KAVENEGAR_CONFIG.template
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': SMS_CONFIG.apiKey
+                    },
+                    body: JSON.stringify({
+                        mobile: phone,
+                        templateId: SMS_CONFIG.templateId,
+                        parameters: [
+                            { name: 'CODE', value: code }
+                        ]
                     })
                 });
+
                 const data = await response.json();
-                if (data.return.status === 200) {
+
+                if (data.status === 1) {
                     return { success: true, message: 'پیامک ارسال شد' };
                 } else {
-                    return { success: false, message: data.return.message };
+                    return { success: false, message: data.message || 'خطا در ارسال پیامک' };
                 }
             } catch (error) {
                 return { success: false, message: error.message };
@@ -2498,7 +2514,7 @@
         }
 
         // ============================================================
-        // 📱 احراز هویت
+        // 📱 احراز هویت با sms.ir
         // ============================================================
         let authMode = 'login';
 
@@ -2542,7 +2558,10 @@
             }
             document.getElementById('authError').style.display = 'none';
             generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-            const result = await sendRealSms(phone, generatedCode);
+
+            // ارسال با sms.ir
+            const result = await sendSmsIr(phone, generatedCode);
+
             if (result.success) {
                 document.getElementById('displayPhone').textContent = phone;
                 document.getElementById('authStep1').style.display = 'none';
@@ -2601,7 +2620,7 @@
         document.getElementById('authResendBtn').addEventListener('click', async function() {
             const phone = document.getElementById('authPhone').value.trim();
             if (otpSeconds > 0 && generatedCode) {
-                const result = await sendRealSms(phone, generatedCode);
+                const result = await sendSmsIr(phone, generatedCode);
                 if (result.success) {
                     document.getElementById('authOtpError').style.display = 'none';
                     document.getElementById('authOtpSuccess').style.display = 'block';
@@ -2610,7 +2629,7 @@
                 }
             } else {
                 generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-                const result = await sendRealSms(phone, generatedCode);
+                const result = await sendSmsIr(phone, generatedCode);
                 if (result.success) {
                     otpSeconds = 120;
                     document.getElementById('otpTimer').textContent = otpSeconds;
@@ -2725,7 +2744,7 @@
         });
 
         // ============================================================
-        // 💳 فرایند پرداخت
+        // 💳 فرایند پرداخت با زرین‌پال
         // ============================================================
         function openCheckout() {
             if (!isLoggedIn) { openAuthModal('login'); return; }
@@ -2759,7 +2778,6 @@
         function openPaymentModal() {
             openModal('paymentModal');
 
-            // محاسبه مجدد هزینه ارسال
             let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             let shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
             let total = subtotal + shipping;
@@ -3003,10 +3021,16 @@
         console.log('📦 هزینه پست: ' + SHIPPING_COST.toLocaleString() + ' تومان');
         console.log('🚚 ارسال رایگان: بالای ' + FREE_SHIPPING_MIN.toLocaleString() + ' تومان');
 
-        if (KAVENEGAR_CONFIG.apiKey) {
-            console.log('✅ سرویس پیامک: کاوه‌نگار فعال');
+        if (SMS_CONFIG.apiKey && SMS_CONFIG.apiKey !== 'YOUR_SMS_IR_API_KEY') {
+            console.log('✅ سرویس پیامک: sms.ir فعال');
         } else {
-            console.log('⚠️ API Key کاوه‌نگار وارد نشده!');
+            console.log('⚠️ API Key sms.ir وارد نشده!');
+        }
+
+        if (ZARINPAL_CONFIG.merchantId && ZARINPAL_CONFIG.merchantId !== 'YOUR_MERCHANT_ID') {
+            console.log('✅ درگاه پرداخت: زرین‌پال فعال');
+        } else {
+            console.log('⚠️ Merchant ID زرین‌پال وارد نشده!');
         }
     </script>
 
