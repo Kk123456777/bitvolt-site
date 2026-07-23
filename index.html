@@ -856,7 +856,7 @@
             font-size: 1.1rem;
             border: 1px solid rgba(255, 179, 0, 0.1);
         }
-        .order-detail-modal .payment-status {
+        .payment-status {
             display: inline-block;
             padding: 3px 14px;
             border-radius: 50px;
@@ -1515,64 +1515,6 @@
         }
 
         /* ============================================================
-           ORDER DETAIL MODAL (برای مشتری)
-           ============================================================ */
-        .order-detail-modal .modal-content {
-            max-width: 700px;
-        }
-        .order-detail-modal .order-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .order-detail-modal .order-info-item {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 12px 14px;
-        }
-        .order-detail-modal .order-info-item .label {
-            font-size: 0.7rem;
-            color: #888;
-            display: block;
-        }
-        .order-detail-modal .order-info-item .value {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #0a1628;
-        }
-        .order-detail-modal .order-items-list {
-            margin-top: 15px;
-        }
-        .order-detail-modal .order-items-list .item-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-            font-size: 0.9rem;
-        }
-        .order-detail-modal .order-items-list .item-row .name {
-            flex: 1;
-        }
-        .order-detail-modal .order-items-list .item-row .qty {
-            margin: 0 15px;
-            color: #888;
-        }
-        .order-detail-modal .order-items-list .item-row .price {
-            font-weight: 600;
-        }
-        .order-detail-modal .order-total-box {
-            background: #fff8e1;
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border: 1px solid rgba(255, 179, 0, 0.1);
-        }
-
-        /* ============================================================
            FOOTER
            ============================================================ */
         .footer {
@@ -1968,7 +1910,6 @@
                     </div>
                 </div>
 
-                <!-- ===== ADMIN ORDERS (با جزئیات کامل) ===== -->
                 <div id="adminOrders" style="display:none;">
                     <h3 style="font-size:1rem; margin-bottom:12px;">مدیریت سفارشات</h3>
                     <div class="admin-table">
@@ -2011,9 +1952,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    ORDER DETAIL MODAL (ادمین - مشاهده جزئیات سفارش)
-    ============================================================ -->
+    <!-- ===== ORDER DETAIL MODAL (ادمین) ===== -->
     <div class="modal-overlay order-detail-modal" id="adminOrderDetailModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
@@ -2021,48 +1960,23 @@
                 <i class="fas fa-receipt" style="color:#ffb300;"></i> جزئیات سفارش
                 <span id="adminOrderDetailId" style="font-size:0.9rem; color:#888; font-weight:400;"></span>
             </h3>
-
             <div class="order-info-grid">
-                <div class="order-info-item">
-                    <span class="label">👤 نام مشتری</span>
-                    <span class="value" id="adminOrderDetailName">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">📱 شماره تماس</span>
-                    <span class="value" id="adminOrderDetailPhone">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">📍 آدرس</span>
-                    <span class="value" id="adminOrderDetailAddress">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">💰 مبلغ کل</span>
-                    <span class="value" id="adminOrderDetailTotal">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">📅 تاریخ</span>
-                    <span class="value" id="adminOrderDetailDate">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">💳 وضعیت پرداخت</span>
-                    <span class="value" id="adminOrderDetailPayment">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">📦 وضعیت مرسوله</span>
-                    <span class="value" id="adminOrderDetailStatus">-</span>
-                </div>
+                <div class="order-info-item"><span class="label">👤 نام مشتری</span><span class="value" id="adminOrderDetailName">-</span></div>
+                <div class="order-info-item"><span class="label">📱 شماره تماس</span><span class="value" id="adminOrderDetailPhone">-</span></div>
+                <div class="order-info-item"><span class="label">📍 آدرس</span><span class="value" id="adminOrderDetailAddress">-</span></div>
+                <div class="order-info-item"><span class="label">💰 مبلغ کل</span><span class="value" id="adminOrderDetailTotal">-</span></div>
+                <div class="order-info-item"><span class="label">📅 تاریخ</span><span class="value" id="adminOrderDetailDate">-</span></div>
+                <div class="order-info-item"><span class="label">💳 وضعیت پرداخت</span><span class="value" id="adminOrderDetailPayment">-</span></div>
+                <div class="order-info-item"><span class="label">📦 وضعیت مرسوله</span><span class="value" id="adminOrderDetailStatus">-</span></div>
             </div>
-
             <div class="order-items-list">
                 <div style="font-weight:600; font-size:0.9rem; margin-bottom:8px;">🛒 محصولات سفارش</div>
                 <div id="adminOrderDetailItems"></div>
             </div>
-
             <div class="order-total-box">
                 <span>جمع کل</span>
                 <span id="adminOrderDetailTotalFinal">۰ تومان</span>
             </div>
-
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
                 <button onclick="updateAdminOrderStatus()" style="background:#ffb300; border:none; padding:6px 20px; border-radius:50px; font-weight:700; cursor:pointer; font-family:inherit; color:#0a1628;">
                     <i class="fas fa-edit"></i> تغییر وضعیت
@@ -2074,9 +1988,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    USER ORDER DETAIL MODAL (مشتری - مشاهده فاکتور)
-    ============================================================ -->
+    <!-- ===== USER ORDER DETAIL MODAL (مشتری) ===== -->
     <div class="modal-overlay order-detail-modal" id="userOrderDetailModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
@@ -2084,36 +1996,20 @@
                 <i class="fas fa-receipt" style="color:#ffb300;"></i> فاکتور سفارش
                 <span id="userOrderDetailId" style="font-size:0.9rem; color:#888; font-weight:400;"></span>
             </h3>
-
             <div class="order-info-grid">
-                <div class="order-info-item">
-                    <span class="label">📅 تاریخ</span>
-                    <span class="value" id="userOrderDetailDate">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">💰 مبلغ کل</span>
-                    <span class="value" id="userOrderDetailTotal">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">📦 وضعیت مرسوله</span>
-                    <span class="value" id="userOrderDetailStatus">-</span>
-                </div>
-                <div class="order-info-item">
-                    <span class="label">📍 آدرس ارسال</span>
-                    <span class="value" id="userOrderDetailAddress">-</span>
-                </div>
+                <div class="order-info-item"><span class="label">📅 تاریخ</span><span class="value" id="userOrderDetailDate">-</span></div>
+                <div class="order-info-item"><span class="label">💰 مبلغ کل</span><span class="value" id="userOrderDetailTotal">-</span></div>
+                <div class="order-info-item"><span class="label">📦 وضعیت مرسوله</span><span class="value" id="userOrderDetailStatus">-</span></div>
+                <div class="order-info-item"><span class="label">📍 آدرس ارسال</span><span class="value" id="userOrderDetailAddress">-</span></div>
             </div>
-
             <div class="order-items-list">
                 <div style="font-weight:600; font-size:0.9rem; margin-bottom:8px;">🛒 محصولات</div>
                 <div id="userOrderDetailItems"></div>
             </div>
-
             <div class="order-total-box">
                 <span>جمع کل</span>
                 <span id="userOrderDetailTotalFinal">۰ تومان</span>
             </div>
-
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
                 <button onclick="window.print()" style="background:#e3f2fd; border:none; padding:6px 20px; border-radius:50px; font-weight:600; cursor:pointer; font-family:inherit; color:#1565c0;">
                     <i class="fas fa-print"></i> چاپ فاکتور
@@ -2125,9 +2021,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    CART
-    ============================================================ -->
+    <!-- ===== CART ===== -->
     <div class="cart-overlay" id="cartOverlay">
         <div class="cart-panel">
             <div class="cart-header">
@@ -2151,10 +2045,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    MODALS
-    ============================================================ -->
-
+    <!-- ===== MODALS ===== -->
     <!-- AUTH -->
     <div class="modal-overlay auth-modal" id="authModal">
         <div class="modal-content">
@@ -2418,31 +2309,33 @@
 
     <script>
         // ============================================================
-        // 🔑 تنظیمات متمرکز - همه API Key ها اینجا
+        // 🔑 تنظیمات متمرکز - همه تنظیمات در یک بخش
         // ============================================================
 
-        // ---------- تنظیمات پیامک (sms.ir) ----------
+        // ---------- پیامک (sms.ir) ----------
         const SMS_CONFIG = {
-            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // <--- کلید sms.ir خود را اینجا بگذارید
-            templateId: 958264, // <--- آیدی قالب sms.ir خود را وارد کنید
-            sender: '500030007' // <--- شماره خط sms.ir خود را وارد کنید
+            apiKey: '', // <--- کلید sms.ir خود را اینجا بگذارید
+            templateId: 100000, // <--- آیدی قالب sms.ir خود را وارد کنید
+            sender: '10002000' // <--- شماره خط sms.ir خود را وارد کنید
         };
 
-        // ---------- تنظیمات زرین‌پال ----------
+        // ---------- زرین‌پال ----------
         const ZARINPAL_CONFIG = {
-            merchantId: '9e66bf2a-3e71-4296-9e7f-00c0d15c635f', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
-            sandbox: true, // true = تست | false = واقعی
+            merchantId: '', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
+            sandbox: false, // true = تست | false = واقعی
             callbackUrl: window.location.href + '?payment=callback'
         };
 
         // ---------- تنظیمات سایت ----------
         const SITE_CONFIG = {
-            adminPassword: 'BitVolt@2026#Secure$GGVolt!',
-            adminSecret: 'admin123',
-            shippingCost: 120000,
-            freeShippingMin: 1000000,
-            phone: '09107484214',
-            address: 'قزوین، تاکستان، خیابان حافظ، پلاک ۱۲'
+            adminPassword: 'BitVolt@2026#Secure$GGVolt!', // رمز پنل ادمین
+            adminSecret: 'admin123', // کد مخفی در جستجو
+            shippingCost: 120000, // هزینه پست
+            freeShippingMin: 1000000, // ارسال رایگان بالای این مبلغ
+            phone: '09107484214', // شماره تماس
+            address: 'قزوین، تاکستان، خیابان حافظ، پلاک ۱۲', // آدرس
+            siteName: 'BitVolt', // نام سایت
+            instagram: 'bitvolt.mtv' // پیج اینستاگرام
         };
 
         // ============================================================
@@ -2537,7 +2430,7 @@
         // 📨 تابع ارسال پیامک با sms.ir (واقعی)
         // ============================================================
         async function sendSmsIr(phone, code) {
-            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG') {
+            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === '') {
                 alert('⚠️ لطفاً ابتدا API Key sms.ir را در تنظیمات وارد کنید.');
                 return { success: false, message: 'API Key وارد نشده است' };
             }
@@ -2574,7 +2467,7 @@
         // 💰 تابع پرداخت با زرین‌پال (واقعی)
         // ============================================================
         async function zarinpalPayment(amount, description) {
-            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === '9e66bf2a-3e71-4296-9e7f-00c0d15c635f') {
+            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === '') {
                 alert('⚠️ لطفاً ابتدا Merchant ID زرین‌پال را در تنظیمات وارد کنید.');
                 return { success: false, message: 'Merchant ID وارد نشده است' };
             }
@@ -2956,12 +2849,10 @@
             if (!city) { alert('⚠️ شهر را انتخاب کنید'); return; }
             if (!address) { alert('⚠️ آدرس کامل را وارد کنید'); return; }
 
-            // ذخیره آدرس
             userAddresses[currentUser] = { phone, name, province, city, full: address };
             saveUserData();
             closeAllModals();
 
-            // ذخیره اطلاعات سفارش برای بعد از پرداخت
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
             pendingOrderData = {
@@ -3026,7 +2917,6 @@
             const status = urlParams.get('Status');
 
             if (authority && status === 'OK' && pendingOrderData) {
-                // پرداخت موفق - ثبت سفارش
                 if (isLoggedIn && pendingOrderData) {
                     const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
                     if (!orders[currentUser]) orders[currentUser] = [];
@@ -3243,7 +3133,7 @@
         }
 
         // ============================================================
-        // 📊 داشبورد مشتری (با مشاهده سفارشات و فاکتور)
+        // 📊 داشبورد مشتری
         // ============================================================
         function showDashboard() {
             if (!isLoggedIn) { openAuthModal('login'); return; }
@@ -3277,18 +3167,17 @@
                     msg += `   📦 ${statusMap[order.status] || 'در حال پردازش'}\n`;
                     msg += `   ──────────────────\n`;
                 });
-                msg += '\n💡 برای مشاهده فاکتور و جزئیات، روی گزینه "مشاهده فاکتور" در زیر کلیک کنید.';
+                msg += '\n💡 برای مشاهده فاکتور، شماره سفارش را وارد کنید.';
             } else {
                 msg += '📦 سفارشی ثبت نشده است';
             }
 
-            // نمایش به صورت alert با امکان انتخاب فاکتور
             const userOrdersList = orders[currentUser] || [];
             if (userOrdersList.length > 0) {
                 const orderIds = userOrdersList.slice().reverse().map((o, i) => `${i+1}. ${o.id}`);
                 const choice = prompt(
                     msg +
-                    '\n\n🔍 برای مشاهده فاکتور، شماره سفارش را وارد کنید:\n' +
+                    '\n\n🔍 شماره سفارش را وارد کنید:\n' +
                     orderIds.join('\n') +
                     '\n\n(یا Enter بزنید برای انصراف)',
                     ''
@@ -3300,7 +3189,6 @@
                     if (index >= 0 && index < ordersList.length) {
                         showUserOrderDetail(ordersList[index]);
                     } else {
-                        // تلاش با کد سفارش
                         const foundOrder = userOrdersList.find(o => o.id === choice.trim());
                         if (foundOrder) {
                             showUserOrderDetail(foundOrder);
@@ -3315,7 +3203,7 @@
         }
 
         // ============================================================
-        // 👁️ نمایش جزئیات سفارش برای مشتری (فاکتور)
+        // 👁️ نمایش جزئیات سفارش برای مشتری
         // ============================================================
         function showUserOrderDetail(order) {
             if (!order) return;
@@ -3335,7 +3223,6 @@
             document.getElementById('userOrderDetailAddress').textContent =
                 `${addr.province || ''} - ${addr.city || ''} - ${addr.full || 'آدرسی ثبت نشده'}`;
 
-            // آیتم‌ها
             let itemsHtml = '';
             if (order.items && order.items.length > 0) {
                 order.items.forEach(item => {
@@ -3357,7 +3244,7 @@
         }
 
         // ============================================================
-        // 👑 پنل ادمین با مشاهده کامل سفارشات
+        // 👑 پنل ادمین
         // ============================================================
         function openAdminPanel() {
             const password = prompt('🔑 برای ورود به پنل مدیریت، رمز عبور را وارد کنید:');
@@ -3462,9 +3349,6 @@
             list.innerHTML = html;
         }
 
-        // ============================================================
-        // 👁️ نمایش جزئیات سفارش برای ادمین
-        // ============================================================
         function viewOrderDetailAdmin(orderId) {
             currentAdminOrderId = orderId;
             let foundOrder = null;
@@ -3509,7 +3393,6 @@
             };
             document.getElementById('adminOrderDetailStatus').textContent = statusMap[foundOrder.status] || 'در حال پردازش';
 
-            // آیتم‌ها
             let itemsHtml = '';
             if (foundOrder.items && foundOrder.items.length > 0) {
                 foundOrder.items.forEach(item => {
@@ -3634,9 +3517,6 @@
             }
         }
 
-        // ============================================================
-        // 📦 مدیریت سفارشات (ادمین)
-        // ============================================================
         function updateOrderStatus(orderId) {
             const newStatus = prompt('وضعیت جدید (processing/shipped/delivered):', 'processing');
             if (newStatus && ['processing', 'shipped', 'delivered'].includes(newStatus)) {
@@ -3753,7 +3633,7 @@
         }
 
         // ============================================================
-        // 🖼️ مودال محصول با مشخصات کامل
+        // 🖼️ مودال محصول
         // ============================================================
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
@@ -3811,21 +3691,18 @@
         console.log('📱 شماره تماس:', SITE_CONFIG.phone);
         console.log('📍 آدرس:', SITE_CONFIG.address);
         console.log('⏱️ زمان انقضای کد: 3 دقیقه');
-        console.log('📦 هزینه پست:', SITE_CONFIG.shippingCost.toLocaleString(), 'تومان');
-        console.log('🚚 ارسال رایگان بالای:', SITE_CONFIG.freeShippingMin.toLocaleString(), 'تومان');
 
-        if (SMS_CONFIG.apiKey && SMS_CONFIG.apiKey !== 'YOUR_SMS_IR_API_KEY') {
+        if (SMS_CONFIG.apiKey && SMS_CONFIG.apiKey !== '') {
             console.log('✅ سرویس پیامک: sms.ir فعال');
         } else {
             console.log('⚠️ API Key sms.ir وارد نشده!');
         }
 
-        if (ZARINPAL_CONFIG.merchantId && ZARINPAL_CONFIG.merchantId !== 'YOUR_MERCHANT_ID') {
+        if (ZARINPAL_CONFIG.merchantId && ZARINPAL_CONFIG.merchantId !== '') {
             console.log('✅ درگاه پرداخت: زرین‌پال فعال');
         } else {
             console.log('⚠️ Merchant ID زرین‌پال وارد نشده!');
         }
     </script>
-
 </body>
 </html>
