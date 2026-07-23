@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== تمام استایل‌های قبلی مثل نسخه قبل ===== */
+        /* ===== تمام استایل‌های قبلی ===== */
         * {
             margin: 0;
             padding: 0;
@@ -558,9 +558,6 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.03);
             font-size: 0.85rem;
         }
-        .product-detail-modal .modal-specs .spec-row:last-child {
-            border-bottom: none;
-        }
         .product-detail-modal .modal-specs .spec-label {
             color: #888;
         }
@@ -800,6 +797,81 @@
             color: #e67e22;
         }
         .badge-status.pending {
+            background: #fff8e1;
+            color: #f9a825;
+        }
+
+        /* ===== ORDER DETAIL MODAL (ادمین) ===== */
+        .order-detail-modal .modal-content {
+            max-width: 700px;
+        }
+        .order-detail-modal .order-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .order-detail-modal .order-info-item {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+        .order-detail-modal .order-info-item .label {
+            font-size: 0.7rem;
+            color: #888;
+            display: block;
+        }
+        .order-detail-modal .order-info-item .value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0a1628;
+        }
+        .order-detail-modal .order-items-list {
+            margin-top: 15px;
+        }
+        .order-detail-modal .order-items-list .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            font-size: 0.9rem;
+        }
+        .order-detail-modal .order-items-list .item-row .name {
+            flex: 1;
+        }
+        .order-detail-modal .order-items-list .item-row .qty {
+            margin: 0 15px;
+            color: #888;
+        }
+        .order-detail-modal .order-items-list .item-row .price {
+            font-weight: 600;
+        }
+        .order-detail-modal .order-total-box {
+            background: #fff8e1;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 179, 0, 0.1);
+        }
+        .order-detail-modal .payment-status {
+            display: inline-block;
+            padding: 3px 14px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .payment-status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .payment-status.failed {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .payment-status.pending {
             background: #fff8e1;
             color: #f9a825;
         }
@@ -1379,9 +1451,6 @@
             margin: 10px 0;
             border: 1px solid #c8e6c9;
         }
-        .payment-modal .secure-badge-big i {
-            font-size: 1.2rem;
-        }
         .payment-modal .payment-btn {
             background: linear-gradient(135deg, #1a7c3e, #145c2e);
             color: #fff;
@@ -1443,6 +1512,64 @@
             background: #ffebee;
             color: #c62828;
             border: 1px solid #ffcdd2;
+        }
+
+        /* ============================================================
+           ORDER DETAIL MODAL (برای مشتری)
+           ============================================================ */
+        .order-detail-modal .modal-content {
+            max-width: 700px;
+        }
+        .order-detail-modal .order-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .order-detail-modal .order-info-item {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+        .order-detail-modal .order-info-item .label {
+            font-size: 0.7rem;
+            color: #888;
+            display: block;
+        }
+        .order-detail-modal .order-info-item .value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0a1628;
+        }
+        .order-detail-modal .order-items-list {
+            margin-top: 15px;
+        }
+        .order-detail-modal .order-items-list .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            font-size: 0.9rem;
+        }
+        .order-detail-modal .order-items-list .item-row .name {
+            flex: 1;
+        }
+        .order-detail-modal .order-items-list .item-row .qty {
+            margin: 0 15px;
+            color: #888;
+        }
+        .order-detail-modal .order-items-list .item-row .price {
+            font-weight: 600;
+        }
+        .order-detail-modal .order-total-box {
+            background: #fff8e1;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 179, 0, 0.1);
         }
 
         /* ============================================================
@@ -1593,6 +1720,9 @@
             .product-detail-modal .modal-grid {
                 grid-template-columns: 1fr;
             }
+            .order-detail-modal .order-info-grid {
+                grid-template-columns: 1fr;
+            }
         }
         @media (max-width: 480px) {
             .header .container {
@@ -1649,9 +1779,7 @@
 </head>
 <body>
 
-    <!-- ============================================================
-    TOP BAR
-    ============================================================ -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
         <div class="container">
             <div class="right">
@@ -1667,9 +1795,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
+    <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="container">
             <div class="logo" onclick="navigateTo('home')">
@@ -1705,9 +1831,7 @@
         </div>
     </header>
 
-    <!-- ============================================================
-    SEARCH
-    ============================================================ -->
+    <!-- ===== SEARCH ===== -->
     <div class="search-bar">
         <div class="container">
             <input type="text" id="searchInput" placeholder="جستجوی محصولات..." onkeyup="checkAdminSecret(this.value)" />
@@ -1715,9 +1839,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    CATEGORIES
-    ============================================================ -->
+    <!-- ===== CATEGORIES ===== -->
     <div class="categories">
         <div class="container" id="categoriesContainer">
             <div class="cat-item active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-list"></i> همه</div>
@@ -1730,9 +1852,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    PAGE: HOME
-    ============================================================ -->
+    <!-- ===== PAGE: HOME ===== -->
     <div class="page active" id="page-home">
         <div class="container">
             <div class="hero">
@@ -1767,9 +1887,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    PAGE: ABOUT
-    ============================================================ -->
+    <!-- ===== PAGE: ABOUT ===== -->
     <div class="page" id="page-about">
         <div class="container">
             <div class="about-section">
@@ -1799,9 +1917,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-    PAGE: ADMIN
-    ============================================================ -->
+    <!-- ===== PAGE: ADMIN ===== -->
     <div class="page" id="page-admin">
         <div class="container">
             <div class="admin-section">
@@ -1852,12 +1968,22 @@
                     </div>
                 </div>
 
+                <!-- ===== ADMIN ORDERS (با جزئیات کامل) ===== -->
                 <div id="adminOrders" style="display:none;">
                     <h3 style="font-size:1rem; margin-bottom:12px;">مدیریت سفارشات</h3>
                     <div class="admin-table">
                         <table>
-                            <thead><tr><th>کد</th><th>کاربر</th><th>مبلغ</th><th>وضعیت</th><th>عملیات</th></tr></thead>
-                            <tbody id="adminOrderList"><tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">سفارشی وجود ندارد</td></tr></tbody>
+                            <thead>
+                                <tr>
+                                    <th>کد</th>
+                                    <th>کاربر</th>
+                                    <th>مبلغ</th>
+                                    <th>وضعیت</th>
+                                    <th>پرداخت</th>
+                                    <th>عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrderList"><tr><td colspan="6" style="text-align:center; color:#888; padding:15px;">سفارشی وجود ندارد</td></tr></tbody>
                         </table>
                     </div>
                 </div>
@@ -1886,54 +2012,116 @@
     </div>
 
     <!-- ============================================================
-    FOOTER
+    ORDER DETAIL MODAL (ادمین - مشاهده جزئیات سفارش)
     ============================================================ -->
-    <div class="footer">
-        <div class="container">
-            <div>
-                <div class="logo">
-                    <i class="fas fa-bolt"></i>
-                    <h3>Bit<span>Volt</span></h3>
+    <div class="modal-overlay order-detail-modal" id="adminOrderDetailModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <h3 style="font-size:1.3rem; font-weight:800; color:#0a1628; margin-bottom:15px;">
+                <i class="fas fa-receipt" style="color:#ffb300;"></i> جزئیات سفارش
+                <span id="adminOrderDetailId" style="font-size:0.9rem; color:#888; font-weight:400;"></span>
+            </h3>
+
+            <div class="order-info-grid">
+                <div class="order-info-item">
+                    <span class="label">👤 نام مشتری</span>
+                    <span class="value" id="adminOrderDetailName">-</span>
                 </div>
-                <p style="margin:5px 0; opacity:0.5; font-size:0.75rem;">فروشگاه تخصصی الکترونیک</p>
-                <p style="font-size:0.65rem; color:#ffb300; opacity:0.6;">bitvolt.mtv</p>
-                <div class="trust">
-                    <div class="item"><i class="fas fa-shield-alt"></i><span>ضمانت اصالت</span></div>
-                    <div class="item"><i class="fas fa-lock"></i><span>پرداخت امن</span></div>
-                    <div class="item"><i class="fas fa-truck"></i><span>ارسال سریع</span></div>
-                    <div class="item"><i class="fas fa-undo"></i><span>بازگشت ۷ روزه</span></div>
-                    <div class="item"><i class="fas fa-headset"></i><span>پشتیبانی ۲۴/۷</span></div>
+                <div class="order-info-item">
+                    <span class="label">📱 شماره تماس</span>
+                    <span class="value" id="adminOrderDetailPhone">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">📍 آدرس</span>
+                    <span class="value" id="adminOrderDetailAddress">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">💰 مبلغ کل</span>
+                    <span class="value" id="adminOrderDetailTotal">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">📅 تاریخ</span>
+                    <span class="value" id="adminOrderDetailDate">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">💳 وضعیت پرداخت</span>
+                    <span class="value" id="adminOrderDetailPayment">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">📦 وضعیت مرسوله</span>
+                    <span class="value" id="adminOrderDetailStatus">-</span>
                 </div>
             </div>
-            <div>
-                <h4>دسترسی سریع</h4>
-                <ul>
-                    <li><a onclick="navigateTo('home')">خانه</a></li>
-                    <li><a onclick="navigateTo('products')">محصولات</a></li>
-                    <li><a onclick="navigateTo('about')">درباره ما</a></li>
-                    <li><a onclick="alert('به زودی')">بلاگ</a></li>
-                </ul>
+
+            <div class="order-items-list">
+                <div style="font-weight:600; font-size:0.9rem; margin-bottom:8px;">🛒 محصولات سفارش</div>
+                <div id="adminOrderDetailItems"></div>
             </div>
-            <div>
-                <h4>اطلاعات تماس</h4>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt" style="color:#ffb300; margin-left:4px;"></i> قزوین، تاکستان، حافظ</li>
-                    <li><i class="fas fa-phone" style="color:#ffb300; margin-left:4px;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</li>
-                    <li><i class="fab fa-instagram" style="color:#ffb300; margin-left:4px;"></i> bitvolt.mtv</li>
-                    <li><i class="fas fa-envelope" style="color:#ffb300; margin-left:4px;"></i> info@bitvolt.mtv</li>
-                </ul>
+
+            <div class="order-total-box">
+                <span>جمع کل</span>
+                <span id="adminOrderDetailTotalFinal">۰ تومان</span>
             </div>
-            <div>
-                <h4>شبکه‌های اجتماعی</h4>
-                <ul>
-                    <li><a href="https://instagram.com/bitvolt.mtv" target="_blank"><i class="fab fa-instagram"></i> bitvolt.mtv</a></li>
-                    <li><a href="#"><i class="fab fa-telegram"></i> bitvolt.mtv</a></li>
-                    <li><a href="#"><i class="fab fa-youtube"></i> bitvolt.mtv</a></li>
-                </ul>
+
+            <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+                <button onclick="updateAdminOrderStatus()" style="background:#ffb300; border:none; padding:6px 20px; border-radius:50px; font-weight:700; cursor:pointer; font-family:inherit; color:#0a1628;">
+                    <i class="fas fa-edit"></i> تغییر وضعیت
+                </button>
+                <button onclick="closeAllModals()" style="background:rgba(0,0,0,0.04); border:none; padding:6px 20px; border-radius:50px; font-weight:600; cursor:pointer; font-family:inherit; color:#555;">
+                    بستن
+                </button>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© ۲۰۲۶ BitVolt | تمامی حقوق محفوظ است | <i class="fas fa-bolt" style="color:#ffb300;"></i></p>
+    </div>
+
+    <!-- ============================================================
+    USER ORDER DETAIL MODAL (مشتری - مشاهده فاکتور)
+    ============================================================ -->
+    <div class="modal-overlay order-detail-modal" id="userOrderDetailModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <h3 style="font-size:1.3rem; font-weight:800; color:#0a1628; margin-bottom:15px;">
+                <i class="fas fa-receipt" style="color:#ffb300;"></i> فاکتور سفارش
+                <span id="userOrderDetailId" style="font-size:0.9rem; color:#888; font-weight:400;"></span>
+            </h3>
+
+            <div class="order-info-grid">
+                <div class="order-info-item">
+                    <span class="label">📅 تاریخ</span>
+                    <span class="value" id="userOrderDetailDate">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">💰 مبلغ کل</span>
+                    <span class="value" id="userOrderDetailTotal">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">📦 وضعیت مرسوله</span>
+                    <span class="value" id="userOrderDetailStatus">-</span>
+                </div>
+                <div class="order-info-item">
+                    <span class="label">📍 آدرس ارسال</span>
+                    <span class="value" id="userOrderDetailAddress">-</span>
+                </div>
+            </div>
+
+            <div class="order-items-list">
+                <div style="font-weight:600; font-size:0.9rem; margin-bottom:8px;">🛒 محصولات</div>
+                <div id="userOrderDetailItems"></div>
+            </div>
+
+            <div class="order-total-box">
+                <span>جمع کل</span>
+                <span id="userOrderDetailTotalFinal">۰ تومان</span>
+            </div>
+
+            <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+                <button onclick="window.print()" style="background:#e3f2fd; border:none; padding:6px 20px; border-radius:50px; font-weight:600; cursor:pointer; font-family:inherit; color:#1565c0;">
+                    <i class="fas fa-print"></i> چاپ فاکتور
+                </button>
+                <button onclick="closeAllModals()" style="background:rgba(0,0,0,0.04); border:none; padding:6px 20px; border-radius:50px; font-weight:600; cursor:pointer; font-family:inherit; color:#555;">
+                    بستن
+                </button>
+            </div>
         </div>
     </div>
 
@@ -2235,14 +2423,14 @@
 
         // ---------- تنظیمات پیامک (sms.ir) ----------
         const SMS_CONFIG = {
-            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // <--- کلید sms.ir خود را اینجا بگذارید
-            templateId: 958264, // <--- آیدی قالب sms.ir خود را وارد کنید
-            sender: '500030007' // <--- شماره خط sms.ir خود را وارد کنید
+            apiKey: 'YOUR_SMS_IR_API_KEY', // <--- کلید sms.ir خود را اینجا بگذارید
+            templateId: 100000, // <--- آیدی قالب sms.ir خود را وارد کنید
+            sender: '10002000' // <--- شماره خط sms.ir خود را وارد کنید
         };
 
         // ---------- تنظیمات زرین‌پال ----------
         const ZARINPAL_CONFIG = {
-            merchantId: '9e66bf2a-3e71-4296-9e7f-00c0d15c635f', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
+            merchantId: 'YOUR_MERCHANT_ID', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
             sandbox: false, // true = تست | false = واقعی
             callbackUrl: window.location.href + '?payment=callback'
         };
@@ -2274,7 +2462,8 @@
         let otpTimerInterval = null;
         let otpSeconds = 180;
         let currentPage = 'home';
-        let pendingPayment = null;
+        let pendingOrderData = null;
+        let currentAdminOrderId = null;
 
         // ============================================================
         // 🏙️ شهرها
@@ -2348,7 +2537,7 @@
         // 📨 تابع ارسال پیامک با sms.ir (واقعی)
         // ============================================================
         async function sendSmsIr(phone, code) {
-            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'YOUR_SMS_IR_API_KEY') {
+            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG') {
                 alert('⚠️ لطفاً ابتدا API Key sms.ir را در تنظیمات وارد کنید.');
                 return { success: false, message: 'API Key وارد نشده است' };
             }
@@ -2385,9 +2574,9 @@
         // 💰 تابع پرداخت با زرین‌پال (واقعی)
         // ============================================================
         async function zarinpalPayment(amount, description) {
-            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === 'YOUR_MERCHANT_ID') {
+            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === '9e66bf2a-3e71-4296-9e7f-00c0d15c635f') {
                 alert('⚠️ لطفاً ابتدا Merchant ID زرین‌پال را در تنظیمات وارد کنید.');
-                return { success: false, message: 'Merchant ID وارد نشده است' };
+                return { success: false, message: '958264' };
             }
 
             try {
@@ -2403,7 +2592,7 @@
                         description: description || 'خرید از BitVolt',
                         metadata: {
                             mobile: currentUser || '09123456789',
-                            email: 'info@bitvolt.mtv'
+                            email: 'bitvolt.mtv@gmail.com'
                         }
                     })
                 });
@@ -2411,7 +2600,6 @@
                 const data = await response.json();
 
                 if (data.data && data.data.code === 100) {
-                    // هدایت به درگاه پرداخت
                     const paymentUrl = `https://www.zarinpal.com/pg/StartPay/${data.data.authority}`;
                     window.location.href = paymentUrl;
                     return { success: true, authority: data.data.authority };
@@ -2556,6 +2744,7 @@
             document.getElementById('adminTotalOrders').textContent = Object.values(orders).reduce((a, b) => a + b.length, 0);
             document.getElementById('adminTotalUsers').textContent = Object.keys(users).length;
             document.getElementById('adminTotalComments').textContent = comments.filter(c => c.status === 'pending').length;
+            renderAdminOrders();
         }
 
         // ============================================================
@@ -2704,8 +2893,6 @@
             document.getElementById('cartShipping').textContent = shipping === 0 ? 'رایگان' : shipping.toLocaleString() +
             ' تومان';
             document.getElementById('cartTotalFinal').textContent = total.toLocaleString() + ' تومان';
-
-            pendingPayment = total;
         }
 
         function closeCart() {
@@ -2741,7 +2928,6 @@
             if (cart.length === 0) { alert('سبد خرید خالی است!'); return; }
             closeCart();
 
-            // نمایش مودال تکمیل اطلاعات
             openModal('checkoutModal');
             if (userAddresses[currentUser]) {
                 document.getElementById('checkoutPhone').value = userAddresses[currentUser].phone || '';
@@ -2770,25 +2956,34 @@
             if (!city) { alert('⚠️ شهر را انتخاب کنید'); return; }
             if (!address) { alert('⚠️ آدرس کامل را وارد کنید'); return; }
 
+            // ذخیره آدرس
             userAddresses[currentUser] = { phone, name, province, city, full: address };
             saveUserData();
             closeAllModals();
 
-            // رفتن به صفحه پرداخت زرین‌پال
+            // ذخیره اطلاعات سفارش برای بعد از پرداخت
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
+            pendingOrderData = {
+                items: JSON.parse(JSON.stringify(cart)),
+                subtotal: subtotal,
+                shipping: shipping,
+                total: subtotal + shipping,
+                address: userAddresses[currentUser]
+            };
+
             openPaymentModal();
         }
 
         function openPaymentModal() {
             openModal('paymentModal');
 
-            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            let shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
-            let total = subtotal + shipping;
+            const total = pendingOrderData ? pendingOrderData.total : 0;
 
             document.getElementById('paymentAmount').textContent = total.toLocaleString() + ' تومان';
             document.getElementById('paymentTotalDisplay').textContent = total.toLocaleString() + ' تومان';
-            document.getElementById('paymentShippingDisplay').textContent = shipping === 0 ? 'رایگان' : shipping
-            .toLocaleString() + ' تومان';
+            document.getElementById('paymentShippingDisplay').textContent = pendingOrderData && pendingOrderData.shipping === 0 ?
+                'رایگان' : (pendingOrderData ? pendingOrderData.shipping.toLocaleString() + ' تومان' : '۰ تومان');
 
             const code = 'ZP-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
             document.getElementById('paymentCode').textContent = code;
@@ -2800,19 +2995,18 @@
         }
 
         async function processPayment() {
+            if (!pendingOrderData) {
+                alert('خطا در اطلاعات سفارش');
+                return;
+            }
+
             document.getElementById('paymentButtons').style.display = 'none';
             document.getElementById('paymentLoading').classList.add('show');
 
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const shipping = total >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
-            const finalTotal = total + shipping;
-
-            // پرداخت با زرین‌پال
-            const result = await zarinpalPayment(finalTotal, `خرید از BitVolt - ${currentUser}`);
+            const result = await zarinpalPayment(pendingOrderData.total, `خرید از BitVolt - ${currentUser}`);
 
             if (result.success && result.authority) {
-                // هدایت به درگاه زرین‌پال (در تابع انجام میشه)
-                // سفارش بعد از بازگشت از درگاه ثبت میشه
+                // هدایت به درگاه زرین‌پال
             } else {
                 document.getElementById('paymentLoading').classList.remove('show');
                 document.getElementById('paymentButtons').style.display = 'block';
@@ -2820,6 +3014,53 @@
                 statusEl.className = 'payment-status error';
                 statusEl.textContent = '❌ خطا در اتصال به زرین‌پال: ' + (result.message || 'خطای ناشناخته');
                 statusEl.style.display = 'block';
+            }
+        }
+
+        // ============================================================
+        // 🔄 مدیریت بازگشت از زرین‌پال (Callback)
+        // ============================================================
+        function handleZarinpalCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const authority = urlParams.get('Authority');
+            const status = urlParams.get('Status');
+
+            if (authority && status === 'OK' && pendingOrderData) {
+                // پرداخت موفق - ثبت سفارش
+                if (isLoggedIn && pendingOrderData) {
+                    const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
+                    if (!orders[currentUser]) orders[currentUser] = [];
+
+                    orders[currentUser].push({
+                        id: orderId,
+                        items: pendingOrderData.items,
+                        subtotal: pendingOrderData.subtotal,
+                        shipping: pendingOrderData.shipping,
+                        total: pendingOrderData.total,
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        status: 'processing',
+                        address: pendingOrderData.address,
+                        payment: {
+                            status: 'success',
+                            authority: authority,
+                            date: new Date().toISOString()
+                        }
+                    });
+
+                    saveUserData();
+                    cart = [];
+                    updateCartUI();
+                    pendingOrderData = null;
+
+                    alert('✅ پرداخت با موفقیت انجام شد! سفارش شما ثبت گردید.\nکد پیگیری: ' + orderId);
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    navigateTo('home');
+                    updateAdminStats();
+                }
+            } else if (authority) {
+                alert('❌ پرداخت ناموفق بود. لطفاً مجدداً تلاش کنید.');
+                pendingOrderData = null;
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
         }
 
@@ -2870,7 +3111,6 @@
 
             generatedCode = String(Math.floor(100000 + Math.random() * 900000));
 
-            // ارسال پیامک واقعی با sms.ir
             const result = await sendSmsIr(phone, generatedCode);
 
             if (result.success) {
@@ -3003,12 +3243,14 @@
         }
 
         // ============================================================
-        // 📊 داشبورد
+        // 📊 داشبورد مشتری (با مشاهده سفارشات و فاکتور)
         // ============================================================
         function showDashboard() {
             if (!isLoggedIn) { openAuthModal('login'); return; }
+
             let msg = '👤 حساب کاربری\n\n';
             msg += '📱 شماره: ' + currentUser + '\n\n';
+
             if (userAddresses[currentUser]) {
                 msg += '📍 آدرس:\n';
                 msg += 'نام: ' + (userAddresses[currentUser].name || '') + '\n';
@@ -3018,64 +3260,104 @@
             } else {
                 msg += '⚠️ آدرسی ثبت نشده است\n\n';
             }
+
             const userOrders = orders[currentUser] || [];
             if (userOrders.length > 0) {
-                msg += '📦 سفارشات:\n';
+                msg += '📦 سفارشات من:\n';
+                msg += '━━━━━━━━━━━━━━━━━━━━━\n';
                 userOrders.slice().reverse().forEach((order, i) => {
-                    msg += (i + 1) + '. ' + order.id + ' - ' + order.total.toLocaleString() + ' تومان - ' + order.date +
-                        '\n';
+                    const statusMap = {
+                        'processing': '🟡 در حال پردازش',
+                        'shipped': '🟢 ارسال شده',
+                        'delivered': '✅ تحویل داده شده'
+                    };
+                    msg += `${i + 1}. ${order.id}\n`;
+                    msg += `   📅 ${order.date}\n`;
+                    msg += `   💰 ${order.total.toLocaleString()} تومان\n`;
+                    msg += `   📦 ${statusMap[order.status] || 'در حال پردازش'}\n`;
+                    msg += `   ──────────────────\n`;
                 });
+                msg += '\n💡 برای مشاهده فاکتور و جزئیات، روی گزینه "مشاهده فاکتور" در زیر کلیک کنید.';
             } else {
                 msg += '📦 سفارشی ثبت نشده است';
             }
-            alert(msg);
-        }
 
-        // ============================================================
-        // 🖼️ مودال محصول با مشخصات کامل
-        // ============================================================
-        function openProductModal(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
-            currentProductId = id;
-            closeAllModals();
-            openModal('productModal');
+            // نمایش به صورت alert با امکان انتخاب فاکتور
+            const userOrdersList = orders[currentUser] || [];
+            if (userOrdersList.length > 0) {
+                const orderIds = userOrdersList.slice().reverse().map((o, i) => `${i+1}. ${o.id}`);
+                const choice = prompt(
+                    msg +
+                    '\n\n🔍 برای مشاهده فاکتور، شماره سفارش را وارد کنید:\n' +
+                    orderIds.join('\n') +
+                    '\n\n(یا Enter بزنید برای انصراف)',
+                    ''
+                );
 
-            document.getElementById('modalImg').src = product.image || 'https://via.placeholder.com/400x300?text=No+Image';
-            document.getElementById('modalName').textContent = product.name;
-            document.getElementById('modalPrice').textContent = `${product.price.toLocaleString()} تومان`;
-            document.getElementById('modalDesc').textContent = product.description || 'توضیحاتی برای این محصول ثبت نشده است.';
-            document.getElementById('modalCategory').textContent = product.category || 'الکترونیک';
-            document.getElementById('modalRating').textContent = product.rating || 4.5;
-
-            document.getElementById('specBrand').textContent = product.brand || 'BitVolt';
-            document.getElementById('specDimensions').textContent = product.dimensions || '۱۲ × ۸ × ۳ سانتیمتر';
-            document.getElementById('specWeight').textContent = product.weight || '۲۵۰ گرم';
-            document.getElementById('specModel').textContent = product.model || `BTV-${String(product.id).padStart(4, '0')}`;
-            document.getElementById('specCountry').textContent = product.country || 'چین';
-
-            const videoContainer = document.getElementById('modalVideoContainer');
-            const videoIframe = document.getElementById('modalVideo');
-            if (product.video && product.video.includes('aparat.com')) {
-                const videoId = product.video.split('/').pop();
-                videoIframe.src = `https://www.aparat.com/video/video/embed/videohash/${videoId}/vt/frame`;
-                videoContainer.style.display = 'block';
+                if (choice) {
+                    const index = parseInt(choice) - 1;
+                    const ordersList = userOrdersList.slice().reverse();
+                    if (index >= 0 && index < ordersList.length) {
+                        showUserOrderDetail(ordersList[index]);
+                    } else {
+                        // تلاش با کد سفارش
+                        const foundOrder = userOrdersList.find(o => o.id === choice.trim());
+                        if (foundOrder) {
+                            showUserOrderDetail(foundOrder);
+                        } else {
+                            alert('❌ سفارش مورد نظر یافت نشد!');
+                        }
+                    }
+                }
             } else {
-                videoContainer.style.display = 'none';
-                videoIframe.src = '';
+                alert(msg);
             }
-
-            document.getElementById('modalAddBtn').dataset.id = product.id;
         }
 
-        document.getElementById('modalAddBtn').addEventListener('click', function() {
-            const id = parseInt(this.dataset.id);
-            addToCart(id);
-            closeAllModals();
-        });
+        // ============================================================
+        // 👁️ نمایش جزئیات سفارش برای مشتری (فاکتور)
+        // ============================================================
+        function showUserOrderDetail(order) {
+            if (!order) return;
+
+            document.getElementById('userOrderDetailId').textContent = order.id;
+            document.getElementById('userOrderDetailDate').textContent = order.date || '-';
+            document.getElementById('userOrderDetailTotal').textContent = order.total.toLocaleString() + ' تومان';
+
+            const statusMap = {
+                'processing': '🟡 در حال پردازش',
+                'shipped': '🟢 ارسال شده',
+                'delivered': '✅ تحویل داده شده'
+            };
+            document.getElementById('userOrderDetailStatus').textContent = statusMap[order.status] || 'در حال پردازش';
+
+            const addr = order.address || {};
+            document.getElementById('userOrderDetailAddress').textContent =
+                `${addr.province || ''} - ${addr.city || ''} - ${addr.full || 'آدرسی ثبت نشده'}`;
+
+            // آیتم‌ها
+            let itemsHtml = '';
+            if (order.items && order.items.length > 0) {
+                order.items.forEach(item => {
+                    itemsHtml += `
+                        <div class="item-row">
+                            <span class="name">${item.name}</span>
+                            <span class="qty">${item.qty} ×</span>
+                            <span class="price">${(item.price * item.qty).toLocaleString()} تومان</span>
+                        </div>
+                    `;
+                });
+            } else {
+                itemsHtml = '<div style="color:#888; padding:8px 0;">محصولی در این سفارش وجود ندارد</div>';
+            }
+            document.getElementById('userOrderDetailItems').innerHTML = itemsHtml;
+            document.getElementById('userOrderDetailTotalFinal').textContent = order.total.toLocaleString() + ' تومان';
+
+            openModal('userOrderDetailModal');
+        }
 
         // ============================================================
-        // 👑 پنل ادمین
+        // 👑 پنل ادمین با مشاهده کامل سفارشات
         // ============================================================
         function openAdminPanel() {
             const password = prompt('🔑 برای ورود به پنل مدیریت، رمز عبور را وارد کنید:');
@@ -3132,6 +3414,125 @@
                 `;
             });
             list.innerHTML = html;
+        }
+
+        function renderAdminOrders() {
+            const list = document.getElementById('adminOrderList');
+            let allOrders = [];
+            Object.entries(orders).forEach(([user, userOrders]) => {
+                userOrders.forEach(order => {
+                    allOrders.push({ ...order, user: user });
+                });
+            });
+
+            if (allOrders.length === 0) {
+                list.innerHTML =
+                `<tr><td colspan="6" style="text-align:center; color:#888; padding:15px;">سفارشی وجود ندارد</td></tr>`;
+                return;
+            }
+
+            let html = '';
+            allOrders.slice().reverse().forEach(order => {
+                const statusMap = { 'processing': 'در حال پردازش', 'shipped': 'ارسال شده', 'delivered': 'تحویل داده شده' };
+                const statusClass = { 'processing': 'warning', 'shipped': 'success', 'delivered': 'success' };
+
+                const paymentStatus = order.payment?.status || 'pending';
+                const paymentLabel = paymentStatus === 'success' ? '✅ موفق' :
+                    paymentStatus === 'failed' ? '❌ ناموفق' : '🟡 در انتظار';
+                const paymentClass = paymentStatus === 'success' ? 'success' :
+                    paymentStatus === 'failed' ? 'failed' : 'pending';
+
+                html += `
+                    <tr>
+                        <td><strong>${order.id}</strong></td>
+                        <td>${order.user}</td>
+                        <td>${order.total.toLocaleString()} تومان</td>
+                        <td><span class="badge-status ${statusClass[order.status] || 'warning'}">${statusMap[order.status] || 'در حال پردازش'}</span></td>
+                        <td><span class="payment-status ${paymentClass}">${paymentLabel}</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="edit" onclick="viewOrderDetailAdmin('${order.id}')"><i class="fas fa-eye"></i></button>
+                                <button class="edit" onclick="updateOrderStatus('${order.id}')"><i class="fas fa-edit"></i></button>
+                                <button class="delete" onclick="deleteOrderAdmin('${order.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        // ============================================================
+        // 👁️ نمایش جزئیات سفارش برای ادمین
+        // ============================================================
+        function viewOrderDetailAdmin(orderId) {
+            currentAdminOrderId = orderId;
+            let foundOrder = null;
+            let foundUser = null;
+
+            Object.entries(orders).forEach(([user, userOrders]) => {
+                userOrders.forEach(order => {
+                    if (order.id === orderId) {
+                        foundOrder = order;
+                        foundUser = user;
+                    }
+                });
+            });
+
+            if (!foundOrder) {
+                alert('❌ سفارش یافت نشد!');
+                return;
+            }
+
+            document.getElementById('adminOrderDetailId').textContent = foundOrder.id;
+
+            const addr = foundOrder.address || {};
+            document.getElementById('adminOrderDetailName').textContent = addr.name || foundUser || '-';
+            document.getElementById('adminOrderDetailPhone').textContent = addr.phone || '-';
+            document.getElementById('adminOrderDetailAddress').textContent =
+                `${addr.province || ''} - ${addr.city || ''} - ${addr.full || 'آدرسی ثبت نشده'}`;
+            document.getElementById('adminOrderDetailTotal').textContent = foundOrder.total.toLocaleString() + ' تومان';
+            document.getElementById('adminOrderDetailDate').textContent = foundOrder.date || '-';
+
+            const paymentStatus = foundOrder.payment?.status || 'pending';
+            const paymentLabel = paymentStatus === 'success' ? '✅ پرداخت موفق' :
+                paymentStatus === 'failed' ? '❌ پرداخت ناموفق' : '🟡 در انتظار پرداخت';
+            const paymentClass = paymentStatus === 'success' ? 'success' :
+                paymentStatus === 'failed' ? 'failed' : 'pending';
+            document.getElementById('adminOrderDetailPayment').innerHTML =
+                `<span class="payment-status ${paymentClass}">${paymentLabel}</span>`;
+
+            const statusMap = {
+                'processing': '🟡 در حال پردازش',
+                'shipped': '🟢 ارسال شده',
+                'delivered': '✅ تحویل داده شده'
+            };
+            document.getElementById('adminOrderDetailStatus').textContent = statusMap[foundOrder.status] || 'در حال پردازش';
+
+            // آیتم‌ها
+            let itemsHtml = '';
+            if (foundOrder.items && foundOrder.items.length > 0) {
+                foundOrder.items.forEach(item => {
+                    itemsHtml += `
+                        <div class="item-row">
+                            <span class="name">${item.name}</span>
+                            <span class="qty">${item.qty} ×</span>
+                            <span class="price">${(item.price * item.qty).toLocaleString()} تومان</span>
+                        </div>
+                    `;
+                });
+            } else {
+                itemsHtml = '<div style="color:#888; padding:8px 0;">محصولی در این سفارش وجود ندارد</div>';
+            }
+            document.getElementById('adminOrderDetailItems').innerHTML = itemsHtml;
+            document.getElementById('adminOrderDetailTotalFinal').textContent = foundOrder.total.toLocaleString() + ' تومان';
+
+            openModal('adminOrderDetailModal');
+        }
+
+        function updateAdminOrderStatus() {
+            if (!currentAdminOrderId) return;
+            updateOrderStatus(currentAdminOrderId);
         }
 
         function showAddProduct() {
@@ -3233,41 +3634,9 @@
             }
         }
 
-        function renderAdminOrders() {
-            const list = document.getElementById('adminOrderList');
-            let allOrders = [];
-            Object.entries(orders).forEach(([user, userOrders]) => {
-                userOrders.forEach(order => {
-                    allOrders.push({ ...order, user: user });
-                });
-            });
-            if (allOrders.length === 0) {
-                list.innerHTML =
-                `<tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">سفارشی وجود ندارد</td></tr>`;
-                return;
-            }
-            let html = '';
-            allOrders.slice().reverse().forEach(order => {
-                const statusMap = { 'processing': 'در حال پردازش', 'shipped': 'ارسال شده', 'delivered': 'تحویل داده شده' };
-                const statusClass = { 'processing': 'warning', 'shipped': 'success', 'delivered': 'success' };
-                html += `
-                    <tr>
-                        <td><strong>${order.id}</strong></td>
-                        <td>${order.user}</td>
-                        <td>${order.total.toLocaleString()} تومان</td>
-                        <td><span class="badge-status ${statusClass[order.status] || 'warning'}">${statusMap[order.status] || 'در حال پردازش'}</span></td>
-                        <td>
-                            <div class="actions">
-                                <button class="edit" onclick="updateOrderStatus('${order.id}')"><i class="fas fa-edit"></i></button>
-                                <button class="delete" onclick="deleteOrderAdmin('${order.id}')"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
-            list.innerHTML = html;
-        }
-
+        // ============================================================
+        // 📦 مدیریت سفارشات (ادمین)
+        // ============================================================
         function updateOrderStatus(orderId) {
             const newStatus = prompt('وضعیت جدید (processing/shipped/delivered):', 'processing');
             if (newStatus && ['processing', 'shipped', 'delivered'].includes(newStatus)) {
@@ -3280,6 +3649,7 @@
                 });
                 saveUserData();
                 renderAdminOrders();
+                closeAllModals();
                 alert('✅ وضعیت سفارش با موفقیت تغییر کرد!');
             }
         }
@@ -3383,43 +3753,47 @@
         }
 
         // ============================================================
-        // 🔄 مدیریت بازگشت از زرین‌پال (Callback)
+        // 🖼️ مودال محصول با مشخصات کامل
         // ============================================================
-        function handleZarinpalCallback() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const authority = urlParams.get('Authority');
-            const status = urlParams.get('Status');
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            currentProductId = id;
+            closeAllModals();
+            openModal('productModal');
 
-            if (authority && status === 'OK') {
-                // پرداخت موفق - ثبت سفارش
-                if (isLoggedIn && cart.length > 0) {
-                    const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
-                    if (!orders[currentUser]) orders[currentUser] = [];
-                    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                    const shipping = total >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
-                    orders[currentUser].push({
-                        id: orderId,
-                        items: JSON.parse(JSON.stringify(cart)),
-                        subtotal: total,
-                        shipping: shipping,
-                        total: total + shipping,
-                        date: new Date().toLocaleDateString('fa-IR'),
-                        status: 'processing',
-                        address: userAddresses[currentUser] || {},
-                        payment: 'zarinpal'
-                    });
-                    saveUserData();
-                    cart = [];
-                    updateCartUI();
-                    alert('✅ پرداخت با موفقیت انجام شد! سفارش شما ثبت گردید.\nکد پیگیری: ' + orderId);
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                    navigateTo('home');
-                }
-            } else if (authority) {
-                alert('❌ پرداخت ناموفق بود. لطفاً مجدداً تلاش کنید.');
-                window.history.replaceState({}, document.title, window.location.pathname);
+            document.getElementById('modalImg').src = product.image || 'https://via.placeholder.com/400x300?text=No+Image';
+            document.getElementById('modalName').textContent = product.name;
+            document.getElementById('modalPrice').textContent = `${product.price.toLocaleString()} تومان`;
+            document.getElementById('modalDesc').textContent = product.description || 'توضیحاتی برای این محصول ثبت نشده است.';
+            document.getElementById('modalCategory').textContent = product.category || 'الکترونیک';
+            document.getElementById('modalRating').textContent = product.rating || 4.5;
+
+            document.getElementById('specBrand').textContent = product.brand || 'BitVolt';
+            document.getElementById('specDimensions').textContent = product.dimensions || '۱۲ × ۸ × ۳ سانتیمتر';
+            document.getElementById('specWeight').textContent = product.weight || '۲۵۰ گرم';
+            document.getElementById('specModel').textContent = product.model || `BTV-${String(product.id).padStart(4, '0')}`;
+            document.getElementById('specCountry').textContent = product.country || 'چین';
+
+            const videoContainer = document.getElementById('modalVideoContainer');
+            const videoIframe = document.getElementById('modalVideo');
+            if (product.video && product.video.includes('aparat.com')) {
+                const videoId = product.video.split('/').pop();
+                videoIframe.src = `https://www.aparat.com/video/video/embed/videohash/${videoId}/vt/frame`;
+                videoContainer.style.display = 'block';
+            } else {
+                videoContainer.style.display = 'none';
+                videoIframe.src = '';
             }
+
+            document.getElementById('modalAddBtn').dataset.id = product.id;
         }
+
+        document.getElementById('modalAddBtn').addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            addToCart(id);
+            closeAllModals();
+        });
 
         // ============================================================
         // 🚀 مقداردهی اولیه
@@ -3452,5 +3826,6 @@
             console.log('⚠️ Merchant ID زرین‌پال وارد نشده!');
         }
     </script>
+
 </body>
 </html>
