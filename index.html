@@ -243,6 +243,17 @@
         .search-bar input::placeholder {
             color: #aaa;
         }
+        .search-bar .admin-hint {
+            display: none;
+            background: #fff8e1;
+            padding: 6px 14px;
+            border-radius: 50px;
+            color: #0a1628;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid #ffb300;
+            white-space: nowrap;
+        }
 
         /* ===== CATEGORIES ===== */
         .categories {
@@ -498,6 +509,159 @@
         }
 
         /* ============================================================
+           PRODUCT DETAIL - با مشخصات کامل
+           ============================================================ */
+        .product-detail-modal .modal-content {
+            max-width: 780px;
+        }
+        .product-detail-modal .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .product-detail-modal .modal-img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 12px;
+        }
+        .product-detail-modal .modal-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0a1628;
+        }
+        .product-detail-modal .modal-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0a1628;
+            margin: 5px 0;
+        }
+        .product-detail-modal .modal-desc {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+        .product-detail-modal .modal-specs {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 14px;
+            margin: 10px 0;
+        }
+        .product-detail-modal .modal-specs .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            font-size: 0.85rem;
+        }
+        .product-detail-modal .modal-specs .spec-row:last-child {
+            border-bottom: none;
+        }
+        .product-detail-modal .modal-specs .spec-label {
+            color: #888;
+        }
+        .product-detail-modal .modal-specs .spec-value {
+            font-weight: 600;
+            color: #0a1628;
+        }
+        .product-detail-modal .modal-video {
+            margin: 10px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0a1628;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .product-detail-modal .modal-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .product-detail-modal .modal-comments {
+            margin-top: 15px;
+            border-top: 2px solid rgba(0, 0, 0, 0.04);
+            padding-top: 15px;
+        }
+        .product-detail-modal .modal-comments h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .product-detail-modal .modal-comments h4 i {
+            color: #ffb300;
+        }
+        .product-detail-modal .modal-comment {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+        }
+        .product-detail-modal .modal-comment .comment-user {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0a1628;
+        }
+        .product-detail-modal .modal-comment .comment-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 3px;
+        }
+        .product-detail-modal .modal-comment .comment-date {
+            font-size: 0.65rem;
+            color: #999;
+        }
+        .product-detail-modal .modal-comment .comment-stars {
+            color: #ffb300;
+            font-size: 0.7rem;
+        }
+        .product-detail-modal .modal-add-btn {
+            background: #ffb300;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            color: #0a1628;
+            margin-top: 10px;
+        }
+        .product-detail-modal .modal-add-btn:hover {
+            transform: scale(1.02);
+        }
+        .product-detail-modal .modal-close-btn {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.04);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #888;
+            transition: 0.3s;
+        }
+        .product-detail-modal .modal-close-btn:hover {
+            background: #e74c3c;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        /* ============================================================
            ADMIN PANEL
            ============================================================ */
         .admin-section {
@@ -674,6 +838,42 @@
             border-color: #ffb300;
             box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
         }
+        .admin-form .form-group .file-upload {
+            border: 2px dashed rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fff;
+        }
+        .admin-form .form-group .file-upload:hover {
+            border-color: #ffb300;
+            background: #fff8e1;
+        }
+        .admin-form .form-group .file-upload input[type="file"] {
+            display: none;
+        }
+        .admin-form .form-group .file-upload .icon {
+            font-size: 2rem;
+            color: #ccc;
+        }
+        .admin-form .form-group .file-upload .text {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 4px;
+        }
+        .admin-form .form-group .file-preview {
+            margin-top: 8px;
+            max-width: 100%;
+            max-height: 100px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: none;
+        }
+        .admin-form .form-group .file-preview.show {
+            display: block;
+        }
         .admin-form .submit-btn {
             background: #ffb300;
             border: none;
@@ -690,7 +890,9 @@
             transform: scale(1.02);
         }
 
-        /* ===== ABOUT ===== */
+        /* ============================================================
+           ABOUT
+           ============================================================ */
         .about-section {
             background: #fff;
             border-radius: 20px;
@@ -900,7 +1102,7 @@
         }
 
         /* ============================================================
-           MODALS
+           MODALS (عمومی)
            ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -941,26 +1143,8 @@
                 opacity: 1;
             }
         }
-        .modal-content .close-modal {
-            position: absolute;
-            top: 12px;
-            left: 16px;
-            background: rgba(0, 0, 0, 0.02);
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #888;
-            transition: 0.3s;
-        }
-        .modal-content .close-modal:hover {
-            background: #e74c3c;
-            color: #fff;
-            transform: rotate(90deg);
-        }
 
+        /* ===== AUTH MODAL ===== */
         .auth-modal .modal-content {
             max-width: 420px;
             text-align: center;
@@ -1041,134 +1225,6 @@
             font-size: 0.8rem;
             margin: 5px 0;
             display: none;
-        }
-
-        .product-detail-modal .modal-img {
-            width: 100%;
-            max-height: 240px;
-            object-fit: contain;
-            background: #f8fafc;
-            border-radius: 14px;
-            padding: 10px;
-        }
-        .product-detail-modal .modal-name {
-            font-size: 1.4rem;
-            font-weight: 800;
-        }
-        .product-detail-modal .modal-price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin: 5px 0;
-        }
-        .product-detail-modal .modal-desc {
-            color: #555;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-        .product-detail-modal .modal-meta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            background: #f8fafc;
-            padding: 8px 14px;
-            border-radius: 12px;
-            margin: 8px 0;
-        }
-        .product-detail-modal .modal-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.8rem;
-            color: #555;
-        }
-        .product-detail-modal .modal-meta i {
-            color: #ffb300;
-        }
-        .product-detail-modal .modal-add-btn {
-            background: #ffb300;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-            color: #0a1628;
-        }
-        .product-detail-modal .modal-add-btn:hover {
-            transform: scale(1.02);
-        }
-
-        .checkout-modal .modal-content {
-            max-width: 460px;
-            text-align: center;
-        }
-        .checkout-modal .checkout-icon {
-            font-size: 3rem;
-            color: #ffb300;
-        }
-        .checkout-modal .checkout-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-        }
-        .checkout-modal .form-group {
-            margin-bottom: 12px;
-            text-align: right;
-        }
-        .checkout-modal .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #333;
-            margin-bottom: 4px;
-        }
-        .checkout-modal .form-group input,
-        .checkout-modal .form-group select,
-        .checkout-modal .form-group textarea {
-            width: 100%;
-            padding: 8px 14px;
-            border: 2px solid rgba(0, 0, 0, 0.04);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
-            font-family: inherit;
-            background: #f8fafc;
-        }
-        .checkout-modal .form-group input:focus,
-        .checkout-modal .form-group select:focus,
-        .checkout-modal .form-group textarea:focus {
-            border-color: #ffb300;
-            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
-        }
-        .checkout-modal .checkout-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .checkout-modal .checkout-actions .btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-            font-family: inherit;
-        }
-        .checkout-modal .checkout-actions .btn-primary {
-            background: #ffb300;
-            color: #0a1628;
-        }
-        .checkout-modal .checkout-actions .btn-primary:hover {
-            transform: scale(1.02);
-        }
-        .checkout-modal .checkout-actions .btn-secondary {
-            background: rgba(0, 0, 0, 0.04);
-            color: #555;
         }
 
         /* ============================================================
@@ -1263,6 +1319,79 @@
         }
 
         /* ============================================================
+           CHECKOUT MODAL
+           ============================================================ */
+        .checkout-modal .modal-content {
+            max-width: 460px;
+            text-align: center;
+        }
+        .checkout-modal .checkout-icon {
+            font-size: 3rem;
+            color: #ffb300;
+        }
+        .checkout-modal .checkout-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .checkout-modal .form-group {
+            margin-bottom: 12px;
+            text-align: right;
+        }
+        .checkout-modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .checkout-modal .form-group input,
+        .checkout-modal .form-group select,
+        .checkout-modal .form-group textarea {
+            width: 100%;
+            padding: 8px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: #f8fafc;
+        }
+        .checkout-modal .form-group input:focus,
+        .checkout-modal .form-group select:focus,
+        .checkout-modal .form-group textarea:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
+        }
+        .checkout-modal .checkout-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .checkout-modal .checkout-actions .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-family: inherit;
+        }
+        .checkout-modal .checkout-actions .btn-primary {
+            background: #ffb300;
+            color: #0a1628;
+        }
+        .checkout-modal .checkout-actions .btn-primary:hover {
+            transform: scale(1.02);
+        }
+        .checkout-modal .checkout-actions .btn-secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #555;
+        }
+
+        /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 768px) {
@@ -1315,6 +1444,9 @@
             }
             .admin-stats {
                 grid-template-columns: 1fr 1fr;
+            }
+            .product-detail-modal .modal-grid {
+                grid-template-columns: 1fr;
             }
         }
         @media (max-width: 480px) {
@@ -1372,7 +1504,9 @@
 </head>
 <body>
 
-    <!-- ===== TOP BAR ===== -->
+    <!-- ============================================================
+    TOP BAR
+    ============================================================ -->
     <div class="top-bar">
         <div class="container">
             <div class="right">
@@ -1388,7 +1522,9 @@
         </div>
     </div>
 
-    <!-- ===== HEADER ===== -->
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
     <header class="header">
         <div class="container">
             <div class="logo" onclick="navigateTo('home')">
@@ -1424,17 +1560,19 @@
         </div>
     </header>
 
-    <!-- ===== SEARCH ===== -->
+    <!-- ============================================================
+    SEARCH
+    ============================================================ -->
     <div class="search-bar">
         <div class="container">
             <input type="text" id="searchInput" placeholder="جستجوی محصولات..." onkeyup="checkAdminSecret(this.value)" />
-            <div id="adminHint" style="display:none; background:#fff8e1; padding:6px 14px; border-radius:50px; color:#0a1628; font-size:0.8rem; font-weight:600; border:1px solid #ffb300;">
-                🔑 کد مخفی شناسایی شد! در حال باز کردن پنل ادمین...
-            </div>
+            <span class="admin-hint" id="adminHint">🔑 کد مخفی شناسایی شد!</span>
         </div>
     </div>
 
-    <!-- ===== CATEGORIES ===== -->
+    <!-- ============================================================
+    CATEGORIES
+    ============================================================ -->
     <div class="categories">
         <div class="container" id="categoriesContainer">
             <div class="cat-item active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-list"></i> همه</div>
@@ -1447,7 +1585,9 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: HOME ===== -->
+    <!-- ============================================================
+    PAGE: HOME
+    ============================================================ -->
     <div class="page active" id="page-home">
         <div class="container">
             <div class="hero">
@@ -1482,7 +1622,9 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: ABOUT ===== -->
+    <!-- ============================================================
+    PAGE: ABOUT
+    ============================================================ -->
     <div class="page" id="page-about">
         <div class="container">
             <div class="about-section">
@@ -1512,7 +1654,9 @@
         </div>
     </div>
 
-    <!-- ===== PAGE: ADMIN ===== -->
+    <!-- ============================================================
+    PAGE: ADMIN
+    ============================================================ -->
     <div class="page" id="page-admin">
         <div class="container">
             <div class="admin-section">
@@ -1596,7 +1740,9 @@
         </div>
     </div>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
     <div class="footer">
         <div class="container">
             <div>
@@ -1646,7 +1792,9 @@
         </div>
     </div>
 
-    <!-- ===== CART ===== -->
+    <!-- ============================================================
+    CART
+    ============================================================ -->
     <div class="cart-overlay" id="cartOverlay">
         <div class="cart-panel">
             <div class="cart-header">
@@ -1670,7 +1818,10 @@
         </div>
     </div>
 
-    <!-- ===== MODALS ===== -->
+    <!-- ============================================================
+    MODALS
+    ============================================================ -->
+
     <!-- AUTH -->
     <div class="modal-overlay auth-modal" id="authModal">
         <div class="modal-content">
@@ -1702,16 +1853,62 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAIL -->
+    <!-- PRODUCT DETAIL MODAL (با مشخصات کامل) -->
     <div class="modal-overlay product-detail-modal" id="productModal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeAllModals()">&times;</button>
-            <img class="modal-img" id="modalImg" src="" alt="" />
-            <div class="modal-name" id="modalName"></div>
-            <div class="modal-price" id="modalPrice"></div>
-            <div class="modal-meta" id="modalMeta"></div>
-            <div class="modal-desc" id="modalDesc"></div>
-            <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
+            <button class="modal-close-btn" onclick="closeAllModals()">&times;</button>
+            <div class="modal-grid">
+                <div>
+                    <img class="modal-img" id="modalImg" src="" alt="" />
+                    <div class="modal-name" id="modalName"></div>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <!-- مشخصات -->
+                    <div class="modal-specs">
+                        <div class="spec-row"><span class="spec-label">سازنده</span><span class="spec-value" id="specBrand">BitVolt</span></div>
+                        <div class="spec-row"><span class="spec-label">ابعاد</span><span class="spec-value" id="specDimensions">۱۲ × ۸ × ۳ سانتیمتر</span></div>
+                        <div class="spec-row"><span class="spec-label">وزن</span><span class="spec-value" id="specWeight">۲۵۰ گرم</span></div>
+                        <div class="spec-row"><span class="spec-label">مدل</span><span class="spec-value" id="specModel">BTV-1000</span></div>
+                        <div class="spec-row"><span class="spec-label">کشور سازنده</span><span class="spec-value" id="specCountry">چین</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-desc" id="modalDesc"></div>
+                    <div class="modal-meta" style="display:flex; gap:8px; flex-wrap:wrap; background:#f8fafc; padding:8px 12px; border-radius:10px; margin:8px 0;">
+                        <span><i class="fas fa-tag" style="color:#ffb300;"></i> دسته: <span id="modalCategory">الکترونیک</span></span>
+                        <span><i class="fas fa-star" style="color:#ffb300;"></i> امتیاز: <span id="modalRating">۴.۵</span></span>
+                    </div>
+                    <!-- ویدیو از اپارات -->
+                    <div class="modal-video" id="modalVideoContainer" style="display:none;">
+                        <iframe id="modalVideo" src="" allowfullscreen></iframe>
+                    </div>
+                    <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
+
+                    <!-- نظرات مشتریان -->
+                    <div class="modal-comments">
+                        <h4><i class="fas fa-comments"></i> نظرات مشتریان</h4>
+                        <div id="modalComments">
+                            <div class="modal-comment">
+                                <div class="comment-user">علی محمدی</div>
+                                <div class="comment-stars">★★★★★</div>
+                                <div class="comment-text">کیفیت عالی، دقیقاً مطابق توضیحات بود. ارسال سریع.</div>
+                                <div class="comment-date">۱۴۰۴/۰۲/۱۵</div>
+                            </div>
+                            <div class="modal-comment">
+                                <div class="comment-user">سارا احمدی</div>
+                                <div class="comment-stars">★★★★☆</div>
+                                <div class="comment-text">محصول خوبیه، فقط کاش راهنمای نصب فارسی داشت.</div>
+                                <div class="comment-date">۱۴۰۴/۰۲/۱۲</div>
+                            </div>
+                            <div class="modal-comment">
+                                <div class="comment-user">رضا کریمی</div>
+                                <div class="comment-stars">★★★★★</div>
+                                <div class="comment-text">عالی! کاملاً راضی هستم. پیشنهاد می‌کنم.</div>
+                                <div class="comment-date">۱۴۰۴/۰۲/۰۸</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1720,7 +1917,7 @@
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
             <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:15px;"><i class="fas fa-plus-circle" style="color:#ffb300;"></i> افزودن محصول جدید</h3>
-            <form class="admin-form" onsubmit="addProductFromAdmin(event)">
+            <form class="admin-form" id="addProductForm" onsubmit="addProductFromAdmin(event)">
                 <div class="form-group">
                     <label>نام محصول *</label>
                     <input type="text" id="adminProdName" placeholder="نام محصول" required />
@@ -1745,8 +1942,30 @@
                     <textarea id="adminProdDesc" placeholder="توضیحات کامل محصول..." required></textarea>
                 </div>
                 <div class="form-group">
-                    <label>آدرس تصویر (URL)</label>
-                    <input type="url" id="adminProdImage" placeholder="https://example.com/image.jpg" />
+                    <label>سازنده</label>
+                    <input type="text" id="adminProdBrand" placeholder="سازنده محصول" value="BitVolt" />
+                </div>
+                <div class="form-group">
+                    <label>ابعاد</label>
+                    <input type="text" id="adminProdDimensions" placeholder="۱۲ × ۸ × ۳ سانتیمتر" />
+                </div>
+                <div class="form-group">
+                    <label>وزن</label>
+                    <input type="text" id="adminProdWeight" placeholder="۲۵۰ گرم" />
+                </div>
+                <div class="form-group">
+                    <label>لینک ویدیو (اپارات)</label>
+                    <input type="url" id="adminProdVideo" placeholder="https://www.aparat.com/v/xxxxx" />
+                </div>
+                <div class="form-group">
+                    <label>تصویر محصول</label>
+                    <div class="file-upload" onclick="document.getElementById('adminProdImageFile').click()">
+                        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div class="text">برای آپلود تصویر کلیک کنید</div>
+                        <input type="file" id="adminProdImageFile" accept="image/*" onchange="previewAdminImage(event)" />
+                    </div>
+                    <img class="file-preview" id="adminImagePreview" alt="پیش‌نمایش" />
+                    <input type="hidden" id="adminProdImage" />
                 </div>
                 <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> افزودن محصول</button>
             </form>
@@ -1823,14 +2042,35 @@
 
     <script>
         // ============================================================
-        // 🔑 تنظیمات
+        // 🔑 تنظیمات متمرکز - همه API Key ها اینجا
         // ============================================================
-        const ADMIN_PASSWORD = 'BitVolt@2026#Secure$GGVolt!';
-        const ADMIN_SECRET = 'admin123';
-        const SMS_OTP_EXPIRE = 180;
 
-        let SHIPPING_COST = 120000;
-        let FREE_SHIPPING_MIN = 1000000;
+        // ---------- تنظیمات پیامک ----------
+        // سرویس: sms.ir یا kavenegar
+        const SMS_CONFIG = {
+            provider: 'smsir', // 'smsir' یا 'kavenegar'
+            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // کلید API
+            templateId: 958264, // آیدی قالب (sms.ir)
+            template: 'verify', // نام قالب (kavenegar)
+            sender: '500030007' // شماره فرستنده
+        };
+
+        // ---------- تنظیمات زرین‌پال ----------
+        const ZARINPAL_CONFIG = {
+            merchantId: '9e66bf2a-3e71-4296-9e7f-00c0d15c635f', // Merchant ID
+            sandbox: true, // true = تست | false = واقعی
+            callbackUrl: window.location.href + '?payment=callback'
+        };
+
+        // ---------- تنظیمات سایت ----------
+        const SITE_CONFIG = {
+            adminPassword: 'BitVolt@2026#Secure$GGVolt!',
+            adminSecret: 'admin123',
+            shippingCost: 120000,
+            freeShippingMin: 1000000,
+            phone: '09107484214',
+            address: 'قزوین، تاکستان، خیابان حافظ، پلاک ۱۲'
+        };
 
         // ============================================================
         // 📦 داده‌ها
@@ -1847,7 +2087,7 @@
         let currentUser = null;
         let generatedCode = '';
         let otpTimerInterval = null;
-        let otpSeconds = SMS_OTP_EXPIRE;
+        let otpSeconds = 180;
         let currentPage = 'home';
 
         // ============================================================
@@ -1905,7 +2145,7 @@
         // ============================================================
         function checkAdminSecret(value) {
             const hint = document.getElementById('adminHint');
-            if (value === ADMIN_SECRET) {
+            if (value === SITE_CONFIG.adminSecret) {
                 hint.style.display = 'inline-block';
                 setTimeout(() => {
                     hint.style.display = 'none';
@@ -1927,14 +2167,91 @@
                 try { products = JSON.parse(saved); } catch (e) { products = []; }
             }
             if (products.length === 0) {
-                products = [
-                    { id: 1, name: 'ماژول ولت BitVolt-1000', category: 'ماژول ولت', price: 145000, description: 'ماژول ولت سنج با دقت بالا و صفحه نمایش OLED...', image: 'https://via.placeholder.com/400x300?text=BitVolt+1000', rating: 4.8 },
-                    { id: 2, name: 'برد آردوینو مگا ۲۵۶۰', category: 'میکروکنترلر', price: 320000, description: 'برد آردوینو مگا با ۵۴ پایه ورودی/خروجی...', image: 'https://via.placeholder.com/400x300?text=Arduino+Mega', rating: 4.9 },
-                    { id: 3, name: 'سنسور دما DS18B20', category: 'سنسور', price: 65000, description: 'سنسور دمای دیجیتال با دقت ۰.۵ درجه...', image: 'https://via.placeholder.com/400x300?text=DS18B20', rating: 4.6 },
-                    { id: 4, name: 'پاوربانک ۳۰۰۰۰mAh BitVolt', category: 'منبع تغذیه', price: 490000, description: 'پاوربانک با ظرفیت ۳۰۰۰۰ میلی‌آمپر ساعت...', image: 'https://via.placeholder.com/400x300?text=PowerBank+BitVolt', rating: 4.7 },
-                    { id: 5, name: 'مولتی‌متر حرفه‌ای BM-990', category: 'ابزار دقیق', price: 780000, description: 'مولتی‌متر دیجیتال با دقت بالا...', image: 'https://via.placeholder.com/400x300?text=Multimeter+Pro', rating: 4.9 },
-                    { id: 6, name: 'کیت آموزشی الکترونیک BitVolt', category: 'رباتیک', price: 630000, description: 'کیت کامل آموزشی شامل آردوینو، سنسورها و...', image: 'https://via.placeholder.com/400x300?text=Education+Kit', rating: 4.5 }
-                ];
+                products = [{
+                    id: 1,
+                    name: 'ماژول ولت BitVolt-1000',
+                    category: 'ماژول ولت',
+                    price: 145000,
+                    description: 'ماژول ولت سنج با دقت بالا و صفحه نمایش OLED. مناسب برای پروژه‌های الکترونیک و اندازه‌گیری ولتاژ DC.',
+                    image: 'https://via.placeholder.com/400x300?text=BitVolt+1000',
+                    rating: 4.8,
+                    brand: 'BitVolt',
+                    dimensions: '۱۲ × ۸ × ۳ سانتیمتر',
+                    weight: '۲۵۰ گرم',
+                    model: 'BTV-1000',
+                    country: 'چین',
+                    video: ''
+                }, {
+                    id: 2,
+                    name: 'برد آردوینو مگا ۲۵۶۰',
+                    category: 'میکروکنترلر',
+                    price: 320000,
+                    description: 'برد آردوینو مگا با ۵۴ پایه ورودی/خروجی، ۱۶ ورودی آنالوگ، حافظه فلش ۲۵۶ کیلوبایت.',
+                    image: 'https://via.placeholder.com/400x300?text=Arduino+Mega',
+                    rating: 4.9,
+                    brand: 'Arduino',
+                    dimensions: '۱۰ × ۵ × ۲ سانتیمتر',
+                    weight: '۳۸ گرم',
+                    model: 'Mega 2560',
+                    country: 'ایتالیا',
+                    video: ''
+                }, {
+                    id: 3,
+                    name: 'سنسور دما DS18B20',
+                    category: 'سنسور',
+                    price: 65000,
+                    description: 'سنسور دمای دیجیتال با دقت ۰.۵ درجه سانتیگراد، قابلیت اتصال به صورت سری.',
+                    image: 'https://via.placeholder.com/400x300?text=DS18B20',
+                    rating: 4.6,
+                    brand: 'Maxim',
+                    dimensions: '۵ × ۳ × ۱ سانتیمتر',
+                    weight: '۵ گرم',
+                    model: 'DS18B20',
+                    country: 'آمریکا',
+                    video: ''
+                }, {
+                    id: 4,
+                    name: 'پاوربانک ۳۰۰۰۰mAh BitVolt',
+                    category: 'منبع تغذیه',
+                    price: 490000,
+                    description: 'پاوربانک با ظرفیت ۳۰۰۰۰ میلی‌آمپر ساعت، دارای پورت USB-C و خروجی سریع ۱۸ وات.',
+                    image: 'https://via.placeholder.com/400x300?text=PowerBank+BitVolt',
+                    rating: 4.7,
+                    brand: 'BitVolt',
+                    dimensions: '۱۵ × ۷ × ۳ سانتیمتر',
+                    weight: '۴۵۰ گرم',
+                    model: 'PB-30000',
+                    country: 'چین',
+                    video: ''
+                }, {
+                    id: 5,
+                    name: 'مولتی‌متر حرفه‌ای BM-990',
+                    category: 'ابزار دقیق',
+                    price: 780000,
+                    description: 'مولتی‌متر دیجیتال با دقت بالا، قابلیت اندازه‌گیری ولتاژ، جریان، مقاومت، خازن و فرکانس.',
+                    image: 'https://via.placeholder.com/400x300?text=Multimeter+Pro',
+                    rating: 4.9,
+                    brand: 'Brymen',
+                    dimensions: '۲۰ × ۱۰ × ۵ سانتیمتر',
+                    weight: '۵۰۰ گرم',
+                    model: 'BM-990',
+                    country: 'تایوان',
+                    video: ''
+                }, {
+                    id: 6,
+                    name: 'کیت آموزشی الکترونیک BitVolt',
+                    category: 'رباتیک',
+                    price: 630000,
+                    description: 'کیت کامل آموزشی شامل آردوینو، سنسورها، موتورها و قطعات الکترونیک برای یادگیری اصول رباتیک.',
+                    image: 'https://via.placeholder.com/400x300?text=Education+Kit',
+                    rating: 4.5,
+                    brand: 'BitVolt',
+                    dimensions: '۳۰ × ۲۰ × ۵ سانتیمتر',
+                    weight: '۱۲۰۰ گرم',
+                    model: 'EK-001',
+                    country: 'چین',
+                    video: ''
+                }];
                 saveProducts();
             }
             updateStatProducts();
@@ -2041,7 +2358,7 @@
 
         function filterProducts() {
             const search = document.getElementById('searchInput').value;
-            if (search !== ADMIN_SECRET) {
+            if (search !== SITE_CONFIG.adminSecret) {
                 renderProducts(search, currentCategory);
             }
         }
@@ -2114,7 +2431,7 @@
             });
             container.innerHTML = html;
 
-            let shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
+            let shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
             let total = subtotal + shipping;
 
             summaryContainer.style.display = 'block';
@@ -2191,7 +2508,7 @@
             const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
             if (!orders[currentUser]) orders[currentUser] = [];
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
+            const shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
             orders[currentUser].push({
                 id: orderId,
                 items: JSON.parse(JSON.stringify(cart)),
@@ -2264,7 +2581,7 @@
             document.getElementById('authOtp').value = '';
             document.getElementById('authOtpError').style.display = 'none';
             document.getElementById('authOtpSuccess').style.display = 'none';
-            otpSeconds = SMS_OTP_EXPIRE;
+            otpSeconds = 180;
             document.getElementById('otpTimer').textContent = otpSeconds;
             if (otpTimerInterval) clearInterval(otpTimerInterval);
             otpTimerInterval = setInterval(() => {
@@ -2320,7 +2637,7 @@
                 generatedCode = String(Math.floor(100000 + Math.random() * 900000));
                 console.log('📱 کد جدید ارسال شد: ' + generatedCode);
                 alert('📱 کد جدید ارسال شد: ' + generatedCode);
-                otpSeconds = SMS_OTP_EXPIRE;
+                otpSeconds = 180;
                 document.getElementById('otpTimer').textContent = otpSeconds;
                 if (otpTimerInterval) clearInterval(otpTimerInterval);
                 otpTimerInterval = setInterval(() => {
@@ -2405,7 +2722,7 @@
         }
 
         // ============================================================
-        // 🖼️ مودال محصول
+        // 🖼️ مودال محصول با مشخصات کامل
         // ============================================================
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
@@ -2413,16 +2730,34 @@
             currentProductId = id;
             closeAllModals();
             openModal('productModal');
+
             document.getElementById('modalImg').src = product.image || 'https://via.placeholder.com/400x300?text=No+Image';
             document.getElementById('modalName').textContent = product.name;
             document.getElementById('modalPrice').textContent = `${product.price.toLocaleString()} تومان`;
             document.getElementById('modalDesc').textContent = product.description || 'توضیحاتی برای این محصول ثبت نشده است.';
-            document.getElementById('modalMeta').innerHTML = `
-                <span><i class="fas fa-tag"></i> دسته: ${product.category}</span>
-                <span><i class="fas fa-bolt"></i> برند: BitVolt</span>
-                <span><i class="fas fa-microchip"></i> کد: BTV-${String(product.id).padStart(4, '0')}</span>
-                <span><i class="fas fa-star"></i> امتیاز: ${product.rating || 4.5}</span>
-            `;
+            document.getElementById('modalCategory').textContent = product.category || 'الکترونیک';
+            document.getElementById('modalRating').textContent = product.rating || 4.5;
+
+            // مشخصات
+            document.getElementById('specBrand').textContent = product.brand || 'BitVolt';
+            document.getElementById('specDimensions').textContent = product.dimensions || '۱۲ × ۸ × ۳ سانتیمتر';
+            document.getElementById('specWeight').textContent = product.weight || '۲۵۰ گرم';
+            document.getElementById('specModel').textContent = product.model || `BTV-${String(product.id).padStart(4, '0')}`;
+            document.getElementById('specCountry').textContent = product.country || 'چین';
+
+            // ویدیو
+            const videoContainer = document.getElementById('modalVideoContainer');
+            const videoIframe = document.getElementById('modalVideo');
+            if (product.video && product.video.includes('aparat.com')) {
+                // تبدیل لینک اپارات به امبد
+                const videoId = product.video.split('/').pop();
+                videoIframe.src = `https://www.aparat.com/video/video/embed/videohash/${videoId}/vt/frame`;
+                videoContainer.style.display = 'block';
+            } else {
+                videoContainer.style.display = 'none';
+                videoIframe.src = '';
+            }
+
             document.getElementById('modalAddBtn').dataset.id = product.id;
         }
 
@@ -2437,7 +2772,7 @@
         // ============================================================
         function openAdminPanel() {
             const password = prompt('🔑 برای ورود به پنل مدیریت، رمز عبور را وارد کنید:');
-            if (password === ADMIN_PASSWORD) {
+            if (password === SITE_CONFIG.adminPassword) {
                 navigateTo('admin');
                 updateAdminStats();
                 document.getElementById('adminTotalProducts').textContent = products.length;
@@ -2453,12 +2788,7 @@
         function switchAdminTab(tab) {
             document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.remove('active'));
             const tabs = document.querySelectorAll('.admin-tabs button');
-            const map = {
-                'products': 0,
-                'orders': 1,
-                'users': 2,
-                'comments': 3
-            };
+            const map = { 'products': 0, 'orders': 1, 'users': 2, 'comments': 3 };
             if (tabs[map[tab]]) tabs[map[tab]].classList.add('active');
             document.getElementById('adminProducts').style.display = tab === 'products' ? 'block' : 'none';
             document.getElementById('adminOrders').style.display = tab === 'orders' ? 'block' : 'none';
@@ -2499,6 +2829,23 @@
 
         function showAddProduct() {
             openModal('addProductModal');
+            document.getElementById('adminImagePreview').classList.remove('show');
+            document.getElementById('adminProdImage').value = '';
+            document.getElementById('addProductForm').reset();
+        }
+
+        function previewAdminImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('adminImagePreview');
+                    preview.src = e.target.result;
+                    preview.classList.add('show');
+                    document.getElementById('adminProdImage').value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         }
 
         function addProductFromAdmin(e) {
@@ -2507,7 +2854,11 @@
             const category = document.getElementById('adminProdCategory').value;
             const price = parseInt(document.getElementById('adminProdPrice').value);
             const description = document.getElementById('adminProdDesc').value.trim();
-            const image = document.getElementById('adminProdImage').value.trim() || 'https://via.placeholder.com/400x300?text=BitVolt+Product';
+            const image = document.getElementById('adminProdImage').value || 'https://via.placeholder.com/400x300?text=BitVolt+Product';
+            const brand = document.getElementById('adminProdBrand').value.trim() || 'BitVolt';
+            const dimensions = document.getElementById('adminProdDimensions').value.trim() || '۱۲ × ۸ × ۳ سانتیمتر';
+            const weight = document.getElementById('adminProdWeight').value.trim() || '۲۵۰ گرم';
+            const video = document.getElementById('adminProdVideo').value.trim() || '';
 
             if (!name || !price || !description) {
                 alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
@@ -2521,7 +2872,13 @@
                 price: price,
                 description: description,
                 image: image,
-                rating: 4.5
+                rating: 4.5,
+                brand: brand,
+                dimensions: dimensions,
+                weight: weight,
+                model: `BTV-${String(products.length + 1).padStart(4, '0')}`,
+                country: 'چین',
+                video: video
             };
 
             products.push(newProduct);
@@ -2529,6 +2886,8 @@
             renderProducts(document.getElementById('searchInput').value, currentCategory);
             renderAdminProducts();
             document.getElementById('addProductForm').reset();
+            document.getElementById('adminImagePreview').classList.remove('show');
+            document.getElementById('adminProdImage').value = '';
             closeAllModals();
             alert('✅ محصول جدید با موفقیت اضافه شد!');
         }
@@ -2544,6 +2903,10 @@
             if (newCategory && newCategory.trim()) product.category = newCategory.trim();
             const newDesc = prompt('📝 توضیحات جدید:', product.description);
             if (newDesc && newDesc.trim()) product.description = newDesc.trim();
+            const newBrand = prompt('🏷️ سازنده جدید:', product.brand);
+            if (newBrand && newBrand.trim()) product.brand = newBrand.trim();
+            const newVideo = prompt('🎬 لینک ویدیو جدید (اپارات):', product.video);
+            if (newVideo !== null) product.video = newVideo.trim();
             saveProducts();
             renderProducts(document.getElementById('searchInput').value, currentCategory);
             renderAdminProducts();
@@ -2719,11 +3082,13 @@
         checkLoginStatus();
 
         console.log('⚡ BitVolt | فروشگاه الکترونیک');
-        console.log('🔑 رمز پنل مدیریت:', ADMIN_PASSWORD);
-        console.log('🔍 کد مخفی در جستجو: admin123');
-        console.log('📱 شماره تماس: 09107484214');
-        console.log('📍 آدرس: قزوین، تاکستان، خیابان حافظ');
+        console.log('🔑 رمز پنل مدیریت:', SITE_CONFIG.adminPassword);
+        console.log('🔍 کد مخفی در جستجو:', SITE_CONFIG.adminSecret);
+        console.log('📱 شماره تماس:', SITE_CONFIG.phone);
+        console.log('📍 آدرس:', SITE_CONFIG.address);
         console.log('⏱️ زمان انقضای کد: 3 دقیقه');
+        console.log('📦 هزینه پست:', SITE_CONFIG.shippingCost.toLocaleString(), 'تومان');
+        console.log('🚚 ارسال رایگان بالای:', SITE_CONFIG.freeShippingMin.toLocaleString(), 'تومان');
     </script>
 </body>
 </html>
