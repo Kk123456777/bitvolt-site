@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
+        /* ===== تمام استایل‌های قبلی مثل نسخه قبل ===== */
         * {
             margin: 0;
             padding: 0;
@@ -509,7 +510,7 @@
         }
 
         /* ============================================================
-           PRODUCT DETAIL - با مشخصات کامل
+           PRODUCT DETAIL
            ============================================================ */
         .product-detail-modal .modal-content {
             max-width: 780px;
@@ -890,9 +891,7 @@
             transform: scale(1.02);
         }
 
-        /* ============================================================
-           ABOUT
-           ============================================================ */
+        /* ===== ABOUT ===== */
         .about-section {
             background: #fff;
             border-radius: 20px;
@@ -1102,7 +1101,7 @@
         }
 
         /* ============================================================
-           MODALS (عمومی)
+           MODALS
            ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -1142,6 +1141,25 @@
                 transform: scale(1);
                 opacity: 1;
             }
+        }
+        .modal-content .close-modal {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.02);
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #888;
+            transition: 0.3s;
+        }
+        .modal-content .close-modal:hover {
+            background: #e74c3c;
+            color: #fff;
+            transform: rotate(90deg);
         }
 
         /* ===== AUTH MODAL ===== */
@@ -1225,6 +1243,206 @@
             font-size: 0.8rem;
             margin: 5px 0;
             display: none;
+        }
+
+        /* ============================================================
+           CHECKOUT MODAL
+           ============================================================ */
+        .checkout-modal .modal-content {
+            max-width: 460px;
+            text-align: center;
+        }
+        .checkout-modal .checkout-icon {
+            font-size: 3rem;
+            color: #ffb300;
+        }
+        .checkout-modal .checkout-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .checkout-modal .form-group {
+            margin-bottom: 12px;
+            text-align: right;
+        }
+        .checkout-modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .checkout-modal .form-group input,
+        .checkout-modal .form-group select,
+        .checkout-modal .form-group textarea {
+            width: 100%;
+            padding: 8px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: #f8fafc;
+        }
+        .checkout-modal .form-group input:focus,
+        .checkout-modal .form-group select:focus,
+        .checkout-modal .form-group textarea:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
+        }
+        .checkout-modal .checkout-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .checkout-modal .checkout-actions .btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-family: inherit;
+        }
+        .checkout-modal .checkout-actions .btn-primary {
+            background: #ffb300;
+            color: #0a1628;
+        }
+        .checkout-modal .checkout-actions .btn-primary:hover {
+            transform: scale(1.02);
+        }
+        .checkout-modal .checkout-actions .btn-secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #555;
+        }
+
+        /* ============================================================
+           PAYMENT MODAL (زرین‌پال)
+           ============================================================ */
+        .payment-modal .modal-content {
+            max-width: 480px;
+            text-align: center;
+        }
+        .payment-modal .payment-icon {
+            font-size: 4rem;
+            color: #1a7c3e;
+        }
+        .payment-modal .payment-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a7c3e;
+        }
+        .payment-modal .payment-amount {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0a1628;
+            margin: 8px 0;
+        }
+        .payment-modal .payment-details {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 14px;
+            margin: 12px 0;
+            color: #555;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+        .payment-modal .payment-details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .payment-modal .payment-details .row:last-child {
+            border-bottom: none;
+        }
+        .payment-modal .payment-details .row .label {
+            color: #888;
+        }
+        .payment-modal .payment-details .row .value {
+            font-weight: 600;
+            color: #0a1628;
+        }
+        .payment-modal .secure-badge-big {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 10px 0;
+            border: 1px solid #c8e6c9;
+        }
+        .payment-modal .secure-badge-big i {
+            font-size: 1.2rem;
+        }
+        .payment-modal .payment-btn {
+            background: linear-gradient(135deg, #1a7c3e, #145c2e);
+            color: #fff;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 4px;
+            font-family: inherit;
+        }
+        .payment-modal .payment-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(26, 124, 62, 0.25);
+        }
+        .payment-modal .payment-btn.secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #555;
+        }
+        .payment-modal .payment-btn.secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        .payment-modal .payment-loading {
+            display: none;
+            padding: 15px;
+        }
+        .payment-modal .payment-loading.show {
+            display: block;
+        }
+        .payment-modal .payment-loading i {
+            font-size: 3rem;
+            color: #1a7c3e;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .payment-modal .payment-status {
+            padding: 12px;
+            border-radius: 12px;
+            margin: 10px 0;
+            display: none;
+        }
+        .payment-modal .payment-status.success {
+            display: block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        .payment-modal .payment-status.error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
         }
 
         /* ============================================================
@@ -1316,79 +1534,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.03);
             font-size: 0.6rem;
             opacity: 0.4;
-        }
-
-        /* ============================================================
-           CHECKOUT MODAL
-           ============================================================ */
-        .checkout-modal .modal-content {
-            max-width: 460px;
-            text-align: center;
-        }
-        .checkout-modal .checkout-icon {
-            font-size: 3rem;
-            color: #ffb300;
-        }
-        .checkout-modal .checkout-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-        }
-        .checkout-modal .form-group {
-            margin-bottom: 12px;
-            text-align: right;
-        }
-        .checkout-modal .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.8rem;
-            color: #333;
-            margin-bottom: 4px;
-        }
-        .checkout-modal .form-group input,
-        .checkout-modal .form-group select,
-        .checkout-modal .form-group textarea {
-            width: 100%;
-            padding: 8px 14px;
-            border: 2px solid rgba(0, 0, 0, 0.04);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
-            font-family: inherit;
-            background: #f8fafc;
-        }
-        .checkout-modal .form-group input:focus,
-        .checkout-modal .form-group select:focus,
-        .checkout-modal .form-group textarea:focus {
-            border-color: #ffb300;
-            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
-        }
-        .checkout-modal .checkout-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .checkout-modal .checkout-actions .btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-            font-family: inherit;
-        }
-        .checkout-modal .checkout-actions .btn-primary {
-            background: #ffb300;
-            color: #0a1628;
-        }
-        .checkout-modal .checkout-actions .btn-primary:hover {
-            transform: scale(1.02);
-        }
-        .checkout-modal .checkout-actions .btn-secondary {
-            background: rgba(0, 0, 0, 0.04);
-            color: #555;
         }
 
         /* ============================================================
@@ -1853,7 +1998,7 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAIL MODAL (با مشخصات کامل) -->
+    <!-- PRODUCT DETAIL -->
     <div class="modal-overlay product-detail-modal" id="productModal">
         <div class="modal-content">
             <button class="modal-close-btn" onclick="closeAllModals()">&times;</button>
@@ -1862,7 +2007,6 @@
                     <img class="modal-img" id="modalImg" src="" alt="" />
                     <div class="modal-name" id="modalName"></div>
                     <div class="modal-price" id="modalPrice"></div>
-                    <!-- مشخصات -->
                     <div class="modal-specs">
                         <div class="spec-row"><span class="spec-label">سازنده</span><span class="spec-value" id="specBrand">BitVolt</span></div>
                         <div class="spec-row"><span class="spec-label">ابعاد</span><span class="spec-value" id="specDimensions">۱۲ × ۸ × ۳ سانتیمتر</span></div>
@@ -1877,13 +2021,10 @@
                         <span><i class="fas fa-tag" style="color:#ffb300;"></i> دسته: <span id="modalCategory">الکترونیک</span></span>
                         <span><i class="fas fa-star" style="color:#ffb300;"></i> امتیاز: <span id="modalRating">۴.۵</span></span>
                     </div>
-                    <!-- ویدیو از اپارات -->
                     <div class="modal-video" id="modalVideoContainer" style="display:none;">
                         <iframe id="modalVideo" src="" allowfullscreen></iframe>
                     </div>
                     <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
-
-                    <!-- نظرات مشتریان -->
                     <div class="modal-comments">
                         <h4><i class="fas fa-comments"></i> نظرات مشتریان</h4>
                         <div id="modalComments">
@@ -1952,6 +2093,24 @@
                 <div class="form-group">
                     <label>وزن</label>
                     <input type="text" id="adminProdWeight" placeholder="۲۵۰ گرم" />
+                </div>
+                <div class="form-group">
+                    <label>کشور سازنده</label>
+                    <select id="adminProdCountry">
+                        <option value="ایران">ایران</option>
+                        <option value="چین">چین</option>
+                        <option value="آمریکا">آمریکا</option>
+                        <option value="آلمان">آلمان</option>
+                        <option value="ژاپن">ژاپن</option>
+                        <option value="کره جنوبی">کره جنوبی</option>
+                        <option value="ایتالیا">ایتالیا</option>
+                        <option value="فرانسه">فرانسه</option>
+                        <option value="انگلیس">انگلیس</option>
+                        <option value="تایوان">تایوان</option>
+                        <option value="ترکیه">ترکیه</option>
+                        <option value="امارات">امارات</option>
+                        <option value="سایر">سایر</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>لینک ویدیو (اپارات)</label>
@@ -2040,25 +2199,51 @@
         </div>
     </div>
 
+    <!-- PAYMENT (زرین‌پال) -->
+    <div class="modal-overlay payment-modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
+            <div class="payment-title">زرین‌پال</div>
+            <p style="color:#888; font-size:0.9rem;">پرداخت امن و سریع</p>
+            <div class="secure-badge-big">
+                <i class="fas fa-shield-alt"></i>
+                پرداخت از درگاه زرین‌پال - امن و مطمئن
+            </div>
+            <div class="payment-amount" id="paymentAmount">۰ تومان</div>
+            <div class="payment-details">
+                <div class="row"><span class="label">مبلغ قابل پرداخت</span><span class="value" id="paymentTotalDisplay">۰ تومان</span></div>
+                <div class="row"><span class="label">هزینه ارسال</span><span class="value" id="paymentShippingDisplay">۰ تومان</span></div>
+                <div class="row"><span class="label">شماره تراکنش</span><span class="value" id="paymentCode">ZP-2026-XXXX</span></div>
+            </div>
+            <div class="payment-loading" id="paymentLoading">
+                <i class="fas fa-spinner"></i>
+                <p style="margin-top:8px;">در حال اتصال به درگاه زرین‌پال...</p>
+            </div>
+            <div id="paymentButtons">
+                <button class="payment-btn" onclick="processPayment()"><i class="fas fa-check"></i> پرداخت با زرین‌پال</button>
+                <button class="payment-btn secondary" onclick="closeAllModals()">انصراف</button>
+            </div>
+            <div class="payment-status" id="paymentStatus"></div>
+        </div>
+    </div>
+
     <script>
         // ============================================================
         // 🔑 تنظیمات متمرکز - همه API Key ها اینجا
         // ============================================================
 
-        // ---------- تنظیمات پیامک ----------
-        // سرویس: sms.ir یا kavenegar
+        // ---------- تنظیمات پیامک (sms.ir) ----------
         const SMS_CONFIG = {
-            provider: 'smsir', // 'smsir' یا 'kavenegar'
-            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // کلید API
-            templateId: 958264, // آیدی قالب (sms.ir)
-            template: 'verify', // نام قالب (kavenegar)
-            sender: '500030007' // شماره فرستنده
+            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // <--- کلید sms.ir خود را اینجا بگذارید
+            templateId: 958264, // <--- آیدی قالب sms.ir خود را وارد کنید
+            sender: '500030007' // <--- شماره خط sms.ir خود را وارد کنید
         };
 
         // ---------- تنظیمات زرین‌پال ----------
         const ZARINPAL_CONFIG = {
-            merchantId: '9e66bf2a-3e71-4296-9e7f-00c0d15c635f', // Merchant ID
-            sandbox: true, // true = تست | false = واقعی
+            merchantId: '9e66bf2a-3e71-4296-9e7f-00c0d15c635f', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
+            sandbox: false, // true = تست | false = واقعی
             callbackUrl: window.location.href + '?payment=callback'
         };
 
@@ -2089,6 +2274,7 @@
         let otpTimerInterval = null;
         let otpSeconds = 180;
         let currentPage = 'home';
+        let pendingPayment = null;
 
         // ============================================================
         // 🏙️ شهرها
@@ -2155,6 +2341,85 @@
             } else {
                 hint.style.display = 'none';
                 filterProducts();
+            }
+        }
+
+        // ============================================================
+        // 📨 تابع ارسال پیامک با sms.ir (واقعی)
+        // ============================================================
+        async function sendSmsIr(phone, code) {
+            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'YOUR_SMS_IR_API_KEY') {
+                alert('⚠️ لطفاً ابتدا API Key sms.ir را در تنظیمات وارد کنید.');
+                return { success: false, message: 'API Key وارد نشده است' };
+            }
+
+            try {
+                const response = await fetch('https://api.sms.ir/v1/send/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': SMS_CONFIG.apiKey
+                    },
+                    body: JSON.stringify({
+                        mobile: phone,
+                        templateId: Number(SMS_CONFIG.templateId),
+                        parameters: [
+                            { name: 'CODE', value: String(code) }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.status === 1) {
+                    return { success: true, message: 'پیامک ارسال شد' };
+                } else {
+                    return { success: false, message: data.message || 'خطا در ارسال پیامک' };
+                }
+            } catch (error) {
+                return { success: false, message: error.message };
+            }
+        }
+
+        // ============================================================
+        // 💰 تابع پرداخت با زرین‌پال (واقعی)
+        // ============================================================
+        async function zarinpalPayment(amount, description) {
+            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === 'YOUR_MERCHANT_ID') {
+                alert('⚠️ لطفاً ابتدا Merchant ID زرین‌پال را در تنظیمات وارد کنید.');
+                return { success: false, message: 'Merchant ID وارد نشده است' };
+            }
+
+            try {
+                const response = await fetch('https://api.zarinpal.com/pg/v4/payment/request.json', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        merchant_id: ZARINPAL_CONFIG.merchantId,
+                        amount: amount,
+                        callback_url: ZARINPAL_CONFIG.callbackUrl,
+                        description: description || 'خرید از BitVolt',
+                        metadata: {
+                            mobile: currentUser || '09123456789',
+                            email: 'info@bitvolt.mtv'
+                        }
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.data && data.data.code === 100) {
+                    // هدایت به درگاه پرداخت
+                    const paymentUrl = `https://www.zarinpal.com/pg/StartPay/${data.data.authority}`;
+                    window.location.href = paymentUrl;
+                    return { success: true, authority: data.data.authority };
+                } else {
+                    return { success: false, message: data.errors?.message || 'خطا در اتصال به زرین‌پال' };
+                }
+            } catch (error) {
+                return { success: false, message: error.message };
             }
         }
 
@@ -2439,6 +2704,8 @@
             document.getElementById('cartShipping').textContent = shipping === 0 ? 'رایگان' : shipping.toLocaleString() +
             ' تومان';
             document.getElementById('cartTotalFinal').textContent = total.toLocaleString() + ' تومان';
+
+            pendingPayment = total;
         }
 
         function closeCart() {
@@ -2467,12 +2734,14 @@
         }
 
         // ============================================================
-        // 🛒 تسویه حساب
+        // 💳 پرداخت با زرین‌پال (قبل از ثبت سفارش)
         // ============================================================
         function openCheckout() {
             if (!isLoggedIn) { openAuthModal('login'); return; }
             if (cart.length === 0) { alert('سبد خرید خالی است!'); return; }
             closeCart();
+
+            // نمایش مودال تکمیل اطلاعات
             openModal('checkoutModal');
             if (userAddresses[currentUser]) {
                 document.getElementById('checkoutPhone').value = userAddresses[currentUser].phone || '';
@@ -2505,29 +2774,57 @@
             saveUserData();
             closeAllModals();
 
-            const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
-            if (!orders[currentUser]) orders[currentUser] = [];
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
-            orders[currentUser].push({
-                id: orderId,
-                items: JSON.parse(JSON.stringify(cart)),
-                subtotal: subtotal,
-                shipping: shipping,
-                total: subtotal + shipping,
-                date: new Date().toLocaleDateString('fa-IR'),
-                status: 'processing',
-                address: userAddresses[currentUser]
-            });
-            saveUserData();
-            cart = [];
-            updateCartUI();
-            alert('✅ سفارش شما با موفقیت ثبت شد!\nکد پیگیری: ' + orderId);
-            updateAdminStats();
+            // رفتن به صفحه پرداخت زرین‌پال
+            openPaymentModal();
+        }
+
+        function openPaymentModal() {
+            openModal('paymentModal');
+
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let shipping = subtotal >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
+            let total = subtotal + shipping;
+
+            document.getElementById('paymentAmount').textContent = total.toLocaleString() + ' تومان';
+            document.getElementById('paymentTotalDisplay').textContent = total.toLocaleString() + ' تومان';
+            document.getElementById('paymentShippingDisplay').textContent = shipping === 0 ? 'رایگان' : shipping
+            .toLocaleString() + ' تومان';
+
+            const code = 'ZP-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
+            document.getElementById('paymentCode').textContent = code;
+
+            document.getElementById('paymentLoading').classList.remove('show');
+            document.getElementById('paymentButtons').style.display = 'block';
+            document.getElementById('paymentStatus').className = 'payment-status';
+            document.getElementById('paymentStatus').style.display = 'none';
+        }
+
+        async function processPayment() {
+            document.getElementById('paymentButtons').style.display = 'none';
+            document.getElementById('paymentLoading').classList.add('show');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = total >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
+            const finalTotal = total + shipping;
+
+            // پرداخت با زرین‌پال
+            const result = await zarinpalPayment(finalTotal, `خرید از BitVolt - ${currentUser}`);
+
+            if (result.success && result.authority) {
+                // هدایت به درگاه زرین‌پال (در تابع انجام میشه)
+                // سفارش بعد از بازگشت از درگاه ثبت میشه
+            } else {
+                document.getElementById('paymentLoading').classList.remove('show');
+                document.getElementById('paymentButtons').style.display = 'block';
+                const statusEl = document.getElementById('paymentStatus');
+                statusEl.className = 'payment-status error';
+                statusEl.textContent = '❌ خطا در اتصال به زرین‌پال: ' + (result.message || 'خطای ناشناخته');
+                statusEl.style.display = 'block';
+            }
         }
 
         // ============================================================
-        // 📱 احراز هویت
+        // 📱 احراز هویت با sms.ir
         // ============================================================
         let authMode = 'login';
 
@@ -2562,7 +2859,7 @@
             document.getElementById('authSendCodeBtn').innerHTML = '<i class="fas fa-paper-plane"></i> ارسال کد تایید';
         }
 
-        document.getElementById('authSendCodeBtn').addEventListener('click', function() {
+        document.getElementById('authSendCodeBtn').addEventListener('click', async function() {
             const phone = document.getElementById('authPhone').value.trim();
             if (!phone || phone.length !== 11) {
                 document.getElementById('authError').style.display = 'block';
@@ -2570,31 +2867,39 @@
                 return;
             }
             document.getElementById('authError').style.display = 'none';
-            generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-            console.log('📱 کد تایید برای ' + phone + ': ' + generatedCode);
-            alert('📱 کد تایید: ' + generatedCode + '\n(شبیه‌سازی شده)');
 
-            document.getElementById('displayPhone').textContent = phone;
-            document.getElementById('authStep1').style.display = 'none';
-            document.getElementById('authStep2').style.display = 'block';
-            setTimeout(() => { document.getElementById('authStep2').classList.add('show'); }, 50);
-            document.getElementById('authOtp').value = '';
-            document.getElementById('authOtpError').style.display = 'none';
-            document.getElementById('authOtpSuccess').style.display = 'none';
-            otpSeconds = 180;
-            document.getElementById('otpTimer').textContent = otpSeconds;
-            if (otpTimerInterval) clearInterval(otpTimerInterval);
-            otpTimerInterval = setInterval(() => {
-                otpSeconds--;
+            generatedCode = String(Math.floor(100000 + Math.random() * 900000));
+
+            // ارسال پیامک واقعی با sms.ir
+            const result = await sendSmsIr(phone, generatedCode);
+
+            if (result.success) {
+                document.getElementById('displayPhone').textContent = phone;
+                document.getElementById('authStep1').style.display = 'none';
+                document.getElementById('authStep2').style.display = 'block';
+                setTimeout(() => { document.getElementById('authStep2').classList.add('show'); }, 50);
+                document.getElementById('authOtp').value = '';
+                document.getElementById('authOtpError').style.display = 'none';
+                document.getElementById('authOtpSuccess').style.display = 'none';
+
+                otpSeconds = 180;
                 document.getElementById('otpTimer').textContent = otpSeconds;
-                if (otpSeconds <= 0) {
-                    clearInterval(otpTimerInterval);
-                    document.getElementById('authResendBtn').style.color = '#ffb300';
-                    document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
-                    document.getElementById('authOtpError').style.display = 'block';
-                    document.getElementById('authOtpError').textContent = 'زمان کد منقضی شد. مجدداً درخواست کنید.';
-                }
-            }, 1000);
+                if (otpTimerInterval) clearInterval(otpTimerInterval);
+                otpTimerInterval = setInterval(() => {
+                    otpSeconds--;
+                    document.getElementById('otpTimer').textContent = otpSeconds;
+                    if (otpSeconds <= 0) {
+                        clearInterval(otpTimerInterval);
+                        document.getElementById('authResendBtn').style.color = '#ffb300';
+                        document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
+                        document.getElementById('authOtpError').style.display = 'block';
+                        document.getElementById('authOtpError').textContent = 'زمان کد منقضی شد. مجدداً درخواست کنید.';
+                    }
+                }, 1000);
+            } else {
+                document.getElementById('authError').style.display = 'block';
+                document.getElementById('authError').textContent = '❌ خطا در ارسال پیامک: ' + result.message;
+            }
         });
 
         document.getElementById('authVerifyBtn').addEventListener('click', function() {
@@ -2625,33 +2930,38 @@
             }
         });
 
-        document.getElementById('authResendBtn').addEventListener('click', function() {
+        document.getElementById('authResendBtn').addEventListener('click', async function() {
             const phone = document.getElementById('authPhone').value.trim();
             if (otpSeconds > 0 && generatedCode) {
-                console.log('📱 کد مجدداً ارسال شد: ' + generatedCode);
-                alert('📱 کد مجدداً ارسال شد: ' + generatedCode);
-                document.getElementById('authOtpSuccess').style.display = 'block';
-                document.getElementById('authOtpSuccess').textContent = '✅ کد مجدداً ارسال شد';
-                setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
+                const result = await sendSmsIr(phone, generatedCode);
+                if (result.success) {
+                    document.getElementById('authOtpError').style.display = 'none';
+                    document.getElementById('authOtpSuccess').style.display = 'block';
+                    document.getElementById('authOtpSuccess').textContent = '✅ کد مجدداً ارسال شد';
+                    setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
+                }
             } else {
                 generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-                console.log('📱 کد جدید ارسال شد: ' + generatedCode);
-                alert('📱 کد جدید ارسال شد: ' + generatedCode);
-                otpSeconds = 180;
-                document.getElementById('otpTimer').textContent = otpSeconds;
-                if (otpTimerInterval) clearInterval(otpTimerInterval);
-                otpTimerInterval = setInterval(() => {
-                    otpSeconds--;
+                const result = await sendSmsIr(phone, generatedCode);
+                if (result.success) {
+                    otpSeconds = 180;
                     document.getElementById('otpTimer').textContent = otpSeconds;
-                    if (otpSeconds <= 0) {
-                        clearInterval(otpTimerInterval);
-                        document.getElementById('authResendBtn').style.color = '#ffb300';
-                        document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
-                    }
-                }, 1000);
-                document.getElementById('authOtpSuccess').style.display = 'block';
-                document.getElementById('authOtpSuccess').textContent = '✅ کد جدید ارسال شد';
-                setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
+                    if (otpTimerInterval) clearInterval(otpTimerInterval);
+                    otpTimerInterval = setInterval(() => {
+                        otpSeconds--;
+                        document.getElementById('otpTimer').textContent = otpSeconds;
+                        if (otpSeconds <= 0) {
+                            clearInterval(otpTimerInterval);
+                            document.getElementById('authResendBtn').style.color = '#ffb300';
+                            document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
+                        }
+                    }, 1000);
+                    document.getElementById('authOtpSuccess').style.display = 'block';
+                    document.getElementById('authOtpSuccess').textContent = '✅ کد جدید ارسال شد';
+                    setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
+                } else {
+                    alert('❌ خطا در ارسال مجدد: ' + result.message);
+                }
             }
             document.getElementById('authOtpError').style.display = 'none';
         });
@@ -2738,18 +3048,15 @@
             document.getElementById('modalCategory').textContent = product.category || 'الکترونیک';
             document.getElementById('modalRating').textContent = product.rating || 4.5;
 
-            // مشخصات
             document.getElementById('specBrand').textContent = product.brand || 'BitVolt';
             document.getElementById('specDimensions').textContent = product.dimensions || '۱۲ × ۸ × ۳ سانتیمتر';
             document.getElementById('specWeight').textContent = product.weight || '۲۵۰ گرم';
             document.getElementById('specModel').textContent = product.model || `BTV-${String(product.id).padStart(4, '0')}`;
             document.getElementById('specCountry').textContent = product.country || 'چین';
 
-            // ویدیو
             const videoContainer = document.getElementById('modalVideoContainer');
             const videoIframe = document.getElementById('modalVideo');
             if (product.video && product.video.includes('aparat.com')) {
-                // تبدیل لینک اپارات به امبد
                 const videoId = product.video.split('/').pop();
                 videoIframe.src = `https://www.aparat.com/video/video/embed/videohash/${videoId}/vt/frame`;
                 videoContainer.style.display = 'block';
@@ -2858,6 +3165,7 @@
             const brand = document.getElementById('adminProdBrand').value.trim() || 'BitVolt';
             const dimensions = document.getElementById('adminProdDimensions').value.trim() || '۱۲ × ۸ × ۳ سانتیمتر';
             const weight = document.getElementById('adminProdWeight').value.trim() || '۲۵۰ گرم';
+            const country = document.getElementById('adminProdCountry').value || 'چین';
             const video = document.getElementById('adminProdVideo').value.trim() || '';
 
             if (!name || !price || !description) {
@@ -2877,7 +3185,7 @@
                 dimensions: dimensions,
                 weight: weight,
                 model: `BTV-${String(products.length + 1).padStart(4, '0')}`,
-                country: 'چین',
+                country: country,
                 video: video
             };
 
@@ -2905,6 +3213,8 @@
             if (newDesc && newDesc.trim()) product.description = newDesc.trim();
             const newBrand = prompt('🏷️ سازنده جدید:', product.brand);
             if (newBrand && newBrand.trim()) product.brand = newBrand.trim();
+            const newCountry = prompt('🌍 کشور سازنده جدید:', product.country);
+            if (newCountry && newCountry.trim()) product.country = newCountry.trim();
             const newVideo = prompt('🎬 لینک ویدیو جدید (اپارات):', product.video);
             if (newVideo !== null) product.video = newVideo.trim();
             saveProducts();
@@ -3073,6 +3383,45 @@
         }
 
         // ============================================================
+        // 🔄 مدیریت بازگشت از زرین‌پال (Callback)
+        // ============================================================
+        function handleZarinpalCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const authority = urlParams.get('Authority');
+            const status = urlParams.get('Status');
+
+            if (authority && status === 'OK') {
+                // پرداخت موفق - ثبت سفارش
+                if (isLoggedIn && cart.length > 0) {
+                    const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
+                    if (!orders[currentUser]) orders[currentUser] = [];
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                    const shipping = total >= SITE_CONFIG.freeShippingMin ? 0 : SITE_CONFIG.shippingCost;
+                    orders[currentUser].push({
+                        id: orderId,
+                        items: JSON.parse(JSON.stringify(cart)),
+                        subtotal: total,
+                        shipping: shipping,
+                        total: total + shipping,
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        status: 'processing',
+                        address: userAddresses[currentUser] || {},
+                        payment: 'zarinpal'
+                    });
+                    saveUserData();
+                    cart = [];
+                    updateCartUI();
+                    alert('✅ پرداخت با موفقیت انجام شد! سفارش شما ثبت گردید.\nکد پیگیری: ' + orderId);
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    navigateTo('home');
+                }
+            } else if (authority) {
+                alert('❌ پرداخت ناموفق بود. لطفاً مجدداً تلاش کنید.');
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+
+        // ============================================================
         // 🚀 مقداردهی اولیه
         // ============================================================
         loadProducts();
@@ -3080,6 +3429,7 @@
         renderProducts();
         updateCartUI();
         checkLoginStatus();
+        handleZarinpalCallback();
 
         console.log('⚡ BitVolt | فروشگاه الکترونیک');
         console.log('🔑 رمز پنل مدیریت:', SITE_CONFIG.adminPassword);
@@ -3089,6 +3439,18 @@
         console.log('⏱️ زمان انقضای کد: 3 دقیقه');
         console.log('📦 هزینه پست:', SITE_CONFIG.shippingCost.toLocaleString(), 'تومان');
         console.log('🚚 ارسال رایگان بالای:', SITE_CONFIG.freeShippingMin.toLocaleString(), 'تومان');
+
+        if (SMS_CONFIG.apiKey && SMS_CONFIG.apiKey !== 'YOUR_SMS_IR_API_KEY') {
+            console.log('✅ سرویس پیامک: sms.ir فعال');
+        } else {
+            console.log('⚠️ API Key sms.ir وارد نشده!');
+        }
+
+        if (ZARINPAL_CONFIG.merchantId && ZARINPAL_CONFIG.merchantId !== 'YOUR_MERCHANT_ID') {
+            console.log('✅ درگاه پرداخت: زرین‌پال فعال');
+        } else {
+            console.log('⚠️ Merchant ID زرین‌پال وارد نشده!');
+        }
     </script>
 </body>
 </html>
