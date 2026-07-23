@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BitVolt | فروشگاه GG Volt</title>
+    <title>BitVolt | فروشگاه الکترونیک</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== تمام استایل‌های قبلی مثل قبل ===== */
-        /* برای اختصار، استایل‌ها رو از نسخه قبلی استفاده کنید */
         * {
             margin: 0;
             padding: 0;
@@ -16,10 +14,9 @@
         }
         body {
             font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, sans-serif;
-            background: #f0f2f8;
+            background: #f5f7fa;
             color: #1a1a2e;
             overflow-x: hidden;
-            padding-bottom: 80px;
         }
         .container {
             max-width: 1280px;
@@ -33,54 +30,50 @@
             background: #f0f2f8;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #ffb300, #f5a000);
+            background: #ffb300;
             border-radius: 10px;
         }
 
         /* ===== TOP BAR ===== */
         .top-bar {
-            background: linear-gradient(90deg, #0a1628, #1a2a4a, #0a1628);
+            background: #0a1628;
             color: #ffb300;
-            padding: 5px 0;
+            padding: 6px 0;
             font-size: 0.7rem;
-            border-bottom: 1px solid rgba(255, 179, 0, 0.08);
         }
         .top-bar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 5px;
         }
-        .top-bar .marquee {
+        .top-bar .right {
             display: flex;
             gap: 20px;
             color: #8ab4d6;
         }
-        .top-bar .marquee span {
+        .top-bar .right span {
             display: flex;
             align-items: center;
             gap: 5px;
         }
-        .top-bar .marquee i {
+        .top-bar .right i {
             color: #ffb300;
         }
-        .top-bar .brand-tag {
+        .top-bar .left a {
+            color: #8ab4d6;
+            margin: 0 8px;
+            transition: 0.3s;
+        }
+        .top-bar .left a:hover {
             color: #ffb300;
-            font-weight: 700;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         /* ===== HEADER ===== */
         .header {
-            background: rgba(10, 22, 40, 0.92);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 179, 0, 0.08);
-            padding: 8px 0;
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -90,126 +83,125 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
         }
         .header .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .header .logo:hover {
-            transform: scale(1.02);
         }
         .header .logo .logo-icon {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #ffb300;
-            filter: drop-shadow(0 0 25px rgba(255, 179, 0, 0.3));
-            animation: glowPulse 2.5s infinite;
-        }
-        @keyframes glowPulse {
-            0%,
-            100% {
-                filter: drop-shadow(0 0 15px rgba(255, 179, 0, 0.2));
-            }
-            50% {
-                filter: drop-shadow(0 0 45px rgba(255, 179, 0, 0.6));
-            }
         }
         .header .logo h1 {
             font-size: 1.6rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ffb300, #f5a000, #ffb300);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 800;
+            color: #0a1628;
         }
         .header .logo h1 span {
-            background: linear-gradient(135deg, #fff, #e0e5ec);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffb300;
         }
         .header .logo small {
             display: block;
             font-size: 0.5rem;
-            color: #8ab4d6;
+            color: #888;
             font-weight: 300;
-            letter-spacing: 2px;
-        }
-        .header .logo .gg-tag {
-            font-size: 0.55rem;
-            color: #ffb300;
-            background: rgba(255, 179, 0, 0.1);
-            padding: 2px 10px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 179, 0, 0.15);
-            margin-right: 5px;
         }
 
         .header .header-actions {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             flex-wrap: wrap;
         }
-        .header .header-actions .auth-links a {
-            color: #c8dcec;
-            font-size: 0.7rem;
-            padding: 4px 10px;
+        .header .header-actions .auth-btn {
+            background: #0a1628;
+            color: #fff;
+            padding: 8px 18px;
             border-radius: 50px;
-            border: 1px solid transparent;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
             transition: 0.3s;
+            font-family: inherit;
+        }
+        .header .header-actions .auth-btn:hover {
+            background: #ffb300;
+            color: #0a1628;
+            transform: scale(1.02);
+        }
+        .header .header-actions .auth-btn i {
+            margin-left: 5px;
+        }
+
+        .header .user-info {
+            display: none;
+            color: #0a1628;
+            font-weight: 600;
+            font-size: 0.8rem;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            position: relative;
+        }
+        .header .user-info .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 38px;
+            background: #fff;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 6px 0;
+            z-index: 1001;
+        }
+        .header .user-info:hover .dropdown {
+            display: block;
+        }
+        .header .user-info .dropdown a {
+            display: block;
+            padding: 8px 18px;
+            color: #333;
+            font-size: 0.8rem;
+            transition: 0.2s;
             cursor: pointer;
         }
-        .header .header-actions .auth-links a:hover {
+        .header .user-info .dropdown a:hover {
+            background: #f5f7fa;
             color: #ffb300;
-            border-color: rgba(255, 179, 0, 0.2);
-            background: rgba(255, 179, 0, 0.05);
         }
-        .header .header-actions .auth-links a i {
-            margin-left: 4px;
+        .header .user-info .dropdown a i {
+            margin-left: 10px;
+            width: 20px;
+            text-align: center;
         }
 
         .header .cart-btn {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
+            background: #ffb300;
             color: #0a1628;
-            padding: 6px 14px;
+            padding: 8px 18px;
             border-radius: 50px;
             font-weight: 700;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.75rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 25px rgba(255, 179, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .header .cart-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
-            animation: btnShine 4s infinite;
-        }
-        @keyframes btnShine {
-            0% {
-                transform: translateX(-100%) rotate(0deg);
-            }
-            100% {
-                transform: translateX(100%) rotate(0deg);
-            }
+            gap: 8px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            font-family: inherit;
+            box-shadow: 0 4px 15px rgba(255, 179, 0, 0.1);
         }
         .header .cart-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 179, 0, 0.2);
         }
         .header .cart-btn .badge {
             background: #0a1628;
@@ -217,190 +209,104 @@
             border-radius: 50%;
             padding: 0 8px;
             font-weight: 800;
-            min-width: 18px;
+            min-width: 20px;
             text-align: center;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
         }
 
-        .header .user-info {
-            display: none;
-            color: #ffb300;
-            font-weight: 600;
-            font-size: 0.75rem;
+        /* ===== SEARCH ===== */
+        .search-bar {
+            background: #fff;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .search-bar .container {
+            display: flex;
+            gap: 10px;
             align-items: center;
-            gap: 5px;
-            padding: 4px 12px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px 22px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
             border-radius: 50px;
-            border: 1px solid rgba(255, 179, 0, 0.15);
-            cursor: pointer;
+            font-size: 0.9rem;
+            outline: none;
             transition: 0.3s;
+            background: #f8fafc;
+            font-family: inherit;
         }
-        .header .user-info:hover {
-            background: rgba(255, 179, 0, 0.05);
+        .search-bar input:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
         }
-        .header .user-info .user-dropdown {
-            position: relative;
-            display: inline-block;
+        .search-bar input::placeholder {
+            color: #aaa;
         }
-        .header .user-info .user-dropdown-content {
+
+        /* ===== CATEGORIES ===== */
+        .categories {
+            background: #fff;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .categories .container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 5px 0;
+        }
+        .categories .cat-item {
+            white-space: nowrap;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .categories .cat-item:hover,
+        .categories .cat-item.active {
+            background: #fff8e1;
+            color: #0a1628;
+        }
+        .categories .cat-item i {
+            color: #ffb300;
+        }
+
+        /* ===== PAGES ===== */
+        .page {
             display: none;
-            position: absolute;
-            right: 0;
-            top: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            min-width: 180px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-            border-radius: 12px;
-            padding: 6px 0;
-            z-index: 1001;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0 60px;
+            animation: fadeIn 0.4s ease;
         }
-        .header .user-info .user-dropdown:hover .user-dropdown-content {
-            display: block;
-            animation: fadeDown 0.3s ease;
-        }
-        @keyframes fadeDown {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(15px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        .header .user-info .user-dropdown-content a {
+        .page.active {
             display: block;
-            padding: 8px 18px;
-            color: #1a1a2e;
-            font-weight: 400;
-            font-size: 0.75rem;
-            transition: 0.2s;
-            border-right: 3px solid transparent;
-            cursor: pointer;
-        }
-        .header .user-info .user-dropdown-content a:hover {
-            background: #f5f7fc;
-            color: #ffb300;
-            border-right-color: #ffb300;
-        }
-        .header .user-info .user-dropdown-content a i {
-            margin-left: 10px;
-            width: 18px;
-            text-align: center;
-            color: #ffb300;
-        }
-
-        .more-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        .header .more-btn {
-            background: rgba(255, 255, 255, 0.05);
-            color: #c8dcec;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 6px 10px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .header .more-btn:hover {
-            background: rgba(255, 179, 0, 0.1);
-            border-color: rgba(255, 179, 0, 0.2);
-            color: #ffb300;
-        }
-        .header .more-btn span {
-            font-size: 0.65rem;
-            font-weight: 600;
-        }
-        .more-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            min-width: 190px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-            border-radius: 12px;
-            padding: 6px 0;
-            z-index: 1001;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .more-dropdown.show {
-            display: block;
-            animation: fadeDown 0.3s ease;
-        }
-        .more-dropdown a {
-            display: block;
-            padding: 8px 18px;
-            color: #1a1a2e;
-            font-weight: 400;
-            font-size: 0.75rem;
-            transition: 0.2s;
-            border-right: 3px solid transparent;
-            cursor: pointer;
-        }
-        .more-dropdown a:hover {
-            background: #f5f7fc;
-            color: #ffb300;
-            border-right-color: #ffb300;
-        }
-        .more-dropdown a i {
-            margin-left: 10px;
-            width: 20px;
-            text-align: center;
-            color: #ffb300;
-        }
-
-        /* ===== SEARCH BAR ===== */
-        .search-bar {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-        }
-        .search-bar .container {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .search-bar input {
-            flex: 1;
-            padding: 8px 20px;
-            border: 2px solid rgba(255, 179, 0, 0.08);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            outline: none;
-            transition: 0.3s;
-            min-width: 160px;
-            background: rgba(255, 255, 255, 0.7);
-            font-family: inherit;
-        }
-        .search-bar input:focus {
-            border-color: #ffb300;
-            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.06);
-            background: #fff;
         }
 
         /* ===== HERO ===== */
-        .hero-section {
-            background: linear-gradient(145deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
-            padding: 30px 0 25px;
-            margin: 10px 0 18px;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.1);
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa, #e8ecf1);
+            border-radius: 20px;
+            padding: 35px 0;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
-        .hero-section .container {
+        .hero .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -409,137 +315,70 @@
         }
         .hero-content {
             flex: 1;
-            min-width: 240px;
-        }
-        .hero-content .badge-top {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 179, 0, 0.1);
-            color: #ffb300;
-            padding: 4px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            border: 1px solid rgba(255, 179, 0, 0.15);
-            margin-bottom: 12px;
+            min-width: 260px;
         }
         .hero-content h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #fff;
-            line-height: 1.02;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0a1628;
         }
-        .hero-content h2 .highlight {
-            background: linear-gradient(135deg, #ffb300, #f5a000, #ffb300);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-content h2 span {
+            color: #ffb300;
         }
         .hero-content p {
             font-size: 0.95rem;
-            color: #c8dcec;
+            color: #666;
             margin: 10px 0 18px;
             max-width: 400px;
-            line-height: 1.7;
-            font-weight: 300;
         }
-        .hero-content .hero-badges {
+        .hero-content .badges {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
-        .hero-content .hero-badges span {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 5px 14px;
+        .hero-content .badges span {
+            background: #fff;
+            padding: 5px 16px;
             border-radius: 50px;
             font-size: 0.7rem;
-            color: #d0e4f5;
-            border: 1px solid rgba(255, 179, 0, 0.08);
-            backdrop-filter: blur(10px);
-            display: inline-flex;
+            color: #555;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
             align-items: center;
             gap: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
-        .hero-content .hero-badges i {
+        .hero-content .badges i {
             color: #ffb300;
         }
         .hero-stats {
             display: flex;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px 25px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            gap: 25px;
+            background: #fff;
+            padding: 15px 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
         }
         .hero-stats div {
             text-align: center;
         }
-        .hero-stats .number {
-            font-size: 1.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ffb300, #f5a000);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-stats .num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0a1628;
             display: block;
         }
         .hero-stats .label {
-            font-size: 0.65rem;
-            color: #8ab4d6;
-        }
-
-        /* ===== CATEGORIES ===== */
-        .categories-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 10px 0 15px;
-            scrollbar-width: thin;
-        }
-        .categories-scroll::-webkit-scrollbar {
-            height: 3px;
-        }
-        .categories-scroll::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, #ffb300, #f5a000);
-            border-radius: 10px;
-        }
-        .categories-scroll .cat-item {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            padding: 6px 18px;
-            border-radius: 50px;
-            white-space: nowrap;
-            font-weight: 600;
-            font-size: 0.75rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #4a4a6a;
-        }
-        .categories-scroll .cat-item:hover {
-            transform: translateY(-3px);
-        }
-        .categories-scroll .cat-item.active {
-            border-color: #ffb300;
-            background: linear-gradient(135deg, #fff8e1, #fff3cd);
-            color: #0a1628;
-            box-shadow: 0 8px 30px rgba(255, 179, 0, 0.12);
-        }
-        .categories-scroll .cat-item i {
-            color: #ffb300;
+            font-size: 0.6rem;
+            color: #888;
         }
 
         /* ===== PRODUCTS ===== */
         .section-title {
             font-size: 1.6rem;
             font-weight: 800;
-            margin: 18px 0 15px;
+            margin: 20px 0 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -548,17 +387,17 @@
         .section-title i {
             color: #ffb300;
         }
-        .section-title .title-line {
+        .section-title .line {
             flex: 1;
             height: 2px;
-            background: linear-gradient(90deg, #ffb30022, #ffb30055, #ffb30022);
+            background: linear-gradient(90deg, #ffb30022, #ffb30044, #ffb30022);
             border-radius: 10px;
         }
         .section-title .count {
             font-size: 0.7rem;
             font-weight: 400;
             color: #888;
-            background: rgba(0, 0, 0, 0.03);
+            background: rgba(0, 0, 0, 0.02);
             padding: 2px 12px;
             border-radius: 50px;
         }
@@ -568,130 +407,344 @@
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 18px;
         }
-
         .product-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(18px);
-            border-radius: 22px;
-            padding: 16px 14px 18px;
-            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.04);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: #fff;
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: 0.4s;
+            border: 1px solid rgba(0, 0, 0, 0.02);
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ffb300, #f5a000, #ffb300);
-            opacity: 0;
-            transition: 0.5s;
-        }
-        .product-card:hover::before {
-            opacity: 1;
         }
         .product-card:hover {
-            transform: translateY(-10px) scale(1.01);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.06);
-            border-color: rgba(255, 179, 0, 0.15);
-            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            border-color: rgba(255, 179, 0, 0.08);
         }
-        .product-card .product-img {
+        .product-card .img {
             width: 100%;
             height: 160px;
             object-fit: contain;
-            background: linear-gradient(145deg, #f8fafc, #f0f2f8);
-            border-radius: 14px;
-            margin-bottom: 8px;
-            transition: 0.5s;
-            padding: 6px;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 8px;
         }
-        .product-card:hover .product-img {
-            transform: scale(1.04);
-        }
-        .product-card .product-badge {
+        .product-card .badge {
             align-self: flex-start;
-            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+            background: #0a1628;
             color: #ffb300;
             padding: 2px 12px;
             border-radius: 50px;
             font-size: 0.5rem;
             font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            margin: 5px 0;
         }
-        .product-card .product-name {
+        .product-card .name {
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 600;
             margin: 4px 0;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            color: #0a1628;
         }
-        .product-card .product-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        .product-card .rating {
             color: #ffb300;
             font-size: 0.7rem;
             margin: 3px 0;
         }
-        .product-card .product-rating .rate-text {
-            color: #888;
-            font-size: 0.6rem;
-        }
-        .product-card .product-price {
+        .product-card .price {
             font-size: 1.2rem;
-            font-weight: 900;
-            color: #0a1628;
-            margin: 6px 0 8px;
+            font-weight: 800;
+            margin: 6px 0 10px;
         }
-        .product-card .product-price small {
+        .product-card .price small {
             font-weight: 400;
             font-size: 0.65rem;
             color: #999;
         }
-        .product-card .add-to-cart {
-            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+        .product-card .add-btn {
+            background: #0a1628;
             color: #fff;
             border: none;
-            padding: 8px;
+            padding: 10px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: auto;
+            transition: 0.3s;
+            font-family: inherit;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 5px;
-            font-family: inherit;
+            margin-top: auto;
         }
-        .product-card .add-to-cart:hover {
-            background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
-            transform: scale(1.02);
-            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.15);
+        .product-card .add-btn:hover {
+            background: #ffb300;
+            color: #0a1628;
         }
-        .product-card .add-to-cart.in-cart {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        .product-card .add-btn.in-cart {
+            background: #2e7d32;
+            color: #fff;
         }
-        .product-card .add-to-cart i {
+        .product-card .add-btn i {
             color: #ffb300;
+        }
+        .product-card .add-btn:hover i {
+            color: #0a1628;
         }
 
         /* ============================================================
-           CART PANEL
+           ADMIN PANEL
+           ============================================================ */
+        .admin-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .admin-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0a1628;
+            margin-bottom: 20px;
+        }
+        .admin-section h2 i {
+            color: #ffb300;
+        }
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .admin-stat {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .admin-stat .icon {
+            font-size: 1.8rem;
+            color: #ffb300;
+        }
+        .admin-stat .num {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+        .admin-stat .label {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+            padding-bottom: 10px;
+        }
+        .admin-tabs button {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.02);
+            color: #555;
+            font-family: inherit;
+        }
+        .admin-tabs button.active {
+            background: #ffb300;
+            color: #0a1628;
+        }
+        .admin-tabs button:hover {
+            transform: scale(1.02);
+        }
+
+        .admin-table {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 14px;
+            overflow-x: auto;
+        }
+        .admin-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .admin-table th {
+            text-align: right;
+            padding: 8px 12px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
+            color: #888;
+            font-weight: 600;
+        }
+        .admin-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .admin-table .actions {
+            display: flex;
+            gap: 5px;
+        }
+        .admin-table .actions button {
+            border: none;
+            padding: 3px 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.65rem;
+            font-weight: 600;
+            font-family: inherit;
+        }
+        .admin-table .actions .edit {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .admin-table .actions .delete {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .admin-table .actions .approve {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .admin-table .badge-status {
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        .badge-status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .badge-status.warning {
+            background: #fff3e0;
+            color: #e67e22;
+        }
+        .badge-status.pending {
+            background: #fff8e1;
+            color: #f9a825;
+        }
+
+        .admin-form {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 18px;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .admin-form .form-group {
+            margin-bottom: 12px;
+        }
+        .admin-form .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        .admin-form .form-group input,
+        .admin-form .form-group select,
+        .admin-form .form-group textarea {
+            width: 100%;
+            padding: 8px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: #fff;
+        }
+        .admin-form .form-group input:focus,
+        .admin-form .form-group select:focus,
+        .admin-form .form-group textarea:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
+        }
+        .admin-form .submit-btn {
+            background: #ffb300;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            color: #0a1628;
+        }
+        .admin-form .submit-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* ===== ABOUT ===== */
+        .about-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .about-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0a1628;
+        }
+        .about-section h2 i {
+            color: #ffb300;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .about-grid p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        .about-grid .social a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            background: #f5f7fa;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .about-grid .social a:hover {
+            background: #ffb300;
+            color: #0a1628;
+        }
+        .about-grid .social i {
+            font-size: 1.2rem;
+            width: 26px;
+            text-align: center;
+        }
+
+        /* ============================================================
+           CART
            ============================================================ */
         .cart-overlay {
             position: fixed;
@@ -699,8 +752,8 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(6px);
             z-index: 999;
             display: none;
             justify-content: flex-end;
@@ -709,19 +762,17 @@
             display: flex;
         }
         .cart-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(25px);
-            width: 420px;
+            background: #fff;
+            width: 400px;
             max-width: 95%;
             height: 100%;
-            padding: 20px 18px;
+            padding: 20px;
             overflow-y: auto;
-            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideIn 0.3s ease;
         }
         @keyframes slideIn {
             from {
-                transform: translateX(80px);
+                transform: translateX(60px);
                 opacity: 0;
             }
             to {
@@ -734,57 +785,37 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid rgba(0, 0, 0, 0.04);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 8px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
         }
-        .cart-panel .cart-header .header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .cart-panel .cart-header .header-left .back-home {
-            background: rgba(0, 0, 0, 0.04);
+        .cart-panel .cart-header .back-home {
+            background: rgba(0, 0, 0, 0.02);
             border: none;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 50px;
             cursor: pointer;
             color: #555;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             transition: 0.3s;
+            font-family: inherit;
             display: flex;
             align-items: center;
             gap: 4px;
-            font-family: inherit;
         }
-        .cart-panel .cart-header .header-left .back-home:hover {
+        .cart-panel .cart-header .back-home:hover {
             background: #ffb300;
             color: #0a1628;
         }
-        .cart-panel .cart-header h2 {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 1.2rem;
-            color: #0a1628;
-        }
-        .cart-panel .cart-header h2 i {
-            color: #ffb300;
-        }
         .cart-panel .cart-header .close-cart {
-            background: rgba(0, 0, 0, 0.04);
+            background: none;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             font-size: 1.2rem;
             cursor: pointer;
             color: #888;
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .cart-panel .cart-header .close-cart:hover {
             background: #e74c3c;
@@ -797,35 +828,31 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             align-items: center;
         }
-        .cart-item .item-info h4 {
+        .cart-item .info h4 {
             font-size: 0.85rem;
-            color: #0a1628;
         }
-        .cart-item .item-info small {
+        .cart-item .info small {
             color: #888;
             font-size: 0.7rem;
         }
-        .cart-item .item-total {
+        .cart-item .total {
             font-weight: 700;
-            color: #0a1628;
             font-size: 0.9rem;
         }
-        .cart-item .remove-item {
+        .cart-item .remove {
             background: none;
             border: none;
             color: #e74c3c;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: 0.3s;
             padding: 4px 6px;
             border-radius: 8px;
         }
-        .cart-item .remove-item:hover {
-            background: rgba(231, 76, 60, 0.05);
+        .cart-item .remove:hover {
+            background: rgba(231, 76, 60, 0.04);
         }
-
         .cart-summary {
-            background: rgba(0, 0, 0, 0.02);
+            background: #f8fafc;
             border-radius: 12px;
             padding: 12px 14px;
             margin: 10px 0;
@@ -841,71 +868,28 @@
             font-size: 1.2rem;
             font-weight: 800;
             color: #0a1628;
-            border-top: 2px solid rgba(0, 0, 0, 0.06);
+            border-top: 2px solid rgba(0, 0, 0, 0.04);
             padding-top: 8px;
-            margin-top: 4px;
         }
-        .cart-summary .row .free-shipping {
-            color: #2e7d32;
-            font-weight: 600;
-            font-size: 0.8rem;
-        }
-        .cart-summary .row .shipping-cost {
-            color: #e67e22;
-            font-weight: 600;
-        }
-
-        .cart-total-final {
-            font-size: 1.6rem;
-            font-weight: 900;
-            margin: 12px 0 10px;
-            color: #0a1628;
-            text-align: center;
-        }
-
-        .secure-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin: 8px 0;
-            border: 1px solid #c8e6c9;
-        }
-        .secure-badge i {
-            font-size: 0.9rem;
-        }
-
         .checkout-btn {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
+            background: #ffb300;
             border: none;
             padding: 12px;
             width: 100%;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 25px rgba(255, 179, 0, 0.2);
             font-family: inherit;
             color: #0a1628;
         }
         .checkout-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 35px rgba(255, 179, 0, 0.3);
         }
         .empty-cart {
             text-align: center;
-            padding: 35px 0;
+            padding: 30px 0;
             color: #999;
         }
         .empty-cart i {
@@ -916,7 +900,7 @@
         }
 
         /* ============================================================
-           MODALS (عمومی)
+           MODALS
            ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -924,8 +908,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
             z-index: 999;
             display: none;
             justify-content: center;
@@ -936,45 +920,40 @@
             display: flex;
         }
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(25px);
-            border-radius: 28px;
+            background: #fff;
+            border-radius: 20px;
             max-width: 680px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             padding: 28px;
-            animation: modalIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: scaleIn 0.4s ease;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
         }
-        @keyframes modalIn {
+        @keyframes scaleIn {
             from {
-                transform: scale(0.85) translateY(40px);
+                transform: scale(0.9);
                 opacity: 0;
             }
             to {
-                transform: scale(1) translateY(0);
+                transform: scale(1);
                 opacity: 1;
             }
         }
         .modal-content .close-modal {
             position: absolute;
-            top: 10px;
-            left: 14px;
-            background: rgba(0, 0, 0, 0.04);
+            top: 12px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.02);
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             font-size: 1.2rem;
             cursor: pointer;
             color: #888;
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .modal-content .close-modal:hover {
             background: #e74c3c;
@@ -982,7 +961,6 @@
             transform: rotate(90deg);
         }
 
-        /* ===== AUTH MODAL ===== */
         .auth-modal .modal-content {
             max-width: 420px;
             text-align: center;
@@ -990,38 +968,33 @@
         .auth-modal .auth-logo {
             font-size: 3.5rem;
             color: #ffb300;
-            margin-bottom: 5px;
         }
         .auth-modal .auth-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: #0a1628;
         }
         .auth-modal .auth-sub {
             color: #888;
-            margin: 4px 0 12px;
-            font-size: 0.9rem;
+            margin: 4px 0 15px;
         }
         .auth-modal .auth-input {
             width: 100%;
             padding: 10px 16px;
-            border: 2px solid rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(0, 0, 0, 0.04);
             border-radius: 12px;
             font-size: 0.95rem;
             outline: none;
             text-align: center;
             margin-bottom: 10px;
-            transition: 0.3s;
+            background: #f8fafc;
             font-family: inherit;
-            background: rgba(0, 0, 0, 0.02);
         }
         .auth-modal .auth-input:focus {
             border-color: #ffb300;
-            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.05);
-            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
         }
         .auth-modal .auth-btn {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
+            background: #ffb300;
             border: none;
             padding: 10px;
             width: 100%;
@@ -1030,17 +1003,11 @@
             font-size: 0.9rem;
             cursor: pointer;
             transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
             font-family: inherit;
             color: #0a1628;
-            box-shadow: 0 4px 20px rgba(255, 179, 0, 0.15);
         }
         .auth-modal .auth-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 179, 0, 0.25);
         }
         .auth-modal .auth-otp-section {
             display: none;
@@ -1053,14 +1020,10 @@
             font-size: 0.8rem;
             margin: 6px 0;
         }
-        .auth-modal .auth-otp-timer span {
-            color: #e74c3c;
-            font-weight: 700;
-        }
         .auth-modal .auth-switch {
-            margin-top: 8px;
+            margin-top: 10px;
             color: #888;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
         .auth-modal .auth-switch a {
             color: #ffb300;
@@ -1080,10 +1043,9 @@
             display: none;
         }
 
-        /* ===== PRODUCT DETAIL MODAL ===== */
         .product-detail-modal .modal-img {
             width: 100%;
-            max-height: 250px;
+            max-height: 240px;
             object-fit: contain;
             background: #f8fafc;
             border-radius: 14px;
@@ -1092,25 +1054,23 @@
         .product-detail-modal .modal-name {
             font-size: 1.4rem;
             font-weight: 800;
-            color: #0a1628;
         }
         .product-detail-modal .modal-price {
             font-size: 1.8rem;
-            font-weight: 900;
-            color: #0a1628;
+            font-weight: 800;
             margin: 5px 0;
         }
         .product-detail-modal .modal-desc {
             color: #555;
             line-height: 1.7;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         .product-detail-modal .modal-meta {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            background: rgba(0, 0, 0, 0.02);
-            padding: 10px 14px;
+            background: #f8fafc;
+            padding: 8px 14px;
             border-radius: 12px;
             margin: 8px 0;
         }
@@ -1125,75 +1085,63 @@
             color: #ffb300;
         }
         .product-detail-modal .modal-add-btn {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
+            background: #ffb300;
             border: none;
-            padding: 12px;
+            padding: 10px;
             width: 100%;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
             font-family: inherit;
             color: #0a1628;
-            box-shadow: 0 4px 20px rgba(255, 179, 0, 0.15);
         }
         .product-detail-modal .modal-add-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 179, 0, 0.25);
         }
 
-        /* ===== CHECKOUT MODAL ===== */
         .checkout-modal .modal-content {
-            max-width: 440px;
+            max-width: 460px;
             text-align: center;
         }
         .checkout-modal .checkout-icon {
             font-size: 3rem;
             color: #ffb300;
-            margin-bottom: 6px;
         }
         .checkout-modal .checkout-title {
             font-size: 1.3rem;
             font-weight: 800;
-            color: #0a1628;
         }
         .checkout-modal .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             text-align: right;
         }
         .checkout-modal .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 3px;
-            color: #333;
             font-size: 0.8rem;
+            color: #333;
+            margin-bottom: 4px;
         }
         .checkout-modal .form-group input,
+        .checkout-modal .form-group select,
         .checkout-modal .form-group textarea {
             width: 100%;
-            padding: 8px 12px;
-            border: 2px solid rgba(0, 0, 0, 0.05);
+            padding: 8px 14px;
+            border: 2px solid rgba(0, 0, 0, 0.04);
             border-radius: 10px;
             font-size: 0.9rem;
             outline: none;
             transition: 0.3s;
             font-family: inherit;
-            background: rgba(255, 255, 255, 0.7);
+            background: #f8fafc;
         }
         .checkout-modal .form-group input:focus,
+        .checkout-modal .form-group select:focus,
         .checkout-modal .form-group textarea:focus {
             border-color: #ffb300;
-            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.05);
-        }
-        .checkout-modal .form-group textarea {
-            resize: vertical;
-            min-height: 50px;
+            box-shadow: 0 0 0 4px rgba(255, 179, 0, 0.04);
         }
         .checkout-modal .checkout-actions {
             display: flex;
@@ -1212,9 +1160,8 @@
             font-family: inherit;
         }
         .checkout-modal .checkout-actions .btn-primary {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
+            background: #ffb300;
             color: #0a1628;
-            box-shadow: 0 4px 20px rgba(255, 179, 0, 0.15);
         }
         .checkout-modal .checkout-actions .btn-primary:hover {
             transform: scale(1.02);
@@ -1223,417 +1170,95 @@
             background: rgba(0, 0, 0, 0.04);
             color: #555;
         }
-        .checkout-modal .checkout-actions .btn-secondary:hover {
-            background: rgba(0, 0, 0, 0.08);
-        }
-
-        /* ===== PAYMENT MODAL (زرین‌پال) ===== */
-        .payment-modal .modal-content {
-            max-width: 480px;
-            text-align: center;
-        }
-        .payment-modal .payment-icon {
-            font-size: 4rem;
-            color: #1a7c3e;
-        }
-        .payment-modal .payment-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #1a7c3e;
-        }
-        .payment-modal .payment-amount {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #0a1628;
-            margin: 8px 0;
-        }
-        .payment-modal .payment-details {
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 14px;
-            margin: 12px 0;
-            color: #555;
-            font-size: 0.9rem;
-            text-align: right;
-        }
-        .payment-modal .payment-details .row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        }
-        .payment-modal .payment-details .row:last-child {
-            border-bottom: none;
-        }
-        .payment-modal .payment-details .row .label {
-            color: #888;
-        }
-        .payment-modal .payment-details .row .value {
-            font-weight: 600;
-            color: #0a1628;
-        }
-
-        .payment-modal .secure-badge-big {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #e8f5e9;
-            color: #2e7d32;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin: 10px 0;
-            border: 1px solid #c8e6c9;
-        }
-        .payment-modal .secure-badge-big i {
-            font-size: 1.2rem;
-        }
-
-        .payment-modal .payment-btn {
-            background: linear-gradient(135deg, #1a7c3e, #145c2e);
-            color: #fff;
-            border: none;
-            padding: 14px 35px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            margin: 4px;
-            font-family: inherit;
-        }
-        .payment-modal .payment-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 35px rgba(26, 124, 62, 0.25);
-        }
-        .payment-modal .payment-btn.secondary {
-            background: rgba(0, 0, 0, 0.04);
-            color: #555;
-        }
-        .payment-modal .payment-btn.secondary:hover {
-            background: rgba(0, 0, 0, 0.08);
-        }
-        .payment-modal .payment-loading {
-            display: none;
-            padding: 15px;
-        }
-        .payment-modal .payment-loading.show {
-            display: block;
-        }
-        .payment-modal .payment-loading i {
-            font-size: 3rem;
-            color: #1a7c3e;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        .payment-modal .payment-status {
-            padding: 12px;
-            border-radius: 12px;
-            margin: 10px 0;
-            display: none;
-        }
-        .payment-modal .payment-status.success {
-            display: block;
-            background: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #c8e6c9;
-        }
-        .payment-modal .payment-status.error {
-            display: block;
-            background: #ffebee;
-            color: #c62828;
-            border: 1px solid #ffcdd2;
-        }
-
-        /* ===== SELLER PANEL ===== */
-        .seller-panel-modal .modal-content {
-            max-width: 540px;
-        }
-        .seller-panel-modal .seller-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-        .seller-panel-modal .seller-header h2 {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.3rem;
-            color: #0a1628;
-        }
-        .seller-panel-modal .seller-header h2 i {
-            color: #ffb300;
-        }
-        .seller-panel-modal .seller-tabs {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.04);
-            padding-bottom: 8px;
-        }
-        .seller-panel-modal .seller-tabs button {
-            padding: 6px 16px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: 0.3s;
-            background: rgba(0, 0, 0, 0.03);
-            color: #555;
-            font-family: inherit;
-        }
-        .seller-panel-modal .seller-tabs button.active {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
-            color: #0a1628;
-            box-shadow: 0 4px 20px rgba(255, 179, 0, 0.15);
-        }
-        .seller-panel-modal .seller-tabs button:hover {
-            transform: scale(1.02);
-        }
-        .seller-panel-modal .form-group {
-            margin-bottom: 10px;
-        }
-        .seller-panel-modal .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: #333;
-            font-size: 0.8rem;
-        }
-        .seller-panel-modal .form-group input,
-        .seller-panel-modal .form-group select,
-        .seller-panel-modal .form-group textarea {
-            width: 100%;
-            padding: 8px 12px;
-            border: 2px solid rgba(0, 0, 0, 0.05);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
-            font-family: inherit;
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .seller-panel-modal .form-group input:focus,
-        .seller-panel-modal .form-group select:focus,
-        .seller-panel-modal .form-group textarea:focus {
-            border-color: #ffb300;
-            box-shadow: 0 0 0 6px rgba(255, 179, 0, 0.05);
-        }
-        .seller-panel-modal .form-group textarea {
-            resize: vertical;
-            min-height: 50px;
-        }
-        .seller-panel-modal .form-group .image-upload {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .seller-panel-modal .form-group .image-upload input[type="file"] {
-            flex: 1;
-            padding: 6px;
-            border: 2px dashed rgba(255, 179, 0, 0.2);
-            border-radius: 10px;
-            background: rgba(255, 179, 0, 0.02);
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        .seller-panel-modal .form-group .image-preview {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 2px solid #e0e5ec;
-            display: none;
-        }
-        .seller-panel-modal .form-group .image-preview.show {
-            display: block;
-        }
-        .seller-panel-modal .submit-btn {
-            background: linear-gradient(135deg, #ffb300, #f5a000);
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            font-family: inherit;
-            color: #0a1628;
-            box-shadow: 0 4px 20px rgba(255, 179, 0, 0.15);
-        }
-        .seller-panel-modal .submit-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 179, 0, 0.25);
-        }
-        .seller-panel-modal .product-list {
-            max-height: 280px;
-            overflow-y: auto;
-        }
-        .seller-panel-modal .product-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 10px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            transition: 0.3s;
-        }
-        .seller-panel-modal .product-list-item:hover {
-            background: rgba(255, 179, 0, 0.03);
-        }
-        .seller-panel-modal .product-list-item .item-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-        }
-        .seller-panel-modal .product-list-item .item-info img {
-            width: 35px;
-            height: 35px;
-            object-fit: cover;
-            border-radius: 8px;
-            background: #f8fafc;
-        }
-        .seller-panel-modal .product-list-item .item-info .name {
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-        .seller-panel-modal .product-list-item .item-info .price {
-            font-size: 0.75rem;
-            color: #888;
-        }
-        .seller-panel-modal .product-list-item .item-actions {
-            display: flex;
-            gap: 4px;
-        }
-        .seller-panel-modal .product-list-item .item-actions button {
-            border: none;
-            padding: 3px 8px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 0.65rem;
-            font-weight: 600;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-        .seller-panel-modal .product-list-item .item-actions .edit-btn {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-        .seller-panel-modal .product-list-item .item-actions .edit-btn:hover {
-            background: #bbdefb;
-        }
-        .seller-panel-modal .product-list-item .item-actions .delete-btn {
-            background: #ffebee;
-            color: #c62828;
-        }
-        .seller-panel-modal .product-list-item .item-actions .delete-btn:hover {
-            background: #ffcdd2;
-        }
 
         /* ============================================================
            FOOTER
            ============================================================ */
-        .footer-section {
-            background: linear-gradient(145deg, #0a1628, #1a2a4a);
+        .footer {
+            background: #0a1628;
             color: #c8dcec;
             padding: 30px 0 18px;
-            border-radius: 30px 30px 0 0;
+            border-radius: 20px 20px 0 0;
             margin-top: 30px;
         }
-        .footer-section .container {
+        .footer .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 18px;
         }
-        .footer-section h4 {
+        .footer h4 {
             color: #ffb300;
             margin-bottom: 8px;
             font-size: 0.9rem;
         }
-        .footer-section ul {
+        .footer ul {
             list-style: none;
         }
-        .footer-section ul li {
+        .footer ul li {
             margin: 4px 0;
         }
-        .footer-section ul li a {
+        .footer ul li a {
             cursor: pointer;
             transition: 0.3s;
             opacity: 0.6;
             font-size: 0.8rem;
         }
-        .footer-section ul li a:hover {
+        .footer ul li a:hover {
             opacity: 1;
             color: #ffb300;
         }
-        .footer-section .footer-logo {
+        .footer .logo {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .footer-section .footer-logo i {
-            font-size: 2.2rem;
-            color: #ffb300;
-        }
-        .footer-section .footer-logo h3 {
-            color: #ffb300;
-            font-size: 1.4rem;
-            font-weight: 800;
-        }
-        .footer-section .footer-logo h3 span {
-            color: #fff;
-        }
-        .footer-section .footer-logo .gg-tag {
-            font-size: 0.5rem;
-            color: #ffb300;
-            background: rgba(255, 179, 0, 0.1);
-            padding: 2px 8px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 179, 0, 0.15);
-        }
-        .footer-section .electronic-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 8px 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 179, 0, 0.06);
-            margin-top: 8px;
-        }
-        .footer-section .electronic-badge i {
+        .footer .logo i {
             font-size: 2rem;
             color: #ffb300;
         }
-        .footer-section .electronic-badge .badge-text {
-            font-size: 0.75rem;
-        }
-        .footer-section .electronic-badge .badge-text strong {
+        .footer .logo h3 {
             color: #ffb300;
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .footer .logo h3 span {
+            color: #fff;
+        }
+        .footer .trust {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .footer .trust .item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 179, 0, 0.04);
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .footer .trust .item:hover {
+            background: rgba(255, 179, 0, 0.04);
+            transform: translateY(-2px);
+        }
+        .footer .trust .item i {
+            font-size: 1.5rem;
+            color: #ffb300;
+            display: block;
+            margin-bottom: 3px;
+        }
+        .footer .trust .item span {
+            font-size: 0.55rem;
+            color: #8ab4d6;
+            display: block;
         }
         .footer-bottom {
             text-align: center;
             padding-top: 15px;
             margin-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.65rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.6rem;
             opacity: 0.4;
         }
 
@@ -1642,29 +1267,25 @@
            ============================================================ */
         @media (max-width: 768px) {
             .hero-content h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .hero-stats {
                 flex-wrap: wrap;
                 justify-content: center;
                 padding: 10px 18px;
-                gap: 10px;
+                gap: 12px;
             }
-            .hero-stats .number {
+            .hero-stats .num {
                 font-size: 1.2rem;
             }
             .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 12px;
             }
-            .product-card {
-                padding: 10px 8px 12px;
-                border-radius: 16px;
+            .product-card .img {
+                height: 130px;
             }
-            .product-card .product-img {
-                height: 120px;
-            }
-            .product-card .product-price {
+            .product-card .price {
                 font-size: 1rem;
             }
             .cart-panel {
@@ -1672,28 +1293,28 @@
                 max-width: 100%;
             }
             .modal-content {
-                padding: 16px;
+                padding: 18px;
                 margin: 8px;
             }
             .header .logo h1 {
                 font-size: 1.2rem;
             }
             .header .cart-btn {
-                padding: 5px 12px;
-                font-size: 0.65rem;
-            }
-            .header .more-btn span {
-                display: none;
+                padding: 6px 14px;
+                font-size: 0.7rem;
             }
             .section-title {
                 font-size: 1.2rem;
             }
-            .footer-section .container {
+            .footer .container {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            .footer-section .electronic-badge {
-                justify-content: center;
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-stats {
+                grid-template-columns: 1fr 1fr;
             }
         }
         @media (max-width: 480px) {
@@ -1707,22 +1328,22 @@
                 flex-wrap: wrap;
             }
             .hero-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             .product-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
             }
-            .product-card .product-img {
+            .product-card .img {
                 height: 100px;
             }
-            .product-card .product-name {
+            .product-card .name {
                 font-size: 0.75rem;
             }
-            .product-card .product-price {
+            .product-card .price {
                 font-size: 0.85rem;
             }
-            .product-card .add-to-cart {
+            .product-card .add-btn {
                 font-size: 0.65rem;
                 padding: 6px;
             }
@@ -1732,9 +1353,9 @@
             .section-title .count {
                 display: none;
             }
-            .categories-scroll .cat-item {
-                padding: 4px 14px;
+            .categories .cat-item {
                 font-size: 0.65rem;
+                padding: 4px 12px;
             }
             .search-bar input {
                 font-size: 0.75rem;
@@ -1743,58 +1364,55 @@
             .checkout-modal .checkout-actions {
                 flex-direction: column;
             }
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================
-    TOP BAR
-    ============================================================ -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar">
         <div class="container">
-            <div class="marquee">
-                <span><i class="fas fa-bolt"></i> ارسال رایگان برای سفارشات بالای ۱ میلیون تومان</span>
-                <span><i class="fas fa-gift"></i> ۷ روز ضمانت بازگشت کالا</span>
+            <div class="right">
+                <span><i class="fas fa-bolt"></i> ارسال رایگان بالای ۱ میلیون</span>
+                <span><i class="fas fa-gift"></i> ۷ روز ضمانت بازگشت</span>
                 <span><i class="fas fa-headset"></i> پشتیبانی ۲۴/۷</span>
             </div>
-            <div class="brand-tag">
-                <i class="fas fa-bolt"></i> GG Volt | bitvolt.mtv
+            <div class="left">
+                <a href="https://instagram.com/bitvolt.mtv" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
+    <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="container">
             <div class="logo" onclick="navigateTo('home')">
                 <i class="fas fa-bolt logo-icon"></i>
                 <div>
                     <h1>Bit<span>Volt</span></h1>
-                    <small><i class="fas fa-microchip"></i> الکترونیک دیجیتال</small>
+                    <small>الکترونیک دیجیتال</small>
                 </div>
-                <span class="gg-tag">GG Volt</span>
             </div>
 
             <div class="header-actions">
-                <div class="auth-links" id="authLinks">
-                    <a onclick="openAuthModal('login')"><i class="fas fa-user"></i> ورود</a>
-                    <a onclick="openAuthModal('register')"><i class="fas fa-user-plus"></i> ثبت‌نام</a>
-                </div>
+                <button class="auth-btn" id="authMainBtn" onclick="openAuthModal('login')">
+                    <i class="fas fa-user"></i> <span id="authBtnText">ورود / ثبت‌نام</span>
+                </button>
 
                 <div class="user-info" id="userInfo">
                     <i class="fas fa-user-circle"></i>
-                    <div class="user-dropdown">
-                        <span id="userDisplayName">کاربر</span>
-                        <i class="fas fa-chevron-down" style="font-size:0.5rem; color:#888;"></i>
-                        <div class="user-dropdown-content">
-                            <a onclick="showDashboard()"><i class="fas fa-user"></i> حساب کاربری</a>
-                            <a onclick="showDashboard()"><i class="fas fa-box"></i> سفارشات</a>
-                            <a onclick="showDashboard()"><i class="fas fa-map-marker-alt"></i> آدرس‌ها</a>
-                            <a onclick="logoutUser()" style="color:#e74c3c;"><i class="fas fa-sign-out-alt"></i> خروج</a>
-                        </div>
+                    <span id="userDisplayName">کاربر</span>
+                    <i class="fas fa-chevron-down" style="font-size:0.5rem; color:#888;"></i>
+                    <div class="dropdown">
+                        <a onclick="showDashboard()"><i class="fas fa-user"></i> حساب کاربری</a>
+                        <a onclick="showDashboard()"><i class="fas fa-box"></i> سفارشات</a>
+                        <a onclick="showDashboard()"><i class="fas fa-map-marker-alt"></i> آدرس‌ها</a>
+                        <a onclick="logoutUser()" style="color:#e74c3c;"><i class="fas fa-sign-out-alt"></i> خروج</a>
                     </div>
                 </div>
 
@@ -1802,166 +1420,258 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span class="badge" id="cartCount">0</span>
                 </button>
-
-                <div class="more-wrapper">
-                    <button class="more-btn" onclick="toggleMoreDropdown()">
-                        <i class="fas fa-ellipsis-v"></i>
-                        <span>بیشتر</span>
-                    </button>
-                    <div class="more-dropdown" id="moreDropdown">
-                        <a onclick="openSellerPanel()"><i class="fas fa-store-alt"></i> پنل فروشنده</a>
-                        <a onclick="navigateTo('about')"><i class="fas fa-info-circle"></i> درباره ما</a>
-                        <a href="https://instagram.com/bitvolt.mtv" target="_blank"><i class="fab fa-instagram"></i> اینستاگرام</a>
-                        <a onclick="showDashboard()"><i class="fas fa-address-card"></i> پروفایل</a>
-                    </div>
-                </div>
             </div>
         </div>
     </header>
 
-    <!-- ============================================================
-    SEARCH BAR
-    ============================================================ -->
+    <!-- ===== SEARCH ===== -->
     <div class="search-bar">
         <div class="container">
-            <input type="text" id="searchInput" placeholder="جستجوی محصولات GG Volt..." oninput="filterProducts()" />
+            <input type="text" id="searchInput" placeholder="جستجوی محصولات..." onkeyup="checkAdminSecret(this.value)" />
+            <div id="adminHint" style="display:none; background:#fff8e1; padding:6px 14px; border-radius:50px; color:#0a1628; font-size:0.8rem; font-weight:600; border:1px solid #ffb300;">
+                🔑 کد مخفی شناسایی شد! در حال باز کردن پنل ادمین...
+            </div>
         </div>
     </div>
 
-    <!-- ============================================================
-    PAGE: HOME
-    ============================================================ -->
+    <!-- ===== CATEGORIES ===== -->
+    <div class="categories">
+        <div class="container" id="categoriesContainer">
+            <div class="cat-item active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-list"></i> همه</div>
+            <div class="cat-item" data-cat="میکروکنترلر" onclick="setCategory('میکروکنترلر')"><i class="fas fa-microchip"></i> میکروکنترلر</div>
+            <div class="cat-item" data-cat="ماژول ولت" onclick="setCategory('ماژول ولت')"><i class="fas fa-bolt"></i> ماژول ولت</div>
+            <div class="cat-item" data-cat="رباتیک" onclick="setCategory('رباتیک')"><i class="fas fa-robot"></i> رباتیک</div>
+            <div class="cat-item" data-cat="سنسور" onclick="setCategory('سنسور')"><i class="fas fa-thermometer-half"></i> سنسور</div>
+            <div class="cat-item" data-cat="ابزار دقیق" onclick="setCategory('ابزار دقیق')"><i class="fas fa-tools"></i> ابزار دقیق</div>
+            <div class="cat-item" data-cat="منبع تغذیه" onclick="setCategory('منبع تغذیه')"><i class="fas fa-plug"></i> منبع تغذیه</div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE: HOME ===== -->
     <div class="page active" id="page-home">
         <div class="container">
-            <section class="hero-section">
+            <div class="hero">
                 <div class="container">
                     <div class="hero-content">
-                        <div class="badge-top"><i class="fas fa-bolt"></i> GG Volt | bitvolt.mtv</div>
-                        <h2>الکترونیک با <span class="highlight">کیفیت</span> و <span class="highlight">اعتماد</span></h2>
-                        <p>تأمین کننده قطعات الکترونیک، ماژول‌های هوشمند و تجهیزات دیجیتال با برند GG Volt</p>
-                        <div class="hero-badges">
+                        <div style="display:inline-block; background:rgba(255,179,0,0.08); color:#ffb300; padding:2px 14px; border-radius:50px; font-size:0.7rem; font-weight:600; margin-bottom:10px;">
+                            <i class="fas fa-bolt"></i> BitVolt
+                        </div>
+                        <h2>الکترونیک با <span>کیفیت</span> و <span>اعتماد</span></h2>
+                        <p>تأمین کننده قطعات الکترونیک، ماژول‌های هوشمند و تجهیزات دیجیتال</p>
+                        <div class="badges">
                             <span><i class="fas fa-shield-alt"></i> ضمانت اصالت</span>
                             <span><i class="fas fa-truck"></i> ارسال رایگان</span>
                             <span><i class="fas fa-undo"></i> بازگشت ۷ روزه</span>
-                            <span><i class="fas fa-headset"></i> پشتیبانی ۲۴/۷</span>
                         </div>
                     </div>
                     <div class="hero-stats">
-                        <div><span class="number" id="statProducts">۰</span><span class="label">محصول</span></div>
-                        <div><span class="number">۲٬۱۰۰</span><span class="label">مشتری</span></div>
-                        <div><span class="number">۹۸٪</span><span class="label">رضایت</span></div>
-                        <div><span class="number">⭐ ۴.۸</span><span class="label">امتیاز</span></div>
+                        <div><span class="num" id="statProducts">۰</span><span class="label">محصول</span></div>
+                        <div><span class="num">۲٬۱۰۰</span><span class="label">مشتری</span></div>
+                        <div><span class="num">۹۸٪</span><span class="label">رضایت</span></div>
+                        <div><span class="num">⭐ ۴.۸</span><span class="label">امتیاز</span></div>
                     </div>
                 </div>
-            </section>
-
-            <div class="categories-scroll" id="categoriesContainer">
-                <div class="cat-item active" data-cat="all" onclick="setCategory('all')"><i class="fas fa-th-list"></i> همه</div>
-                <div class="cat-item" data-cat="میکروکنترلر" onclick="setCategory('میکروکنترلر')"><i class="fas fa-microchip"></i> میکروکنترلر</div>
-                <div class="cat-item" data-cat="ماژول ولت" onclick="setCategory('ماژول ولت')"><i class="fas fa-bolt"></i> ماژول ولت</div>
-                <div class="cat-item" data-cat="رباتیک" onclick="setCategory('رباتیک')"><i class="fas fa-robot"></i> رباتیک</div>
-                <div class="cat-item" data-cat="سنسور" onclick="setCategory('سنسور')"><i class="fas fa-thermometer-half"></i> سنسور</div>
-                <div class="cat-item" data-cat="ابزار دقیق" onclick="setCategory('ابزار دقیق')"><i class="fas fa-tools"></i> ابزار دقیق</div>
-                <div class="cat-item" data-cat="منبع تغذیه" onclick="setCategory('منبع تغذیه')"><i class="fas fa-plug"></i> منبع تغذیه</div>
             </div>
 
             <div class="section-title">
-                <i class="fas fa-bolt"></i> محصولات <span style="color:#ffb300;">GG Volt</span>
-                <span class="title-line"></span>
+                <i class="fas fa-bolt"></i> محصولات <span style="color:#ffb300;">BitVolt</span>
+                <span class="line"></span>
                 <span class="count" id="productCount">(۰ محصول)</span>
             </div>
             <div class="product-grid" id="productGrid"></div>
         </div>
     </div>
 
-    <!-- ============================================================
-    PAGE: ABOUT
-    ============================================================ -->
+    <!-- ===== PAGE: ABOUT ===== -->
     <div class="page" id="page-about">
         <div class="container">
-            <div style="background:rgba(255,255,255,0.85); backdrop-filter:blur(18px); border-radius:28px; padding:25px;">
-                <h2 style="display:flex; align-items:center; gap:10px; color:#0a1628; font-size:1.4rem;"><i class="fas fa-info-circle" style="color:#ffb300;"></i> درباره BitVolt</h2>
-                <div style="display:grid; grid-template-columns:2fr 1fr; gap:18px;">
+            <div class="about-section">
+                <h2><i class="fas fa-info-circle"></i> درباره BitVolt</h2>
+                <div class="about-grid">
                     <div>
-                        <p style="font-size:0.9rem; line-height:1.8;"><strong>BitVolt</strong> با برند <strong>GG Volt</strong>، فروشگاه تخصصی الکترونیک و قطعات دیجیتال. ما با افتخار محصولات اورجینال را با بهترین قیمت ارائه می‌دهیم.</p>
-                        <div style="display:flex; flex-wrap:wrap; gap:8px; margin:8px 0;">
+                        <p><strong>BitVolt</strong> یک فروشگاه تخصصی در حوزه <strong>الکترونیک و قطعات دیجیتال</strong> است که با هدف ارائه محصولات اورجینال و باکیفیت به بازار ایران تأسیس شد.</p>
+                        <p style="margin-top:10px;">داستان ما از یک تیم کوچک از مهندسان الکترونیک شروع شد که می‌خواستند دسترسی به قطعات باکیفیت را برای همه آسان کنند.</p>
+                        <div style="display:flex; flex-wrap:wrap; gap:8px; margin:12px 0;">
                             <span><i class="fas fa-check-circle" style="color:#2e7d32;"></i> ضمانت اصالت</span>
                             <span><i class="fas fa-truck" style="color:#e67e22;"></i> ارسال سریع</span>
                             <span><i class="fas fa-headset" style="color:#0a1628;"></i> پشتیبانی ۲۴/۷</span>
                         </div>
-                        <p><i class="fas fa-map-marker-alt" style="color:#ffb300;"></i> قزوین، تاکستان، خیابان حافظ، پلاک ۱۲</p>
-                        <p><i class="fas fa-phone" style="color:#ffb300;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</p>
-                        <p><i class="fas fa-globe" style="color:#ffb300;"></i> bitvolt.mtv</p>
+                        <p><i class="fas fa-map-marker-alt" style="color:#ffb300;"></i> <strong>آدرس:</strong> قزوین، تاکستان، خیابان حافظ، پلاک ۱۲</p>
+                        <p><i class="fas fa-phone" style="color:#ffb300;"></i> <strong>تلفن:</strong> ۰۹۱۰-۷۴۸۴۲۱۴</p>
+                        <p><i class="fas fa-globe" style="color:#ffb300;"></i> <strong>وبسایت:</strong> bitvolt.mtv</p>
                     </div>
-                    <div style="display:flex; flex-direction:column; gap:5px;">
-                        <a href="https://instagram.com/bitvolt.mtv" target="_blank" style="background:rgba(0,0,0,0.02); padding:6px 12px; border-radius:10px; display:flex; align-items:center; gap:6px; font-size:0.8rem;"><i class="fab fa-instagram"></i> bitvolt.mtv</a>
-                        <a href="#" style="background:rgba(0,0,0,0.02); padding:6px 12px; border-radius:10px; display:flex; align-items:center; gap:6px; font-size:0.8rem;"><i class="fab fa-telegram"></i> bitvolt.mtv</a>
-                        <a href="#" style="background:rgba(0,0,0,0.02); padding:6px 12px; border-radius:10px; display:flex; align-items:center; gap:6px; font-size:0.8rem;"><i class="fab fa-youtube"></i> bitvolt.mtv</a>
+                    <div class="social">
+                        <a href="https://instagram.com/bitvolt.mtv" target="_blank"><i class="fab fa-instagram"></i> bitvolt.mtv</a>
+                        <a href="#"><i class="fab fa-telegram"></i> bitvolt.mtv</a>
+                        <a href="#"><i class="fab fa-youtube"></i> bitvolt.mtv</a>
+                        <a href="#"><i class="fab fa-twitter"></i> bitvolt.mtv</a>
+                        <a href="#"><i class="fas fa-envelope"></i> info@bitvolt.mtv</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================
-    FOOTER
-    ============================================================ -->
-    <div class="container">
-        <div class="footer-section">
-            <div class="container">
-                <div>
-                    <div class="footer-logo">
-                        <i class="fas fa-bolt"></i>
-                        <h3>Bit<span>Volt</span></h3>
-                        <span class="gg-tag">GG Volt</span>
+    <!-- ===== PAGE: ADMIN ===== -->
+    <div class="page" id="page-admin">
+        <div class="container">
+            <div class="admin-section">
+                <h2><i class="fas fa-crown"></i> پنل مدیریت</h2>
+
+                <div class="admin-stats">
+                    <div class="admin-stat">
+                        <div class="icon"><i class="fas fa-box"></i></div>
+                        <div class="num" id="adminTotalProducts">۰</div>
+                        <div class="label">محصولات</div>
                     </div>
-                    <p style="margin:5px 0; opacity:0.5; font-size:0.75rem;">فروشگاه تخصصی الکترونیک</p>
-                    <p style="font-size:0.65rem; color:#ffb300; opacity:0.6;">bitvolt.mtv</p>
-                    <div class="electronic-badge">
-                        <i class="fas fa-microchip"></i>
-                        <div class="badge-text">
-                            <strong>نماد الکترونیک</strong><br />
-                            <span style="font-size:0.6rem; opacity:0.4;">مجوز رسمی</span>
-                        </div>
+                    <div class="admin-stat">
+                        <div class="icon"><i class="fas fa-shopping-bag"></i></div>
+                        <div class="num" id="adminTotalOrders">۰</div>
+                        <div class="label">سفارشات</div>
+                    </div>
+                    <div class="admin-stat">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div class="num" id="adminTotalUsers">۰</div>
+                        <div class="label">کاربران</div>
+                    </div>
+                    <div class="admin-stat">
+                        <div class="icon"><i class="fas fa-comments"></i></div>
+                        <div class="num" id="adminTotalComments">۰</div>
+                        <div class="label">نظرات</div>
                     </div>
                 </div>
-                <div>
-                    <h4>دسترسی سریع</h4>
-                    <ul>
-                        <li><a onclick="navigateTo('home')">خانه</a></li>
-                        <li><a onclick="navigateTo('products')">محصولات</a></li>
-                        <li><a onclick="alert('📝 به زودی')">بلاگ</a></li>
-                        <li><a onclick="navigateTo('about')">درباره ما</a></li>
-                    </ul>
+
+                <div class="admin-tabs">
+                    <button class="active" onclick="switchAdminTab('products')"><i class="fas fa-box"></i> محصولات</button>
+                    <button onclick="switchAdminTab('orders')"><i class="fas fa-shopping-bag"></i> سفارشات</button>
+                    <button onclick="switchAdminTab('users')"><i class="fas fa-users"></i> کاربران</button>
+                    <button onclick="switchAdminTab('comments')"><i class="fas fa-comments"></i> نظرات</button>
                 </div>
-                <div>
-                    <h4>اطلاعات تماس</h4>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt" style="color:#ffb300; margin-left:4px;"></i> قزوین، تاکستان، حافظ</li>
-                        <li><i class="fas fa-phone" style="color:#ffb300; margin-left:4px;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</li>
-                        <li><i class="fab fa-instagram" style="color:#ffb300; margin-left:4px;"></i> bitvolt.mtv</li>
-                    </ul>
+
+                <div id="adminProducts">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                        <h3 style="font-size:1rem;">مدیریت محصولات</h3>
+                        <button onclick="showAddProduct()" style="background:#ffb300; border:none; padding:5px 16px; border-radius:50px; font-weight:700; cursor:pointer; font-family:inherit; color:#0a1628;">
+                            <i class="fas fa-plus"></i> افزودن
+                        </button>
+                    </div>
+                    <div class="admin-table">
+                        <table>
+                            <thead><tr><th>تصویر</th><th>نام</th><th>دسته</th><th>قیمت</th><th>عملیات</th></tr></thead>
+                            <tbody id="adminProductList"><tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">محصولی وجود ندارد</td></tr></tbody>
+                        </table>
+                    </div>
                 </div>
-                <div>
-                    <h4>شبکه‌های اجتماعی</h4>
-                    <ul>
-                        <li><a href="https://instagram.com/bitvolt.mtv" target="_blank"><i class="fab fa-instagram"></i> bitvolt.mtv</a></li>
-                        <li><a href="#"><i class="fab fa-telegram"></i> bitvolt.mtv</a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i> bitvolt.mtv</a></li>
-                    </ul>
+
+                <div id="adminOrders" style="display:none;">
+                    <h3 style="font-size:1rem; margin-bottom:12px;">مدیریت سفارشات</h3>
+                    <div class="admin-table">
+                        <table>
+                            <thead><tr><th>کد</th><th>کاربر</th><th>مبلغ</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody id="adminOrderList"><tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">سفارشی وجود ندارد</td></tr></tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© ۲۰۲۶ BitVolt | GG Volt | تمامی حقوق محفوظ است | bitvolt.mtv</p>
+
+                <div id="adminUsers" style="display:none;">
+                    <h3 style="font-size:1rem; margin-bottom:12px;">مدیریت کاربران</h3>
+                    <div class="admin-table">
+                        <table>
+                            <thead><tr><th>شماره</th><th>تاریخ ثبت</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody id="adminUserList"><tr><td colspan="4" style="text-align:center; color:#888; padding:15px;">کاربری وجود ندارد</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="adminComments" style="display:none;">
+                    <h3 style="font-size:1rem; margin-bottom:12px;">تایید نظرات</h3>
+                    <div class="admin-table">
+                        <table>
+                            <thead><tr><th>کاربر</th><th>محصول</th><th>نظر</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                            <tbody id="adminCommentList"><tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">نظری وجود ندارد</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================
-    MODALS
-    ============================================================ -->
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <div class="container">
+            <div>
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Bit<span>Volt</span></h3>
+                </div>
+                <p style="margin:5px 0; opacity:0.5; font-size:0.75rem;">فروشگاه تخصصی الکترونیک</p>
+                <p style="font-size:0.65rem; color:#ffb300; opacity:0.6;">bitvolt.mtv</p>
+                <div class="trust">
+                    <div class="item"><i class="fas fa-shield-alt"></i><span>ضمانت اصالت</span></div>
+                    <div class="item"><i class="fas fa-lock"></i><span>پرداخت امن</span></div>
+                    <div class="item"><i class="fas fa-truck"></i><span>ارسال سریع</span></div>
+                    <div class="item"><i class="fas fa-undo"></i><span>بازگشت ۷ روزه</span></div>
+                    <div class="item"><i class="fas fa-headset"></i><span>پشتیبانی ۲۴/۷</span></div>
+                </div>
+            </div>
+            <div>
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a onclick="navigateTo('home')">خانه</a></li>
+                    <li><a onclick="navigateTo('products')">محصولات</a></li>
+                    <li><a onclick="navigateTo('about')">درباره ما</a></li>
+                    <li><a onclick="alert('به زودی')">بلاگ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>اطلاعات تماس</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt" style="color:#ffb300; margin-left:4px;"></i> قزوین، تاکستان، حافظ</li>
+                    <li><i class="fas fa-phone" style="color:#ffb300; margin-left:4px;"></i> ۰۹۱۰-۷۴۸۴۲۱۴</li>
+                    <li><i class="fab fa-instagram" style="color:#ffb300; margin-left:4px;"></i> bitvolt.mtv</li>
+                    <li><i class="fas fa-envelope" style="color:#ffb300; margin-left:4px;"></i> info@bitvolt.mtv</li>
+                </ul>
+            </div>
+            <div>
+                <h4>شبکه‌های اجتماعی</h4>
+                <ul>
+                    <li><a href="https://instagram.com/bitvolt.mtv" target="_blank"><i class="fab fa-instagram"></i> bitvolt.mtv</a></li>
+                    <li><a href="#"><i class="fab fa-telegram"></i> bitvolt.mtv</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> bitvolt.mtv</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ۲۰۲۶ BitVolt | تمامی حقوق محفوظ است | <i class="fas fa-bolt" style="color:#ffb300;"></i></p>
+        </div>
+    </div>
 
-    <!-- AUTH MODAL -->
+    <!-- ===== CART ===== -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-panel">
+            <div class="cart-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <button class="back-home" onclick="closeCart()"><i class="fas fa-arrow-right"></i> برگشت</button>
+                    <h2 style="font-size:1.1rem;"><i class="fas fa-shopping-cart" style="color:#ffb300;"></i> سبد خرید</h2>
+                </div>
+                <button class="close-cart" onclick="closeCart()">&times;</button>
+            </div>
+            <div id="cartItemsContainer">
+                <div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>سبد خرید خالی است</p></div>
+            </div>
+            <div id="cartSummaryContainer" style="display:none;">
+                <div class="cart-summary">
+                    <div class="row"><span>مجموع محصولات</span><span id="cartSubtotal">۰ تومان</span></div>
+                    <div class="row"><span>هزینه ارسال</span><span id="cartShipping">۱۲۰٬۰۰۰ تومان</span></div>
+                    <div class="row total"><span>مبلغ قابل پرداخت</span><span id="cartTotalFinal">۰ تومان</span></div>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()"><i class="fas fa-credit-card"></i> تکمیل خرید</button>
+        </div>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+    <!-- AUTH -->
     <div class="modal-overlay auth-modal" id="authModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
@@ -1974,11 +1684,12 @@
                 <button class="auth-btn" id="authSendCodeBtn"><i class="fas fa-paper-plane"></i> ارسال کد تایید</button>
             </div>
             <div class="auth-otp-section" id="authStep2">
-                <div style="background:rgba(0,0,0,0.02); padding:10px; border-radius:10px; margin:8px 0; border:2px dashed rgba(255,179,0,0.15);">
+                <div style="background:#f8fafc; padding:10px; border-radius:10px; margin:8px 0; border:2px dashed rgba(255,179,0,0.12);">
                     <p style="font-size:0.75rem; color:#555;"><i class="fas fa-check-circle" style="color:#2e7d32;"></i> کد تایید به شماره <strong id="displayPhone" style="color:#0a1628;">۰۹۱۲۳۴۵۶۷۸۹</strong> ارسال شد</p>
+                    <p style="font-size:0.6rem; color:#999; margin-top:3px;">⏱️ کد تا ۳ دقیقه اعتبار دارد</p>
                 </div>
                 <input class="auth-input" type="text" id="authOtp" placeholder="کد ۶ رقمی را وارد کنید" maxlength="6" />
-                <div class="auth-otp-timer">⏱️ زمان باقی‌مانده: <span id="otpTimer">۱۲۰</span> ثانیه</div>
+                <div class="auth-otp-timer">⏱️ زمان باقی‌مانده: <span id="otpTimer">۱۸۰</span> ثانیه</div>
                 <div class="auth-error" id="authOtpError">کد اشتباه است</div>
                 <div class="auth-success" id="authOtpSuccess">✅ کد تایید صحیح است!</div>
                 <button class="auth-btn" id="authVerifyBtn"><i class="fas fa-check-circle"></i> تایید و ورود</button>
@@ -1991,7 +1702,7 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAIL MODAL -->
+    <!-- PRODUCT DETAIL -->
     <div class="modal-overlay product-detail-modal" id="productModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
@@ -2000,11 +1711,49 @@
             <div class="modal-price" id="modalPrice"></div>
             <div class="modal-meta" id="modalMeta"></div>
             <div class="modal-desc" id="modalDesc"></div>
-            <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد خرید</button>
+            <button class="modal-add-btn" id="modalAddBtn"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL -->
+    <!-- ADD PRODUCT -->
+    <div class="modal-overlay" id="addProductModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAllModals()">&times;</button>
+            <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:15px;"><i class="fas fa-plus-circle" style="color:#ffb300;"></i> افزودن محصول جدید</h3>
+            <form class="admin-form" onsubmit="addProductFromAdmin(event)">
+                <div class="form-group">
+                    <label>نام محصول *</label>
+                    <input type="text" id="adminProdName" placeholder="نام محصول" required />
+                </div>
+                <div class="form-group">
+                    <label>دسته‌بندی *</label>
+                    <select id="adminProdCategory" required>
+                        <option value="میکروکنترلر">میکروکنترلر</option>
+                        <option value="ماژول ولت" selected>ماژول ولت</option>
+                        <option value="رباتیک">رباتیک</option>
+                        <option value="سنسور">سنسور</option>
+                        <option value="ابزار دقیق">ابزار دقیق</option>
+                        <option value="منبع تغذیه">منبع تغذیه</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>قیمت (تومان) *</label>
+                    <input type="number" id="adminProdPrice" placeholder="۲۵۰۰۰۰" required />
+                </div>
+                <div class="form-group">
+                    <label>توضیحات *</label>
+                    <textarea id="adminProdDesc" placeholder="توضیحات کامل محصول..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>آدرس تصویر (URL)</label>
+                    <input type="url" id="adminProdImage" placeholder="https://example.com/image.jpg" />
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> افزودن محصول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CHECKOUT -->
     <div class="modal-overlay checkout-modal" id="checkoutModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeAllModals()">&times;</button>
@@ -2020,8 +1769,50 @@
                 <input type="text" id="checkoutName" placeholder="نام و نام خانوادگی" />
             </div>
             <div class="form-group">
+                <label>📍 استان</label>
+                <select id="checkoutProvince" onchange="updateCities()">
+                    <option value="">انتخاب استان...</option>
+                    <option value="تهران">تهران</option>
+                    <option value="اصفهان">اصفهان</option>
+                    <option value="فارس">فارس</option>
+                    <option value="خراسان رضوی">خراسان رضوی</option>
+                    <option value="آذربایجان شرقی">آذربایجان شرقی</option>
+                    <option value="قزوین">قزوین</option>
+                    <option value="گیلان">گیلان</option>
+                    <option value="مازندران">مازندران</option>
+                    <option value="البرز">البرز</option>
+                    <option value="کرمان">کرمان</option>
+                    <option value="هرمزگان">هرمزگان</option>
+                    <option value="یزد">یزد</option>
+                    <option value="سمنان">سمنان</option>
+                    <option value="زنجان">زنجان</option>
+                    <option value="اردبیل">اردبیل</option>
+                    <option value="کردستان">کردستان</option>
+                    <option value="کرمانشاه">کرمانشاه</option>
+                    <option value="لرستان">لرستان</option>
+                    <option value="خوزستان">خوزستان</option>
+                    <option value="بوشهر">بوشهر</option>
+                    <option value="همدان">همدان</option>
+                    <option value="مرکزی">مرکزی</option>
+                    <option value="چهارمحال و بختیاری">چهارمحال و بختیاری</option>
+                    <option value="کهگیلویه و بویراحمد">کهگیلویه و بویراحمد</option>
+                    <option value="سیستان و بلوچستان">سیستان و بلوچستان</option>
+                    <option value="خراسان جنوبی">خراسان جنوبی</option>
+                    <option value="خراسان شمالی">خراسان شمالی</option>
+                    <option value="گلستان">گلستان</option>
+                    <option value="ایلام">ایلام</option>
+                    <option value="قم">قم</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>📍 شهر</label>
+                <select id="checkoutCity">
+                    <option value="">ابتدا استان را انتخاب کنید...</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label>📍 آدرس کامل</label>
-                <textarea id="checkoutAddress" placeholder="استان، شهر، خیابان، پلاک، کد پستی"></textarea>
+                <textarea id="checkoutAddress" placeholder="خیابان، پلاک، واحد..."></textarea>
             </div>
             <div class="checkout-actions">
                 <button class="btn btn-secondary" onclick="closeAllModals()">انصراف</button>
@@ -2030,189 +1821,16 @@
         </div>
     </div>
 
-    <!-- PAYMENT MODAL (زرین‌پال) -->
-    <div class="modal-overlay payment-modal" id="paymentModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeAllModals()">&times;</button>
-            <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
-            <div class="payment-title">زرین‌پال</div>
-            <p style="color:#888; font-size:0.9rem;">پرداخت امن و سریع</p>
-
-            <div class="secure-badge-big">
-                <i class="fas fa-shield-alt"></i>
-                پرداخت از درگاه زرین‌پال - امن و مطمئن
-            </div>
-
-            <div class="payment-amount" id="paymentAmount">۰ تومان</div>
-
-            <div class="payment-details">
-                <div class="row"><span class="label">مبلغ قابل پرداخت</span><span class="value" id="paymentTotalDisplay">۰ تومان</span></div>
-                <div class="row"><span class="label">هزینه ارسال</span><span class="value" id="paymentShippingDisplay">۰ تومان</span></div>
-                <div class="row"><span class="label">شماره تراکنش</span><span class="value" id="paymentCode">ZP-2026-XXXX</span></div>
-            </div>
-
-            <div class="payment-loading" id="paymentLoading">
-                <i class="fas fa-spinner"></i>
-                <p style="margin-top:8px;">در حال اتصال به درگاه زرین‌پال...</p>
-            </div>
-
-            <div id="paymentButtons">
-                <button class="payment-btn" onclick="processPayment()"><i class="fas fa-check"></i> پرداخت با زرین‌پال</button>
-                <button class="payment-btn secondary" onclick="closeAllModals()">انصراف</button>
-            </div>
-
-            <div class="payment-status" id="paymentStatus"></div>
-        </div>
-    </div>
-
-    <!-- SELLER PANEL MODAL -->
-    <div class="modal-overlay seller-panel-modal" id="sellerModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeAllModals()">&times;</button>
-
-            <div id="sellerLoginSection">
-                <div style="text-align:center; padding:8px 0;">
-                    <div style="font-size:2.5rem; color:#ffb300;"><i class="fas fa-store-alt"></i></div>
-                    <h2 style="font-size:1.3rem; color:#0a1628;">پنل فروشنده</h2>
-                    <p style="color:#888; margin:4px 0 10px; font-size:0.85rem;">رمز عبور را وارد کنید</p>
-                    <input class="auth-input" type="password" id="sellerPasswordInput" placeholder="رمز عبور" style="text-align:center; max-width:280px; margin:0 auto 10px;" />
-                    <button class="auth-btn" onclick="loginSeller()" style="max-width:280px; margin:0 auto;"><i class="fas fa-lock-open"></i> ورود به پنل</button>
-                    <div id="sellerLoginError" style="color:#e74c3c; font-size:0.8rem; margin-top:6px; display:none;">رمز عبور اشتباه است!</div>
-                </div>
-            </div>
-
-            <div id="sellerPanelContent" style="display:none;">
-                <div class="seller-header">
-                    <h2><i class="fas fa-store-alt"></i> مدیریت محصولات</h2>
-                    <button onclick="logoutSeller()" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-size:0.75rem;"><i class="fas fa-sign-out-alt"></i> خروج</button>
-                </div>
-
-                <div class="seller-tabs">
-                    <button class="active" onclick="switchSellerTab('add')" id="tabAdd">➕ افزودن</button>
-                    <button onclick="switchSellerTab('list')" id="tabList">📋 لیست</button>
-                </div>
-
-                <div id="sellerTabAdd">
-                    <form id="addProductForm" onsubmit="addProductFromSeller(event)">
-                        <div class="form-group">
-                            <label>نام محصول *</label>
-                            <input type="text" id="prodName" placeholder="مثال: ماژول ولت GG-2000" required />
-                        </div>
-                        <div class="form-group">
-                            <label>دسته‌بندی *</label>
-                            <select id="prodCategory" required>
-                                <option value="میکروکنترلر">میکروکنترلر</option>
-                                <option value="ماژول ولت" selected>ماژول ولت</option>
-                                <option value="رباتیک">رباتیک</option>
-                                <option value="سنسور">سنسور</option>
-                                <option value="ابزار دقیق">ابزار دقیق</option>
-                                <option value="منبع تغذیه">منبع تغذیه</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>قیمت (تومان) *</label>
-                            <input type="number" id="prodPrice" placeholder="۲۵۰۰۰۰" required />
-                        </div>
-                        <div class="form-group">
-                            <label>توضیحات *</label>
-                            <textarea id="prodDesc" placeholder="توضیحات کامل محصول..." required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>تصویر محصول</label>
-                            <div class="image-upload">
-                                <input type="file" id="prodImageFile" accept="image/*" onchange="previewImage(event)" />
-                                <img class="image-preview" id="imagePreview" alt="پیش‌نمایش" />
-                            </div>
-                            <input type="hidden" id="prodImageUrl" />
-                        </div>
-                        <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> افزودن محصول</button>
-                    </form>
-                </div>
-
-                <div id="sellerTabList" style="display:none;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                        <span style="font-weight:600; font-size:0.85rem;">تعداد: <span id="sellerProductCount">۰</span></span>
-                        <span style="font-size:0.7rem; color:#888;">ویرایش / حذف</span>
-                    </div>
-                    <div class="product-list" id="sellerProductList"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================
-    CART PANEL
-    ============================================================ -->
-    <div class="cart-overlay" id="cartOverlay">
-        <div class="cart-panel">
-            <div class="cart-header">
-                <div class="header-left">
-                    <button class="back-home" onclick="closeCart()"><i class="fas fa-arrow-right"></i> برگشت</button>
-                    <h2><i class="fas fa-shopping-cart" style="color:#ffb300;"></i> سبد خرید</h2>
-                </div>
-                <button class="close-cart" onclick="closeCart()">&times;</button>
-            </div>
-            <div id="cartItemsContainer">
-                <div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>سبد خرید خالی است</p></div>
-            </div>
-
-            <!-- جمع خودکار قیمت با هزینه پست -->
-            <div id="cartSummaryContainer" style="display:none;">
-                <div class="cart-summary">
-                    <div class="row">
-                        <span>مجموع محصولات</span>
-                        <span id="cartSubtotal">۰ تومان</span>
-                    </div>
-                    <div class="row">
-                        <span>هزینه ارسال</span>
-                        <span class="shipping-cost" id="cartShipping">۱۲۰٬۰۰۰ تومان</span>
-                    </div>
-                    <div class="row" id="freeShippingRow" style="display:none;">
-                        <span><i class="fas fa-gift" style="color:#2e7d32;"></i> ارسال رایگان</span>
-                        <span class="free-shipping">رایگان</span>
-                    </div>
-                    <div class="row total">
-                        <span>مبلغ قابل پرداخت</span>
-                        <span id="cartTotalFinal">۰ تومان</span>
-                    </div>
-                </div>
-
-                <div class="secure-badge">
-                    <i class="fas fa-shield-alt"></i>
-                    پرداخت از درگاه زرین‌پال - امن و مطمئن
-                </div>
-            </div>
-
-            <button class="checkout-btn" onclick="openCheckout()"><i class="fas fa-credit-card"></i> تکمیل خرید</button>
-        </div>
-    </div>
-
-
     <script>
         // ============================================================
-        // 🔑 تنظیمات متمرکز - تمام API Key ها اینجا
+        // 🔑 تنظیمات
         // ============================================================
+        const ADMIN_PASSWORD = 'BitVolt@2026#Secure$GGVolt!';
+        const ADMIN_SECRET = 'admin123';
+        const SMS_OTP_EXPIRE = 180;
 
-        // ---------- تنظیمات پیامک (sms.ir) ----------
-        const SMS_CONFIG = {
-            apiKey: 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG', // <--- کلید sms.ir خود را اینجا بگذارید
-            templateId: 958264, // <--- آیدی قالب sms.ir خود را وارد کنید
-            sender: '09107484214' // <--- شماره خط sms.ir خود را وارد کنید
-        };
-
-        // ---------- تنظیمات زرین‌پال ----------
-        const ZARINPAL_CONFIG = {
-            merchantId: 'YOUR_MERCHANT_ID', // <--- Merchant ID زرین‌پال خود را اینجا بگذارید
-            sandbox: true, // true = تست | false = واقعی
-            callbackUrl: window.location.href + '?payment=callback'
-        };
-
-        // ---------- رمز پنل فروشنده ----------
-        const SELLER_PASSWORD = 'BitVolt@2026#Secure$GGVolt!';
-
-        // ---------- هزینه ارسال ----------
-        const SHIPPING_COST = 120000; // هزینه پست ۱۲۰ هزار تومان
-        const FREE_SHIPPING_MIN = 1000000; // ارسال رایگان بالای ۱ میلیون
+        let SHIPPING_COST = 120000;
+        let FREE_SHIPPING_MIN = 1000000;
 
         // ============================================================
         // 📦 داده‌ها
@@ -2222,15 +1840,83 @@
         let users = {};
         let orders = {};
         let userAddresses = {};
+        let comments = [];
         let currentCategory = 'all';
         let currentProductId = null;
         let isLoggedIn = false;
         let currentUser = null;
         let generatedCode = '';
         let otpTimerInterval = null;
-        let otpSeconds = 120;
+        let otpSeconds = SMS_OTP_EXPIRE;
         let currentPage = 'home';
-        let pendingTotal = 0;
+
+        // ============================================================
+        // 🏙️ شهرها
+        // ============================================================
+        const citiesData = {
+            'تهران': ['تهران', 'ری', 'ورامین', 'شهریار', 'قدس', 'ملارد', 'اسلامشهر', 'قرچک', 'پاکدشت', 'دماوند', 'فیروزکوه'],
+            'اصفهان': ['اصفهان', 'کاشان', 'خمینی‌شهر', 'نجف‌آباد', 'شاهین‌شهر', 'مبارکه', 'فلاورجان', 'گلپایگان', 'نائین', 'سمیرم'],
+            'فارس': ['شیراز', 'مرودشت', 'کازرون', 'لارستان', 'جهرم', 'فسا', 'داراب', 'اقلید', 'نی‌ریز', 'استهبان'],
+            'خراسان رضوی': ['مشهد', 'نیشابور', 'سبزوار', 'تربت‌حیدریه', 'کاشمر', 'قوچان', 'چناران', 'فریمان', 'سرخس', 'درگز'],
+            'آذربایجان شرقی': ['تبریز', 'مراغه', 'مرند', 'اهر', 'بستان‌آباد', 'عجب‌شیر', 'آذرشهر', 'اسکو', 'سهند', 'خسروشاه'],
+            'قزوین': ['قزوین', 'تاکستان', 'الوند', 'آبیک', 'محمدیه', 'بویین‌زهرا'],
+            'گیلان': ['رشت', 'انزلی', 'لاهیجان', 'تالش', 'آستارا', 'رودسر', 'رودبار', 'فومن', 'صومعه‌سرا', 'آستانه'],
+            'مازندران': ['ساری', 'بابل', 'آمل', 'قائم‌شهر', 'نوشهر', 'چالوس', 'تنکابن', 'رامسر', 'نور', 'بهشهر', 'جویبار'],
+            'البرز': ['کرج', 'نظرآباد', 'طالقان', 'اشتهارد', 'فردیس', 'ساوجبلاغ'],
+            'کرمان': ['کرمان', 'رفسنجان', 'سیرجان', 'جیرفت', 'بم', 'زرند', 'کهنوج', 'شهر بابک', 'بافت', 'رودبار جنوب'],
+            'هرمزگان': ['بندرعباس', 'قشم', 'کیش', 'لار', 'میناب', 'حاجی‌آباد', 'جاسک', 'بستک', 'بندرلنگه'],
+            'یزد': ['یزد', 'اردکان', 'میبد', 'مهریز', 'بافق', 'ابرکوه', 'اشکذر', 'تفت', 'خاتم'],
+            'سمنان': ['سمنان', 'شاهرود', 'دامغان', 'گرمسار', 'سرخه', 'میامی', 'ایوانکی'],
+            'زنجان': ['زنجان', 'ابهر', 'خرم‌دره', 'ماه‌نشان', 'سلطانیه', 'طارم'],
+            'اردبیل': ['اردبیل', 'پارس‌آباد', 'مشگین‌شهر', 'خلخال', 'گرمی', 'بیله‌سوار', 'نمین'],
+            'کردستان': ['سنندج', 'سقز', 'مریوان', 'بانه', 'دیواندره', 'کامیاران', 'بیجار', 'دهگلان', 'قروه'],
+            'کرمانشاه': ['کرمانشاه', 'اسلام‌آباد', 'سنقر', 'هرسین', 'صحنه', 'پاوه', 'گیلانغرب', 'جوانرود', 'سرپل‌ذهاب'],
+            'لرستان': ['خرم‌آباد', 'بروجرد', 'دورود', 'الیگودرز', 'کوهدشت', 'ازنا', 'نورآباد', 'پلدختر', 'الشتر'],
+            'خوزستان': ['اهواز', 'آبادان', 'خرمشهر', 'دزفول', 'اندیمشک', 'شوشتر', 'بهبهان', 'ایذه', 'مسجدسلیمان', 'رامهرمز'],
+            'بوشهر': ['بوشهر', 'برازجان', 'گناوه', 'خارک', 'دشتستان', 'دشتی', 'تنگستان', 'جم', 'کنگان', 'دیلم'],
+            'همدان': ['همدان', 'ملایر', 'نهاوند', 'تویسرکان', 'اسدآباد', 'کبودرآهنگ', 'رزن', 'فامنین', 'بهار'],
+            'مرکزی': ['اراک', 'ساوه', 'خمین', 'محلات', 'دلیجان', 'زرندیه', 'شازند', 'تفرش', 'خنداب'],
+            'چهارمحال و بختیاری': ['شهرکرد', 'بروجن', 'فارسان', 'اردل', 'لردگان', 'بن', 'کیار'],
+            'کهگیلویه و بویراحمد': ['یاسوج', 'دهدشت', 'دوگنبدان', 'چرام', 'لنده', 'باشت'],
+            'سیستان و بلوچستان': ['زاهدان', 'ایرانشهر', 'چابهار', 'خاش', 'زابل', 'سراوان', 'کنارک', 'نیكشهر', 'راسک'],
+            'خراسان جنوبی': ['بیرجند', 'قاین', 'فردوس', 'طبس', 'نهبندان', 'درمیان', 'سربیشه'],
+            'خراسان شمالی': ['بجنورد', 'شیروان', 'اسفراین', 'جاجرم', 'مانه', 'سملقان', 'گرمه'],
+            'گلستان': ['گرگان', 'گنبدکاووس', 'بندرترکمن', 'آق‌قلا', 'علی‌آباد', 'کردکوی', 'رامیان', 'کلاله', 'مینودشت'],
+            'ایلام': ['ایلام', 'دهلران', 'ایوان', 'ملکشاهی', 'مهران', 'دره‌شهر', 'آبدانان'],
+            'قم': ['قم', 'کهک', 'جعفریه', 'سلفچگان']
+        };
+
+        function updateCities() {
+            const province = document.getElementById('checkoutProvince').value;
+            const citySelect = document.getElementById('checkoutCity');
+            citySelect.innerHTML = '<option value="">انتخاب شهر...</option>';
+            if (province && citiesData[province]) {
+                citiesData[province].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        }
+
+        // ============================================================
+        // 🔍 تابع بررسی کد مخفی ادمین
+        // ============================================================
+        function checkAdminSecret(value) {
+            const hint = document.getElementById('adminHint');
+            if (value === ADMIN_SECRET) {
+                hint.style.display = 'inline-block';
+                setTimeout(() => {
+                    hint.style.display = 'none';
+                    openAdminPanel();
+                    document.getElementById('searchInput').value = '';
+                }, 800);
+            } else {
+                hint.style.display = 'none';
+                filterProducts();
+            }
+        }
 
         // ============================================================
         // 💾 بارگذاری داده‌ها
@@ -2242,12 +1928,12 @@
             }
             if (products.length === 0) {
                 products = [
-                    { id: 1, name: 'ماژول ولت GG-1000', category: 'ماژول ولت', price: 145000, description: 'ماژول ولت سنج با دقت بالا و صفحه نمایش OLED...', image: 'https://via.placeholder.com/400x300?text=GG+Volt+1000', rating: 4.8 },
+                    { id: 1, name: 'ماژول ولت BitVolt-1000', category: 'ماژول ولت', price: 145000, description: 'ماژول ولت سنج با دقت بالا و صفحه نمایش OLED...', image: 'https://via.placeholder.com/400x300?text=BitVolt+1000', rating: 4.8 },
                     { id: 2, name: 'برد آردوینو مگا ۲۵۶۰', category: 'میکروکنترلر', price: 320000, description: 'برد آردوینو مگا با ۵۴ پایه ورودی/خروجی...', image: 'https://via.placeholder.com/400x300?text=Arduino+Mega', rating: 4.9 },
-                    { id: 3, name: 'سنسور دما DS18B20', category: 'سنسور', price: 65000, description: 'سنسور دمای دیجیتال با دقت ۰.۵ درجه سانتیگراد...', image: 'https://via.placeholder.com/400x300?text=DS18B20', rating: 4.6 },
-                    { id: 4, name: 'پاوربانک ۳۰۰۰۰mAh GG', category: 'منبع تغذیه', price: 490000, description: 'پاوربانک با ظرفیت ۳۰۰۰۰ میلی‌آمپر ساعت...', image: 'https://via.placeholder.com/400x300?text=PowerBank+GG', rating: 4.7 },
-                    { id: 5, name: 'مولتی‌متر حرفه‌ای BM-990', category: 'ابزار دقیق', price: 780000, description: 'مولتی‌متر دیجیتال با دقت بالا و صفحه نمایش بزرگ...', image: 'https://via.placeholder.com/400x300?text=Multimeter+Pro', rating: 4.9 },
-                    { id: 6, name: 'کیت آموزشی الکترونیک GG', category: 'رباتیک', price: 630000, description: 'کیت کامل آموزشی شامل آردوینو، سنسورها و...', image: 'https://via.placeholder.com/400x300?text=Education+Kit', rating: 4.5 }
+                    { id: 3, name: 'سنسور دما DS18B20', category: 'سنسور', price: 65000, description: 'سنسور دمای دیجیتال با دقت ۰.۵ درجه...', image: 'https://via.placeholder.com/400x300?text=DS18B20', rating: 4.6 },
+                    { id: 4, name: 'پاوربانک ۳۰۰۰۰mAh BitVolt', category: 'منبع تغذیه', price: 490000, description: 'پاوربانک با ظرفیت ۳۰۰۰۰ میلی‌آمپر ساعت...', image: 'https://via.placeholder.com/400x300?text=PowerBank+BitVolt', rating: 4.7 },
+                    { id: 5, name: 'مولتی‌متر حرفه‌ای BM-990', category: 'ابزار دقیق', price: 780000, description: 'مولتی‌متر دیجیتال با دقت بالا...', image: 'https://via.placeholder.com/400x300?text=Multimeter+Pro', rating: 4.9 },
+                    { id: 6, name: 'کیت آموزشی الکترونیک BitVolt', category: 'رباتیک', price: 630000, description: 'کیت کامل آموزشی شامل آردوینو، سنسورها و...', image: 'https://via.placeholder.com/400x300?text=Education+Kit', rating: 4.5 }
                 ];
                 saveProducts();
             }
@@ -2261,6 +1947,7 @@
 
         function updateStatProducts() {
             document.getElementById('statProducts').textContent = products.length;
+            document.getElementById('adminTotalProducts').textContent = products.length;
         }
 
         function loadUserData() {
@@ -2270,49 +1957,23 @@
             if (savedOrders) { try { orders = JSON.parse(savedOrders); } catch (e) { orders = {}; } }
             const savedAddresses = localStorage.getItem('bitvolt_addresses');
             if (savedAddresses) { try { userAddresses = JSON.parse(savedAddresses); } catch (e) { userAddresses = {}; } }
+            const savedComments = localStorage.getItem('bitvolt_comments');
+            if (savedComments) { try { comments = JSON.parse(savedComments); } catch (e) { comments = []; } }
+            updateAdminStats();
         }
 
         function saveUserData() {
             localStorage.setItem('bitvolt_users', JSON.stringify(users));
             localStorage.setItem('bitvolt_orders', JSON.stringify(orders));
             localStorage.setItem('bitvolt_addresses', JSON.stringify(userAddresses));
+            localStorage.setItem('bitvolt_comments', JSON.stringify(comments));
+            updateAdminStats();
         }
 
-        // ============================================================
-        // 📨 تابع ارسال پیامک با sms.ir
-        // ============================================================
-        async function sendSmsIr(phone, code) {
-            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'YOUR_SMS_IR_API_KEY') {
-                console.log('⚠️ API Key sms.ir وارد نشده! کد:', code);
-                return { success: true, message: 'شبیه‌سازی شده' };
-            }
-
-            try {
-                const response = await fetch('https://api.sms.ir/v1/send/verify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-KEY': SMS_CONFIG.apiKey
-                    },
-                    body: JSON.stringify({
-                        mobile: phone,
-                        templateId: SMS_CONFIG.templateId,
-                        parameters: [
-                            { name: 'CODE', value: code }
-                        ]
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.status === 1) {
-                    return { success: true, message: 'پیامک ارسال شد' };
-                } else {
-                    return { success: false, message: data.message || 'خطا در ارسال پیامک' };
-                }
-            } catch (error) {
-                return { success: false, message: error.message };
-            }
+        function updateAdminStats() {
+            document.getElementById('adminTotalOrders').textContent = Object.values(orders).reduce((a, b) => a + b.length, 0);
+            document.getElementById('adminTotalUsers').textContent = Object.keys(users).length;
+            document.getElementById('adminTotalComments').textContent = comments.filter(c => c.status === 'pending').length;
         }
 
         // ============================================================
@@ -2326,7 +1987,6 @@
                 currentPage = page;
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            closeMoreDropdown();
         }
 
         // ============================================================
@@ -2343,8 +2003,8 @@
             const productCount = document.getElementById('productCount');
             if (filtered.length === 0) {
                 grid.innerHTML =
-                    `<div style="grid-column:1/-1; text-align:center; padding:35px 20px; color:#888;">
-                        <i class="fas fa-box-open" style="font-size:2.2rem; color:#ddd; display:block; margin-bottom:8px;"></i>
+                    `<div style="grid-column:1/-1; text-align:center; padding:30px 20px; color:#888;">
+                        <i class="fas fa-box-open" style="font-size:2rem; color:#ddd; display:block; margin-bottom:8px;"></i>
                         <p style="font-size:0.9rem;">محصولی یافت نشد</p>
                     </div>`;
                 productCount.textContent = '(۰ محصول)';
@@ -2357,20 +2017,20 @@
                 card.className = 'product-card';
                 const stars = '★'.repeat(Math.floor(p.rating || 4)) + '☆'.repeat(5 - Math.floor(p.rating || 4));
                 card.innerHTML = `
-                    <span class="product-badge"><i class="fas fa-bolt"></i> ${p.category}</span>
-                    <img class="product-img" src="${p.image || 'https://via.placeholder.com/400x300?text=No+Image'}" alt="${p.name}" />
-                    <div class="product-name">${p.name}</div>
-                    <div class="product-rating"><span class="stars">${stars}</span><span class="rate-text">(${p.rating || 4.5})</span></div>
-                    <div class="product-price">${p.price.toLocaleString()} <small>تومان</small></div>
-                    <button class="add-to-cart" data-id="${p.id}"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
+                    <span class="badge"><i class="fas fa-bolt"></i> ${p.category}</span>
+                    <img class="img" src="${p.image || 'https://via.placeholder.com/400x300?text=No+Image'}" alt="${p.name}" />
+                    <div class="name">${p.name}</div>
+                    <div class="rating"><span>${stars}</span> <span style="color:#888; font-size:0.6rem;">(${p.rating || 4.5})</span></div>
+                    <div class="price">${p.price.toLocaleString()} <small>تومان</small></div>
+                    <button class="add-btn" data-id="${p.id}"><i class="fas fa-cart-plus"></i> افزودن به سبد</button>
                 `;
                 card.addEventListener('click', function(e) {
-                    if (e.target.closest('.add-to-cart')) return;
+                    if (e.target.closest('.add-btn')) return;
                     openProductModal(p.id);
                 });
                 grid.appendChild(card);
             });
-            document.querySelectorAll('.add-to-cart').forEach(btn => {
+            document.querySelectorAll('.add-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const id = parseInt(this.dataset.id);
@@ -2381,7 +2041,9 @@
 
         function filterProducts() {
             const search = document.getElementById('searchInput').value;
-            renderProducts(search, currentCategory);
+            if (search !== ADMIN_SECRET) {
+                renderProducts(search, currentCategory);
+            }
         }
 
         function setCategory(cat) {
@@ -2393,7 +2055,7 @@
         }
 
         // ============================================================
-        // 🛒 سبد خرید با جمع خودکار و هزینه پست
+        // 🛒 سبد خرید
         // ============================================================
         function addToCart(productId) {
             if (!isLoggedIn) { openAuthModal('login'); return; }
@@ -2402,7 +2064,7 @@
             const existing = cart.find(item => item.id === productId);
             if (existing) { existing.qty += 1; } else { cart.push({ ...product, qty: 1 }); }
             updateCartUI();
-            const btn = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
+            const btn = document.querySelector(`.add-btn[data-id="${productId}"]`);
             if (btn) {
                 btn.classList.add('in-cart');
                 btn.innerHTML = '<i class="fas fa-check"></i> اضافه شد';
@@ -2429,11 +2091,9 @@
                 container.innerHTML =
                     `<div class="empty-cart"><i class="fas fa-shopping-bag"></i><p>سبد خرید خالی است</p></div>`;
                 summaryContainer.style.display = 'none';
-                document.getElementById('cartTotalFinal').textContent = '۰ تومان';
                 return;
             }
 
-            // نمایش محصولات
             let html = '';
             let subtotal = 0;
             cart.forEach(item => {
@@ -2441,65 +2101,27 @@
                 subtotal += itemTotal;
                 html += `
                     <div class="cart-item">
-                        <div class="item-info">
+                        <div class="info">
                             <h4>${item.name}</h4>
                             <small>${item.qty} × ${item.price.toLocaleString()} تومان</small>
                         </div>
                         <div>
-                            <span class="item-total">${itemTotal.toLocaleString()}</span>
-                            <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button>
+                            <span class="total">${itemTotal.toLocaleString()}</span>
+                            <button class="remove" onclick="removeFromCart(${item.id})"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 `;
             });
             container.innerHTML = html;
 
-            // محاسبه هزینه ارسال
-            let shipping = 0;
-            let isFree = false;
-            if (subtotal >= FREE_SHIPPING_MIN) {
-                shipping = 0;
-                isFree = true;
-            } else {
-                shipping = SHIPPING_COST;
-            }
-            const total = subtotal + shipping;
+            let shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
+            let total = subtotal + shipping;
 
-            // نمایش خلاصه
             summaryContainer.style.display = 'block';
             document.getElementById('cartSubtotal').textContent = subtotal.toLocaleString() + ' تومان';
-
-            const shippingEl = document.getElementById('cartShipping');
-            const freeRow = document.getElementById('freeShippingRow');
-            if (isFree) {
-                shippingEl.textContent = 'رایگان';
-                shippingEl.className = 'free-shipping';
-                freeRow.style.display = 'flex';
-            } else {
-                shippingEl.textContent = shipping.toLocaleString() + ' تومان';
-                shippingEl.className = 'shipping-cost';
-                freeRow.style.display = 'none';
-            }
-
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'رایگان' : shipping.toLocaleString() +
+            ' تومان';
             document.getElementById('cartTotalFinal').textContent = total.toLocaleString() + ' تومان';
-
-            // ذخیره برای پرداخت
-            pendingTotal = total;
-        }
-
-        // ============================================================
-        // 🖱️ توابع مدیریت مودال‌ها و سبد خرید
-        // ============================================================
-        function closeAllModals() {
-            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
-            document.body.style.overflow = '';
-            closeMoreDropdown();
-        }
-
-        function openModal(modalId) {
-            closeAllModals();
-            document.getElementById(modalId).classList.add('show');
-            document.body.style.overflow = 'hidden';
         }
 
         function closeCart() {
@@ -2514,7 +2136,81 @@
         }
 
         // ============================================================
-        // 📱 احراز هویت با sms.ir
+        // 🖱️ مودال‌ها
+        // ============================================================
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
+            document.body.style.overflow = '';
+        }
+
+        function openModal(modalId) {
+            closeAllModals();
+            document.getElementById(modalId).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ============================================================
+        // 🛒 تسویه حساب
+        // ============================================================
+        function openCheckout() {
+            if (!isLoggedIn) { openAuthModal('login'); return; }
+            if (cart.length === 0) { alert('سبد خرید خالی است!'); return; }
+            closeCart();
+            openModal('checkoutModal');
+            if (userAddresses[currentUser]) {
+                document.getElementById('checkoutPhone').value = userAddresses[currentUser].phone || '';
+                document.getElementById('checkoutName').value = userAddresses[currentUser].name || '';
+                document.getElementById('checkoutProvince').value = userAddresses[currentUser].province || '';
+                if (userAddresses[currentUser].province) {
+                    updateCities();
+                    setTimeout(() => {
+                        document.getElementById('checkoutCity').value = userAddresses[currentUser].city || '';
+                    }, 100);
+                }
+                document.getElementById('checkoutAddress').value = userAddresses[currentUser].full || '';
+            }
+        }
+
+        function confirmCheckout() {
+            const phone = document.getElementById('checkoutPhone').value.trim();
+            const name = document.getElementById('checkoutName').value.trim();
+            const province = document.getElementById('checkoutProvince').value;
+            const city = document.getElementById('checkoutCity').value;
+            const address = document.getElementById('checkoutAddress').value.trim();
+
+            if (!phone || phone.length < 11) { alert('⚠️ شماره تماس معتبر وارد کنید'); return; }
+            if (!name) { alert('⚠️ نام گیرنده را وارد کنید'); return; }
+            if (!province) { alert('⚠️ استان را انتخاب کنید'); return; }
+            if (!city) { alert('⚠️ شهر را انتخاب کنید'); return; }
+            if (!address) { alert('⚠️ آدرس کامل را وارد کنید'); return; }
+
+            userAddresses[currentUser] = { phone, name, province, city, full: address };
+            saveUserData();
+            closeAllModals();
+
+            const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
+            if (!orders[currentUser]) orders[currentUser] = [];
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
+            orders[currentUser].push({
+                id: orderId,
+                items: JSON.parse(JSON.stringify(cart)),
+                subtotal: subtotal,
+                shipping: shipping,
+                total: subtotal + shipping,
+                date: new Date().toLocaleDateString('fa-IR'),
+                status: 'processing',
+                address: userAddresses[currentUser]
+            });
+            saveUserData();
+            cart = [];
+            updateCartUI();
+            alert('✅ سفارش شما با موفقیت ثبت شد!\nکد پیگیری: ' + orderId);
+            updateAdminStats();
+        }
+
+        // ============================================================
+        // 📱 احراز هویت
         // ============================================================
         let authMode = 'login';
 
@@ -2549,7 +2245,7 @@
             document.getElementById('authSendCodeBtn').innerHTML = '<i class="fas fa-paper-plane"></i> ارسال کد تایید';
         }
 
-        document.getElementById('authSendCodeBtn').addEventListener('click', async function() {
+        document.getElementById('authSendCodeBtn').addEventListener('click', function() {
             const phone = document.getElementById('authPhone').value.trim();
             if (!phone || phone.length !== 11) {
                 document.getElementById('authError').style.display = 'block';
@@ -2558,36 +2254,30 @@
             }
             document.getElementById('authError').style.display = 'none';
             generatedCode = String(Math.floor(100000 + Math.random() * 900000));
+            console.log('📱 کد تایید برای ' + phone + ': ' + generatedCode);
+            alert('📱 کد تایید: ' + generatedCode + '\n(شبیه‌سازی شده)');
 
-            // ارسال با sms.ir
-            const result = await sendSmsIr(phone, generatedCode);
-
-            if (result.success) {
-                document.getElementById('displayPhone').textContent = phone;
-                document.getElementById('authStep1').style.display = 'none';
-                document.getElementById('authStep2').style.display = 'block';
-                setTimeout(() => { document.getElementById('authStep2').classList.add('show'); }, 50);
-                document.getElementById('authOtp').value = '';
-                document.getElementById('authOtpError').style.display = 'none';
-                document.getElementById('authOtpSuccess').style.display = 'none';
-                otpSeconds = 120;
+            document.getElementById('displayPhone').textContent = phone;
+            document.getElementById('authStep1').style.display = 'none';
+            document.getElementById('authStep2').style.display = 'block';
+            setTimeout(() => { document.getElementById('authStep2').classList.add('show'); }, 50);
+            document.getElementById('authOtp').value = '';
+            document.getElementById('authOtpError').style.display = 'none';
+            document.getElementById('authOtpSuccess').style.display = 'none';
+            otpSeconds = SMS_OTP_EXPIRE;
+            document.getElementById('otpTimer').textContent = otpSeconds;
+            if (otpTimerInterval) clearInterval(otpTimerInterval);
+            otpTimerInterval = setInterval(() => {
+                otpSeconds--;
                 document.getElementById('otpTimer').textContent = otpSeconds;
-                if (otpTimerInterval) clearInterval(otpTimerInterval);
-                otpTimerInterval = setInterval(() => {
-                    otpSeconds--;
-                    document.getElementById('otpTimer').textContent = otpSeconds;
-                    if (otpSeconds <= 0) {
-                        clearInterval(otpTimerInterval);
-                        document.getElementById('authResendBtn').style.color = '#ffb300';
-                        document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
-                        document.getElementById('authOtpError').style.display = 'block';
-                        document.getElementById('authOtpError').textContent = 'زمان کد منقضی شد. مجدداً درخواست کنید.';
-                    }
-                }, 1000);
-            } else {
-                document.getElementById('authError').style.display = 'block';
-                document.getElementById('authError').textContent = '❌ خطا: ' + result.message;
-            }
+                if (otpSeconds <= 0) {
+                    clearInterval(otpTimerInterval);
+                    document.getElementById('authResendBtn').style.color = '#ffb300';
+                    document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
+                    document.getElementById('authOtpError').style.display = 'block';
+                    document.getElementById('authOtpError').textContent = 'زمان کد منقضی شد. مجدداً درخواست کنید.';
+                }
+            }, 1000);
         });
 
         document.getElementById('authVerifyBtn').addEventListener('click', function() {
@@ -2600,7 +2290,8 @@
                 if (!users[phone]) { users[phone] = { phone: phone, registeredAt: new Date().toISOString() }; }
                 isLoggedIn = true;
                 currentUser = phone;
-                document.getElementById('authLinks').style.display = 'none';
+                document.getElementById('authBtnText').textContent = 'خوش آمدید';
+                document.getElementById('authMainBtn').style.display = 'none';
                 document.getElementById('userInfo').style.display = 'flex';
                 const displayName = phone.slice(0, 4) + '***' + phone.slice(-4);
                 document.getElementById('userDisplayName').textContent = displayName;
@@ -2617,38 +2308,33 @@
             }
         });
 
-        document.getElementById('authResendBtn').addEventListener('click', async function() {
+        document.getElementById('authResendBtn').addEventListener('click', function() {
             const phone = document.getElementById('authPhone').value.trim();
             if (otpSeconds > 0 && generatedCode) {
-                const result = await sendSmsIr(phone, generatedCode);
-                if (result.success) {
-                    document.getElementById('authOtpError').style.display = 'none';
-                    document.getElementById('authOtpSuccess').style.display = 'block';
-                    document.getElementById('authOtpSuccess').textContent = '✅ کد مجدداً ارسال شد';
-                    setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
-                }
+                console.log('📱 کد مجدداً ارسال شد: ' + generatedCode);
+                alert('📱 کد مجدداً ارسال شد: ' + generatedCode);
+                document.getElementById('authOtpSuccess').style.display = 'block';
+                document.getElementById('authOtpSuccess').textContent = '✅ کد مجدداً ارسال شد';
+                setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
             } else {
                 generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-                const result = await sendSmsIr(phone, generatedCode);
-                if (result.success) {
-                    otpSeconds = 120;
+                console.log('📱 کد جدید ارسال شد: ' + generatedCode);
+                alert('📱 کد جدید ارسال شد: ' + generatedCode);
+                otpSeconds = SMS_OTP_EXPIRE;
+                document.getElementById('otpTimer').textContent = otpSeconds;
+                if (otpTimerInterval) clearInterval(otpTimerInterval);
+                otpTimerInterval = setInterval(() => {
+                    otpSeconds--;
                     document.getElementById('otpTimer').textContent = otpSeconds;
-                    if (otpTimerInterval) clearInterval(otpTimerInterval);
-                    otpTimerInterval = setInterval(() => {
-                        otpSeconds--;
-                        document.getElementById('otpTimer').textContent = otpSeconds;
-                        if (otpSeconds <= 0) {
-                            clearInterval(otpTimerInterval);
-                            document.getElementById('authResendBtn').style.color = '#ffb300';
-                            document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
-                        }
-                    }, 1000);
-                    document.getElementById('authOtpSuccess').style.display = 'block';
-                    document.getElementById('authOtpSuccess').textContent = '✅ کد جدید ارسال شد';
-                    setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
-                } else {
-                    alert('❌ خطا در ارسال مجدد: ' + result.message);
-                }
+                    if (otpSeconds <= 0) {
+                        clearInterval(otpTimerInterval);
+                        document.getElementById('authResendBtn').style.color = '#ffb300';
+                        document.getElementById('authResendBtn').textContent = 'ارسال مجدد کد';
+                    }
+                }, 1000);
+                document.getElementById('authOtpSuccess').style.display = 'block';
+                document.getElementById('authOtpSuccess').textContent = '✅ کد جدید ارسال شد';
+                setTimeout(() => { document.getElementById('authOtpSuccess').style.display = 'none'; }, 3000);
             }
             document.getElementById('authOtpError').style.display = 'none';
         });
@@ -2663,7 +2349,8 @@
         function logoutUser() {
             isLoggedIn = false;
             currentUser = null;
-            document.getElementById('authLinks').style.display = 'block';
+            document.getElementById('authBtnText').textContent = 'ورود / ثبت‌نام';
+            document.getElementById('authMainBtn').style.display = 'flex';
             document.getElementById('userInfo').style.display = 'none';
             localStorage.removeItem('bitvolt_user');
             cart = [];
@@ -2680,7 +2367,8 @@
             if (savedUser && users[savedUser]) {
                 isLoggedIn = true;
                 currentUser = savedUser;
-                document.getElementById('authLinks').style.display = 'none';
+                document.getElementById('authBtnText').textContent = 'خوش آمدید';
+                document.getElementById('authMainBtn').style.display = 'none';
                 document.getElementById('userInfo').style.display = 'flex';
                 const displayName = savedUser.slice(0, 4) + '***' + savedUser.slice(-4);
                 document.getElementById('userDisplayName').textContent = displayName;
@@ -2697,7 +2385,8 @@
             if (userAddresses[currentUser]) {
                 msg += '📍 آدرس:\n';
                 msg += 'نام: ' + (userAddresses[currentUser].name || '') + '\n';
-                msg += 'تلفن: ' + (userAddresses[currentUser].phone || '') + '\n';
+                msg += 'استان: ' + (userAddresses[currentUser].province || '') + '\n';
+                msg += 'شهر: ' + (userAddresses[currentUser].city || '') + '\n';
                 msg += 'آدرس: ' + (userAddresses[currentUser].full || '') + '\n\n';
             } else {
                 msg += '⚠️ آدرسی ثبت نشده است\n\n';
@@ -2730,7 +2419,7 @@
             document.getElementById('modalDesc').textContent = product.description || 'توضیحاتی برای این محصول ثبت نشده است.';
             document.getElementById('modalMeta').innerHTML = `
                 <span><i class="fas fa-tag"></i> دسته: ${product.category}</span>
-                <span><i class="fas fa-bolt"></i> برند: GG Volt</span>
+                <span><i class="fas fa-bolt"></i> برند: BitVolt</span>
                 <span><i class="fas fa-microchip"></i> کد: BTV-${String(product.id).padStart(4, '0')}</span>
                 <span><i class="fas fa-star"></i> امتیاز: ${product.rating || 4.5}</span>
             `;
@@ -2744,157 +2433,81 @@
         });
 
         // ============================================================
-        // 💳 فرایند پرداخت با زرین‌پال
+        // 👑 پنل ادمین
         // ============================================================
-        function openCheckout() {
-            if (!isLoggedIn) { openAuthModal('login'); return; }
-            if (cart.length === 0) { alert('سبد خرید خالی است!'); return; }
-            closeCart();
-            openModal('checkoutModal');
-            if (userAddresses[currentUser]) {
-                document.getElementById('checkoutPhone').value = userAddresses[currentUser].phone || '';
-                document.getElementById('checkoutName').value = userAddresses[currentUser].name || '';
-                document.getElementById('checkoutAddress').value = userAddresses[currentUser].full || '';
-            } else {
-                document.getElementById('checkoutPhone').value = '';
-                document.getElementById('checkoutName').value = '';
-                document.getElementById('checkoutAddress').value = '';
+        function openAdminPanel() {
+            const password = prompt('🔑 برای ورود به پنل مدیریت، رمز عبور را وارد کنید:');
+            if (password === ADMIN_PASSWORD) {
+                navigateTo('admin');
+                updateAdminStats();
+                document.getElementById('adminTotalProducts').textContent = products.length;
+                renderAdminProducts();
+                renderAdminOrders();
+                renderAdminUsers();
+                renderAdminComments();
+            } else if (password !== null) {
+                alert('❌ رمز عبور اشتباه است!');
             }
         }
 
-        function confirmCheckout() {
-            const phone = document.getElementById('checkoutPhone').value.trim();
-            const name = document.getElementById('checkoutName').value.trim();
-            const address = document.getElementById('checkoutAddress').value.trim();
-            if (!phone || phone.length < 11) { alert('⚠️ شماره تماس معتبر وارد کنید'); return; }
-            if (!name) { alert('⚠️ نام گیرنده را وارد کنید'); return; }
-            if (!address) { alert('⚠️ آدرس کامل را وارد کنید'); return; }
-            userAddresses[currentUser] = { phone, name, full: address };
-            saveUserData();
-            closeAllModals();
-            openPaymentModal();
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.remove('active'));
+            const tabs = document.querySelectorAll('.admin-tabs button');
+            const map = {
+                'products': 0,
+                'orders': 1,
+                'users': 2,
+                'comments': 3
+            };
+            if (tabs[map[tab]]) tabs[map[tab]].classList.add('active');
+            document.getElementById('adminProducts').style.display = tab === 'products' ? 'block' : 'none';
+            document.getElementById('adminOrders').style.display = tab === 'orders' ? 'block' : 'none';
+            document.getElementById('adminUsers').style.display = tab === 'users' ? 'block' : 'none';
+            document.getElementById('adminComments').style.display = tab === 'comments' ? 'block' : 'none';
+            if (tab === 'products') renderAdminProducts();
+            if (tab === 'orders') renderAdminOrders();
+            if (tab === 'users') renderAdminUsers();
+            if (tab === 'comments') renderAdminComments();
         }
 
-        function openPaymentModal() {
-            openModal('paymentModal');
-
-            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            let shipping = subtotal >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
-            let total = subtotal + shipping;
-
-            document.getElementById('paymentAmount').textContent = total.toLocaleString() + ' تومان';
-            document.getElementById('paymentTotalDisplay').textContent = total.toLocaleString() + ' تومان';
-            document.getElementById('paymentShippingDisplay').textContent = shipping === 0 ? 'رایگان' : shipping
-            .toLocaleString() + ' تومان';
-
-            const code = 'ZP-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
-            document.getElementById('paymentCode').textContent = code;
-
-            document.getElementById('paymentLoading').classList.remove('show');
-            document.getElementById('paymentButtons').style.display = 'block';
-            document.getElementById('paymentStatus').className = 'payment-status';
-            document.getElementById('paymentStatus').style.display = 'none';
-        }
-
-        function processPayment() {
-            document.getElementById('paymentButtons').style.display = 'none';
-            document.getElementById('paymentLoading').classList.add('show');
-
-            setTimeout(() => {
-                document.getElementById('paymentLoading').classList.remove('show');
-                if (isLoggedIn && cart.length > 0) {
-                    const orderId = 'ORD-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 10000);
-                    if (!orders[currentUser]) orders[currentUser] = [];
-                    const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                    const shipping = total >= FREE_SHIPPING_MIN ? 0 : SHIPPING_COST;
-                    orders[currentUser].push({
-                        id: orderId,
-                        items: JSON.parse(JSON.stringify(cart)),
-                        subtotal: total,
-                        shipping: shipping,
-                        total: total + shipping,
-                        date: new Date().toLocaleDateString('fa-IR'),
-                        status: 'processing',
-                        address: userAddresses[currentUser] || {}
-                    });
-                    saveUserData();
-                    cart = [];
-                    updateCartUI();
-                }
-                const statusEl = document.getElementById('paymentStatus');
-                statusEl.className = 'payment-status success';
-                statusEl.textContent = '✅ پرداخت با موفقیت انجام شد! سفارش شما ثبت گردید.';
-                statusEl.style.display = 'block';
-
-                setTimeout(() => {
-                    closeAllModals();
-                    alert('✅ پرداخت با زرین‌پال با موفقیت انجام شد!\nسفارش شما ثبت گردید.');
-                    showDashboard();
-                }, 1500);
-            }, 3000);
-        }
-
-        // ============================================================
-        // 🏪 پنل فروشنده
-        // ============================================================
-        function openSellerPanel() {
-            closeAllModals();
-            openModal('sellerModal');
-            document.getElementById('sellerLoginSection').style.display = 'block';
-            document.getElementById('sellerPanelContent').style.display = 'none';
-            document.getElementById('sellerPasswordInput').value = '';
-            document.getElementById('sellerLoginError').style.display = 'none';
-        }
-
-        function loginSeller() {
-            const password = document.getElementById('sellerPasswordInput').value;
-            if (password === SELLER_PASSWORD) {
-                document.getElementById('sellerLoginSection').style.display = 'none';
-                document.getElementById('sellerPanelContent').style.display = 'block';
-                document.getElementById('sellerLoginError').style.display = 'none';
-                renderSellerProductList();
-                switchSellerTab('add');
-            } else {
-                document.getElementById('sellerLoginError').style.display = 'block';
+        function renderAdminProducts() {
+            const list = document.getElementById('adminProductList');
+            if (products.length === 0) {
+                list.innerHTML =
+                `<tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">محصولی وجود ندارد</td></tr>`;
+                return;
             }
+            let html = '';
+            products.forEach(p => {
+                html += `
+                    <tr>
+                        <td><img src="${p.image || 'https://via.placeholder.com/50x50?text=No+Image'}" style="width:35px; height:35px; object-fit:cover; border-radius:6px;" /></td>
+                        <td><strong>${p.name}</strong></td>
+                        <td>${p.category}</td>
+                        <td>${p.price.toLocaleString()} تومان</td>
+                        <td>
+                            <div class="actions">
+                                <button class="edit" onclick="editProductAdmin(${p.id})"><i class="fas fa-edit"></i></button>
+                                <button class="delete" onclick="deleteProductAdmin(${p.id})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            list.innerHTML = html;
         }
 
-        function logoutSeller() {
-            document.getElementById('sellerLoginSection').style.display = 'block';
-            document.getElementById('sellerPanelContent').style.display = 'none';
-            document.getElementById('sellerPasswordInput').value = '';
-            document.getElementById('sellerLoginError').style.display = 'none';
+        function showAddProduct() {
+            openModal('addProductModal');
         }
 
-        function switchSellerTab(tab) {
-            document.getElementById('tabAdd').classList.toggle('active', tab === 'add');
-            document.getElementById('tabList').classList.toggle('active', tab === 'list');
-            document.getElementById('sellerTabAdd').style.display = tab === 'add' ? 'block' : 'none';
-            document.getElementById('sellerTabList').style.display = tab === 'list' ? 'block' : 'none';
-            if (tab === 'list') renderSellerProductList();
-        }
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = e.target.result;
-                    preview.classList.add('show');
-                    document.getElementById('prodImageUrl').value = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function addProductFromSeller(e) {
+        function addProductFromAdmin(e) {
             e.preventDefault();
-            const name = document.getElementById('prodName').value.trim();
-            const category = document.getElementById('prodCategory').value;
-            const price = parseInt(document.getElementById('prodPrice').value);
-            const description = document.getElementById('prodDesc').value.trim();
-            const image = document.getElementById('prodImageUrl').value || 'https://via.placeholder.com/400x300?text=GG+Volt+Product';
+            const name = document.getElementById('adminProdName').value.trim();
+            const category = document.getElementById('adminProdCategory').value;
+            const price = parseInt(document.getElementById('adminProdPrice').value);
+            const description = document.getElementById('adminProdDesc').value.trim();
+            const image = document.getElementById('adminProdImage').value.trim() || 'https://via.placeholder.com/400x300?text=BitVolt+Product';
 
             if (!name || !price || !description) {
                 alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
@@ -2914,45 +2527,13 @@
             products.push(newProduct);
             saveProducts();
             renderProducts(document.getElementById('searchInput').value, currentCategory);
+            renderAdminProducts();
             document.getElementById('addProductForm').reset();
-            document.getElementById('imagePreview').classList.remove('show');
-            document.getElementById('prodImageUrl').value = '';
+            closeAllModals();
             alert('✅ محصول جدید با موفقیت اضافه شد!');
-            renderSellerProductList();
         }
 
-        function renderSellerProductList() {
-            const list = document.getElementById('sellerProductList');
-            const count = document.getElementById('sellerProductCount');
-            count.textContent = products.length;
-
-            if (products.length === 0) {
-                list.innerHTML = `<p style="text-align:center; color:#888; padding:15px; font-size:0.85rem;">هیچ محصولی ثبت نشده است</p>`;
-                return;
-            }
-
-            let html = '';
-            products.forEach(p => {
-                html += `
-                    <div class="product-list-item">
-                        <div class="item-info">
-                            <img src="${p.image || 'https://via.placeholder.com/60x60?text=No+Image'}" alt="${p.name}" />
-                            <div>
-                                <div class="name">${p.name}</div>
-                                <div class="price">${p.price.toLocaleString()} تومان | ${p.category}</div>
-                            </div>
-                        </div>
-                        <div class="item-actions">
-                            <button class="edit-btn" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i></button>
-                            <button class="delete-btn" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-            list.innerHTML = html;
-        }
-
-        function editProduct(id) {
+        function editProductAdmin(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
             const newName = prompt('✏️ نام جدید:', product.name);
@@ -2965,45 +2546,168 @@
             if (newDesc && newDesc.trim()) product.description = newDesc.trim();
             saveProducts();
             renderProducts(document.getElementById('searchInput').value, currentCategory);
-            renderSellerProductList();
+            renderAdminProducts();
             alert('✅ محصول با موفقیت ویرایش شد!');
         }
 
-        function deleteProduct(id) {
+        function deleteProductAdmin(id) {
             if (confirm('⚠️ آیا از حذف این محصول اطمینان دارید؟')) {
                 products = products.filter(p => p.id !== id);
                 saveProducts();
                 renderProducts(document.getElementById('searchInput').value, currentCategory);
-                renderSellerProductList();
+                renderAdminProducts();
                 alert('✅ محصول با موفقیت حذف شد!');
             }
         }
 
-        // ============================================================
-        // 🔽 سه‌نقطه
-        // ============================================================
-        function toggleMoreDropdown() {
-            document.getElementById('moreDropdown').classList.toggle('show');
-        }
-
-        function closeMoreDropdown() {
-            document.getElementById('moreDropdown').classList.remove('show');
-        }
-
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.more-wrapper')) {
-                closeMoreDropdown();
-            }
-        });
-
-        // ============================================================
-        // ❌ بستن مودال‌ها با کلیک خارج
-        // ============================================================
-        document.querySelectorAll('.modal-overlay').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) closeAllModals();
+        function renderAdminOrders() {
+            const list = document.getElementById('adminOrderList');
+            let allOrders = [];
+            Object.entries(orders).forEach(([user, userOrders]) => {
+                userOrders.forEach(order => {
+                    allOrders.push({ ...order, user: user });
+                });
             });
-        });
+            if (allOrders.length === 0) {
+                list.innerHTML =
+                `<tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">سفارشی وجود ندارد</td></tr>`;
+                return;
+            }
+            let html = '';
+            allOrders.slice().reverse().forEach(order => {
+                const statusMap = { 'processing': 'در حال پردازش', 'shipped': 'ارسال شده', 'delivered': 'تحویل داده شده' };
+                const statusClass = { 'processing': 'warning', 'shipped': 'success', 'delivered': 'success' };
+                html += `
+                    <tr>
+                        <td><strong>${order.id}</strong></td>
+                        <td>${order.user}</td>
+                        <td>${order.total.toLocaleString()} تومان</td>
+                        <td><span class="badge-status ${statusClass[order.status] || 'warning'}">${statusMap[order.status] || 'در حال پردازش'}</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="edit" onclick="updateOrderStatus('${order.id}')"><i class="fas fa-edit"></i></button>
+                                <button class="delete" onclick="deleteOrderAdmin('${order.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        function updateOrderStatus(orderId) {
+            const newStatus = prompt('وضعیت جدید (processing/shipped/delivered):', 'processing');
+            if (newStatus && ['processing', 'shipped', 'delivered'].includes(newStatus)) {
+                Object.values(orders).forEach(userOrders => {
+                    userOrders.forEach(order => {
+                        if (order.id === orderId) {
+                            order.status = newStatus;
+                        }
+                    });
+                });
+                saveUserData();
+                renderAdminOrders();
+                alert('✅ وضعیت سفارش با موفقیت تغییر کرد!');
+            }
+        }
+
+        function deleteOrderAdmin(orderId) {
+            if (confirm('⚠️ آیا از حذف این سفارش اطمینان دارید؟')) {
+                Object.keys(orders).forEach(user => {
+                    orders[user] = orders[user].filter(order => order.id !== orderId);
+                });
+                saveUserData();
+                renderAdminOrders();
+                alert('✅ سفارش با موفقیت حذف شد!');
+            }
+        }
+
+        function renderAdminUsers() {
+            const list = document.getElementById('adminUserList');
+            const userList = Object.entries(users);
+            if (userList.length === 0) {
+                list.innerHTML =
+                `<tr><td colspan="4" style="text-align:center; color:#888; padding:15px;">کاربری وجود ندارد</td></tr>`;
+                return;
+            }
+            let html = '';
+            userList.forEach(([phone, data]) => {
+                html += `
+                    <tr>
+                        <td><strong>${phone}</strong></td>
+                        <td>${new Date(data.registeredAt).toLocaleDateString('fa-IR')}</td>
+                        <td><span class="badge-status success">فعال</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="delete" onclick="deleteUserAdmin('${phone}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        function deleteUserAdmin(phone) {
+            if (confirm(`⚠️ آیا از حذف کاربر ${phone} اطمینان دارید؟`)) {
+                delete users[phone];
+                delete userAddresses[phone];
+                delete orders[phone];
+                saveUserData();
+                renderAdminUsers();
+                updateAdminStats();
+                alert('✅ کاربر با موفقیت حذف شد!');
+            }
+        }
+
+        function renderAdminComments() {
+            const list = document.getElementById('adminCommentList');
+            if (comments.length === 0) {
+                list.innerHTML =
+                `<tr><td colspan="5" style="text-align:center; color:#888; padding:15px;">نظری وجود ندارد</td></tr>`;
+                return;
+            }
+            let html = '';
+            comments.forEach((c, index) => {
+                const statusMap = { 'pending': 'در انتظار تایید', 'approved': 'تایید شده', 'rejected': 'رد شده' };
+                const statusClass = { 'pending': 'pending', 'approved': 'success', 'rejected': 'danger' };
+                html += `
+                    <tr>
+                        <td>${c.user || 'ناشناس'}</td>
+                        <td>${c.product || 'محصول'}</td>
+                        <td>${c.text || ''}</td>
+                        <td><span class="badge-status ${statusClass[c.status] || 'pending'}">${statusMap[c.status] || 'در انتظار تایید'}</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="approve" onclick="approveCommentAdmin(${index})"><i class="fas fa-check"></i></button>
+                                <button class="delete" onclick="deleteCommentAdmin(${index})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        function approveCommentAdmin(index) {
+            if (comments[index]) {
+                comments[index].status = 'approved';
+                saveUserData();
+                renderAdminComments();
+                updateAdminStats();
+                alert('✅ نظر با موفقیت تایید شد!');
+            }
+        }
+
+        function deleteCommentAdmin(index) {
+            if (confirm('⚠️ آیا از حذف این نظر اطمینان دارید؟')) {
+                comments.splice(index, 1);
+                saveUserData();
+                renderAdminComments();
+                updateAdminStats();
+                alert('✅ نظر با موفقیت حذف شد!');
+            }
+        }
 
         // ============================================================
         // 🚀 مقداردهی اولیه
@@ -3014,25 +2718,12 @@
         updateCartUI();
         checkLoginStatus();
 
-        console.log('⚡ BitVolt | GG Volt | bitvolt.mtv');
-        console.log('🔑 رمز پنل فروشنده:', SELLER_PASSWORD);
+        console.log('⚡ BitVolt | فروشگاه الکترونیک');
+        console.log('🔑 رمز پنل مدیریت:', ADMIN_PASSWORD);
+        console.log('🔍 کد مخفی در جستجو: admin123');
         console.log('📱 شماره تماس: 09107484214');
-        console.log('💳 درگاه پرداخت: زرین‌پال (واقعی)');
-        console.log('📦 هزینه پست: ' + SHIPPING_COST.toLocaleString() + ' تومان');
-        console.log('🚚 ارسال رایگان: بالای ' + FREE_SHIPPING_MIN.toLocaleString() + ' تومان');
-
-        if (SMS_CONFIG.apiKey && SMS_CONFIG.apiKey !== 'YOUR_SMS_IR_API_KEY') {
-            console.log('✅ سرویس پیامک: sms.ir فعال');
-        } else {
-            console.log('⚠️ API Key sms.ir وارد نشده!');
-        }
-
-        if (ZARINPAL_CONFIG.merchantId && ZARINPAL_CONFIG.merchantId !== 'YOUR_MERCHANT_ID') {
-            console.log('✅ درگاه پرداخت: زرین‌پال فعال');
-        } else {
-            console.log('⚠️ Merchant ID زرین‌پال وارد نشده!');
-        }
+        console.log('📍 آدرس: قزوین، تاکستان، خیابان حافظ');
+        console.log('⏱️ زمان انقضای کد: 3 دقیقه');
     </script>
-
 </body>
 </html>
