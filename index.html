@@ -2537,7 +2537,7 @@
         // 📨 تابع ارسال پیامک با sms.ir (واقعی)
         // ============================================================
         async function sendSmsIr(phone, code) {
-            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'YOUR_SMS_IR_API_KEY') {
+            if (!SMS_CONFIG.apiKey || SMS_CONFIG.apiKey === 'leRP2t6EQQXW9O2ILq4oMZE2ufQqyh91RcVDg3TbIx09QpQG') {
                 alert('⚠️ لطفاً ابتدا API Key sms.ir را در تنظیمات وارد کنید.');
                 return { success: false, message: 'API Key وارد نشده است' };
             }
@@ -2574,7 +2574,7 @@
         // 💰 تابع پرداخت با زرین‌پال (واقعی)
         // ============================================================
         async function zarinpalPayment(amount, description) {
-            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === 'YOUR_MERCHANT_ID') {
+            if (!ZARINPAL_CONFIG.merchantId || ZARINPAL_CONFIG.merchantId === '9e66bf2a-3e71-4296-9e7f-00c0d15c635f') {
                 alert('⚠️ لطفاً ابتدا Merchant ID زرین‌پال را در تنظیمات وارد کنید.');
                 return { success: false, message: 'Merchant ID وارد نشده است' };
             }
