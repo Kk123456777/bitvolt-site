@@ -14,6 +14,9 @@
     <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
+    <!-- QuaggaJS for Barcode Scanning -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -154,6 +157,10 @@
         .btn-sm { padding: 6px 14px; font-size: 11px; }
         .btn-excel { background: linear-gradient(135deg, #217346, #1e7e4a); color: white; }
         .btn-excel:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(33,115,70,0.35); }
+        .btn-barcode { background: linear-gradient(135deg, #FF6F00, #E65100); color: white; }
+        .btn-barcode:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,111,0,0.35); }
+        .btn-bulk { background: linear-gradient(135deg, #0D47A1, #1565C0); color: white; }
+        .btn-bulk:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(13,71,161,0.35); }
         
         .table-container { background: var(--dark-card); border-radius: var(--radius); border: 1px solid var(--glass-border); overflow: hidden; overflow-x: auto; }
         .table-container table { width: 100%; border-collapse: collapse; min-width: 600px; }
@@ -173,6 +180,93 @@
         .actions-cell button { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px 8px; border-radius: 6px; transition: var(--transition); font-size: 14px; }
         .actions-cell button:hover { background: rgba(108,60,225,0.12); color: var(--primary); }
         .actions-cell button.danger:hover { background: rgba(255,23,68,0.12); color: var(--danger); }
+        
+        /* Barcode Scanner */
+        .scanner-container {
+            background: var(--dark-card);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .scanner-container video {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            background: #000;
+            display: block;
+            margin: 0 auto;
+        }
+        .scanner-container .scanner-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+            border: 3px solid var(--secondary);
+            border-radius: 10px;
+            pointer-events: none;
+            box-shadow: 0 0 30px rgba(0,212,255,0.3);
+            animation: scanPulse 2s ease-in-out infinite;
+        }
+        @keyframes scanPulse {
+            0%,100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .scanner-container .scan-result {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,212,255,0.05);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--secondary);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .scanner-container .scan-result .barcode-data {
+            color: var(--text);
+            font-size: 18px;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 16px;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+        .scanner-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        
+        /* Quick Entry */
+        .quick-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 20px;
+        }
+        .quick-entry .form-group { margin-bottom: 0; }
+        .quick-entry .form-group input {
+            padding: 10px 14px;
+            font-size: 13px;
+        }
+        .quick-entry .actions {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
         
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -226,6 +320,33 @@
         .class-card .class-stats { display: flex; gap: 15px; margin-top: 12px; flex-wrap: wrap; }
         .class-card .class-stats span { background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 8px; font-size: 12px; }
         
+        .bulk-import-area {
+            background: rgba(255,255,255,0.03);
+            border: 2px dashed var(--glass-border);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .bulk-import-area:hover { border-color: var(--primary); background: rgba(108,60,225,0.05); }
+        .bulk-import-area textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 13px;
+            min-height: 120px;
+            resize: vertical;
+        }
+        .bulk-import-area .hint {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
         @media (max-width: 992px) {
             .sidebar { transform: translateX(100%); width: 270px; }
             .sidebar.open { transform: translateX(0); }
@@ -234,6 +355,7 @@
             .header-right { width: 100%; justify-content: space-between; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .modal .form-row { grid-template-columns: 1fr; }
+            .quick-entry { grid-template-columns: 1fr; }
         }
         @media (max-width: 576px) {
             .stats-grid { grid-template-columns: 1fr; }
@@ -257,6 +379,18 @@
         .footer .heart { color: var(--danger); display: inline-block; animation: heartbeat 1.5s ease infinite; }
         @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
         @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        
+        .barcode-highlight {
+            background: rgba(0,212,255,0.15);
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            padding: 8px 16px;
+            animation: highlightPulse 1s ease 3;
+        }
+        @keyframes highlightPulse {
+            0%,100% { background: rgba(0,212,255,0.15); }
+            50% { background: rgba(0,212,255,0.35); }
+        }
     </style>
 </head>
 <body>
@@ -269,7 +403,7 @@
         <div class="login-logo">
             <div class="icon">🏫</div>
             <h1>مدیریت هوشمند مدرسه</h1>
-            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">سیستم جامع مدیریت آموزشی</p>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">سیستم جامع با قابلیت بارکدخوان</p>
         </div>
         <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
@@ -315,7 +449,7 @@
             <li><a class="active" data-page="dashboard-home"><i class="fas fa-home"></i> داشبورد</a></li>
             <li><a data-page="students"><i class="fas fa-user-graduate"></i> دانش‌آموزان</a></li>
             <li><a data-page="teachers"><i class="fas fa-chalkboard-teacher"></i> معلمان</a></li>
-            <li><a data-page="classes"><i class="fas fa-school"></i> کلاس‌ها <span class="badge">جدید</span></a></li>
+            <li><a data-page="classes"><i class="fas fa-school"></i> کلاس‌ها <span class="badge">بارکد</span></a></li>
             <li><a data-page="subjects"><i class="fas fa-book"></i> دروس</a></li>
             <li><a data-page="grades"><i class="fas fa-star"></i> نمرات</a></li>
             <li><a data-page="attendance"><i class="fas fa-check-circle"></i> حضور و غیاب</a></li>
@@ -370,10 +504,36 @@
             <div class="panel-header">
                 <h2>👨‍🎓 مدیریت دانش‌آموزان</h2>
                 <div class="actions">
+                    <button class="btn btn-barcode" onclick="openModal('scanStudent')"><i class="fas fa-qrcode"></i> اسکن بارکد</button>
+                    <button class="btn btn-bulk" onclick="openModal('bulkStudent')"><i class="fas fa-users"></i> ثبت گروهی</button>
                     <button class="btn btn-primary" onclick="openModal('addStudent')"><i class="fas fa-plus"></i> افزودن دانش‌آموز</button>
                     <button class="btn btn-excel" onclick="exportToExcel('students')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
                 </div>
             </div>
+            
+            <!-- Quick Entry -->
+            <div class="quick-entry" id="quickStudentEntry">
+                <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> شناسه دانش‌آموز (بارکد)</label>
+                    <input type="text" id="quickStudentId" placeholder="مثال: 14001 یا اسکن بارکد" onkeydown="if(event.key==='Enter') quickAddStudent()">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> نام کامل</label>
+                    <input type="text" id="quickStudentName" placeholder="نام و نام خانوادگی" onkeydown="if(event.key==='Enter') quickAddStudent()">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-school"></i> کلاس</label>
+                    <select id="quickStudentClass" onchange="if(this.value) document.getElementById('quickStudentName').focus()">
+                        <option value="">انتخاب کلاس...</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-success" onclick="quickAddStudent()" style="width:100%;">
+                        <i class="fas fa-save"></i> ثبت سریع
+                    </button>
+                </div>
+            </div>
+            
             <div class="table-container">
                 <table>
                     <thead><tr><th>شناسه</th><th>نام</th><th>کلاس</th><th>میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
@@ -404,10 +564,33 @@
             <div class="panel-header">
                 <h2>🏫 مدیریت کلاس‌ها</h2>
                 <div class="actions">
+                    <button class="btn btn-barcode" onclick="openModal('scanClass')"><i class="fas fa-qrcode"></i> اسکن بارکد</button>
                     <button class="btn btn-primary" onclick="openModal('addClass')"><i class="fas fa-plus"></i> افزودن کلاس</button>
                     <button class="btn btn-excel" onclick="exportToExcel('classes')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
                 </div>
             </div>
+            
+            <!-- Quick Class Entry -->
+            <div class="quick-entry" id="quickClassEntry">
+                <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> شناسه کلاس (بارکد)</label>
+                    <input type="text" id="quickClassId" placeholder="مثال: C001 یا اسکن بارکد" onkeydown="if(event.key==='Enter') quickAddClass()">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-school"></i> نام کلاس</label>
+                    <input type="text" id="quickClassName" placeholder="مثال: ۱۰-الف" onkeydown="if(event.key==='Enter') quickAddClass()">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-graduation-cap"></i> پایه</label>
+                    <input type="number" id="quickClassGrade" placeholder="مثال: 10" onkeydown="if(event.key==='Enter') quickAddClass()">
+                </div>
+                <div class="actions">
+                    <button class="btn btn-success" onclick="quickAddClass()" style="width:100%;">
+                        <i class="fas fa-save"></i> ثبت سریع کلاس
+                    </button>
+                </div>
+            </div>
+            
             <div id="classesGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px;"></div>
         </div>
         
@@ -450,6 +633,7 @@
             <div class="panel-header">
                 <h2>✅ مدیریت حضور و غیاب</h2>
                 <div class="actions">
+                    <button class="btn btn-barcode" onclick="openModal('scanAttendance')"><i class="fas fa-qrcode"></i> اسکن بارکد</button>
                     <button class="btn btn-primary" onclick="openModal('addAttendance')"><i class="fas fa-plus"></i> ثبت حضور</button>
                     <button class="btn btn-excel" onclick="exportToExcel('attendance')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
                 </div>
@@ -501,13 +685,123 @@
 </div>
 
 <!-- ===== MODALS ===== -->
+
+<!-- Scan Student Barcode -->
+<div class="modal-overlay" id="modal-scanStudent">
+    <div class="modal" style="max-width:550px;">
+        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن بارکد دانش‌آموز</h3><button class="close-modal" onclick="closeModal('scanStudent'); stopScanner();">&times;</button></div>
+        <div class="scanner-container">
+            <div id="studentScanner" style="position:relative;">
+                <div class="scanner-overlay"></div>
+            </div>
+            <div class="scan-result" id="studentScanResult">
+                <i class="fas fa-camera"></i>
+                <span>دوربین را روی بارکد بگیرید...</span>
+            </div>
+            <div class="scanner-controls">
+                <button class="btn btn-barcode" onclick="startStudentScanner()"><i class="fas fa-play"></i> شروع اسکن</button>
+                <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
+                <button class="btn btn-outline" onclick="closeModal('scanStudent'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
+            </div>
+        </div>
+        <div id="scannedStudentInfo" style="display:none; background:rgba(0,212,255,0.05); border-radius:10px; padding:15px; margin-top:10px; border:1px solid var(--secondary);">
+            <h4>✅ دانش‌آموز یافت شد:</h4>
+            <div id="scannedStudentData"></div>
+            <div style="margin-top:10px; display:flex; gap:8px;">
+                <button class="btn btn-success btn-sm" onclick="useScannedStudent()"><i class="fas fa-check"></i> استفاده</button>
+                <button class="btn btn-primary btn-sm" onclick="editScannedStudent()"><i class="fas fa-edit"></i> ویرایش</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scan Class Barcode -->
+<div class="modal-overlay" id="modal-scanClass">
+    <div class="modal" style="max-width:550px;">
+        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن بارکد کلاس</h3><button class="close-modal" onclick="closeModal('scanClass'); stopScanner();">&times;</button></div>
+        <div class="scanner-container">
+            <div id="classScanner" style="position:relative;">
+                <div class="scanner-overlay"></div>
+            </div>
+            <div class="scan-result" id="classScanResult">
+                <i class="fas fa-camera"></i>
+                <span>دوربین را روی بارکد بگیرید...</span>
+            </div>
+            <div class="scanner-controls">
+                <button class="btn btn-barcode" onclick="startClassScanner()"><i class="fas fa-play"></i> شروع اسکن</button>
+                <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
+                <button class="btn btn-outline" onclick="closeModal('scanClass'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
+            </div>
+        </div>
+        <div id="scannedClassInfo" style="display:none; background:rgba(0,212,255,0.05); border-radius:10px; padding:15px; margin-top:10px; border:1px solid var(--secondary);">
+            <h4>✅ کلاس یافت شد:</h4>
+            <div id="scannedClassData"></div>
+            <div style="margin-top:10px; display:flex; gap:8px;">
+                <button class="btn btn-success btn-sm" onclick="useScannedClass()"><i class="fas fa-check"></i> استفاده</button>
+                <button class="btn btn-primary btn-sm" onclick="editScannedClass()"><i class="fas fa-edit"></i> ویرایش</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scan Attendance Barcode -->
+<div class="modal-overlay" id="modal-scanAttendance">
+    <div class="modal" style="max-width:550px;">
+        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن برای حضور و غیاب</h3><button class="close-modal" onclick="closeModal('scanAttendance'); stopScanner();">&times;</button></div>
+        <div class="scanner-container">
+            <div id="attendanceScanner" style="position:relative;">
+                <div class="scanner-overlay"></div>
+            </div>
+            <div class="scan-result" id="attendanceScanResult">
+                <i class="fas fa-camera"></i>
+                <span>بارکد دانش‌آموز را اسکن کنید...</span>
+            </div>
+            <div class="scanner-controls">
+                <button class="btn btn-barcode" onclick="startAttendanceScanner()"><i class="fas fa-play"></i> شروع اسکن</button>
+                <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
+                <button class="btn btn-outline" onclick="closeModal('scanAttendance'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
+            </div>
+        </div>
+        <div id="scannedAttendanceInfo" style="display:none; background:rgba(0,212,255,0.05); border-radius:10px; padding:15px; margin-top:10px; border:1px solid var(--secondary);">
+            <h4>✅ ثبت حضور:</h4>
+            <div id="scannedAttendanceData"></div>
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn btn-success btn-sm" onclick="markAttendance('حاضر')"><i class="fas fa-check"></i> حاضر</button>
+                <button class="btn btn-warning btn-sm" onclick="markAttendance('تأخیر')"><i class="fas fa-clock"></i> تأخیر</button>
+                <button class="btn btn-danger btn-sm" onclick="markAttendance('غایب')"><i class="fas fa-times"></i> غایب</button>
+                <button class="btn btn-outline btn-sm" onclick="markAttendance('مرخصی')"><i class="fas fa-door-open"></i> مرخصی</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Import Students -->
+<div class="modal-overlay" id="modal-bulkStudent">
+    <div class="modal">
+        <div class="modal-header"><h3><i class="fas fa-users" style="color:var(--secondary);"></i> ثبت گروهی دانش‌آموزان</h3><button class="close-modal" onclick="closeModal('bulkStudent')">&times;</button></div>
+        <div class="bulk-import-area">
+            <p style="margin-bottom:12px; color:var(--text-secondary);">
+                <i class="fas fa-info-circle"></i> هر دانش‌آموز را در یک خط وارد کنید با فرمت:
+                <br><span style="color:var(--text); font-family:monospace; font-size:12px;">شناسه, نام کامل, کلاس</span>
+            </p>
+            <textarea id="bulkStudentData" placeholder="مثال:&#10;S001, علی محمدی, C001&#10;S002, سارا احمدی, C001&#10;S003, رضا کریمی, C002"></textarea>
+            <div class="hint">
+                <i class="fas fa-lightbulb"></i> شناسه کلاس باید از قبل وجود داشته باشد
+            </div>
+            <button class="btn btn-success" style="margin-top:12px;" onclick="bulkImportStudents()">
+                <i class="fas fa-upload"></i> ثبت گروهی
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- Add Student -->
 <div class="modal-overlay" id="modal-addStudent">
     <div class="modal">
         <div class="modal-header"><h3>➕ افزودن دانش‌آموز</h3><button class="close-modal" onclick="closeModal('addStudent')">&times;</button></div>
         <form onsubmit="addStudent(event)">
             <div class="form-row">
-                <div class="form-group"><label>شناسه</label><input type="text" id="studentId" placeholder="مثال: 14001" required></div>
+                <div class="form-group"><label>شناسه (بارکد)</label><input type="text" id="studentId" placeholder="مثال: 14001" required></div>
                 <div class="form-group"><label>نام کامل</label><input type="text" id="studentName" placeholder="نام و نام خانوادگی" required></div>
             </div>
             <div class="form-row">
@@ -545,7 +839,7 @@
         <div class="modal-header"><h3>➕ افزودن کلاس جدید</h3><button class="close-modal" onclick="closeModal('addClass')">&times;</button></div>
         <form onsubmit="addClass(event)">
             <div class="form-row">
-                <div class="form-group"><label>شناسه کلاس</label><input type="text" id="classId" placeholder="مثال: C001" required></div>
+                <div class="form-group"><label>شناسه کلاس (بارکد)</label><input type="text" id="classId" placeholder="مثال: C001" required></div>
                 <div class="form-group"><label>نام کلاس</label><input type="text" id="className" placeholder="مثال: ۱۰-الف" required></div>
             </div>
             <div class="form-row">
@@ -653,13 +947,19 @@ const DATA = {
     attendance: [],
     activities: [],
     alerts: [],
-    currentUser: null,
-    nextIds: { student: 1, teacher: 1, class: 1, subject: 1 }
+    currentUser: null
 };
 
 const USERS = {
     admin: { username: 'admin', password: 'Admin@1404', name: 'مدیر سیستم', role: 'admin' }
 };
+
+// Barcode Scanner State
+let scannerActive = false;
+let scanMode = null;
+let scannedStudentId = null;
+let scannedClassId = null;
+let scannedAttendanceId = null;
 
 // ============================================================
 // ================ AUTHENTICATION =============================
@@ -719,6 +1019,7 @@ function handleLogout() {
         DATA.currentUser = null;
         document.getElementById('dashboard').classList.remove('active');
         document.getElementById('loginPage').style.display = 'flex';
+        stopScanner();
         showToast('👋 خروج موفق', 'info');
     }
 }
@@ -774,7 +1075,6 @@ function getSubjectById(id) { return DATA.subjects.find(s => s.id === id); }
 function getStudentGrades(studentId) { return DATA.grades.filter(g => g.studentId === studentId); }
 function getClassStudents(classId) { return DATA.students.filter(s => s.classId === classId); }
 function getClassTeachers(classId) { return DATA.teachers.filter(t => t.classes && t.classes.includes(classId)); }
-function getTeacherSubjects(teacherId) { return DATA.subjects.filter(s => s.teacherId === teacherId); }
 
 function calculateAverage(grades) {
     if (!grades || grades.length === 0) return 0;
@@ -790,6 +1090,469 @@ function updateStudentAverages() {
         s.grades = grades.map(g => g.value);
     });
     saveData();
+}
+
+// ============================================================
+// ================ QUICK ADD FUNCTIONS ========================
+// ============================================================
+
+function quickAddStudent() {
+    const id = document.getElementById('quickStudentId').value.trim();
+    const name = document.getElementById('quickStudentName').value.trim();
+    const classId = document.getElementById('quickStudentClass').value;
+    
+    if (!id || !name || !classId) {
+        showToast('❌ لطفاً تمام فیلدها را پر کنید', 'error');
+        return;
+    }
+    if (DATA.students.find(s => s.id === id)) {
+        showToast('❌ شناسه تکراری است!', 'error');
+        return;
+    }
+    
+    DATA.students.push({ id, name, classId, parentPhone: '', grades: [], average: 0, status: 'نامشخص' });
+    if (getClassById(classId)) {
+        if (!getClassById(classId).students) getClassById(classId).students = [];
+        getClassById(classId).students.push(id);
+    }
+    updateStudentAverages();
+    saveData();
+    renderAll();
+    updateDashboard();
+    
+    document.getElementById('quickStudentId').value = '';
+    document.getElementById('quickStudentName').value = '';
+    document.getElementById('quickStudentId').focus();
+    
+    showToast('✅ دانش‌آموز با موفقیت ثبت شد', 'success');
+    addActivity('ثبت سریع دانش‌آموز', 'دانش‌آموز ' + name + ' با شناسه ' + id + ' ثبت شد');
+}
+
+function quickAddClass() {
+    const id = document.getElementById('quickClassId').value.trim();
+    const name = document.getElementById('quickClassName').value.trim();
+    const grade = parseInt(document.getElementById('quickClassGrade').value);
+    
+    if (!id || !name || !grade) {
+        showToast('❌ لطفاً تمام فیلدها را پر کنید', 'error');
+        return;
+    }
+    if (DATA.classes.find(c => c.id === id)) {
+        showToast('❌ شناسه کلاس تکراری است!', 'error');
+        return;
+    }
+    
+    DATA.classes.push({ id, name, grade, capacity: 30, teachers: [], students: [] });
+    saveData();
+    renderAll();
+    updateDashboard();
+    
+    document.getElementById('quickClassId').value = '';
+    document.getElementById('quickClassName').value = '';
+    document.getElementById('quickClassGrade').value = '';
+    document.getElementById('quickClassId').focus();
+    
+    showToast('✅ کلاس با موفقیت ثبت شد', 'success');
+    addActivity('ثبت سریع کلاس', 'کلاس ' + name + ' با شناسه ' + id + ' ثبت شد');
+}
+
+// ============================================================
+// ================ BULK IMPORT ================================
+// ============================================================
+
+function bulkImportStudents() {
+    const text = document.getElementById('bulkStudentData').value.trim();
+    if (!text) {
+        showToast('❌ لطفاً داده‌ها را وارد کنید', 'error');
+        return;
+    }
+    
+    const lines = text.split('\n').filter(line => line.trim());
+    let added = 0;
+    let errors = [];
+    
+    lines.forEach((line, index) => {
+        const parts = line.split(',').map(p => p.trim());
+        if (parts.length < 3) {
+            errors.push(`خط ${index+1}: فرمت نادرست`);
+            return;
+        }
+        const [id, name, classId] = parts;
+        if (!id || !name || !classId) {
+            errors.push(`خط ${index+1}: فیلدهای خالی`);
+            return;
+        }
+        if (DATA.students.find(s => s.id === id)) {
+            errors.push(`خط ${index+1}: شناسه ${id} تکراری است`);
+            return;
+        }
+        if (!getClassById(classId)) {
+            errors.push(`خط ${index+1}: کلاس ${classId} وجود ندارد`);
+            return;
+        }
+        DATA.students.push({ id, name, classId, parentPhone: '', grades: [], average: 0, status: 'نامشخص' });
+        if (getClassById(classId)) {
+            if (!getClassById(classId).students) getClassById(classId).students = [];
+            getClassById(classId).students.push(id);
+        }
+        added++;
+    });
+    
+    if (added > 0) {
+        updateStudentAverages();
+        saveData();
+        renderAll();
+        updateDashboard();
+        showToast(`✅ ${added} دانش‌آموز با موفقیت ثبت شد`, 'success');
+        addActivity('ثبت گروهی', `${added} دانش‌آموز ثبت شد`);
+    }
+    if (errors.length > 0) {
+        showToast(`⚠️ ${errors.length} خطا: ${errors.slice(0,3).join(' • ')}`, 'warning');
+    }
+    document.getElementById('bulkStudentData').value = '';
+}
+
+// ============================================================
+// ================ BARCODE SCANNER ============================
+// ============================================================
+
+function startStudentScanner() {
+    scanMode = 'student';
+    startScanner('studentScanner', 'studentScanResult', handleStudentBarcode);
+}
+
+function startClassScanner() {
+    scanMode = 'class';
+    startScanner('classScanner', 'classScanResult', handleClassBarcode);
+}
+
+function startAttendanceScanner() {
+    scanMode = 'attendance';
+    startScanner('attendanceScanner', 'attendanceScanResult', handleAttendanceBarcode);
+}
+
+function startScanner(containerId, resultId, callback) {
+    if (scannerActive) {
+        stopScanner();
+    }
+    
+    const container = document.getElementById(containerId);
+    const result = document.getElementById(resultId);
+    result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال راه‌اندازی دوربین...';
+    
+    if (typeof Quagga === 'undefined') {
+        result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:var(--warning);"></i> کتابخانه بارکدخوان بارگذاری نشد. لطفاً اتصال اینترنت را بررسی کنید.';
+        showToast('❌ خطا در بارگذاری بارکدخوان', 'error');
+        return;
+    }
+    
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: container,
+            constraints: {
+                width: 400,
+                height: 300,
+                facingMode: "environment"
+            }
+        },
+        decoder: {
+            readers: ["ean_reader", "ean_8_reader", "code_128_reader", "code_39_reader", "upc_reader", "upc_e_reader"]
+        }
+    }, function(err) {
+        if (err) {
+            result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:var(--danger);"></i> خطا: ' + err.message;
+            showToast('❌ خطا در راه‌اندازی دوربین', 'error');
+            return;
+        }
+        scannerActive = true;
+        Quagga.start();
+        result.innerHTML = '<i class="fas fa-camera"></i> <span>دوربین فعال شد، بارکد را اسکن کنید...</span>';
+        showToast('📷 دوربین فعال شد', 'success');
+    });
+    
+    Quagga.onDetected(function(data) {
+        const code = data.codeResult.code;
+        result.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success);"></i> <span class="barcode-data">' + code + '</span>';
+        if (callback) callback(code);
+        if (scanMode !== 'attendance') {
+            stopScanner();
+        }
+    });
+}
+
+function stopScanner() {
+    if (scannerActive) {
+        try {
+            Quagga.stop();
+            Quagga.offDetected();
+        } catch(e) {}
+        scannerActive = false;
+        scanMode = null;
+    }
+    // Clear all scanner containers
+    ['studentScanner', 'classScanner', 'attendanceScanner'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '';
+    });
+}
+
+function handleStudentBarcode(code) {
+    const student = getStudentById(code);
+    const infoDiv = document.getElementById('scannedStudentInfo');
+    const dataDiv = document.getElementById('scannedStudentData');
+    
+    if (student) {
+        const cls = getClassById(student.classId);
+        scannedStudentId = student.id;
+        dataDiv.innerHTML = `
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+                <div><strong>شناسه:</strong> ${student.id}</div>
+                <div><strong>نام:</strong> ${student.name}</div>
+                <div><strong>کلاس:</strong> ${cls ? cls.name : 'ثبت نشده'}</div>
+                <div><strong>میانگین:</strong> ${student.average.toFixed(1)}</div>
+                <div><strong>وضعیت:</strong> <span class="status-badge ${student.status === 'عالی' ? 'excellent' : student.status === 'خوب' ? 'good' : student.status === 'قبول' ? 'pending' : 'fail'}">${student.status}</span></div>
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--success)';
+        showToast('✅ دانش‌آموز یافت شد: ' + student.name, 'success');
+    } else {
+        dataDiv.innerHTML = `
+            <div style="margin-top:8px; color:var(--danger);">
+                <i class="fas fa-exclamation-circle"></i> 
+                دانش‌آموزی با شناسه <strong>${code}</strong> یافت نشد.
+                <div style="margin-top:8px;">
+                    <button class="btn btn-primary btn-sm" onclick="quickAddFromScan('${code}')">
+                        <i class="fas fa-plus"></i> ثبت سریع دانش‌آموز
+                    </button>
+                </div>
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--warning)';
+        scannedStudentId = code;
+        showToast('⚠️ دانش‌آموز یافت نشد، می‌توانید ثبت کنید', 'warning');
+    }
+}
+
+function handleClassBarcode(code) {
+    const cls = getClassById(code);
+    const infoDiv = document.getElementById('scannedClassInfo');
+    const dataDiv = document.getElementById('scannedClassData');
+    
+    if (cls) {
+        const students = getClassStudents(cls.id);
+        const teachers = getClassTeachers(cls.id);
+        scannedClassId = cls.id;
+        dataDiv.innerHTML = `
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+                <div><strong>شناسه:</strong> ${cls.id}</div>
+                <div><strong>نام:</strong> ${cls.name}</div>
+                <div><strong>پایه:</strong> ${cls.grade}</div>
+                <div><strong>ظرفیت:</strong> ${students.length}/${cls.capacity}</div>
+                <div><strong>معلمان:</strong> ${teachers.map(t => t.name).join('، ') || 'تعیین نشده'}</div>
+                <div><strong>دانش‌آموزان:</strong> ${students.length} نفر</div>
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--success)';
+        showToast('✅ کلاس یافت شد: ' + cls.name, 'success');
+    } else {
+        dataDiv.innerHTML = `
+            <div style="margin-top:8px; color:var(--danger);">
+                <i class="fas fa-exclamation-circle"></i> 
+                کلاسی با شناسه <strong>${code}</strong> یافت نشد.
+                <div style="margin-top:8px;">
+                    <button class="btn btn-primary btn-sm" onclick="quickAddClassFromScan('${code}')">
+                        <i class="fas fa-plus"></i> ثبت سریع کلاس
+                    </button>
+                </div>
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--warning)';
+        scannedClassId = code;
+        showToast('⚠️ کلاس یافت نشد، می‌توانید ثبت کنید', 'warning');
+    }
+}
+
+function handleAttendanceBarcode(code) {
+    const student = getStudentById(code);
+    const infoDiv = document.getElementById('scannedAttendanceInfo');
+    const dataDiv = document.getElementById('scannedAttendanceData');
+    
+    if (student) {
+        const cls = getClassById(student.classId);
+        scannedAttendanceId = student.id;
+        dataDiv.innerHTML = `
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+                <div><strong>شناسه:</strong> ${student.id}</div>
+                <div><strong>نام:</strong> ${student.name}</div>
+                <div><strong>کلاس:</strong> ${cls ? cls.name : 'ثبت نشده'}</div>
+                <div><strong>وضعیت فعلی:</strong> <span style="color:var(--secondary);">در انتظار ثبت</span></div>
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--secondary)';
+        showToast('📋 دانش‌آموز: ' + student.name + ' - وضعیت را انتخاب کنید', 'info');
+    } else {
+        dataDiv.innerHTML = `
+            <div style="margin-top:8px; color:var(--danger);">
+                <i class="fas fa-exclamation-circle"></i> 
+                دانش‌آموزی با شناسه <strong>${code}</strong> یافت نشد.
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--danger)';
+        showToast('❌ دانش‌آموز یافت نشد', 'error');
+    }
+}
+
+function quickAddFromScan(code) {
+    closeModal('scanStudent');
+    openModal('addStudent');
+    document.getElementById('studentId').value = code;
+    document.getElementById('studentName').focus();
+    showToast('📝 اطلاعات دانش‌آموز را تکمیل کنید', 'info');
+}
+
+function quickAddClassFromScan(code) {
+    closeModal('scanClass');
+    openModal('addClass');
+    document.getElementById('classId').value = code;
+    document.getElementById('className').focus();
+    showToast('📝 اطلاعات کلاس را تکمیل کنید', 'info');
+}
+
+function useScannedStudent() {
+    if (scannedStudentId) {
+        closeModal('scanStudent');
+        stopScanner();
+        const student = getStudentById(scannedStudentId);
+        if (student) {
+            showToast('👤 ' + student.name + ' - میانگین: ' + student.average.toFixed(1), 'info');
+        }
+        scannedStudentId = null;
+    }
+}
+
+function editScannedStudent() {
+    if (scannedStudentId) {
+        closeModal('scanStudent');
+        stopScanner();
+        // Find student and open edit mode (we'll just show info)
+        const student = getStudentById(scannedStudentId);
+        if (student) {
+            openModal('addStudent');
+            document.getElementById('studentId').value = student.id;
+            document.getElementById('studentId').disabled = true;
+            document.getElementById('studentName').value = student.name;
+            document.getElementById('studentClassSelect').value = student.classId || '';
+            document.getElementById('studentParentPhone').value = student.parentPhone || '';
+            // Change button text
+            const btn = document.querySelector('#modal-addStudent form button');
+            btn.textContent = '✏️ ویرایش دانش‌آموز';
+            btn.onclick = function(e) {
+                e.preventDefault();
+                const name = document.getElementById('studentName').value.trim();
+                const classId = document.getElementById('studentClassSelect').value;
+                const parentPhone = document.getElementById('studentParentPhone').value.trim();
+                if (student) {
+                    student.name = name;
+                    student.classId = classId;
+                    student.parentPhone = parentPhone;
+                    saveData();
+                    renderAll();
+                    updateDashboard();
+                    closeModal('addStudent');
+                    document.getElementById('studentId').disabled = false;
+                    showToast('✅ دانش‌آموز ویرایش شد', 'success');
+                    addActivity('ویرایش دانش‌آموز', 'دانش‌آموز ' + name + ' ویرایش شد');
+                }
+            };
+        }
+        scannedStudentId = null;
+    }
+}
+
+function useScannedClass() {
+    if (scannedClassId) {
+        closeModal('scanClass');
+        stopScanner();
+        const cls = getClassById(scannedClassId);
+        if (cls) {
+            showToast('🏫 ' + cls.name + ' - پایه: ' + cls.grade + ' - ' + getClassStudents(cls.id).length + ' دانش‌آموز', 'info');
+        }
+        scannedClassId = null;
+    }
+}
+
+function editScannedClass() {
+    if (scannedClassId) {
+        closeModal('scanClass');
+        stopScanner();
+        const cls = getClassById(scannedClassId);
+        if (cls) {
+            openModal('addClass');
+            document.getElementById('classId').value = cls.id;
+            document.getElementById('classId').disabled = true;
+            document.getElementById('className').value = cls.name;
+            document.getElementById('classGrade').value = cls.grade;
+            document.getElementById('classCapacity').value = cls.capacity || 30;
+            const btn = document.querySelector('#modal-addClass form button');
+            btn.textContent = '✏️ ویرایش کلاس';
+            btn.onclick = function(e) {
+                e.preventDefault();
+                const name = document.getElementById('className').value.trim();
+                const grade = parseInt(document.getElementById('classGrade').value);
+                const capacity = parseInt(document.getElementById('classCapacity').value);
+                if (cls) {
+                    cls.name = name;
+                    cls.grade = grade;
+                    cls.capacity = capacity;
+                    saveData();
+                    renderAll();
+                    updateDashboard();
+                    closeModal('addClass');
+                    document.getElementById('classId').disabled = false;
+                    showToast('✅ کلاس ویرایش شد', 'success');
+                    addActivity('ویرایش کلاس', 'کلاس ' + name + ' ویرایش شد');
+                }
+            };
+        }
+        scannedClassId = null;
+    }
+}
+
+function markAttendance(status) {
+    if (!scannedAttendanceId) {
+        showToast('❌ ابتدا دانش‌آموز را اسکن کنید', 'error');
+        return;
+    }
+    
+    const student = getStudentById(scannedAttendanceId);
+    if (!student) {
+        showToast('❌ دانش‌آموز یافت نشد', 'error');
+        return;
+    }
+    
+    const date = new Date().toLocaleDateString('fa-IR');
+    DATA.attendance.push({ studentId: scannedAttendanceId, date, status, note: 'ثبت با بارکد' });
+    saveData();
+    renderAll();
+    updateDashboard();
+    
+    showToast('✅ حضور ' + status + ' برای ' + student.name + ' ثبت شد', 'success');
+    addActivity('ثبت حضور با بارکد', student.name + ' - ' + status);
+    
+    // Reset for next scan
+    scannedAttendanceId = null;
+    document.getElementById('scannedAttendanceInfo').style.display = 'none';
+    document.getElementById('attendanceScanResult').innerHTML = '<i class="fas fa-camera"></i> <span>بارکد بعدی را اسکن کنید...</span>';
+    
+    // Keep scanner running for next scan
 }
 
 // ============================================================
@@ -821,6 +1584,11 @@ function addStudent(e) {
     document.getElementById('studentId').value = '';
     document.getElementById('studentName').value = '';
     document.getElementById('studentParentPhone').value = '';
+    document.getElementById('studentId').disabled = false;
+    // Reset button
+    const btn = document.querySelector('#modal-addStudent form button');
+    btn.textContent = 'ثبت دانش‌آموز';
+    btn.onclick = null;
 }
 
 function addTeacher(e) {
@@ -870,6 +1638,11 @@ function addClass(e) {
     document.getElementById('className').value = '';
     document.getElementById('classGrade').value = '';
     document.getElementById('classCapacity').value = '30';
+    document.getElementById('classId').disabled = false;
+    // Reset button
+    const btn = document.querySelector('#modal-addClass form button');
+    btn.textContent = 'ثبت کلاس';
+    btn.onclick = null;
 }
 
 function addSubject(e) {
@@ -1084,6 +1857,7 @@ function renderClassesGrid() {
             <div class="class-stats">
                 <span>👨‍🎓 ${students.length} دانش‌آموز</span>
                 <span>📖 ${subjects.length} درس</span>
+                <span><i class="fas fa-qrcode"></i> ${c.id}</span>
             </div>
             <div style="margin-top:12px; display:flex; gap:8px;">
                 <button class="btn btn-sm btn-danger" onclick="deleteClass('${c.id}')"><i class="fas fa-trash"></i> حذف</button>
@@ -1160,6 +1934,17 @@ function renderAttendanceTable() {
 }
 
 function renderSelectOptions() {
+    // Quick student class
+    const quickClass = document.getElementById('quickStudentClass');
+    if (quickClass) {
+        const val = quickClass.value;
+        quickClass.innerHTML = '<option value="">انتخاب کلاس...</option>';
+        DATA.classes.forEach(c => {
+            quickClass.innerHTML += `<option value="${c.id}">${c.id} - ${c.name}</option>`;
+        });
+        quickClass.value = val;
+    }
+    
     // Students
     ['gradeStudent', 'attendanceStudent', 'reportStudent'].forEach(id => {
         const select = document.getElementById(id);
@@ -1338,15 +2123,35 @@ function openModal(name) {
     if (name === 'addClass') {
         document.getElementById('classGrade').value = '';
     }
+    // Reset scanner modals when opened
+    if (name === 'scanStudent' || name === 'scanClass' || name === 'scanAttendance') {
+        // Clear previous scanner state
+        stopScanner();
+        scannedStudentId = null;
+        scannedClassId = null;
+        scannedAttendanceId = null;
+        document.getElementById('scannedStudentInfo').style.display = 'none';
+        document.getElementById('scannedClassInfo').style.display = 'none';
+        document.getElementById('scannedAttendanceInfo').style.display = 'none';
+    }
 }
 
 function closeModal(name) {
     document.getElementById('modal-' + name).classList.remove('active');
+    if (name === 'scanStudent' || name === 'scanClass' || name === 'scanAttendance') {
+        stopScanner();
+    }
 }
 
 document.querySelectorAll('.modal-overlay').forEach(el => {
     el.addEventListener('click', function(e) {
-        if (e.target === this) this.classList.remove('active');
+        if (e.target === this) {
+            const id = this.id.replace('modal-', '');
+            closeModal(id);
+            if (id === 'scanStudent' || id === 'scanClass' || id === 'scanAttendance') {
+                stopScanner();
+            }
+        }
     });
 });
 
@@ -1625,12 +2430,12 @@ document.querySelectorAll('.sidebar-menu li a').forEach(link => {
             panel.classList.add('active');
             const titles = {
                 'dashboard-home': ['🏠 داشبورد', 'خلاصه وضعیت مدرسه'],
-                'students': ['👨‍🎓 دانش‌آموزان', 'مدیریت دانش‌آموزان'],
+                'students': ['👨‍🎓 دانش‌آموزان', 'مدیریت دانش‌آموزان با بارکد'],
                 'teachers': ['👨‍🏫 معلمان', 'مدیریت معلمان'],
-                'classes': ['🏫 کلاس‌ها', 'مدیریت کلاس‌ها'],
+                'classes': ['🏫 کلاس‌ها', 'مدیریت کلاس‌ها با بارکد'],
                 'subjects': ['📚 دروس', 'مدیریت دروس'],
                 'grades': ['⭐ نمرات', 'مدیریت نمرات'],
-                'attendance': ['✅ حضور و غیاب', 'مدیریت حضور و غیاب'],
+                'attendance': ['✅ حضور و غیاب', 'مدیریت حضور و غیاب با بارکد'],
                 'reports': ['📊 گزارشات', 'گزارشات و تحلیل‌ها']
             };
             const title = titles[page] || ['صفحه', ''];
@@ -1651,11 +2456,21 @@ function toggleProfileMenu() {
 
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        document.querySelectorAll('.modal-overlay.active').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.modal-overlay.active').forEach(el => {
+            const id = el.id.replace('modal-', '');
+            closeModal(id);
+            if (id === 'scanStudent' || id === 'scanClass' || id === 'scanAttendance') {
+                stopScanner();
+            }
+        });
     }
     if (e.ctrlKey && e.key === 'l') {
         e.preventDefault();
         document.querySelector('.sidebar-menu li a[data-page="students"]')?.click();
+    }
+    if (e.ctrlKey && e.key === 'c') {
+        e.preventDefault();
+        document.querySelector('.sidebar-menu li a[data-page="classes"]')?.click();
     }
 });
 
@@ -1665,9 +2480,11 @@ document.addEventListener('keydown', function(e) {
 
 loadAllData();
 
-console.log('🏫 سیستم مدیریت مدرسه هوشمند');
+console.log('🏫 سیستم مدیریت مدرسه هوشمند با بارکدخوان');
 console.log('💻 ساخته شده توسط BitVolt.MTV');
 console.log('🔑 ورود: admin / Admin@1404');
+console.log('📷 برای اسکن بارکد از دکمه‌های سبز رنگ استفاده کنید');
+console.log('⌨️ میانبرها: Ctrl+L = دانش‌آموزان, Ctrl+C = کلاس‌ها');
 </script>
 </body>
 </html>
