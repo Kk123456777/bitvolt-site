@@ -54,7 +54,6 @@
             100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
         
-        /* ===== صفحه ورود ===== */
         .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .login-box {
             background: var(--dark-card); border-radius: var(--radius); padding: 50px 40px; max-width: 450px; width: 100%;
@@ -80,6 +79,7 @@
         
         .login-logo h1 { font-size: 28px; margin-top: 10px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .login-logo p { color: var(--text-secondary); font-size: 14px; margin-top: 5px; }
+        .login-logo .default-pass { font-size: 12px; color: var(--warning); margin-top: 8px; background: rgba(255,215,0,0.1); padding: 6px 12px; border-radius: 8px; display: inline-block; border: 1px solid rgba(255,215,0,0.2); }
         
         .login-form .form-group { margin-bottom: 20px; }
         .login-form label { display: block; color: var(--text-secondary); font-size: 13px; margin-bottom: 8px; font-weight: 500; letter-spacing: 0.5px; }
@@ -119,7 +119,6 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .login-error { color: var(--danger); font-size: 13px; text-align: center; margin-top: 15px; display: none; }
         
-        /* ===== داشبورد ===== */
         .dashboard { display: none; min-height: 100vh; }
         .dashboard.active { display: flex; }
         
@@ -288,7 +287,6 @@
         .footer .heart { color: var(--danger); display: inline-block; animation: heartbeat 1.5s ease infinite; }
         @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
         
-        /* ===== Welcome Modal ===== */
         .welcome-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); z-index: 99999;
@@ -377,6 +375,7 @@
             <div class="icon">🏫</div>
             <h1>مدیریت مدرسه</h1>
             <p>سیستم هوشمند مدیریت آموزشی</p>
+            <div class="default-pass">🔑 رمز پیش‌فرض: <strong>Admin@1404</strong></div>
             <div class="welcome-text" id="loginWelcome">به سامانه خوش آمدید</div>
         </div>
         
@@ -720,6 +719,7 @@
 <div class="form-group"><label>نوع درس</label><select id="subjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div></div>
 <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت درس</button></form></div></div>
 
+<!-- ===== مودال ثبت نمره (دسترسی معلم و مدیر) ===== -->
 <div class="modal-overlay" id="modal-addGrade"><div class="modal"><div class="modal-header"><h3><i class="fas fa-star"></i> ثبت نمره</h3><button class="close-modal" onclick="closeModal('addGrade')">&times;</button></div>
 <form onsubmit="addGrade(event)"><div class="form-group"><label>دانش‌آموز</label><select id="gradeStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
 <div class="form-group"><label>درس</label><select id="gradeSubject" required><option value="">انتخاب درس...</option></select></div>
@@ -768,10 +768,14 @@ const DATA = {
     }
 };
 
+// ============================================================
+// ================ USERS WITH DEFAULT PASSWORD ===============
+// ============================================================
+
 const USERS = {
     admin: {
-        username: '',
-        password: '',
+        username: 'admin',
+        password: 'Admin@1404',
         name: 'مدیر سیستم',
         role: 'admin',
         avatar: 'AD'
@@ -794,24 +798,15 @@ function initSystem() {
             USERS.admin.name = settings.adminName || 'مدیر سیستم';
         } catch(e) {}
     } else {
-        // تنظیمات پیش‌فرض - بدون رمز پیش‌فرض
+        // تنظیمات پیش‌فرض با رمز مشخص
         USERS.admin.username = 'admin';
-        USERS.admin.password = generateRandomPassword();
+        USERS.admin.password = 'Admin@1404';
         USERS.admin.name = 'مدیر سیستم';
         saveSettings();
     }
     
     // بروزرسانی صفحه ورود
     document.getElementById('loginWelcome').innerHTML = 'به <span style="color:var(--primary-light);">' + DATA.settings.schoolName + '</span> خوش آمدید';
-}
-
-function generateRandomPassword() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
-    let password = '';
-    for (let i = 0; i < 10; i++) {
-        password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return password;
 }
 
 function saveSettings() {
@@ -864,14 +859,12 @@ function handleLogin(e) {
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
             
-            // بروزرسانی اطلاعات کاربر
             const userInfo = DATA.currentUser.role === 'admin' ? 'مدیر سیستم' : 'معلم';
             document.getElementById('sidebarUserInfo').textContent = userInfo;
             document.getElementById('userName').textContent = DATA.currentUser.name;
             document.getElementById('userRole').textContent = DATA.currentUser.role === 'admin' ? 'مدیر' : 'معلم';
             document.getElementById('userAvatar').textContent = DATA.currentUser.avatar || DATA.currentUser.name.substring(0, 2);
             
-            // بروزرسانی نام مدرسه
             document.getElementById('sidebarSchoolName').textContent = DATA.settings.schoolName;
             document.getElementById('sidebarSchoolDisplay').textContent = '🏛️ ' + DATA.settings.schoolName;
             document.getElementById('aboutSchoolName').textContent = DATA.settings.schoolName;
@@ -880,17 +873,18 @@ function handleLogin(e) {
             loadAllData();
             updateDashboard();
             
+            // محدودیت دسترسی معلم
             if (DATA.currentUser.role === 'teacher') {
                 document.querySelectorAll('.sidebar-menu li a').forEach(item => {
                     if (['teachers', 'subjects', 'reports', 'settings'].includes(item.dataset.page)) {
                         item.style.display = 'none';
                     }
                 });
+                // معلم فقط می‌تواند نمره ثبت کند
+                showToast('👨‍🏫 شما به عنوان معلم وارد شدید - فقط می‌توانید نمره ثبت کنید', 'info');
             }
             
             addActivity('ورود به سیستم', 'کاربر ' + DATA.currentUser.name + ' وارد شد');
-            
-            // نمایش پیام خوش‌آمدگویی
             showWelcomeMessage();
             
         } else {
@@ -949,7 +943,6 @@ function loadAllData() {
         }
     } catch(e) {}
     
-    // داده‌های نمونه
     DATA.students = [
         { id: '14001', name: 'علی محمدی', grade: 10, class: 'الف', parentPhone: '09121234567', average: 17.5, status: 'عالی' },
         { id: '14002', name: 'سارا احمدی', grade: 10, class: 'الف', parentPhone: '09129876543', average: 15.2, status: 'قبول' },
@@ -1055,18 +1048,50 @@ function addSubject(e) {
     document.getElementById('subjectUnits').value = '3';
 }
 
+// ============================================================
+// ================ GRADE SYSTEM (برای معلم و مدیر) ==========
+// ============================================================
+
 function addGrade(e) {
     e.preventDefault();
+    
+    // بررسی دسترسی - معلم و مدیر هر دو می‌توانند نمره ثبت کنند
+    if (!DATA.currentUser) {
+        showToast('❌ لطفاً ابتدا وارد شوید', 'error');
+        return;
+    }
+    
     const studentId = document.getElementById('gradeStudent').value;
     const subjectId = document.getElementById('gradeSubject').value;
     const value = parseFloat(document.getElementById('gradeValue').value);
     const examType = document.getElementById('gradeExamType').value;
     const date = new Date().toLocaleDateString('fa-IR');
-    if (value < 0 || value > 20) { showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error'); return; }
+    
+    if (value < 0 || value > 20) {
+        showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error');
+        return;
+    }
+    
+    // اگر کاربر معلم است، بررسی کن که درسش باشد
+    if (DATA.currentUser.role === 'teacher') {
+        const subject = getSubjectById(subjectId);
+        if (!subject || subject.teacher !== DATA.currentUser.id) {
+            showToast('❌ شما فقط می‌توانید برای درس خود نمره ثبت کنید!', 'error');
+            return;
+        }
+    }
+    
     DATA.grades.push({ studentId, subjectId, value, examType, date });
-    updateStudentAverages(); saveData(); updateDashboard(); renderAllTables(); closeModal('addGrade');
+    updateStudentAverages();
+    saveData();
+    updateDashboard();
+    renderAllTables();
+    closeModal('addGrade');
+    
+    const studentName = getStudentById(studentId)?.name || '';
     showToast('✅ نمره با موفقیت ثبت شد', 'success');
-    addActivity('ثبت نمره', 'نمره ' + value + ' برای ' + (getStudentById(studentId)?.name || '') + ' ثبت شد');
+    addActivity('ثبت نمره', 'نمره ' + value + ' برای ' + studentName + ' ثبت شد');
+    
     document.getElementById('gradeValue').value = '';
 }
 
@@ -1263,7 +1288,6 @@ function saveSettings() {
         }
     }
     
-    // ذخیره تنظیمات
     const settings = {
         schoolName: DATA.settings.schoolName,
         adminName: DATA.settings.adminName,
@@ -1301,7 +1325,6 @@ function changeAdminCredentials() {
         document.getElementById('settingsNewPassword').value = '';
     }
     
-    // ذخیره تنظیمات
     const settings = {
         schoolName: DATA.settings.schoolName,
         adminName: DATA.settings.adminName,
@@ -1654,7 +1677,6 @@ document.querySelectorAll('.sidebar-menu li a').forEach(link => {
             document.getElementById('pageTitle').innerHTML = title[0];
             document.getElementById('pageSubtitle').textContent = title[1];
             
-            // بارگذاری تنظیمات در صفحه تنظیمات
             if (page === 'settings') {
                 document.getElementById('settingsSchoolName').value = DATA.settings.schoolName || '';
                 document.getElementById('settingsAdminName').value = DATA.settings.adminName || '';
@@ -1739,7 +1761,8 @@ document.head.appendChild(styleShake);
 
 console.log('🏫 سیستم مدیریت مدرسه');
 console.log('💻 ساخته شده توسط BitVolt.MTV');
-console.log('🔑 برای ورود با مدیر تماس بگیرید');
+console.log('🔑 رمز پیش‌فرض: Admin@1404');
+console.log('👤 نام کاربری: admin');
 </script>
 </body>
 </html>
