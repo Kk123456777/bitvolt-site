@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏫 سیستم مدیریت مدرسه - BitVolt</title>
+    <title>🏫 سیستم مدیریت مدرسه هوشمند - BitVolt</title>
     
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
@@ -25,376 +30,261 @@
             --glass-border: rgba(255,255,255,0.08);
             --text: #FFFFFF;
             --text-secondary: #8888aa;
-            --shadow: 0 20px 60px rgba(0,0,0,0.6);
-            --radius: 20px;
-            --transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+            --shadow: 0 15px 45px rgba(0,0,0,0.6);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
         }
-        body { font-family: 'Vazirmatn', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+        body { font-family: 'Vazirmatn', sans-serif; background: var(--dark); color: var(--text); min-height: 100vh; }
         
         .bg-animation {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(108,60,225,0.2) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(0,212,255,0.1) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(255,107,107,0.05) 0%, transparent 50%);
-            animation: bgPulse 20s ease-in-out infinite;
-        }
-        @keyframes bgPulse { 0%,100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
-        
-        .floating-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .particle {
-            position: absolute; width: 3px; height: 3px; background: var(--primary-light); border-radius: 50%;
-            animation: float 25s infinite; opacity: 0.2;
-            box-shadow: 0 0 10px var(--primary-light);
-        }
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+            background: radial-gradient(ellipse at 20% 50%, rgba(108,60,225,0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, rgba(0,212,255,0.08) 0%, transparent 60%);
         }
         
+        /* Login */
         .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .login-box {
-            background: var(--dark-card); border-radius: var(--radius); padding: 50px 40px; max-width: 450px; width: 100%;
-            border: 1px solid var(--glass-border); box-shadow: var(--shadow); backdrop-filter: blur(30px);
-            animation: slideUp 0.8s cubic-bezier(0.175,0.885,0.32,1.275);
-            position: relative;
-            overflow: hidden;
+            background: var(--dark-card); border-radius: var(--radius); padding: 50px 40px; max-width: 440px; width: 100%;
+            border: 1px solid var(--glass-border); box-shadow: var(--shadow);
         }
-        .login-box::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(108,60,225,0.05) 0%, transparent 50%);
-            animation: rotateGlow 20s linear infinite;
-        }
-        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .login-box > * { position: relative; z-index: 1; }
-        
-        @keyframes slideUp { from { opacity: 0; transform: translateY(60px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        
         .login-logo { text-align: center; margin-bottom: 30px; }
-        .login-logo .icon { font-size: 60px; display: inline-block; animation: floatLogo 3s ease-in-out infinite; }
-        @keyframes floatLogo { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .login-logo .icon { font-size: 55px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-logo h1 { font-size: 26px; margin-top: 10px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .login-logo h1 { font-size: 28px; margin-top: 10px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .login-logo p { color: var(--text-secondary); font-size: 14px; margin-top: 5px; }
-        .login-logo .default-pass { font-size: 12px; color: var(--warning); margin-top: 8px; background: rgba(255,215,0,0.1); padding: 6px 12px; border-radius: 8px; display: inline-block; border: 1px solid rgba(255,215,0,0.2); }
-        
-        .login-form .form-group { margin-bottom: 20px; }
-        .login-form label { display: block; color: var(--text-secondary); font-size: 13px; margin-bottom: 8px; font-weight: 500; letter-spacing: 0.5px; }
+        .login-form .form-group { margin-bottom: 18px; }
+        .login-form label { display: block; color: var(--text-secondary); font-size: 13px; margin-bottom: 6px; font-weight: 500; }
         .login-form input, .login-form select {
-            width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.03); border: 2px solid var(--glass-border);
-            border-radius: 12px; color: var(--text); font-size: 15px; font-family: 'Vazirmatn', sans-serif;
+            width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.05); border: 2px solid var(--glass-border);
+            border-radius: 10px; color: var(--text); font-size: 14px; font-family: 'Vazirmatn', sans-serif;
             transition: var(--transition); outline: none;
         }
-        .login-form input:focus, .login-form select:focus {
-            border-color: var(--primary); box-shadow: 0 0 40px rgba(108,60,225,0.15); background: rgba(255,255,255,0.06);
-        }
-        .login-form input::placeholder { color: var(--text-secondary); opacity: 0.3; }
+        .login-form input:focus, .login-form select:focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(108,60,225,0.15); background: rgba(255,255,255,0.08); }
         .login-form .password-wrapper { position: relative; }
         .login-form .password-wrapper .toggle-password {
             position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
             background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 18px;
-            opacity: 0.5; transition: var(--transition);
         }
-        .login-form .password-wrapper .toggle-password:hover { opacity: 1; }
-        
         .login-btn {
-            width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border: none; border-radius: 12px; color: white; font-size: 18px; font-weight: 600;
+            width: 100%; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none; border-radius: 10px; color: white; font-size: 17px; font-weight: 600;
             font-family: 'Vazirmatn', sans-serif; cursor: pointer; transition: var(--transition); margin-top: 10px;
-            position: relative; overflow: hidden;
         }
-        .login-btn::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: btnShine 3s ease-in-out infinite;
-        }
-        @keyframes btnShine { 0%,100% { transform: translate(-30%, -30%); } 50% { transform: translate(30%, 30%); } }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(108,60,225,0.4); }
         
-        .login-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(108,60,225,0.4); }
-        .login-btn:active { transform: scale(0.98); }
-        .login-btn .loader { display: none; width: 22px; height: 22px; border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid white; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .login-error { color: var(--danger); font-size: 13px; text-align: center; margin-top: 15px; display: none; }
-        
+        /* Dashboard */
         .dashboard { display: none; min-height: 100vh; }
         .dashboard.active { display: flex; }
         
         .sidebar {
-            width: 280px; background: var(--dark-card); padding: 25px 20px; border-left: 1px solid var(--glass-border);
-            min-height: 100vh; position: fixed; right: 0; top: 0; bottom: 0; overflow-y: auto;
-            transition: var(--transition); z-index: 1000;
+            width: 270px; background: var(--dark-card); padding: 20px 16px; border-left: 1px solid var(--glass-border);
+            min-height: 100vh; position: fixed; right: 0; top: 0; bottom: 0; overflow-y: auto; z-index: 1000;
         }
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar { width: 3px; }
         .sidebar::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
         
-        .sidebar-brand { text-align: center; padding-bottom: 25px; border-bottom: 1px solid var(--glass-border); margin-bottom: 25px; }
-        .sidebar-brand .brand-icon { font-size: 45px; display: inline-block; animation: floatLogo 3s ease-in-out infinite; }
-        .sidebar-brand h2 { font-size: 20px; margin-top: 8px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .sidebar-brand .user-info { color: var(--text-secondary); font-size: 13px; margin-top: 5px; }
-        .sidebar-brand .school-name { color: var(--text-secondary); font-size: 14px; margin-top: 8px; padding: 6px 12px; background: rgba(108,60,225,0.1); border-radius: 8px; display: inline-block; border: 1px solid rgba(108,60,225,0.2); }
+        .sidebar-brand { text-align: center; padding-bottom: 20px; border-bottom: 1px solid var(--glass-border); margin-bottom: 20px; }
+        .sidebar-brand .brand-icon { font-size: 38px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sidebar-brand h2 { font-size: 19px; margin-top: 6px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sidebar-brand .user-info { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
         
-        .sidebar-menu { list-style: none; padding: 0; }
-        .sidebar-menu li { margin-bottom: 5px; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 3px; }
         .sidebar-menu li a {
-            display: flex; align-items: center; padding: 14px 18px; color: var(--text-secondary);
-            text-decoration: none; border-radius: 12px; transition: var(--transition);
-            font-size: 14px; font-weight: 500; cursor: pointer;
+            display: flex; align-items: center; padding: 12px 16px; color: var(--text-secondary);
+            text-decoration: none; border-radius: 10px; transition: var(--transition);
+            font-size: 13px; font-weight: 500; cursor: pointer; gap: 12px;
         }
-        .sidebar-menu li a i { margin-left: 15px; width: 22px; font-size: 18px; }
-        .sidebar-menu li a:hover { background: rgba(108,60,225,0.12); color: var(--text); transform: translateX(-5px); }
-        .sidebar-menu li a.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 5px 25px rgba(108,60,225,0.3); }
-        .sidebar-menu li a .badge { margin-right: auto; background: var(--danger); color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; animation: pulse 2s infinite; }
+        .sidebar-menu li a i { width: 20px; font-size: 16px; }
+        .sidebar-menu li a:hover { background: rgba(108,60,225,0.12); color: var(--text); }
+        .sidebar-menu li a.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 5px 20px rgba(108,60,225,0.3); }
+        .sidebar-menu li a .badge { margin-right: auto; background: var(--danger); color: white; padding: 1px 10px; border-radius: 20px; font-size: 10px; }
         
-        .sidebar-footer { position: absolute; bottom: 20px; left: 20px; right: 20px; padding-top: 20px; border-top: 1px solid var(--glass-border); }
-        .sidebar-footer a { display: flex; align-items: center; padding: 12px 18px; color: var(--text-secondary); text-decoration: none; border-radius: 12px; transition: var(--transition); font-size: 14px; cursor: pointer; }
-        .sidebar-footer a:hover { background: rgba(255,23,68,0.12); color: var(--danger); transform: translateX(-5px); }
-        .sidebar-footer a i { margin-left: 15px; }
+        .sidebar-footer { position: absolute; bottom: 20px; left: 16px; right: 16px; padding-top: 15px; border-top: 1px solid var(--glass-border); }
+        .sidebar-footer a { display: flex; align-items: center; padding: 10px 16px; color: var(--text-secondary); text-decoration: none; border-radius: 10px; transition: var(--transition); font-size: 13px; cursor: pointer; gap: 12px; }
+        .sidebar-footer a:hover { background: rgba(255,23,68,0.12); color: var(--danger); }
         
-        .main-content { margin-right: 280px; padding: 30px 40px; flex: 1; width: calc(100% - 280px); }
+        .main-content { margin-right: 270px; padding: 25px 35px; flex: 1; }
         
         .header {
-            display: flex; justify-content: space-between; align-items: center; padding: 20px 30px;
+            display: flex; justify-content: space-between; align-items: center; padding: 18px 25px;
             background: var(--dark-card); border-radius: var(--radius); border: 1px solid var(--glass-border);
-            margin-bottom: 30px; backdrop-filter: blur(20px);
+            margin-bottom: 25px;
         }
-        .header-left h1 { font-size: 24px; font-weight: 700; }
-        .header-left h1 span { background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .header-left p { color: var(--text-secondary); font-size: 14px; margin-top: 5px; }
-        .header-right { display: flex; align-items: center; gap: 20px; }
-        .header-right .notification-btn { background: none; border: none; color: var(--text-secondary); font-size: 22px; cursor: pointer; position: relative; transition: var(--transition); }
-        .header-right .notification-btn:hover { color: var(--text); transform: scale(1.1); }
-        .header-right .notification-btn .dot { position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; background: var(--danger); border-radius: 50%; border: 2px solid var(--dark-card); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+        .header-left h1 { font-size: 20px; font-weight: 700; }
+        .header-left p { color: var(--text-secondary); font-size: 13px; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .header-right .profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 14px; border-radius: 10px; transition: var(--transition); }
+        .header-right .profile:hover { background: rgba(255,255,255,0.04); }
+        .header-right .profile .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; }
         
-        .header-right .profile { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 8px 16px; border-radius: 12px; transition: var(--transition); }
-        .header-right .profile:hover { background: rgba(255,255,255,0.03); }
-        .header-right .profile .avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; box-shadow: 0 5px 20px rgba(108,60,225,0.3); }
-        .header-right .profile .info { text-align: left; }
-        .header-right .profile .info .name { font-size: 14px; font-weight: 600; }
-        .header-right .profile .info .role { font-size: 12px; color: var(--text-secondary); }
-        
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 25px; }
         .stat-card {
-            background: var(--dark-card); border-radius: var(--radius); padding: 25px; border: 1px solid var(--glass-border);
-            transition: var(--transition); position: relative; overflow: hidden; cursor: pointer;
+            background: var(--dark-card); border-radius: var(--radius); padding: 22px; border: 1px solid var(--glass-border);
+            transition: var(--transition);
         }
-        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 50px rgba(108,60,225,0.1); }
-        .stat-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            opacity: 0; transition: var(--transition);
-        }
-        .stat-card:hover::before { opacity: 1; }
-        .stat-card .stat-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; }
-        .stat-card .stat-number { font-size: 34px; font-weight: 700; margin: 5px 0; background: linear-gradient(135deg, var(--text), var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-card .stat-label { color: var(--text-secondary); font-size: 14px; }
-        .stat-card .stat-change { position: absolute; top: 20px; left: 20px; font-size: 12px; padding: 4px 12px; border-radius: 20px; background: rgba(0,200,83,0.12); color: var(--success); }
-        .stat-card .stat-change.down { background: rgba(255,23,68,0.12); color: var(--danger); }
+        .stat-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 8px 30px rgba(108,60,225,0.1); }
+        .stat-card .stat-icon { font-size: 28px; margin-bottom: 8px; display: inline-block; }
+        .stat-card .stat-number { font-size: 28px; font-weight: 700; margin: 4px 0; }
+        .stat-card .stat-label { color: var(--text-secondary); font-size: 13px; }
         
-        .content-panel { display: none; animation: fadeIn 0.5s ease; }
+        .content-panel { display: none; animation: fadeIn 0.4s ease; }
         .content-panel.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px; }
-        .panel-header h2 { font-size: 22px; font-weight: 700; }
-        .panel-header h2 i { color: var(--primary-light); margin-left: 10px; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .panel-header h2 { font-size: 20px; font-weight: 700; }
         .panel-header .actions { display: flex; gap: 10px; flex-wrap: wrap; }
         
         .btn {
-            padding: 12px 24px; border: none; border-radius: 12px; font-size: 14px; font-weight: 600;
+            padding: 10px 20px; border: none; border-radius: 10px; font-size: 13px; font-weight: 600;
             font-family: 'Vazirmatn', sans-serif; cursor: pointer; transition: var(--transition);
             display: inline-flex; align-items: center; gap: 8px;
         }
         .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(108,60,225,0.4); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(108,60,225,0.35); }
         .btn-success { background: linear-gradient(135deg, var(--success), #009624); color: white; }
-        .btn-success:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(0,200,83,0.4); }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,200,83,0.35); }
         .btn-danger { background: linear-gradient(135deg, var(--danger), #c62828); color: white; }
-        .btn-danger:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,23,68,0.4); }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,23,68,0.35); }
         .btn-warning { background: linear-gradient(135deg, var(--warning), #f9a825); color: var(--dark); }
-        .btn-warning:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,215,0,0.4); }
+        .btn-warning:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.35); }
         .btn-outline { background: transparent; border: 2px solid var(--glass-border); color: var(--text-secondary); }
-        .btn-outline:hover { border-color: var(--primary); color: var(--text); background: rgba(108,60,225,0.08); transform: translateY(-3px); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--text); background: rgba(108,60,225,0.08); }
+        .btn-sm { padding: 6px 14px; font-size: 11px; }
         .btn-excel { background: linear-gradient(135deg, #217346, #1e7e4a); color: white; }
-        .btn-excel:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(33,115,70,0.4); }
-        .btn-glow { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: 0 5px 30px rgba(108,60,225,0.3); }
-        .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(108,60,225,0.5); }
-        .btn-sm { padding: 8px 16px; font-size: 12px; }
+        .btn-excel:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(33,115,70,0.35); }
         
         .table-container { background: var(--dark-card); border-radius: var(--radius); border: 1px solid var(--glass-border); overflow: hidden; overflow-x: auto; }
         .table-container table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        .table-container table thead { background: rgba(108,60,225,0.1); }
-        .table-container table th { padding: 16px 20px; text-align: right; font-weight: 600; font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--glass-border); }
-        .table-container table td { padding: 14px 20px; border-bottom: 1px solid var(--glass-border); font-size: 14px; }
+        .table-container table thead { background: rgba(108,60,225,0.12); }
+        .table-container table th { padding: 14px 18px; text-align: right; font-weight: 600; font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid var(--glass-border); }
+        .table-container table td { padding: 12px 18px; border-bottom: 1px solid var(--glass-border); font-size: 13px; }
         .table-container table tr:hover td { background: rgba(255,255,255,0.02); }
-        .table-container table .status-badge { padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .status-badge.active { background: rgba(0,200,83,0.15); color: var(--success); }
-        .status-badge.inactive { background: rgba(255,23,68,0.15); color: var(--danger); }
-        .status-badge.pending { background: rgba(255,215,0,0.15); color: var(--warning); }
+        .status-badge { padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .status-badge.active { background: rgba(0,200,83,0.2); color: var(--success); }
+        .status-badge.inactive { background: rgba(255,23,68,0.2); color: var(--danger); }
+        .status-badge.pending { background: rgba(255,215,0,0.2); color: var(--warning); }
+        .status-badge.excellent { background: rgba(0,200,83,0.25); color: #00e676; }
+        .status-badge.good { background: rgba(0,200,83,0.15); color: #69f0ae; }
+        .status-badge.fail { background: rgba(255,23,68,0.2); color: #ff5252; }
         
-        .table-container .actions-cell { display: flex; gap: 8px; }
-        .table-container .actions-cell button { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 6px; border-radius: 8px; transition: var(--transition); font-size: 16px; }
-        .table-container .actions-cell button:hover { background: rgba(108,60,225,0.12); color: var(--primary); transform: scale(1.1); }
-        .table-container .actions-cell button.danger:hover { background: rgba(255,23,68,0.12); color: var(--danger); }
+        .actions-cell { display: flex; gap: 6px; flex-wrap: wrap; }
+        .actions-cell button { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px 8px; border-radius: 6px; transition: var(--transition); font-size: 14px; }
+        .actions-cell button:hover { background: rgba(108,60,225,0.12); color: var(--primary); }
+        .actions-cell button.danger:hover { background: rgba(255,23,68,0.12); color: var(--danger); }
         
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(15px); z-index: 9999;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 9999;
             align-items: center; justify-content: center; animation: fadeIn 0.3s ease;
         }
         .modal-overlay.active { display: flex; }
         .modal {
-            background: var(--dark-card); border-radius: var(--radius); padding: 40px;
-            max-width: 600px; width: 95%; max-height: 90vh; overflow-y: auto;
-            border: 1px solid var(--glass-border); box-shadow: var(--shadow); animation: slideUp 0.4s ease;
+            background: var(--dark-card); border-radius: var(--radius); padding: 35px;
+            max-width: 650px; width: 95%; max-height: 90vh; overflow-y: auto;
+            border: 1px solid var(--glass-border); box-shadow: var(--shadow);
         }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .modal-header h3 { font-size: 20px; font-weight: 700; }
-        .modal-header h3 i { color: var(--primary-light); margin-left: 10px; }
-        .modal-header .close-modal { background: none; border: none; color: var(--text-secondary); font-size: 28px; cursor: pointer; transition: var(--transition); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-header h3 { font-size: 19px; font-weight: 700; }
+        .modal-header .close-modal { background: none; border: none; color: var(--text-secondary); font-size: 26px; cursor: pointer; transition: var(--transition); }
         .modal-header .close-modal:hover { color: var(--danger); transform: rotate(90deg); }
-        .modal .form-group { margin-bottom: 18px; }
-        .modal .form-group label { display: block; color: var(--text-secondary); font-size: 13px; margin-bottom: 6px; font-weight: 500; }
+        .modal .form-group { margin-bottom: 15px; }
+        .modal .form-group label { display: block; color: var(--text-secondary); font-size: 13px; margin-bottom: 5px; font-weight: 500; }
         .modal .form-group input, .modal .form-group select, .modal .form-group textarea {
-            width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 2px solid var(--glass-border);
-            border-radius: 10px; color: var(--text); font-size: 14px; font-family: 'Vazirmatn', sans-serif;
+            width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.05); border: 2px solid var(--glass-border);
+            border-radius: 8px; color: var(--text); font-size: 13px; font-family: 'Vazirmatn', sans-serif;
             transition: var(--transition); outline: none;
         }
         .modal .form-group input:focus, .modal .form-group select:focus, .modal .form-group textarea:focus {
-            border-color: var(--primary); box-shadow: 0 0 30px rgba(108,60,225,0.1); background: rgba(255,255,255,0.05);
+            border-color: var(--primary); box-shadow: 0 0 20px rgba(108,60,225,0.1);
         }
-        .modal .form-group textarea { resize: vertical; min-height: 80px; }
-        .modal .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .modal .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .modal .form-group textarea { resize: vertical; min-height: 60px; }
         
-        .about-school { background: var(--dark-card); border-radius: var(--radius); padding: 40px; border: 1px solid var(--glass-border); }
-        .about-school .school-header { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
-        .about-school .school-header .school-icon { font-size: 60px; animation: floatLogo 3s ease-in-out infinite; }
-        .about-school .school-header h2 { font-size: 28px; font-weight: 700; }
-        .about-school .school-header p { color: var(--text-secondary); }
-        .about-school .school-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 30px 0; }
-        .about-school .school-stats .stat-item { text-align: center; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--glass-border); transition: var(--transition); }
-        .about-school .school-stats .stat-item:hover { background: rgba(108,60,225,0.05); transform: translateY(-3px); }
-        .about-school .school-stats .stat-item .number { font-size: 28px; font-weight: 700; color: var(--primary-light); }
-        .about-school .school-stats .stat-item .label { color: var(--text-secondary); font-size: 13px; margin-top: 5px; }
-        .about-school .school-description { color: var(--text-secondary); line-height: 2; font-size: 15px; }
+        .toast-container { position: fixed; top: 20px; left: 20px; z-index: 99999; display: flex; flex-direction: column; gap: 8px; }
+        .toast {
+            padding: 14px 22px; border-radius: 10px; color: white; font-size: 13px; font-weight: 500;
+            animation: slideInRight 0.4s ease; box-shadow: var(--shadow); min-width: 260px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+        .toast.warning { background: var(--warning); color: var(--dark); }
+        .toast.info { background: var(--primary); }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+        .toast .close-toast { background: none; border: none; color: inherit; cursor: pointer; font-size: 16px; margin-right: auto; opacity: 0.6; }
+        .toast .close-toast:hover { opacity: 1; }
         
-        .footer { margin-top: 50px; padding: 30px; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 14px; }
-        .footer .brand { color: var(--primary-light); font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .footer .heart { color: var(--danger); display: inline-block; animation: heartbeat 1.5s ease infinite; }
-        @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-        
-        .welcome-overlay {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); z-index: 99999;
-            align-items: center; justify-content: center; animation: fadeIn 0.5s ease;
+        .class-card {
+            background: var(--dark-card); border: 1px solid var(--glass-border); border-radius: var(--radius);
+            padding: 20px; transition: var(--transition);
         }
-        .welcome-overlay.active { display: flex; }
-        .welcome-box {
-            background: var(--dark-card); border-radius: var(--radius); padding: 50px 60px;
-            max-width: 500px; width: 95%; text-align: center;
-            border: 1px solid var(--glass-border); box-shadow: var(--shadow);
-            animation: slideUp 0.6s cubic-bezier(0.175,0.885,0.32,1.275);
-            position: relative;
-            overflow: hidden;
-        }
-        .welcome-box::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(108,60,225,0.08) 0%, transparent 50%);
-            animation: rotateGlow 20s linear infinite;
-        }
-        .welcome-box > * { position: relative; z-index: 1; }
-        .welcome-box .welcome-icon { font-size: 80px; display: inline-block; animation: floatLogo 3s ease-in-out infinite; }
-        .welcome-box h2 { font-size: 32px; margin: 20px 0 10px; background: linear-gradient(135deg, var(--primary-light), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .welcome-box p { color: var(--text-secondary); font-size: 16px; line-height: 1.8; }
-        .welcome-box .welcome-name { color: var(--primary-light); font-weight: 700; font-size: 18px; }
-        .welcome-box .btn { margin-top: 20px; }
+        .class-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .class-card .class-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .class-card .class-info { color: var(--text-secondary); font-size: 13px; margin-bottom: 4px; }
+        .class-card .class-stats { display: flex; gap: 15px; margin-top: 12px; flex-wrap: wrap; }
+        .class-card .class-stats span { background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 8px; font-size: 12px; }
         
         @media (max-width: 992px) {
-            .sidebar { transform: translateX(100%); width: 280px; }
+            .sidebar { transform: translateX(100%); width: 270px; }
             .sidebar.open { transform: translateX(0); }
-            .main-content { margin-right: 0; width: 100%; padding: 20px; }
-            .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .main-content { margin-right: 0; padding: 15px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
             .header-right { width: 100%; justify-content: space-between; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .modal .form-row { grid-template-columns: 1fr; }
-            .welcome-box { padding: 30px 20px; }
         }
         @media (max-width: 576px) {
             .stats-grid { grid-template-columns: 1fr; }
-            .login-box { padding: 30px 20px; }
-            .modal { padding: 25px; }
+            .login-box { padding: 25px 18px; }
+            .modal { padding: 20px; }
             .panel-header { flex-direction: column; align-items: stretch; }
-            .panel-header .actions { flex-direction: column; }
             .btn { justify-content: center; }
-            .welcome-box { padding: 25px 15px; }
-            .welcome-box .welcome-icon { font-size: 50px; }
-            .welcome-box h2 { font-size: 24px; }
         }
         
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
         
-        .text-center { text-align: center; }
         .text-muted { color: var(--text-secondary); }
-        .toast-container { position: fixed; top: 20px; left: 20px; z-index: 99999; display: flex; flex-direction: column; gap: 10px; }
-        .toast {
-            padding: 16px 24px; border-radius: 12px; color: white; font-size: 14px; font-weight: 500;
-            animation: slideInRight 0.4s ease; box-shadow: var(--shadow); min-width: 280px;
-            display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.1);
-        }
-        .toast.success { background: rgba(0,200,83,0.9); backdrop-filter: blur(10px); }
-        .toast.error { background: rgba(255,23,68,0.9); backdrop-filter: blur(10px); }
-        .toast.warning { background: rgba(255,215,0,0.9); backdrop-filter: blur(10px); color: var(--dark); }
-        .toast.info { background: rgba(108,60,225,0.9); backdrop-filter: blur(10px); }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-        .toast .close-toast { background: none; border: none; color: inherit; cursor: pointer; font-size: 18px; margin-right: auto; opacity: 0.7; transition: var(--transition); }
-        .toast .close-toast:hover { opacity: 1; transform: scale(1.1); }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 12px; }
+        .mb-2 { margin-bottom: 12px; }
         
-        .typing-text { border-left: 2px solid var(--primary); padding-left: 5px; animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { border-color: transparent; } }
-        
-        .welcome-text { font-size: 16px; color: var(--text-secondary); margin-top: 5px; }
-        .welcome-text span { color: var(--primary-light); font-weight: 600; }
+        .footer { margin-top: 40px; padding: 25px; text-align: center; border-top: 1px solid var(--glass-border); color: var(--text-secondary); font-size: 13px; }
+        .footer .brand { color: var(--primary-light); font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer .heart { color: var(--danger); display: inline-block; animation: heartbeat 1.5s ease infinite; }
+        @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
     </style>
 </head>
 <body>
 
 <div class="bg-animation"></div>
-<div class="floating-particles" id="particles"></div>
 
-<!-- ===== صفحه ورود ===== -->
+<!-- ===== LOGIN ===== -->
 <div class="login-container" id="loginPage">
     <div class="login-box">
         <div class="login-logo">
             <div class="icon">🏫</div>
-            <h1>مدیریت مدرسه</h1>
-            <p>سیستم هوشمند مدیریت آموزشی</p>
-            <div class="default-pass">🔑 رمز پیش‌فرض: <strong>Admin@1404</strong></div>
-            <div class="welcome-text" id="loginWelcome">به سامانه خوش آمدید</div>
+            <h1>مدیریت هوشمند مدرسه</h1>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">سیستم جامع مدیریت آموزشی</p>
         </div>
-        
         <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label><i class="fas fa-user"></i> نام کاربری / شناسه</label>
-                <input type="text" id="loginUsername" placeholder="نام کاربری خود را وارد کنید" required>
+                <label><i class="fas fa-user"></i> نام کاربری</label>
+                <input type="text" id="loginUsername" placeholder="نام کاربری" value="admin" required>
             </div>
-            
             <div class="form-group">
                 <label><i class="fas fa-lock"></i> رمز عبور</label>
                 <div class="password-wrapper">
-                    <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید" required>
+                    <input type="password" id="loginPassword" placeholder="رمز عبور" value="Admin@1404" required>
                     <button type="button" class="toggle-password" onclick="togglePassword()">
                         <i class="fas fa-eye" id="passwordIcon"></i>
                     </button>
                 </div>
             </div>
-            
             <div class="form-group">
                 <label><i class="fas fa-user-tie"></i> نقش</label>
                 <select id="loginRole" required>
@@ -402,62 +292,35 @@
                     <option value="teacher">👨‍🏫 معلم</option>
                 </select>
             </div>
-            
             <button type="submit" class="login-btn" id="loginBtn">
                 <span id="loginText">🚀 ورود به سیستم</span>
-                <span class="loader" id="loginLoader"></span>
+                <span class="loader" id="loginLoader" style="display:none;">...</span>
             </button>
-            
-            <div class="login-error" id="loginError">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="errorMessage">نام کاربری یا رمز عبور اشتباه است!</span>
-            </div>
-            
-            <div style="text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-secondary); opacity: 0.5;">
-                <i class="fas fa-shield-alt"></i> سیستم امن مدیریت مدرسه
+            <div class="login-error" id="loginError" style="display:none; color:var(--danger); font-size:13px; text-align:center; margin-top:12px;">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">نام کاربری یا رمز عبور اشتباه است!</span>
             </div>
         </form>
     </div>
 </div>
 
-<!-- ===== Welcome Modal ===== -->
-<div class="welcome-overlay" id="welcomeModal">
-    <div class="welcome-box">
-        <div class="welcome-icon">🎉</div>
-        <h2 id="welcomeTitle">خوش آمدید!</h2>
-        <p id="welcomeMessage">
-            <span class="welcome-name" id="welcomeName">مدیر</span> عزیز<br>
-            به سیستم مدیریت مدرسه خوش آمدید.<br>
-            <span style="font-size: 14px; color: var(--text-secondary);" id="welcomeSchool">مدرسه نمونه</span>
-        </p>
-        <button class="btn btn-glow" onclick="closeWelcome()">
-            <i class="fas fa-rocket"></i> شروع کنید
-        </button>
-    </div>
-</div>
-
-<!-- ===== داشبورد ===== -->
+<!-- ===== DASHBOARD ===== -->
 <div class="dashboard" id="dashboard">
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <div class="brand-icon">🏫</div>
-            <h2 id="sidebarSchoolName">مدیریت مدرسه</h2>
+            <h2>مدیریت مدرسه</h2>
             <div class="user-info" id="sidebarUserInfo">مدیر سیستم</div>
-            <div class="school-name" id="sidebarSchoolDisplay">🏛️ مدرسه نمونه</div>
         </div>
-        
         <ul class="sidebar-menu">
             <li><a class="active" data-page="dashboard-home"><i class="fas fa-home"></i> داشبورد</a></li>
             <li><a data-page="students"><i class="fas fa-user-graduate"></i> دانش‌آموزان</a></li>
             <li><a data-page="teachers"><i class="fas fa-chalkboard-teacher"></i> معلمان</a></li>
+            <li><a data-page="classes"><i class="fas fa-school"></i> کلاس‌ها <span class="badge">جدید</span></a></li>
             <li><a data-page="subjects"><i class="fas fa-book"></i> دروس</a></li>
-            <li><a data-page="grades"><i class="fas fa-star"></i> نمرات <span class="badge">جدید</span></a></li>
+            <li><a data-page="grades"><i class="fas fa-star"></i> نمرات</a></li>
             <li><a data-page="attendance"><i class="fas fa-check-circle"></i> حضور و غیاب</a></li>
             <li><a data-page="reports"><i class="fas fa-chart-bar"></i> گزارشات</a></li>
-            <li><a data-page="settings"><i class="fas fa-cog"></i> تنظیمات</a></li>
-            <li><a data-page="about"><i class="fas fa-info-circle"></i> درباره مدرسه</a></li>
         </ul>
-        
         <div class="sidebar-footer">
             <a onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> خروج از سیستم</a>
         </div>
@@ -466,51 +329,46 @@
     <div class="main-content">
         <header class="header">
             <div class="header-left">
-                <h1 id="pageTitle">🏠 <span>داشبورد</span></h1>
+                <h1 id="pageTitle">🏠 داشبورد</h1>
                 <p id="pageSubtitle">خلاصه وضعیت مدرسه</p>
             </div>
             <div class="header-right">
-                <button class="notification-btn" onclick="showNotifications()">
-                    <i class="fas fa-bell"></i>
-                    <span class="dot"></span>
-                </button>
                 <div class="profile" onclick="toggleProfileMenu()">
                     <div class="avatar" id="userAvatar">AD</div>
-                    <div class="info">
-                        <div class="name" id="userName">مدیر سیستم</div>
-                        <div class="role" id="userRole">مدیر</div>
+                    <div>
+                        <div class="text" id="userName" style="font-weight:600; font-size:14px;">مدیر سیستم</div>
+                        <div class="text-muted" id="userRole" style="font-size:12px;">مدیر</div>
                     </div>
                 </div>
             </div>
         </header>
         
-        <!-- ===== داشبورد ===== -->
+        <!-- ===== DASHBOARD HOME ===== -->
         <div class="content-panel active" id="panel-dashboard-home">
             <div class="stats-grid" id="statsGrid">
-                <div class="stat-card"><div class="stat-icon">👨‍🎓</div><div class="stat-number" id="statStudents">0</div><div class="stat-label">تعداد دانش‌آموزان</div><div class="stat-change">+12%</div></div>
-                <div class="stat-card"><div class="stat-icon">👨‍🏫</div><div class="stat-number" id="statTeachers">0</div><div class="stat-label">تعداد معلمان</div><div class="stat-change">+5%</div></div>
-                <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-number" id="statSubjects">0</div><div class="stat-label">تعداد دروس</div><div class="stat-change">+8%</div></div>
-                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="statAverage">0</div><div class="stat-label">میانگین نمرات</div><div class="stat-change">+3%</div></div>
-                <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-number" id="statAttendance">0%</div><div class="stat-label">درصد حضور</div><div class="stat-change">+2%</div></div>
-                <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-number" id="statFinance">0</div><div class="stat-label">شهریه دریافتی</div><div class="stat-change up">+15%</div></div>
+                <div class="stat-card"><div class="stat-icon">👨‍🎓</div><div class="stat-number" id="statStudents">0</div><div class="stat-label">دانش‌آموزان</div></div>
+                <div class="stat-card"><div class="stat-icon">👨‍🏫</div><div class="stat-number" id="statTeachers">0</div><div class="stat-label">معلمان</div></div>
+                <div class="stat-card"><div class="stat-icon">🏫</div><div class="stat-number" id="statClasses">0</div><div class="stat-label">کلاس‌ها</div></div>
+                <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-number" id="statSubjects">0</div><div class="stat-label">دروس</div></div>
+                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="statAverage">0</div><div class="stat-label">میانگین نمرات</div></div>
+                <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-number" id="statAttendance">0%</div><div class="stat-label">درصد حضور</div></div>
             </div>
-            
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
-                <div class="table-container" style="padding: 20px;">
-                    <h3 style="margin-bottom: 15px;">📊 آخرین فعالیت‌ها</h3>
-                    <div id="recentActivities"><p class="text-muted text-center" style="padding: 30px;">هیچ فعالیتی ثبت نشده است</p></div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div class="table-container" style="padding:18px;">
+                    <h3 style="margin-bottom:12px; font-size:16px;">📋 آخرین فعالیت‌ها</h3>
+                    <div id="recentActivities"><p class="text-muted text-center" style="padding:20px;">هیچ فعالیتی ثبت نشده است</p></div>
                 </div>
-                <div class="table-container" style="padding: 20px;">
-                    <h3 style="margin-bottom: 15px;">🚨 هشدارها</h3>
-                    <div id="alertsList"><p class="text-muted text-center" style="padding: 30px;">✅ همه چیز عالی است!</p></div>
+                <div class="table-container" style="padding:18px;">
+                    <h3 style="margin-bottom:12px; font-size:16px;">🚨 هشدارها</h3>
+                    <div id="alertsList"><p class="text-muted text-center" style="padding:20px;">هیچ هشداری وجود ندارد</p></div>
                 </div>
             </div>
         </div>
         
-        <!-- ===== دانش‌آموزان ===== -->
+        <!-- ===== STUDENTS ===== -->
         <div class="content-panel" id="panel-students">
             <div class="panel-header">
-                <h2><i class="fas fa-user-graduate"></i> مدیریت دانش‌آموزان</h2>
+                <h2>👨‍🎓 مدیریت دانش‌آموزان</h2>
                 <div class="actions">
                     <button class="btn btn-primary" onclick="openModal('addStudent')"><i class="fas fa-plus"></i> افزودن دانش‌آموز</button>
                     <button class="btn btn-excel" onclick="exportToExcel('students')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
@@ -518,16 +376,16 @@
             </div>
             <div class="table-container">
                 <table>
-                    <thead><tr><th>شناسه</th><th>نام</th><th>پایه</th><th>کلاس</th><th>میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
-                    <tbody id="studentsTableBody"><tr><td colspan="7" class="text-muted text-center" style="padding: 30px;">هیچ دانش‌آموزی ثبت نشده است</td></tr></tbody>
+                    <thead><tr><th>شناسه</th><th>نام</th><th>کلاس</th><th>میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                    <tbody id="studentsTableBody"></tbody>
                 </table>
             </div>
         </div>
         
-        <!-- ===== معلمان ===== -->
+        <!-- ===== TEACHERS ===== -->
         <div class="content-panel" id="panel-teachers">
             <div class="panel-header">
-                <h2><i class="fas fa-chalkboard-teacher"></i> مدیریت معلمان</h2>
+                <h2>👨‍🏫 مدیریت معلمان</h2>
                 <div class="actions">
                     <button class="btn btn-primary" onclick="openModal('addTeacher')"><i class="fas fa-plus"></i> افزودن معلم</button>
                     <button class="btn btn-excel" onclick="exportToExcel('teachers')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
@@ -535,16 +393,28 @@
             </div>
             <div class="table-container">
                 <table>
-                    <thead><tr><th>شناسه</th><th>نام معلم</th><th>درس تخصصی</th><th>شماره تماس</th><th>وضعیت</th><th>عملیات</th></tr></thead>
-                    <tbody id="teachersTableBody"><tr><td colspan="6" class="text-muted text-center" style="padding: 30px;">هیچ معلمی ثبت نشده است</td></tr></tbody>
+                    <thead><tr><th>شناسه</th><th>نام</th><th>تخصص</th><th>کلاس‌ها</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                    <tbody id="teachersTableBody"></tbody>
                 </table>
             </div>
         </div>
         
-        <!-- ===== دروس ===== -->
+        <!-- ===== CLASSES ===== -->
+        <div class="content-panel" id="panel-classes">
+            <div class="panel-header">
+                <h2>🏫 مدیریت کلاس‌ها</h2>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="openModal('addClass')"><i class="fas fa-plus"></i> افزودن کلاس</button>
+                    <button class="btn btn-excel" onclick="exportToExcel('classes')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
+                </div>
+            </div>
+            <div id="classesGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:16px;"></div>
+        </div>
+        
+        <!-- ===== SUBJECTS ===== -->
         <div class="content-panel" id="panel-subjects">
             <div class="panel-header">
-                <h2><i class="fas fa-book"></i> مدیریت دروس</h2>
+                <h2>📚 مدیریت دروس</h2>
                 <div class="actions">
                     <button class="btn btn-primary" onclick="openModal('addSubject')"><i class="fas fa-plus"></i> افزودن درس</button>
                     <button class="btn btn-excel" onclick="exportToExcel('subjects')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
@@ -552,16 +422,16 @@
             </div>
             <div class="table-container">
                 <table>
-                    <thead><tr><th>شناسه</th><th>نام درس</th><th>معلم</th><th>واحد</th><th>نوع</th><th>عملیات</th></tr></thead>
-                    <tbody id="subjectsTableBody"><tr><td colspan="6" class="text-muted text-center" style="padding: 30px;">هیچ درسی ثبت نشده است</td></tr></tbody>
+                    <thead><tr><th>شناسه</th><th>نام درس</th><th>معلم</th><th>کلاس</th><th>واحد</th><th>عملیات</th></tr></thead>
+                    <tbody id="subjectsTableBody"></tbody>
                 </table>
             </div>
         </div>
         
-        <!-- ===== نمرات ===== -->
+        <!-- ===== GRADES ===== -->
         <div class="content-panel" id="panel-grades">
             <div class="panel-header">
-                <h2><i class="fas fa-star"></i> مدیریت نمرات</h2>
+                <h2>⭐ مدیریت نمرات</h2>
                 <div class="actions">
                     <button class="btn btn-primary" onclick="openModal('addGrade')"><i class="fas fa-plus"></i> ثبت نمره</button>
                     <button class="btn btn-excel" onclick="exportToExcel('grades')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
@@ -570,15 +440,15 @@
             <div class="table-container">
                 <table>
                     <thead><tr><th>دانش‌آموز</th><th>درس</th><th>نمره</th><th>نوع آزمون</th><th>تاریخ</th><th>عملیات</th></tr></thead>
-                    <tbody id="gradesTableBody"><tr><td colspan="6" class="text-muted text-center" style="padding: 30px;">هیچ نمره‌ای ثبت نشده است</td></tr></tbody>
+                    <tbody id="gradesTableBody"></tbody>
                 </table>
             </div>
         </div>
         
-        <!-- ===== حضور ===== -->
+        <!-- ===== ATTENDANCE ===== -->
         <div class="content-panel" id="panel-attendance">
             <div class="panel-header">
-                <h2><i class="fas fa-check-circle"></i> مدیریت حضور و غیاب</h2>
+                <h2>✅ مدیریت حضور و غیاب</h2>
                 <div class="actions">
                     <button class="btn btn-primary" onclick="openModal('addAttendance')"><i class="fas fa-plus"></i> ثبت حضور</button>
                     <button class="btn btn-excel" onclick="exportToExcel('attendance')"><i class="fas fa-file-excel"></i> خروجی اکسل</button>
@@ -587,237 +457,209 @@
             <div class="table-container">
                 <table>
                     <thead><tr><th>دانش‌آموز</th><th>تاریخ</th><th>وضعیت</th><th>توضیحات</th><th>عملیات</th></tr></thead>
-                    <tbody id="attendanceTableBody"><tr><td colspan="5" class="text-muted text-center" style="padding: 30px;">هیچ حضور و غیابی ثبت نشده است</td></tr></tbody>
+                    <tbody id="attendanceTableBody"></tbody>
                 </table>
             </div>
         </div>
         
-        <!-- ===== گزارشات ===== -->
+        <!-- ===== REPORTS ===== -->
         <div class="content-panel" id="panel-reports">
             <div class="panel-header">
-                <h2><i class="fas fa-chart-bar"></i> گزارشات و تحلیل</h2>
+                <h2>📊 گزارشات و تحلیل</h2>
                 <div class="actions">
-                    <button class="btn btn-excel" onclick="exportToExcel('all')"><i class="fas fa-file-excel"></i> خروجی کامل اکسل</button>
+                    <button class="btn btn-excel" onclick="exportToExcel('all')"><i class="fas fa-file-excel"></i> خروجی کامل</button>
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
-                <div class="table-container" style="padding: 25px; text-align: center;">
-                    <i class="fas fa-file-pdf" style="font-size: 48px; color: var(--primary);"></i>
-                    <h3 style="margin: 15px 0;">گزارش ماهانه</h3>
-                    <p class="text-muted">دریافت گزارش کامل ماهانه</p>
-                    <button class="btn btn-primary" style="margin-top: 15px;" onclick="generateReport('monthly')"><i class="fas fa-download"></i> دانلود</button>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px;">
+                <div class="table-container" style="padding:22px; text-align:center;">
+                    <i class="fas fa-file-pdf" style="font-size:40px; color:var(--primary);"></i>
+                    <h3 style="margin:12px 0; font-size:16px;">گزارش ماهانه</h3>
+                    <button class="btn btn-primary" onclick="generateReport('monthly')"><i class="fas fa-download"></i> دانلود</button>
                 </div>
-                <div class="table-container" style="padding: 25px; text-align: center;">
-                    <i class="fas fa-user-graduate" style="font-size: 48px; color: var(--success);"></i>
-                    <h3 style="margin: 15px 0;">کارنامه دانش‌آموز</h3>
-                    <p class="text-muted">دریافت کارنامه فردی</p>
-                    <button class="btn btn-success" style="margin-top: 15px;" onclick="openModal('reportCard')"><i class="fas fa-print"></i> مشاهده</button>
+                <div class="table-container" style="padding:22px; text-align:center;">
+                    <i class="fas fa-user-graduate" style="font-size:40px; color:var(--success);"></i>
+                    <h3 style="margin:12px 0; font-size:16px;">کارنامه</h3>
+                    <button class="btn btn-success" onclick="openModal('reportCard')"><i class="fas fa-print"></i> مشاهده</button>
                 </div>
-                <div class="table-container" style="padding: 25px; text-align: center;">
-                    <i class="fas fa-chart-line" style="font-size: 48px; color: var(--warning);"></i>
-                    <h3 style="margin: 15px 0;">تحلیل آماری</h3>
-                    <p class="text-muted">نمودارها و تحلیل‌های پیشرفته</p>
-                    <button class="btn btn-warning" style="margin-top: 15px;" onclick="generateReport('analytics')"><i class="fas fa-chart-pie"></i> مشاهده</button>
+                <div class="table-container" style="padding:22px; text-align:center;">
+                    <i class="fas fa-chart-line" style="font-size:40px; color:var(--warning);"></i>
+                    <h3 style="margin:12px 0; font-size:16px;">تحلیل آماری</h3>
+                    <button class="btn btn-warning" onclick="generateReport('analytics')"><i class="fas fa-chart-pie"></i> مشاهده</button>
                 </div>
-            </div>
-        </div>
-        
-        <!-- ===== تنظیمات ===== -->
-        <div class="content-panel" id="panel-settings">
-            <div class="panel-header">
-                <h2><i class="fas fa-cog"></i> تنظیمات سیستم</h2>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div class="table-container" style="padding: 30px;">
-                    <h3 style="margin-bottom: 20px;">🏫 تنظیمات مدرسه</h3>
-                    <div class="form-group">
-                        <label>نام مدرسه</label>
-                        <input type="text" id="settingsSchoolName" placeholder="نام مدرسه را وارد کنید" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:2px solid var(--glass-border);border-radius:10px;color:var(--text);font-size:14px;font-family:'Vazirmatn',sans-serif;transition:var(--transition);outline:none;">
-                    </div>
-                    <div class="form-group">
-                        <label>نام مدیر</label>
-                        <input type="text" id="settingsAdminName" placeholder="نام مدیر را وارد کنید" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:2px solid var(--glass-border);border-radius:10px;color:var(--text);font-size:14px;font-family:'Vazirmatn',sans-serif;transition:var(--transition);outline:none;">
-                    </div>
-                    <button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> ذخیره تنظیمات</button>
-                </div>
-                
-                <div class="table-container" style="padding: 30px;">
-                    <h3 style="margin-bottom: 20px;">👑 مدیریت کاربران</h3>
-                    <div class="form-group">
-                        <label>نام کاربری جدید</label>
-                        <input type="text" id="settingsNewUsername" placeholder="نام کاربری" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:2px solid var(--glass-border);border-radius:10px;color:var(--text);font-size:14px;font-family:'Vazirmatn',sans-serif;transition:var(--transition);outline:none;">
-                    </div>
-                    <div class="form-group">
-                        <label>رمز عبور جدید</label>
-                        <input type="password" id="settingsNewPassword" placeholder="رمز عبور" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:2px solid var(--glass-border);border-radius:10px;color:var(--text);font-size:14px;font-family:'Vazirmatn',sans-serif;transition:var(--transition);outline:none;">
-                    </div>
-                    <button class="btn btn-success" onclick="changeAdminCredentials()"><i class="fas fa-key"></i> تغییر رمز مدیر</button>
-                    <hr style="border-color:var(--glass-border);margin:15px 0;">
-                    <button class="btn btn-danger" onclick="resetAllData()"><i class="fas fa-trash"></i> بازنشانی همه داده‌ها</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- ===== درباره مدرسه ===== -->
-        <div class="content-panel" id="panel-about">
-            <div class="about-school">
-                <div class="school-header">
-                    <div class="school-icon">🏛️</div>
-                    <div>
-                        <h2 id="aboutSchoolName">مدرسه نمونه</h2>
-                        <p id="aboutSchoolDesc">اطلاعات کامل و تاریخچه مدرسه</p>
-                    </div>
-                </div>
-                <div class="school-stats">
-                    <div class="stat-item"><div class="number" id="aboutStudents">0</div><div class="label">دانش‌آموز</div></div>
-                    <div class="stat-item"><div class="number" id="aboutTeachers">0</div><div class="label">معلم</div></div>
-                    <div class="stat-item"><div class="number" id="aboutSubjects">0</div><div class="label">درس</div></div>
-                    <div class="stat-item"><div class="number" id="aboutYear">1404</div><div class="label">سال تحصیلی</div></div>
-                </div>
-                <div class="school-description">
-                    <h3 style="margin-bottom: 15px;">📖 تاریخچه مدرسه</h3>
-                    <p id="aboutHistory">مدرسه نمونه با هدف ارائه آموزش با کیفیت و پرورش استعدادهای درخشان تأسیس شده است.</p>
-                    <br>
-                    <h3 style="margin-bottom: 15px;">🎯 اهداف و رسالت</h3>
-                    <p>• ارائه آموزش با استانداردهای بین‌المللی<br>• پرورش مهارت‌های فردی و اجتماعی<br>• استفاده از فناوری‌های نوین آموزشی</p>
-                    <br>
-                    <h3 style="margin-bottom: 15px;">👨‍💼 مدیریت</h3>
-                    <p id="aboutAdminName">مدیر: مدیر سیستم</p>
+                <div class="table-container" style="padding:22px; text-align:center;">
+                    <i class="fas fa-trophy" style="font-size:40px; color:#FF6F00;"></i>
+                    <h3 style="margin:12px 0; font-size:16px;">رتبه‌بندی</h3>
+                    <button class="btn btn-warning" onclick="showRanking()"><i class="fas fa-ranking-star"></i> مشاهده</button>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p><span class="heart">❤️</span> ساخته شده توسط <span class="brand">BitVolt.MTV</span> <span class="heart">❤️</span><br>
-            <span style="font-size: 12px; opacity: 0.7;"><i class="fas fa-code"></i> با عشق و تکنولوژی <i class="fas fa-rocket" style="color: var(--primary);"></i></span></p>
+            <p><span class="heart">❤️</span> ساخته شده توسط <span class="brand">BitVolt.MTV</span> <span class="heart">❤️</span></p>
         </div>
     </div>
 </div>
 
-<!-- ===== مودال‌ها ===== -->
-<div class="modal-overlay" id="modal-addStudent"><div class="modal"><div class="modal-header"><h3><i class="fas fa-user-plus"></i> افزودن دانش‌آموز جدید</h3><button class="close-modal" onclick="closeModal('addStudent')">&times;</button></div>
-<form onsubmit="addStudent(event)"><div class="form-group"><label>شناسه دانش‌آموز</label><input type="text" id="studentId" placeholder="مثال: 14001" required></div>
-<div class="form-group"><label>نام و نام خانوادگی</label><input type="text" id="studentName" placeholder="نام کامل" required></div>
-<div class="form-row"><div class="form-group"><label>پایه تحصیلی</label><input type="number" id="studentGrade" placeholder="مثال: 10" required></div>
-<div class="form-group"><label>کلاس</label><input type="text" id="studentClass" placeholder="مثال: الف" required></div></div>
-<div class="form-group"><label>شماره تماس والدین</label><input type="tel" id="studentParentPhone" placeholder="مثال: 09123456789"></div>
-<button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت دانش‌آموز</button></form></div></div>
+<!-- ===== MODALS ===== -->
+<!-- Add Student -->
+<div class="modal-overlay" id="modal-addStudent">
+    <div class="modal">
+        <div class="modal-header"><h3>➕ افزودن دانش‌آموز</h3><button class="close-modal" onclick="closeModal('addStudent')">&times;</button></div>
+        <form onsubmit="addStudent(event)">
+            <div class="form-row">
+                <div class="form-group"><label>شناسه</label><input type="text" id="studentId" placeholder="مثال: 14001" required></div>
+                <div class="form-group"><label>نام کامل</label><input type="text" id="studentName" placeholder="نام و نام خانوادگی" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>کلاس</label><select id="studentClassSelect" required><option value="">انتخاب کلاس...</option></select></div>
+                <div class="form-group"><label>شماره والدین</label><input type="tel" id="studentParentPhone" placeholder="مثال: 09123456789"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت دانش‌آموز</button>
+        </form>
+    </div>
+</div>
 
-<div class="modal-overlay" id="modal-addTeacher"><div class="modal"><div class="modal-header"><h3><i class="fas fa-chalkboard-teacher"></i> افزودن معلم جدید</h3><button class="close-modal" onclick="closeModal('addTeacher')">&times;</button></div>
-<form onsubmit="addTeacher(event)"><div class="form-group"><label>شناسه معلم</label><input type="text" id="teacherId" placeholder="مثال: T001" required></div>
-<div class="form-group"><label>نام معلم</label><input type="text" id="teacherName" placeholder="نام کامل" required></div>
-<div class="form-group"><label>درس تخصصی</label><input type="text" id="teacherSubject" placeholder="مثال: ریاضی" required></div>
-<div class="form-group"><label>شماره تماس</label><input type="tel" id="teacherPhone" placeholder="مثال: 09123456789"></div>
-<div class="form-group"><label>رمز عبور (برای ورود معلم)</label><input type="password" id="teacherPassword" placeholder="حداقل ۶ کاراکتر" required></div>
-<button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت معلم</button></form></div></div>
+<!-- Add Teacher -->
+<div class="modal-overlay" id="modal-addTeacher">
+    <div class="modal">
+        <div class="modal-header"><h3>➕ افزودن معلم</h3><button class="close-modal" onclick="closeModal('addTeacher')">&times;</button></div>
+        <form onsubmit="addTeacher(event)">
+            <div class="form-row">
+                <div class="form-group"><label>شناسه</label><input type="text" id="teacherId" placeholder="مثال: T001" required></div>
+                <div class="form-group"><label>نام کامل</label><input type="text" id="teacherName" placeholder="نام و نام خانوادگی" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>تخصص</label><input type="text" id="teacherSpecialty" placeholder="مثال: ریاضی" required></div>
+                <div class="form-group"><label>شماره تماس</label><input type="tel" id="teacherPhone" placeholder="مثال: 09123456789"></div>
+            </div>
+            <div class="form-group"><label>کلاس‌های تدریس</label><select id="teacherClasses" multiple style="height:80px;"><option value="">کلاس‌ها را انتخاب کنید...</option></select></div>
+            <div class="form-group"><label>رمز عبور</label><input type="password" id="teacherPassword" placeholder="حداقل ۶ کاراکتر" required></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت معلم</button>
+        </form>
+    </div>
+</div>
 
-<div class="modal-overlay" id="modal-addSubject"><div class="modal"><div class="modal-header"><h3><i class="fas fa-book"></i> افزودن درس جدید</h3><button class="close-modal" onclick="closeModal('addSubject')">&times;</button></div>
-<form onsubmit="addSubject(event)"><div class="form-group"><label>شناسه درس</label><input type="text" id="subjectId" placeholder="مثال: SUB001" required></div>
-<div class="form-group"><label>نام درس</label><input type="text" id="subjectName" placeholder="نام درس" required></div>
-<div class="form-group"><label>معلم درس</label><select id="subjectTeacher" required><option value="">انتخاب معلم...</option></select></div>
-<div class="form-row"><div class="form-group"><label>تعداد واحد</label><input type="number" id="subjectUnits" value="3" required></div>
-<div class="form-group"><label>نوع درس</label><select id="subjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div></div>
-<button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت درس</button></form></div></div>
+<!-- Add Class -->
+<div class="modal-overlay" id="modal-addClass">
+    <div class="modal">
+        <div class="modal-header"><h3>➕ افزودن کلاس جدید</h3><button class="close-modal" onclick="closeModal('addClass')">&times;</button></div>
+        <form onsubmit="addClass(event)">
+            <div class="form-row">
+                <div class="form-group"><label>شناسه کلاس</label><input type="text" id="classId" placeholder="مثال: C001" required></div>
+                <div class="form-group"><label>نام کلاس</label><input type="text" id="className" placeholder="مثال: ۱۰-الف" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>پایه تحصیلی</label><input type="number" id="classGrade" placeholder="مثال: 10" required></div>
+                <div class="form-group"><label>ظرفیت</label><input type="number" id="classCapacity" placeholder="مثال: 30" value="30" required></div>
+            </div>
+            <div class="form-group"><label>معلم‌ها (Ctrl+Click برای انتخاب چند معلم)</label><select id="classTeachers" multiple style="height:80px;"></select></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت کلاس</button>
+        </form>
+    </div>
+</div>
 
-<!-- ===== مودال ثبت نمره (دسترسی معلم و مدیر) ===== -->
-<div class="modal-overlay" id="modal-addGrade"><div class="modal"><div class="modal-header"><h3><i class="fas fa-star"></i> ثبت نمره</h3><button class="close-modal" onclick="closeModal('addGrade')">&times;</button></div>
-<form onsubmit="addGrade(event)"><div class="form-group"><label>دانش‌آموز</label><select id="gradeStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
-<div class="form-group"><label>درس</label><select id="gradeSubject" required><option value="">انتخاب درس...</option></select></div>
-<div class="form-group"><label>نمره (۰ تا ۲۰)</label><input type="number" id="gradeValue" min="0" max="20" step="0.25" required></div>
-<div class="form-group"><label>نوع آزمون</label><select id="gradeExamType"><option value="quiz">آزمون کوتاه</option><option value="homework">تکلیف</option><option value="midterm" selected>میان‌ترم</option><option value="final">پایان‌ترم</option><option value="extra">فوق‌العاده</option></select></div>
-<button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت نمره</button></form></div></div>
+<!-- Add Subject -->
+<div class="modal-overlay" id="modal-addSubject">
+    <div class="modal">
+        <div class="modal-header"><h3>➕ افزودن درس</h3><button class="close-modal" onclick="closeModal('addSubject')">&times;</button></div>
+        <form onsubmit="addSubject(event)">
+            <div class="form-row">
+                <div class="form-group"><label>شناسه درس</label><input type="text" id="subjectId" placeholder="مثال: SUB001" required></div>
+                <div class="form-group"><label>نام درس</label><input type="text" id="subjectName" placeholder="نام درس" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>معلم</label><select id="subjectTeacher" required><option value="">انتخاب معلم...</option></select></div>
+                <div class="form-group"><label>کلاس</label><select id="subjectClass" required><option value="">انتخاب کلاس...</option></select></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label>واحد</label><input type="number" id="subjectUnits" value="3" required></div>
+                <div class="form-group"><label>نوع</label><select id="subjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت درس</button>
+        </form>
+    </div>
+</div>
 
-<div class="modal-overlay" id="modal-addAttendance"><div class="modal"><div class="modal-header"><h3><i class="fas fa-check-circle"></i> ثبت حضور و غیاب</h3><button class="close-modal" onclick="closeModal('addAttendance')">&times;</button></div>
-<form onsubmit="addAttendance(event)"><div class="form-group"><label>دانش‌آموز</label><select id="attendanceStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
-<div class="form-group"><label>تاریخ</label><input type="date" id="attendanceDate" required></div>
-<div class="form-group"><label>وضعیت</label><select id="attendanceStatus" required><option value="حاضر">حاضر</option><option value="غایب">غایب</option><option value="مرخصی">مرخصی</option><option value="تأخیر">تأخیر</option></select></div>
-<div class="form-group"><label>توضیحات (اختیاری)</label><textarea id="attendanceNote" placeholder="توضیحات اضافی..."></textarea></div>
-<button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت حضور</button></form></div></div>
+<!-- Add Grade -->
+<div class="modal-overlay" id="modal-addGrade">
+    <div class="modal">
+        <div class="modal-header"><h3>⭐ ثبت نمره</h3><button class="close-modal" onclick="closeModal('addGrade')">&times;</button></div>
+        <form onsubmit="addGrade(event)">
+            <div class="form-group"><label>دانش‌آموز</label><select id="gradeStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
+            <div class="form-group"><label>درس</label><select id="gradeSubject" required><option value="">انتخاب درس...</option></select></div>
+            <div class="form-row">
+                <div class="form-group"><label>نمره (۰-۲۰)</label><input type="number" id="gradeValue" min="0" max="20" step="0.25" required></div>
+                <div class="form-group"><label>نوع آزمون</label><select id="gradeExamType"><option value="quiz">آزمون کوتاه</option><option value="homework">تکلیف</option><option value="midterm">میان‌ترم</option><option value="final">پایان‌ترم</option></select></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت نمره</button>
+        </form>
+    </div>
+</div>
 
-<div class="modal-overlay" id="modal-reportCard"><div class="modal"><div class="modal-header"><h3><i class="fas fa-print"></i> کارنامه دانش‌آموز</h3><button class="close-modal" onclick="closeModal('reportCard')">&times;</button></div>
-<form onsubmit="showReportCard(event)"><div class="form-group"><label>دانش‌آموز</label><select id="reportStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
-<button type="submit" class="btn btn-success" style="width:100%;"><i class="fas fa-print"></i> نمایش کارنامه</button></form>
-<div id="reportCardResult" style="margin-top: 20px; display: none;"></div></div></div>
+<!-- Add Attendance -->
+<div class="modal-overlay" id="modal-addAttendance">
+    <div class="modal">
+        <div class="modal-header"><h3>✅ ثبت حضور</h3><button class="close-modal" onclick="closeModal('addAttendance')">&times;</button></div>
+        <form onsubmit="addAttendance(event)">
+            <div class="form-group"><label>دانش‌آموز</label><select id="attendanceStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
+            <div class="form-row">
+                <div class="form-group"><label>تاریخ</label><input type="date" id="attendanceDate" required></div>
+                <div class="form-group"><label>وضعیت</label><select id="attendanceStatus"><option value="حاضر">حاضر</option><option value="غایب">غایب</option><option value="مرخصی">مرخصی</option><option value="تأخیر">تأخیر</option></select></div>
+            </div>
+            <div class="form-group"><label>توضیحات</label><textarea id="attendanceNote" placeholder="توضیحات اضافی..."></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت حضور</button>
+        </form>
+    </div>
+</div>
 
-<!-- ===== تاییدیه ===== -->
-<div class="modal-overlay" id="modal-confirm"><div class="modal" style="max-width: 400px; text-align: center;">
-<div style="font-size: 60px; margin-bottom: 15px;">⚠️</div><h3 style="margin-bottom: 10px;" id="confirmTitle">تأیید عملیات</h3><p class="text-muted" id="confirmMessage">آیا از انجام این عملیات اطمینان دارید؟</p>
-<div style="display: flex; gap: 10px; margin-top: 20px; justify-content: center;">
-<button class="btn btn-danger" onclick="confirmAction(true)">بله، تأیید</button>
-<button class="btn btn-outline" onclick="confirmAction(false)">لغو</button></div></div></div>
+<!-- Report Card -->
+<div class="modal-overlay" id="modal-reportCard">
+    <div class="modal">
+        <div class="modal-header"><h3>📈 کارنامه دانش‌آموز</h3><button class="close-modal" onclick="closeModal('reportCard')">&times;</button></div>
+        <form onsubmit="showReportCard(event)">
+            <div class="form-group"><label>دانش‌آموز</label><select id="reportStudent" required><option value="">انتخاب دانش‌آموز...</option></select></div>
+            <button type="submit" class="btn btn-success" style="width:100%;"><i class="fas fa-print"></i> نمایش کارنامه</button>
+        </form>
+        <div id="reportCardResult" style="margin-top:18px; display:none;"></div>
+    </div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay" id="modal-confirm">
+    <div class="modal" style="max-width:380px; text-align:center;">
+        <div style="font-size:50px; margin-bottom:12px;">⚠️</div>
+        <h3 id="confirmTitle" style="margin-bottom:8px;">تأیید عملیات</h3>
+        <p class="text-muted" id="confirmMessage">آیا از انجام این عملیات اطمینان دارید؟</p>
+        <div style="display:flex; gap:10px; margin-top:18px; justify-content:center;">
+            <button class="btn btn-danger" onclick="confirmAction(true)">بله</button>
+            <button class="btn btn-outline" onclick="confirmAction(false)">لغو</button>
+        </div>
+    </div>
+</div>
 
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
 // ============================================================
-// ================ DATA LAYER ================================
+// ================ DATA LAYER =================================
 // ============================================================
 
 const DATA = {
     students: [],
     teachers: [],
+    classes: [],
     subjects: [],
     grades: [],
     attendance: [],
     activities: [],
     alerts: [],
     currentUser: null,
-    settings: {
-        schoolName: 'مدرسه نمونه',
-        adminName: 'مدیر سیستم'
-    }
+    nextIds: { student: 1, teacher: 1, class: 1, subject: 1 }
 };
-
-// ============================================================
-// ================ USERS WITH DEFAULT PASSWORD ===============
-// ============================================================
 
 const USERS = {
-    admin: {
-        username: 'admin',
-        password: 'Admin@1404',
-        name: 'مدیر سیستم',
-        role: 'admin',
-        avatar: 'AD'
-    }
+    admin: { username: 'admin', password: 'Admin@1404', name: 'مدیر سیستم', role: 'admin' }
 };
-
-// ============================================================
-// ================ INITIALIZATION =============================
-// ============================================================
-
-function initSystem() {
-    // بارگذاری تنظیمات
-    const savedSettings = localStorage.getItem('schoolSettings');
-    if (savedSettings) {
-        try {
-            const settings = JSON.parse(savedSettings);
-            DATA.settings = settings;
-            USERS.admin.username = settings.adminUsername || 'admin';
-            USERS.admin.password = settings.adminPassword || 'Admin@1404';
-            USERS.admin.name = settings.adminName || 'مدیر سیستم';
-        } catch(e) {}
-    } else {
-        // تنظیمات پیش‌فرض با رمز مشخص
-        USERS.admin.username = 'admin';
-        USERS.admin.password = 'Admin@1404';
-        USERS.admin.name = 'مدیر سیستم';
-        saveSettings();
-    }
-    
-    // بروزرسانی صفحه ورود
-    document.getElementById('loginWelcome').innerHTML = 'به <span style="color:var(--primary-light);">' + DATA.settings.schoolName + '</span> خوش آمدید';
-}
-
-function saveSettings() {
-    const settings = {
-        schoolName: DATA.settings.schoolName,
-        adminName: DATA.settings.adminName,
-        adminUsername: USERS.admin.username,
-        adminPassword: USERS.admin.password
-    };
-    localStorage.setItem('schoolSettings', JSON.stringify(settings));
-}
 
 // ============================================================
 // ================ AUTHENTICATION =============================
@@ -828,87 +670,41 @@ function handleLogin(e) {
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value;
     const role = document.getElementById('loginRole').value;
-    const btn = document.getElementById('loginBtn');
-    const text = document.getElementById('loginText');
-    const loader = document.getElementById('loginLoader');
     const error = document.getElementById('loginError');
     
-    text.style.display = 'none';
-    loader.style.display = 'block';
-    btn.disabled = true;
-    error.style.display = 'none';
-    
-    setTimeout(() => {
-        let isValid = false;
-        if (role === 'admin' && USERS.admin.username === username && USERS.admin.password === password) {
+    let isValid = false;
+    if (role === 'admin' && USERS.admin.username === username && USERS.admin.password === password) {
+        isValid = true;
+        DATA.currentUser = { ...USERS.admin, role: 'admin' };
+    } else {
+        const teacher = DATA.teachers.find(t => t.id === username && t.password === password);
+        if (teacher) {
             isValid = true;
-            DATA.currentUser = { ...USERS.admin, role: 'admin' };
-        } else {
-            const teacher = DATA.teachers.find(t => t.id === username && t.password === password);
-            if (teacher) {
-                isValid = true;
-                DATA.currentUser = { ...teacher, role: 'teacher', username: teacher.id };
-            }
+            DATA.currentUser = { ...teacher, role: 'teacher', username: teacher.id };
         }
-        text.style.display = 'inline';
-        loader.style.display = 'none';
-        btn.disabled = false;
-        
-        if (isValid) {
-            showToast('✅ خوش آمدید ' + DATA.currentUser.name, 'success');
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('dashboard').classList.add('active');
-            
-            const userInfo = DATA.currentUser.role === 'admin' ? 'مدیر سیستم' : 'معلم';
-            document.getElementById('sidebarUserInfo').textContent = userInfo;
-            document.getElementById('userName').textContent = DATA.currentUser.name;
-            document.getElementById('userRole').textContent = DATA.currentUser.role === 'admin' ? 'مدیر' : 'معلم';
-            document.getElementById('userAvatar').textContent = DATA.currentUser.avatar || DATA.currentUser.name.substring(0, 2);
-            
-            document.getElementById('sidebarSchoolName').textContent = DATA.settings.schoolName;
-            document.getElementById('sidebarSchoolDisplay').textContent = '🏛️ ' + DATA.settings.schoolName;
-            document.getElementById('aboutSchoolName').textContent = DATA.settings.schoolName;
-            document.getElementById('aboutAdminName').textContent = 'مدیر: ' + DATA.settings.adminName;
-            
-            loadAllData();
-            updateDashboard();
-            
-            // محدودیت دسترسی معلم
-            if (DATA.currentUser.role === 'teacher') {
-                document.querySelectorAll('.sidebar-menu li a').forEach(item => {
-                    if (['teachers', 'subjects', 'reports', 'settings'].includes(item.dataset.page)) {
-                        item.style.display = 'none';
-                    }
-                });
-                // معلم فقط می‌تواند نمره ثبت کند
-                showToast('👨‍🏫 شما به عنوان معلم وارد شدید - فقط می‌توانید نمره ثبت کنید', 'info');
-            }
-            
-            addActivity('ورود به سیستم', 'کاربر ' + DATA.currentUser.name + ' وارد شد');
-            showWelcomeMessage();
-            
-        } else {
-            error.style.display = 'block';
-            document.getElementById('errorMessage').textContent = 'نام کاربری یا رمز عبور اشتباه است!';
-            document.querySelector('.login-box').style.animation = 'shake 0.5s ease';
-            setTimeout(() => { document.querySelector('.login-box').style.animation = ''; }, 500);
+    }
+    
+    if (isValid) {
+        showToast('✅ خوش آمدید ' + DATA.currentUser.name, 'success');
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('dashboard').classList.add('active');
+        document.getElementById('sidebarUserInfo').textContent = DATA.currentUser.role === 'admin' ? 'مدیر سیستم' : 'معلم';
+        document.getElementById('userName').textContent = DATA.currentUser.name;
+        document.getElementById('userRole').textContent = DATA.currentUser.role === 'admin' ? 'مدیر' : 'معلم';
+        document.getElementById('userAvatar').textContent = DATA.currentUser.avatar || DATA.currentUser.name.substring(0, 2);
+        loadAllData();
+        updateDashboard();
+        if (DATA.currentUser.role === 'teacher') {
+            document.querySelectorAll('.sidebar-menu li a').forEach(a => {
+                if (['teachers', 'classes', 'subjects', 'reports'].includes(a.dataset.page)) a.style.display = 'none';
+            });
         }
-    }, 800);
-}
-
-function showWelcomeMessage() {
-    document.getElementById('welcomeName').textContent = DATA.currentUser.name;
-    document.getElementById('welcomeSchool').textContent = DATA.settings.schoolName;
-    document.getElementById('welcomeTitle').textContent = '🎉 خوش آمدید، ' + DATA.currentUser.name + '!';
-    document.getElementById('welcomeMessage').innerHTML = 
-        '<span class="welcome-name">' + DATA.currentUser.name + '</span> عزیز<br>' +
-        'به سیستم مدیریت مدرسه خوش آمدید.<br>' +
-        '<span style="font-size: 14px; color: var(--text-secondary);">' + DATA.settings.schoolName + '</span>';
-    document.getElementById('welcomeModal').classList.add('active');
-}
-
-function closeWelcome() {
-    document.getElementById('welcomeModal').classList.remove('active');
+        addActivity('ورود به سیستم', 'کاربر ' + DATA.currentUser.name + ' وارد شد');
+    } else {
+        error.style.display = 'block';
+        document.querySelector('.login-box').style.animation = 'shake 0.4s ease';
+        setTimeout(() => document.querySelector('.login-box').style.animation = '', 500);
+    }
 }
 
 function togglePassword() {
@@ -919,11 +715,10 @@ function togglePassword() {
 }
 
 function handleLogout() {
-    if (confirm('آیا از خروج از سیستم اطمینان دارید؟')) {
+    if (confirm('آیا از خروج اطمینان دارید؟')) {
         DATA.currentUser = null;
         document.getElementById('dashboard').classList.remove('active');
         document.getElementById('loginPage').style.display = 'flex';
-        document.getElementById('loginPassword').value = '';
         showToast('👋 خروج موفق', 'info');
     }
 }
@@ -934,50 +729,52 @@ function handleLogout() {
 
 function loadAllData() {
     try {
-        const saved = localStorage.getItem('schoolData');
-        if (saved) { 
-            const parsed = JSON.parse(saved);
-            Object.assign(DATA, parsed);
-            renderAllTables(); 
-            return; 
-        }
+        const saved = localStorage.getItem('schoolDataV2');
+        if (saved) { Object.assign(DATA, JSON.parse(saved)); renderAll(); return; }
     } catch(e) {}
     
+    // Sample Data
+    DATA.classes = [
+        { id: 'C001', name: '۱۰-الف', grade: 10, capacity: 30, teachers: ['T001'], students: [] },
+        { id: 'C002', name: '۱۰-ب', grade: 10, capacity: 30, teachers: ['T002'], students: [] }
+    ];
     DATA.students = [
-        { id: '14001', name: 'علی محمدی', grade: 10, class: 'الف', parentPhone: '09121234567', average: 17.5, status: 'عالی' },
-        { id: '14002', name: 'سارا احمدی', grade: 10, class: 'الف', parentPhone: '09129876543', average: 15.2, status: 'قبول' },
-        { id: '14003', name: 'رضا کریمی', grade: 11, class: 'ب', parentPhone: '09123456789', average: 9.8, status: 'مردود' }
+        { id: 'S001', name: 'علی محمدی', classId: 'C001', parentPhone: '09121234567', grades: [], average: 0, status: 'عالی' },
+        { id: 'S002', name: 'سارا احمدی', classId: 'C001', parentPhone: '09129876543', grades: [], average: 0, status: 'قبول' },
+        { id: 'S003', name: 'رضا کریمی', classId: 'C002', parentPhone: '09123456789', grades: [], average: 0, status: 'مردود' }
     ];
     DATA.teachers = [
-        { id: 'T001', name: 'دکتر احمد نوری', subject: 'ریاضی', phone: '09111111111', password: 'Teacher@123' },
-        { id: 'T002', name: 'خانم زهرا رضوی', subject: 'فیزیک', phone: '09112222222', password: 'Teacher@456' }
+        { id: 'T001', name: 'دکتر احمد نوری', specialty: 'ریاضی', phone: '09111111111', classes: ['C001'], password: 'Teacher@123' },
+        { id: 'T002', name: 'خانم زهرا رضوی', specialty: 'فیزیک', phone: '09112222222', classes: ['C002'], password: 'Teacher@456' }
     ];
     DATA.subjects = [
-        { id: 'SUB001', name: 'ریاضی', teacher: 'T001', units: 4, type: 'نظری' },
-        { id: 'SUB002', name: 'فیزیک', teacher: 'T002', units: 3, type: 'نظری' }
+        { id: 'SUB001', name: 'ریاضی', teacherId: 'T001', classId: 'C001', units: 4, type: 'نظری' },
+        { id: 'SUB002', name: 'فیزیک', teacherId: 'T002', classId: 'C002', units: 3, type: 'نظری' }
     ];
     DATA.grades = [
-        { studentId: '14001', subjectId: 'SUB001', value: 18, examType: 'midterm', date: '1403/08/15' },
-        { studentId: '14001', subjectId: 'SUB001', value: 19, examType: 'final', date: '1403/09/20' },
-        { studentId: '14002', subjectId: 'SUB001', value: 15, examType: 'midterm', date: '1403/08/15' }
+        { studentId: 'S001', subjectId: 'SUB001', value: 18, examType: 'midterm', date: '1403/08/15' },
+        { studentId: 'S002', subjectId: 'SUB001', value: 15, examType: 'midterm', date: '1403/08/15' }
     ];
     DATA.attendance = [
-        { studentId: '14001', date: '1403/08/01', status: 'حاضر', note: '' },
-        { studentId: '14001', date: '1403/08/02', status: 'حاضر', note: '' },
-        { studentId: '14002', date: '1403/08/01', status: 'غایب', note: 'مرخصی' }
+        { studentId: 'S001', date: '1403/08/01', status: 'حاضر', note: '' },
+        { studentId: 'S002', date: '1403/08/01', status: 'غایب', note: 'مرخصی' }
     ];
     DATA.activities = [{ text: 'سیستم راه‌اندازی شد', time: new Date().toLocaleString('fa-IR') }];
-    DATA.alerts = [{ studentId: '14003', message: 'دانش‌آموز رضا کریمی نیاز به توجه ویژه دارد', severity: 'critical', date: new Date().toLocaleString('fa-IR') }];
+    updateStudentAverages();
     saveData();
-    renderAllTables();
+    renderAll();
 }
 
-function saveData() { localStorage.setItem('schoolData', JSON.stringify(DATA)); }
+function saveData() { localStorage.setItem('schoolDataV2', JSON.stringify(DATA)); }
 
 function getStudentById(id) { return DATA.students.find(s => s.id === id); }
 function getTeacherById(id) { return DATA.teachers.find(t => t.id === id); }
+function getClassById(id) { return DATA.classes.find(c => c.id === id); }
 function getSubjectById(id) { return DATA.subjects.find(s => s.id === id); }
 function getStudentGrades(studentId) { return DATA.grades.filter(g => g.studentId === studentId); }
+function getClassStudents(classId) { return DATA.students.filter(s => s.classId === classId); }
+function getClassTeachers(classId) { return DATA.teachers.filter(t => t.classes && t.classes.includes(classId)); }
+function getTeacherSubjects(teacherId) { return DATA.subjects.filter(s => s.teacherId === teacherId); }
 
 function calculateAverage(grades) {
     if (!grades || grades.length === 0) return 0;
@@ -986,9 +783,11 @@ function calculateAverage(grades) {
 
 function updateStudentAverages() {
     DATA.students.forEach(s => {
-        const avg = calculateAverage(getStudentGrades(s.id));
+        const grades = getStudentGrades(s.id);
+        const avg = calculateAverage(grades);
         s.average = avg;
-        s.status = avg >= 18 ? 'عالی' : avg >= 10 ? 'قبول' : 'مردود';
+        s.status = avg >= 18 ? 'عالی' : avg >= 14 ? 'خوب' : avg >= 10 ? 'قبول' : 'مردود';
+        s.grades = grades.map(g => g.value);
     });
     saveData();
 }
@@ -1001,16 +800,26 @@ function addStudent(e) {
     e.preventDefault();
     const id = document.getElementById('studentId').value.trim();
     const name = document.getElementById('studentName').value.trim();
-    const grade = parseInt(document.getElementById('studentGrade').value);
-    const class_ = document.getElementById('studentClass').value.trim();
+    const classId = document.getElementById('studentClassSelect').value;
     const parentPhone = document.getElementById('studentParentPhone').value.trim();
+    
     if (DATA.students.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    DATA.students.push({ id, name, grade, class: class_, parentPhone, average: 0, status: 'نامشخص' });
-    saveData(); updateDashboard(); renderAllTables(); closeModal('addStudent');
+    if (!classId) { showToast('❌ لطفاً کلاس را انتخاب کنید', 'error'); return; }
+    
+    DATA.students.push({ id, name, classId, parentPhone, grades: [], average: 0, status: 'نامشخص' });
+    if (getClassById(classId)) {
+        if (!getClassById(classId).students) getClassById(classId).students = [];
+        getClassById(classId).students.push(id);
+    }
+    updateStudentAverages();
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addStudent');
     showToast('✅ دانش‌آموز با موفقیت اضافه شد', 'success');
     addActivity('افزودن دانش‌آموز', 'دانش‌آموز ' + name + ' اضافه شد');
-    document.getElementById('studentId').value = ''; document.getElementById('studentName').value = '';
-    document.getElementById('studentGrade').value = ''; document.getElementById('studentClass').value = '';
+    document.getElementById('studentId').value = '';
+    document.getElementById('studentName').value = '';
     document.getElementById('studentParentPhone').value = '';
 }
 
@@ -1018,80 +827,93 @@ function addTeacher(e) {
     e.preventDefault();
     const id = document.getElementById('teacherId').value.trim();
     const name = document.getElementById('teacherName').value.trim();
-    const subject = document.getElementById('teacherSubject').value.trim();
+    const specialty = document.getElementById('teacherSpecialty').value.trim();
     const phone = document.getElementById('teacherPhone').value.trim();
     const password = document.getElementById('teacherPassword').value;
-    if (password.length < 6) { showToast('❌ رمز عبور باید حداقل ۶ کاراکتر باشد', 'error'); return; }
+    const classes = Array.from(document.getElementById('teacherClasses').selectedOptions).map(o => o.value).filter(v => v);
+    
     if (DATA.teachers.find(t => t.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    DATA.teachers.push({ id, name, subject, phone, password });
-    saveData(); updateDashboard(); renderAllTables(); closeModal('addTeacher');
+    if (password.length < 6) { showToast('❌ رمز عبور باید حداقل ۶ کاراکتر باشد', 'error'); return; }
+    
+    DATA.teachers.push({ id, name, specialty, phone, classes, password });
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addTeacher');
     showToast('✅ معلم با موفقیت اضافه شد', 'success');
     addActivity('افزودن معلم', 'معلم ' + name + ' اضافه شد');
-    document.getElementById('teacherId').value = ''; document.getElementById('teacherName').value = '';
-    document.getElementById('teacherSubject').value = ''; document.getElementById('teacherPhone').value = '';
+    document.getElementById('teacherId').value = '';
+    document.getElementById('teacherName').value = '';
+    document.getElementById('teacherSpecialty').value = '';
+    document.getElementById('teacherPhone').value = '';
     document.getElementById('teacherPassword').value = '';
+}
+
+function addClass(e) {
+    e.preventDefault();
+    const id = document.getElementById('classId').value.trim();
+    const name = document.getElementById('className').value.trim();
+    const grade = parseInt(document.getElementById('classGrade').value);
+    const capacity = parseInt(document.getElementById('classCapacity').value);
+    const teachers = Array.from(document.getElementById('classTeachers').selectedOptions).map(o => o.value).filter(v => v);
+    
+    if (DATA.classes.find(c => c.id === id)) { showToast('❌ شناسه کلاس تکراری است!', 'error'); return; }
+    
+    DATA.classes.push({ id, name, grade, capacity, teachers, students: [] });
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addClass');
+    showToast('✅ کلاس با موفقیت اضافه شد', 'success');
+    addActivity('افزودن کلاس', 'کلاس ' + name + ' اضافه شد');
+    document.getElementById('classId').value = '';
+    document.getElementById('className').value = '';
+    document.getElementById('classGrade').value = '';
+    document.getElementById('classCapacity').value = '30';
 }
 
 function addSubject(e) {
     e.preventDefault();
     const id = document.getElementById('subjectId').value.trim();
     const name = document.getElementById('subjectName').value.trim();
-    const teacher = document.getElementById('subjectTeacher').value;
+    const teacherId = document.getElementById('subjectTeacher').value;
+    const classId = document.getElementById('subjectClass').value;
     const units = parseInt(document.getElementById('subjectUnits').value);
     const type = document.getElementById('subjectType').value;
-    if (DATA.subjects.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    DATA.subjects.push({ id, name, teacher, units, type });
-    saveData(); updateDashboard(); renderAllTables(); closeModal('addSubject');
+    
+    if (DATA.subjects.find(s => s.id === id)) { showToast('❌ شناسه درس تکراری است!', 'error'); return; }
+    
+    DATA.subjects.push({ id, name, teacherId, classId, units, type });
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addSubject');
     showToast('✅ درس با موفقیت اضافه شد', 'success');
     addActivity('افزودن درس', 'درس ' + name + ' اضافه شد');
-    document.getElementById('subjectId').value = ''; document.getElementById('subjectName').value = '';
+    document.getElementById('subjectId').value = '';
+    document.getElementById('subjectName').value = '';
     document.getElementById('subjectUnits').value = '3';
 }
 
-// ============================================================
-// ================ GRADE SYSTEM (برای معلم و مدیر) ==========
-// ============================================================
-
 function addGrade(e) {
     e.preventDefault();
-    
-    // بررسی دسترسی - معلم و مدیر هر دو می‌توانند نمره ثبت کنند
-    if (!DATA.currentUser) {
-        showToast('❌ لطفاً ابتدا وارد شوید', 'error');
-        return;
-    }
-    
     const studentId = document.getElementById('gradeStudent').value;
     const subjectId = document.getElementById('gradeSubject').value;
     const value = parseFloat(document.getElementById('gradeValue').value);
     const examType = document.getElementById('gradeExamType').value;
     const date = new Date().toLocaleDateString('fa-IR');
     
-    if (value < 0 || value > 20) {
-        showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error');
-        return;
-    }
-    
-    // اگر کاربر معلم است، بررسی کن که درسش باشد
-    if (DATA.currentUser.role === 'teacher') {
-        const subject = getSubjectById(subjectId);
-        if (!subject || subject.teacher !== DATA.currentUser.id) {
-            showToast('❌ شما فقط می‌توانید برای درس خود نمره ثبت کنید!', 'error');
-            return;
-        }
-    }
+    if (!studentId || !subjectId) { showToast('❌ لطفاً دانش‌آموز و درس را انتخاب کنید', 'error'); return; }
+    if (value < 0 || value > 20) { showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error'); return; }
     
     DATA.grades.push({ studentId, subjectId, value, examType, date });
     updateStudentAverages();
     saveData();
+    renderAll();
     updateDashboard();
-    renderAllTables();
     closeModal('addGrade');
-    
-    const studentName = getStudentById(studentId)?.name || '';
     showToast('✅ نمره با موفقیت ثبت شد', 'success');
-    addActivity('ثبت نمره', 'نمره ' + value + ' برای ' + studentName + ' ثبت شد');
-    
+    addActivity('ثبت نمره', 'نمره ' + value + ' برای ' + (getStudentById(studentId)?.name || '') + ' ثبت شد');
     document.getElementById('gradeValue').value = '';
 }
 
@@ -1102,19 +924,29 @@ function addAttendance(e) {
     const status = document.getElementById('attendanceStatus').value;
     const note = document.getElementById('attendanceNote').value;
     const persianDate = new Date(date).toLocaleDateString('fa-IR');
+    
+    if (!studentId) { showToast('❌ لطفاً دانش‌آموز را انتخاب کنید', 'error'); return; }
+    
     DATA.attendance.push({ studentId, date: persianDate, status, note });
-    saveData(); updateDashboard(); renderAllTables(); closeModal('addAttendance');
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addAttendance');
     showToast('✅ حضور با موفقیت ثبت شد', 'success');
     addActivity('ثبت حضور', 'حضور ' + status + ' برای ' + (getStudentById(studentId)?.name || '') + ' ثبت شد');
     document.getElementById('attendanceNote').value = '';
 }
 
+// ===== DELETE FUNCTIONS =====
 function deleteStudent(id) {
     showConfirm('حذف دانش‌آموز', 'آیا از حذف این دانش‌آموز اطمینان دارید؟', () => {
         DATA.students = DATA.students.filter(s => s.id !== id);
         DATA.grades = DATA.grades.filter(g => g.studentId !== id);
         DATA.attendance = DATA.attendance.filter(a => a.studentId !== id);
-        saveData(); updateDashboard(); renderAllTables();
+        DATA.classes.forEach(c => { if (c.students) c.students = c.students.filter(s => s !== id); });
+        saveData();
+        renderAll();
+        updateDashboard();
         showToast('🗑️ دانش‌آموز حذف شد', 'warning');
         addActivity('حذف دانش‌آموز', 'دانش‌آموز با شناسه ' + id + ' حذف شد');
     });
@@ -1123,8 +955,24 @@ function deleteStudent(id) {
 function deleteTeacher(id) {
     showConfirm('حذف معلم', 'آیا از حذف این معلم اطمینان دارید؟', () => {
         DATA.teachers = DATA.teachers.filter(t => t.id !== id);
-        saveData(); updateDashboard(); renderAllTables();
+        DATA.subjects = DATA.subjects.filter(s => s.teacherId !== id);
+        DATA.classes.forEach(c => { if (c.teachers) c.teachers = c.teachers.filter(t => t !== id); });
+        saveData();
+        renderAll();
+        updateDashboard();
         showToast('🗑️ معلم حذف شد', 'warning');
+    });
+}
+
+function deleteClass(id) {
+    showConfirm('حذف کلاس', 'آیا از حذف این کلاس اطمینان دارید؟ دانش‌آموزان کلاس حذف نمی‌شوند.', () => {
+        DATA.classes = DATA.classes.filter(c => c.id !== id);
+        DATA.subjects = DATA.subjects.filter(s => s.classId !== id);
+        DATA.students.forEach(s => { if (s.classId === id) s.classId = ''; });
+        saveData();
+        renderAll();
+        updateDashboard();
+        showToast('🗑️ کلاس حذف شد', 'warning');
     });
 }
 
@@ -1132,7 +980,9 @@ function deleteSubject(id) {
     showConfirm('حذف درس', 'آیا از حذف این درس اطمینان دارید؟', () => {
         DATA.subjects = DATA.subjects.filter(s => s.id !== id);
         DATA.grades = DATA.grades.filter(g => g.subjectId !== id);
-        saveData(); updateDashboard(); renderAllTables();
+        saveData();
+        renderAll();
+        updateDashboard();
         showToast('🗑️ درس حذف شد', 'warning');
     });
 }
@@ -1140,15 +990,20 @@ function deleteSubject(id) {
 function deleteGrade(index) {
     showConfirm('حذف نمره', 'آیا از حذف این نمره اطمینان دارید؟', () => {
         DATA.grades.splice(index, 1);
-        updateStudentAverages(); saveData(); updateDashboard(); renderAllTables();
+        updateStudentAverages();
+        saveData();
+        renderAll();
+        updateDashboard();
         showToast('🗑️ نمره حذف شد', 'warning');
     });
 }
 
 function deleteAttendance(index) {
-    showConfirm('حذف حضور', 'آیا از حذف این رکورد حضور اطمینان دارید؟', () => {
+    showConfirm('حذف حضور', 'آیا از حذف این رکورد اطمینان دارید؟', () => {
         DATA.attendance.splice(index, 1);
-        saveData(); updateDashboard(); renderAllTables();
+        saveData();
+        renderAll();
+        updateDashboard();
         showToast('🗑️ رکورد حضور حذف شد', 'warning');
     });
 }
@@ -1157,64 +1012,237 @@ function deleteAttendance(index) {
 // ================ RENDER FUNCTIONS ===========================
 // ============================================================
 
-function renderAllTables() {
-    renderStudentsTable(); renderTeachersTable(); renderSubjectsTable();
-    renderGradesTable(); renderAttendanceTable(); renderSelectOptions();
+function renderAll() {
+    renderStudentsTable();
+    renderTeachersTable();
+    renderClassesGrid();
+    renderSubjectsTable();
+    renderGradesTable();
+    renderAttendanceTable();
+    renderSelectOptions();
+    updateDashboard();
 }
 
 function renderStudentsTable() {
     const tbody = document.getElementById('studentsTableBody');
-    if (DATA.students.length === 0) { tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center" style="padding: 30px;">هیچ دانش‌آموزی ثبت نشده است</td></tr>'; return; }
-    tbody.innerHTML = DATA.students.map(s => '<tr><td><strong>' + s.id + '</strong></td><td>' + s.name + '</td><td>' + s.grade + '</td><td>' + s.class + '</td><td>' + (s.average?.toFixed(1) || '0') + '</td><td><span class="status-badge ' + (s.status === 'عالی' ? 'active' : s.status === 'قبول' ? 'pending' : 'inactive') + '">' + (s.status || 'نامشخص') + '</span></td><td><div class="actions-cell"><button onclick="viewStudent(\'' + s.id + '\')" title="مشاهده"><i class="fas fa-eye"></i></button><button class="danger" onclick="deleteStudent(\'' + s.id + '\')" title="حذف"><i class="fas fa-trash"></i></button></div></td></tr>').join('');
+    if (DATA.students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ دانش‌آموزی ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = DATA.students.map(s => {
+        const cls = getClassById(s.classId);
+        const statusClass = s.status === 'عالی' ? 'excellent' : s.status === 'خوب' ? 'good' : s.status === 'قبول' ? 'pending' : 'fail';
+        return `<tr>
+            <td><strong>${s.id}</strong></td>
+            <td>${s.name}</td>
+            <td>${cls ? cls.name : 'ثبت نشده'}</td>
+            <td>${s.average?.toFixed(1) || '0'}</td>
+            <td><span class="status-badge ${statusClass}">${s.status || 'نامشخص'}</span></td>
+            <td><div class="actions-cell">
+                <button onclick="viewStudent('${s.id}')" title="مشاهده"><i class="fas fa-eye"></i></button>
+                <button class="danger" onclick="deleteStudent('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderTeachersTable() {
     const tbody = document.getElementById('teachersTableBody');
-    if (DATA.teachers.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding: 30px;">هیچ معلمی ثبت نشده است</td></tr>'; return; }
-    tbody.innerHTML = DATA.teachers.map(t => '<tr><td><strong>' + t.id + '</strong></td><td>' + t.name + '</td><td>' + t.subject + '</td><td>' + (t.phone || '-') + '</td><td><span class="status-badge active">فعال</span></td><td><div class="actions-cell"><button class="danger" onclick="deleteTeacher(\'' + t.id + '\')" title="حذف"><i class="fas fa-trash"></i></button></div></td></tr>').join('');
+    if (DATA.teachers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ معلمی ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = DATA.teachers.map(t => {
+        const classes = t.classes ? t.classes.map(cid => getClassById(cid)?.name || cid).join('، ') : 'بدون کلاس';
+        return `<tr>
+            <td><strong>${t.id}</strong></td>
+            <td>${t.name}</td>
+            <td>${t.specialty}</td>
+            <td>${classes}</td>
+            <td><span class="status-badge active">فعال</span></td>
+            <td><div class="actions-cell">
+                <button class="danger" onclick="deleteTeacher('${t.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
+}
+
+function renderClassesGrid() {
+    const grid = document.getElementById('classesGrid');
+    if (DATA.classes.length === 0) {
+        grid.innerHTML = '<p class="text-muted text-center" style="padding:30px;">هیچ کلاسی ثبت نشده است</p>';
+        return;
+    }
+    grid.innerHTML = DATA.classes.map(c => {
+        const students = getClassStudents(c.id);
+        const teachers = getClassTeachers(c.id);
+        const subjects = DATA.subjects.filter(s => s.classId === c.id);
+        return `<div class="class-card">
+            <div class="class-title">${c.name}</div>
+            <div class="class-info">📚 پایه: ${c.grade} | ظرفیت: ${students.length}/${c.capacity}</div>
+            <div class="class-info">👨‍🏫 معلمان: ${teachers.map(t => t.name).join('، ') || 'تعیین نشده'}</div>
+            <div class="class-stats">
+                <span>👨‍🎓 ${students.length} دانش‌آموز</span>
+                <span>📖 ${subjects.length} درس</span>
+            </div>
+            <div style="margin-top:12px; display:flex; gap:8px;">
+                <button class="btn btn-sm btn-danger" onclick="deleteClass('${c.id}')"><i class="fas fa-trash"></i> حذف</button>
+            </div>
+        </div>`;
+    }).join('');
 }
 
 function renderSubjectsTable() {
     const tbody = document.getElementById('subjectsTableBody');
-    if (DATA.subjects.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding: 30px;">هیچ درسی ثبت نشده است</td></tr>'; return; }
-    tbody.innerHTML = DATA.subjects.map(s => { const t = getTeacherById(s.teacher); return '<tr><td><strong>' + s.id + '</strong></td><td>' + s.name + '</td><td>' + (t ? t.name : 'نامشخص') + '</td><td>' + s.units + '</td><td>' + s.type + '</td><td><div class="actions-cell"><button class="danger" onclick="deleteSubject(\'' + s.id + '\')" title="حذف"><i class="fas fa-trash"></i></button></div></td></tr>'; }).join('');
+    if (DATA.subjects.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ درسی ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = DATA.subjects.map(s => {
+        const teacher = getTeacherById(s.teacherId);
+        const cls = getClassById(s.classId);
+        return `<tr>
+            <td><strong>${s.id}</strong></td>
+            <td>${s.name}</td>
+            <td>${teacher ? teacher.name : 'نامشخص'}</td>
+            <td>${cls ? cls.name : 'نامشخص'}</td>
+            <td>${s.units}</td>
+            <td><div class="actions-cell">
+                <button class="danger" onclick="deleteSubject('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderGradesTable() {
     const tbody = document.getElementById('gradesTableBody');
-    if (DATA.grades.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding: 30px;">هیچ نمره‌ای ثبت نشده است</td></tr>'; return; }
-    tbody.innerHTML = DATA.grades.map((g, i) => { const s = getStudentById(g.studentId); const sub = getSubjectById(g.subjectId); const color = g.value >= 18 ? 'var(--success)' : g.value >= 10 ? 'var(--warning)' : 'var(--danger)'; return '<tr><td>' + (s ? s.name : 'نامشخص') + '</td><td>' + (sub ? sub.name : 'نامشخص') + '</td><td><strong style="color:' + color + ';">' + g.value + '</strong></td><td>' + (g.examType === 'quiz' ? 'آزمون کوتاه' : g.examType === 'homework' ? 'تکلیف' : g.examType === 'midterm' ? 'میان‌ترم' : g.examType === 'final' ? 'پایان‌ترم' : 'فوق‌العاده') + '</td><td>' + g.date + '</td><td><div class="actions-cell"><button class="danger" onclick="deleteGrade(' + i + ')" title="حذف"><i class="fas fa-trash"></i></button></div></td></tr>'; }).join('');
+    if (DATA.grades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ نمره‌ای ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = DATA.grades.map((g, i) => {
+        const student = getStudentById(g.studentId);
+        const subject = getSubjectById(g.subjectId);
+        const color = g.value >= 18 ? 'var(--success)' : g.value >= 14 ? 'var(--warning)' : g.value >= 10 ? '#FF9800' : 'var(--danger)';
+        const examLabels = { quiz: 'آزمون کوتاه', homework: 'تکلیف', midterm: 'میان‌ترم', final: 'پایان‌ترم' };
+        return `<tr>
+            <td>${student ? student.name : 'نامشخص'}</td>
+            <td>${subject ? subject.name : 'نامشخص'}</td>
+            <td><strong style="color:${color};">${g.value}</strong></td>
+            <td>${examLabels[g.examType] || g.examType}</td>
+            <td>${g.date}</td>
+            <td><div class="actions-cell">
+                <button class="danger" onclick="deleteGrade(${i})" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderAttendanceTable() {
     const tbody = document.getElementById('attendanceTableBody');
-    if (DATA.attendance.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="text-muted text-center" style="padding: 30px;">هیچ حضور و غیابی ثبت نشده است</td></tr>'; return; }
-    tbody.innerHTML = DATA.attendance.map((a, i) => { const s = getStudentById(a.studentId); const color = a.status === 'حاضر' ? 'var(--success)' : a.status === 'غایب' ? 'var(--danger)' : 'var(--warning)'; return '<tr><td>' + (s ? s.name : 'نامشخص') + '</td><td>' + a.date + '</td><td><span style="color:' + color + '; font-weight: 600;">' + a.status + '</span></td><td>' + (a.note || '-') + '</td><td><div class="actions-cell"><button class="danger" onclick="deleteAttendance(' + i + ')" title="حذف"><i class="fas fa-trash"></i></button></div></td></tr>'; }).join('');
+    if (DATA.attendance.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-muted text-center" style="padding:25px;">هیچ حضور و غیابی ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = DATA.attendance.map((a, i) => {
+        const student = getStudentById(a.studentId);
+        const color = a.status === 'حاضر' ? 'var(--success)' : a.status === 'غایب' ? 'var(--danger)' : 'var(--warning)';
+        return `<tr>
+            <td>${student ? student.name : 'نامشخص'}</td>
+            <td>${a.date}</td>
+            <td><span style="color:${color}; font-weight:600;">${a.status}</span></td>
+            <td>${a.note || '-'}</td>
+            <td><div class="actions-cell">
+                <button class="danger" onclick="deleteAttendance(${i})" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderSelectOptions() {
+    // Students
     ['gradeStudent', 'attendanceStudent', 'reportStudent'].forEach(id => {
         const select = document.getElementById(id);
         if (select) {
             const val = select.value;
             select.innerHTML = '<option value="">انتخاب دانش‌آموز...</option>';
-            DATA.students.forEach(s => { select.innerHTML += '<option value="' + s.id + '">' + s.id + ' - ' + s.name + '</option>'; });
+            DATA.students.forEach(s => {
+                select.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
+            });
             select.value = val;
         }
     });
-    const ts = document.getElementById('subjectTeacher');
-    if (ts) {
-        const val = ts.value;
-        ts.innerHTML = '<option value="">انتخاب معلم...</option>';
-        DATA.teachers.forEach(t => { ts.innerHTML += '<option value="' + t.id + '">' + t.id + ' - ' + t.name + '</option>'; });
-        ts.value = val;
+    
+    // Classes for student
+    const classSelect = document.getElementById('studentClassSelect');
+    if (classSelect) {
+        const val = classSelect.value;
+        classSelect.innerHTML = '<option value="">انتخاب کلاس...</option>';
+        DATA.classes.forEach(c => {
+            classSelect.innerHTML += `<option value="${c.id}">${c.id} - ${c.name}</option>`;
+        });
+        classSelect.value = val;
     }
-    const gs = document.getElementById('gradeSubject');
-    if (gs) {
-        const val = gs.value;
-        gs.innerHTML = '<option value="">انتخاب درس...</option>';
-        DATA.subjects.forEach(s => { gs.innerHTML += '<option value="' + s.id + '">' + s.id + ' - ' + s.name + '</option>'; });
-        gs.value = val;
+    
+    // Teachers for subject
+    const teacherSelect = document.getElementById('subjectTeacher');
+    if (teacherSelect) {
+        const val = teacherSelect.value;
+        teacherSelect.innerHTML = '<option value="">انتخاب معلم...</option>';
+        DATA.teachers.forEach(t => {
+            teacherSelect.innerHTML += `<option value="${t.id}">${t.id} - ${t.name}</option>`;
+        });
+        teacherSelect.value = val;
+    }
+    
+    // Classes for subject
+    const classSubjectSelect = document.getElementById('subjectClass');
+    if (classSubjectSelect) {
+        const val = classSubjectSelect.value;
+        classSubjectSelect.innerHTML = '<option value="">انتخاب کلاس...</option>';
+        DATA.classes.forEach(c => {
+            classSubjectSelect.innerHTML += `<option value="${c.id}">${c.id} - ${c.name}</option>`;
+        });
+        classSubjectSelect.value = val;
+    }
+    
+    // Subjects for grade
+    const gradeSubject = document.getElementById('gradeSubject');
+    if (gradeSubject) {
+        const val = gradeSubject.value;
+        gradeSubject.innerHTML = '<option value="">انتخاب درس...</option>';
+        DATA.subjects.forEach(s => {
+            gradeSubject.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
+        });
+        gradeSubject.value = val;
+    }
+    
+    // Teacher classes (multi-select)
+    const teacherClasses = document.getElementById('teacherClasses');
+    if (teacherClasses) {
+        const val = Array.from(teacherClasses.selectedOptions).map(o => o.value);
+        teacherClasses.innerHTML = '';
+        DATA.classes.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.id + ' - ' + c.name;
+            if (val.includes(c.id)) opt.selected = true;
+            teacherClasses.appendChild(opt);
+        });
+    }
+    
+    // Class teachers (multi-select)
+    const classTeachers = document.getElementById('classTeachers');
+    if (classTeachers) {
+        const val = Array.from(classTeachers.selectedOptions).map(o => o.value);
+        classTeachers.innerHTML = '';
+        DATA.teachers.forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.id + ' - ' + t.name + ' (' + t.specialty + ')';
+            if (val.includes(t.id)) opt.selected = true;
+            classTeachers.appendChild(opt);
+        });
     }
 }
 
@@ -1223,136 +1251,78 @@ function renderSelectOptions() {
 // ============================================================
 
 function updateDashboard() {
-    const totalStudents = DATA.students.length;
-    const totalTeachers = DATA.teachers.length;
-    const totalSubjects = DATA.subjects.length;
-    let avgSum = 0, avgCount = 0;
-    DATA.students.forEach(s => { if (s.average && s.average > 0) { avgSum += s.average; avgCount++; } });
-    const overallAvg = avgCount > 0 ? Math.round((avgSum / avgCount) * 10) / 10 : 0;
-    let presentCount = 0;
-    DATA.attendance.forEach(a => { if (a.status === 'حاضر') presentCount++; });
-    const attendanceRate = DATA.attendance.length > 0 ? Math.round((presentCount / DATA.attendance.length) * 100) : 0;
-    const totalFinance = totalStudents * 1500000;
+    document.getElementById('statStudents').textContent = DATA.students.length;
+    document.getElementById('statTeachers').textContent = DATA.teachers.length;
+    document.getElementById('statClasses').textContent = DATA.classes.length;
+    document.getElementById('statSubjects').textContent = DATA.subjects.length;
     
-    document.getElementById('statStudents').textContent = totalStudents;
-    document.getElementById('statTeachers').textContent = totalTeachers;
-    document.getElementById('statSubjects').textContent = totalSubjects;
-    document.getElementById('statAverage').textContent = overallAvg;
-    document.getElementById('statAttendance').textContent = attendanceRate + '%';
-    document.getElementById('statFinance').textContent = totalFinance.toLocaleString() + ' تومان';
-    document.getElementById('aboutStudents').textContent = totalStudents;
-    document.getElementById('aboutTeachers').textContent = totalTeachers;
-    document.getElementById('aboutSubjects').textContent = totalSubjects;
-    renderActivities(); renderAlerts();
+    let avgSum = 0, avgCount = 0;
+    DATA.students.forEach(s => { if (s.average > 0) { avgSum += s.average; avgCount++; } });
+    document.getElementById('statAverage').textContent = avgCount > 0 ? (avgSum / avgCount).toFixed(1) : '0';
+    
+    let present = DATA.attendance.filter(a => a.status === 'حاضر').length;
+    document.getElementById('statAttendance').textContent = DATA.attendance.length > 0 ? Math.round((present / DATA.attendance.length) * 100) + '%' : '0%';
+    
+    renderActivities();
+    renderAlerts();
 }
 
 function renderActivities() {
     const c = document.getElementById('recentActivities');
-    if (DATA.activities.length === 0) { c.innerHTML = '<p class="text-muted text-center" style="padding: 30px;">هیچ فعالیتی ثبت نشده است</p>'; return; }
-    c.innerHTML = DATA.activities.slice(-5).reverse().map(a => '<div style="padding: 12px 16px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;"><span>' + a.text + '</span><span style="color: var(--text-secondary); font-size: 12px;">' + a.time + '</span></div>').join('');
+    if (DATA.activities.length === 0) {
+        c.innerHTML = '<p class="text-muted text-center" style="padding:20px;">هیچ فعالیتی ثبت نشده است</p>';
+        return;
+    }
+    c.innerHTML = DATA.activities.slice(-8).reverse().map(a =>
+        `<div style="padding:10px 14px; border-bottom:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center; font-size:13px;">
+            <span>${a.text}</span>
+            <span style="color:var(--text-secondary); font-size:11px;">${a.time}</span>
+        </div>`
+    ).join('');
 }
 
 function renderAlerts() {
     const c = document.getElementById('alertsList');
     const active = DATA.alerts.filter(a => !a.resolved);
-    if (active.length === 0) { c.innerHTML = '<p class="text-muted text-center" style="padding: 30px;">✅ همه چیز عالی است! هیچ هشداری وجود ندارد</p>'; return; }
-    c.innerHTML = active.map(a => '<div style="padding: 12px 16px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; border-right: 4px solid ' + (a.severity === 'critical' ? 'var(--danger)' : 'var(--warning)') + ';"><div><span style="font-weight: 500;">' + a.message + '</span><br><span style="color: var(--text-secondary); font-size: 11px;">' + a.date + '</span></div><button class="btn btn-sm btn-success" onclick="resolveAlert(' + DATA.alerts.indexOf(a) + ')">رفع</button></div>').join('');
+    if (active.length === 0) {
+        c.innerHTML = '<p class="text-muted text-center" style="padding:20px;">✅ همه چیز عالی است!</p>';
+        return;
+    }
+    c.innerHTML = active.map(a =>
+        `<div style="padding:10px 14px; border-bottom:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center; border-right:3px solid ${a.severity === 'critical' ? 'var(--danger)' : 'var(--warning)'}; font-size:13px;">
+            <div><span>${a.message}</span><br><span style="color:var(--text-secondary); font-size:11px;">${a.date}</span></div>
+            <button class="btn btn-sm btn-success" onclick="resolveAlert(${DATA.alerts.indexOf(a)})">رفع</button>
+        </div>`
+    ).join('');
 }
 
 function resolveAlert(index) { DATA.alerts[index].resolved = true; saveData(); renderAlerts(); showToast('✅ هشدار رفع شد', 'success'); }
-function addActivity(text, detail) { DATA.activities.push({ text: text + (detail ? ' - ' + detail : ''), time: new Date().toLocaleString('fa-IR') }); if (DATA.activities.length > 50) DATA.activities.shift(); saveData(); renderActivities(); }
 
-// ============================================================
-// ================ SETTINGS ===================================
-// ============================================================
-
-function saveSettings() {
-    const schoolName = document.getElementById('settingsSchoolName').value.trim();
-    const adminName = document.getElementById('settingsAdminName').value.trim();
-    
-    if (schoolName) {
-        DATA.settings.schoolName = schoolName;
-        document.getElementById('sidebarSchoolName').textContent = schoolName;
-        document.getElementById('sidebarSchoolDisplay').textContent = '🏛️ ' + schoolName;
-        document.getElementById('aboutSchoolName').textContent = schoolName;
-        document.getElementById('loginWelcome').innerHTML = 'به <span style="color:var(--primary-light);">' + schoolName + '</span> خوش آمدید';
-    }
-    
-    if (adminName) {
-        DATA.settings.adminName = adminName;
-        USERS.admin.name = adminName;
-        document.getElementById('aboutAdminName').textContent = 'مدیر: ' + adminName;
-        if (DATA.currentUser && DATA.currentUser.role === 'admin') {
-            document.getElementById('userName').textContent = adminName;
-            document.getElementById('sidebarUserInfo').textContent = 'مدیر سیستم';
-        }
-    }
-    
-    const settings = {
-        schoolName: DATA.settings.schoolName,
-        adminName: DATA.settings.adminName,
-        adminUsername: USERS.admin.username,
-        adminPassword: USERS.admin.password
-    };
-    localStorage.setItem('schoolSettings', JSON.stringify(settings));
+function addActivity(text, detail) {
+    DATA.activities.push({ text: text + (detail ? ' - ' + detail : ''), time: new Date().toLocaleString('fa-IR') });
+    if (DATA.activities.length > 50) DATA.activities.shift();
     saveData();
-    
-    showToast('✅ تنظیمات با موفقیت ذخیره شد', 'success');
-    addActivity('تنظیمات', 'تنظیمات مدرسه به‌روزرسانی شد');
+    renderActivities();
 }
 
-function changeAdminCredentials() {
-    const newUsername = document.getElementById('settingsNewUsername').value.trim();
-    const newPassword = document.getElementById('settingsNewPassword').value.trim();
-    
-    if (!newUsername && !newPassword) {
-        showToast('❌ لطفاً نام کاربری یا رمز عبور جدید را وارد کنید', 'error');
-        return;
-    }
-    
-    if (newPassword && newPassword.length < 6) {
-        showToast('❌ رمز عبور باید حداقل ۶ کاراکتر باشد', 'error');
-        return;
-    }
-    
-    if (newUsername) {
-        USERS.admin.username = newUsername;
-        document.getElementById('settingsNewUsername').value = '';
-    }
-    
-    if (newPassword) {
-        USERS.admin.password = newPassword;
-        document.getElementById('settingsNewPassword').value = '';
-    }
-    
-    const settings = {
-        schoolName: DATA.settings.schoolName,
-        adminName: DATA.settings.adminName,
-        adminUsername: USERS.admin.username,
-        adminPassword: USERS.admin.password
-    };
-    localStorage.setItem('schoolSettings', JSON.stringify(settings));
-    
-    showToast('✅ اطلاعات کاربری با موفقیت تغییر یافت', 'success');
-    addActivity('امنیت', 'رمز عبور مدیر تغییر یافت');
+function viewStudent(id) {
+    const s = getStudentById(id);
+    if (!s) return;
+    const cls = getClassById(s.classId);
+    const grades = getStudentGrades(id);
+    const avg = calculateAverage(grades);
+    showToast(`👤 ${s.name} | کلاس: ${cls ? cls.name : 'ثبت نشده'} | میانگین: ${avg.toFixed(1)} | وضعیت: ${s.status}`, 'info');
 }
 
-function resetAllData() {
-    showConfirm('بازنشانی همه داده‌ها', '⚠️ تمام داده‌ها پاک خواهند شد! آیا اطمینان دارید؟', () => {
-        localStorage.removeItem('schoolData');
-        DATA.students = [];
-        DATA.teachers = [];
-        DATA.subjects = [];
-        DATA.grades = [];
-        DATA.attendance = [];
-        DATA.activities = [];
-        DATA.alerts = [];
-        saveData();
-        renderAllTables();
-        updateDashboard();
-        showToast('🗑️ همه داده‌ها بازنشانی شدند', 'warning');
-        addActivity('بازنشانی', 'همه داده‌ها بازنشانی شدند');
+function showRanking() {
+    const sorted = [...DATA.students].sort((a, b) => (b.average || 0) - (a.average || 0));
+    if (sorted.length === 0) { showToast('❌ هیچ دانش‌آموزی برای رتبه‌بندی وجود ندارد', 'error'); return; }
+    let msg = '🏆 رتبه‌بندی دانش‌آموزان:\n' + '='.repeat(40) + '\n';
+    sorted.forEach((s, i) => {
+        msg += `${i+1}. ${s.name} - میانگین: ${(s.average || 0).toFixed(1)} - ${s.status}\n`;
     });
+    alert(msg);
+    addActivity('مشاهده رتبه‌بندی', 'رتبه‌بندی دانش‌آموزان مشاهده شد');
 }
 
 // ============================================================
@@ -1362,20 +1332,42 @@ function resetAllData() {
 function openModal(name) {
     document.getElementById('modal-' + name).classList.add('active');
     renderSelectOptions();
-    if (name === 'addAttendance') { document.getElementById('attendanceDate').value = new Date().toISOString().split('T')[0]; }
+    if (name === 'addAttendance') {
+        document.getElementById('attendanceDate').value = new Date().toISOString().split('T')[0];
+    }
+    if (name === 'addClass') {
+        document.getElementById('classGrade').value = '';
+    }
 }
-function closeModal(name) { document.getElementById('modal-' + name).classList.remove('active'); }
-document.querySelectorAll('.modal-overlay').forEach(el => { el.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('active'); }); });
+
+function closeModal(name) {
+    document.getElementById('modal-' + name).classList.remove('active');
+}
+
+document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('active');
+    });
+});
 
 let confirmCallback = null;
-function showConfirm(title, message, callback) { document.getElementById('confirmTitle').textContent = title; document.getElementById('confirmMessage').textContent = message; document.getElementById('modal-confirm').classList.add('active'); confirmCallback = callback; }
-function confirmAction(confirmed) { document.getElementById('modal-confirm').classList.remove('active'); if (confirmed && confirmCallback) confirmCallback(); confirmCallback = null; }
+function showConfirm(title, message, callback) {
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMessage').textContent = message;
+    document.getElementById('modal-confirm').classList.add('active');
+    confirmCallback = callback;
+}
+function confirmAction(confirmed) {
+    document.getElementById('modal-confirm').classList.remove('active');
+    if (confirmed && confirmCallback) confirmCallback();
+    confirmCallback = null;
+}
 
 function showToast(message, type) {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
     toast.className = 'toast ' + (type || 'info');
-    toast.innerHTML = '<span>' + message + '</span><button class="close-toast" onclick="this.parentElement.remove()">&times;</button>';
+    toast.innerHTML = `<span>${message}</span><button class="close-toast" onclick="this.parentElement.remove()">&times;</button>`;
     container.appendChild(toast);
     setTimeout(() => { if (toast.parentElement) toast.remove(); }, 5000);
 }
@@ -1390,15 +1382,16 @@ function exportToExcel(type) {
         let sheetName = '';
         
         if (type === 'students' || type === 'all') {
-            data = DATA.students.map(s => ({
-                'شناسه': s.id,
-                'نام': s.name,
-                'پایه': s.grade,
-                'کلاس': s.class,
-                'شماره تماس': s.parentPhone || '',
-                'میانگین': s.average || 0,
-                'وضعیت': s.status || 'نامشخص'
-            }));
+            data = DATA.students.map(s => {
+                const cls = getClassById(s.classId);
+                return {
+                    'شناسه': s.id,
+                    'نام': s.name,
+                    'کلاس': cls ? cls.name : 'ثبت نشده',
+                    'میانگین': s.average || 0,
+                    'وضعیت': s.status || 'نامشخص'
+                };
+            });
             sheetName = 'دانش‌آموزان';
         }
         
@@ -1407,25 +1400,36 @@ function exportToExcel(type) {
             const teacherData = DATA.teachers.map(t => ({
                 'شناسه': t.id,
                 'نام': t.name,
-                'درس تخصصی': t.subject,
-                'شماره تماس': t.phone || '',
+                'تخصص': t.specialty,
+                'تماس': t.phone || '',
                 'وضعیت': 'فعال'
             }));
             data = data.concat(teacherData);
             sheetName = 'معلمان';
         }
         
+        if (type === 'classes' || type === 'all') {
+            if (type === 'all' && data.length > 0) { exportAllToExcel(); return; }
+            data = DATA.classes.map(c => ({
+                'شناسه': c.id,
+                'نام': c.name,
+                'پایه': c.grade,
+                'ظرفیت': c.capacity,
+                'تعداد دانش‌آموز': getClassStudents(c.id).length
+            }));
+            sheetName = 'کلاس‌ها';
+        }
+        
         if (type === 'subjects' || type === 'all') {
-            if (type === 'all' && data.length > 0) {
-                exportAllToExcel();
-                return;
-            }
+            if (type === 'all') { exportAllToExcel(); return; }
             data = DATA.subjects.map(s => {
-                const t = getTeacherById(s.teacher);
+                const t = getTeacherById(s.teacherId);
+                const cls = getClassById(s.classId);
                 return {
                     'شناسه': s.id,
                     'نام درس': s.name,
                     'معلم': t ? t.name : 'نامشخص',
+                    'کلاس': cls ? cls.name : 'نامشخص',
                     'واحد': s.units,
                     'نوع': s.type
                 };
@@ -1434,18 +1438,16 @@ function exportToExcel(type) {
         }
         
         if (type === 'grades' || type === 'all') {
-            if (type === 'all') {
-                exportAllToExcel();
-                return;
-            }
+            if (type === 'all') { exportAllToExcel(); return; }
             data = DATA.grades.map(g => {
                 const s = getStudentById(g.studentId);
                 const sub = getSubjectById(g.subjectId);
+                const labels = { quiz: 'آزمون کوتاه', homework: 'تکلیف', midterm: 'میان‌ترم', final: 'پایان‌ترم' };
                 return {
                     'دانش‌آموز': s ? s.name : 'نامشخص',
                     'درس': sub ? sub.name : 'نامشخص',
                     'نمره': g.value,
-                    'نوع آزمون': g.examType === 'quiz' ? 'آزمون کوتاه' : g.examType === 'homework' ? 'تکلیف' : g.examType === 'midterm' ? 'میان‌ترم' : g.examType === 'final' ? 'پایان‌ترم' : 'فوق‌العاده',
+                    'نوع آزمون': labels[g.examType] || g.examType,
                     'تاریخ': g.date
                 };
             });
@@ -1453,10 +1455,7 @@ function exportToExcel(type) {
         }
         
         if (type === 'attendance' || type === 'all') {
-            if (type === 'all') {
-                exportAllToExcel();
-                return;
-            }
+            if (type === 'all') { exportAllToExcel(); return; }
             data = DATA.attendance.map(a => {
                 const s = getStudentById(a.studentId);
                 return {
@@ -1469,27 +1468,21 @@ function exportToExcel(type) {
             sheetName = 'حضور و غیاب';
         }
         
-        if (data.length === 0) {
-            showToast('❌ داده‌ای برای خروجی وجود ندارد!', 'error');
-            return;
-        }
+        if (type === 'all') { exportAllToExcel(); return; }
+        
+        if (data.length === 0) { showToast('❌ داده‌ای برای خروجی وجود ندارد!', 'error'); return; }
         
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.json_to_sheet(data);
+        ws['!cols'] = Object.keys(data[0]).map(() => ({ wch: 20 }));
         XLSX.utils.book_append_sheet(wb, ws, sheetName);
         
-        const cols = Object.keys(data[0]).map(key => ({ wch: 20 }));
-        ws['!cols'] = cols;
-        
-        const fileName = 'گزارش_' + sheetName + '_' + new Date().toLocaleDateString('fa-IR') + '.xlsx';
+        const fileName = `گزارش_${sheetName}_${new Date().toLocaleDateString('fa-IR')}.xlsx`;
         XLSX.writeFile(wb, fileName);
-        
         showToast('✅ فایل اکسل با موفقیت دانلود شد!', 'success');
         addActivity('خروجی اکسل', 'خروجی ' + type + ' گرفته شد');
-        
     } catch (error) {
-        showToast('❌ خطا در ایجاد فایل اکسل: ' + error.message, 'error');
-        console.error(error);
+        showToast('❌ خطا: ' + error.message, 'error');
     }
 }
 
@@ -1497,86 +1490,28 @@ function exportAllToExcel() {
     try {
         const wb = XLSX.utils.book_new();
         
-        const studentsData = DATA.students.map(s => ({
-            'شناسه': s.id,
-            'نام': s.name,
-            'پایه': s.grade,
-            'کلاس': s.class,
-            'شماره تماس': s.parentPhone || '',
-            'میانگین': s.average || 0,
-            'وضعیت': s.status || 'نامشخص'
-        }));
-        if (studentsData.length > 0) {
-            const ws1 = XLSX.utils.json_to_sheet(studentsData);
-            XLSX.utils.book_append_sheet(wb, ws1, 'دانش‌آموزان');
-        }
+        const sheets = [
+            { name: 'دانش‌آموزان', data: DATA.students.map(s => ({ 'شناسه': s.id, 'نام': s.name, 'کلاس': getClassById(s.classId)?.name || '', 'میانگین': s.average || 0, 'وضعیت': s.status || '' })) },
+            { name: 'معلمان', data: DATA.teachers.map(t => ({ 'شناسه': t.id, 'نام': t.name, 'تخصص': t.specialty, 'تماس': t.phone || '' })) },
+            { name: 'کلاس‌ها', data: DATA.classes.map(c => ({ 'شناسه': c.id, 'نام': c.name, 'پایه': c.grade, 'ظرفیت': c.capacity, 'دانش‌آموز': getClassStudents(c.id).length })) },
+            { name: 'دروس', data: DATA.subjects.map(s => ({ 'شناسه': s.id, 'نام': s.name, 'معلم': getTeacherById(s.teacherId)?.name || '', 'کلاس': getClassById(s.classId)?.name || '' })) },
+            { name: 'نمرات', data: DATA.grades.map(g => ({ 'دانش‌آموز': getStudentById(g.studentId)?.name || '', 'درس': getSubjectById(g.subjectId)?.name || '', 'نمره': g.value, 'تاریخ': g.date })) }
+        ];
         
-        const teachersData = DATA.teachers.map(t => ({
-            'شناسه': t.id,
-            'نام': t.name,
-            'درس تخصصی': t.subject,
-            'شماره تماس': t.phone || '',
-            'وضعیت': 'فعال'
-        }));
-        if (teachersData.length > 0) {
-            const ws2 = XLSX.utils.json_to_sheet(teachersData);
-            XLSX.utils.book_append_sheet(wb, ws2, 'معلمان');
-        }
-        
-        const subjectsData = DATA.subjects.map(s => {
-            const t = getTeacherById(s.teacher);
-            return {
-                'شناسه': s.id,
-                'نام درس': s.name,
-                'معلم': t ? t.name : 'نامشخص',
-                'واحد': s.units,
-                'نوع': s.type
-            };
+        sheets.forEach(sheet => {
+            if (sheet.data.length > 0) {
+                const ws = XLSX.utils.json_to_sheet(sheet.data);
+                ws['!cols'] = Object.keys(sheet.data[0]).map(() => ({ wch: 20 }));
+                XLSX.utils.book_append_sheet(wb, ws, sheet.name);
+            }
         });
-        if (subjectsData.length > 0) {
-            const ws3 = XLSX.utils.json_to_sheet(subjectsData);
-            XLSX.utils.book_append_sheet(wb, ws3, 'دروس');
-        }
         
-        const gradesData = DATA.grades.map(g => {
-            const s = getStudentById(g.studentId);
-            const sub = getSubjectById(g.subjectId);
-            return {
-                'دانش‌آموز': s ? s.name : 'نامشخص',
-                'درس': sub ? sub.name : 'نامشخص',
-                'نمره': g.value,
-                'نوع آزمون': g.examType === 'quiz' ? 'آزمون کوتاه' : g.examType === 'homework' ? 'تکلیف' : g.examType === 'midterm' ? 'میان‌ترم' : g.examType === 'final' ? 'پایان‌ترم' : 'فوق‌العاده',
-                'تاریخ': g.date
-            };
-        });
-        if (gradesData.length > 0) {
-            const ws4 = XLSX.utils.json_to_sheet(gradesData);
-            XLSX.utils.book_append_sheet(wb, ws4, 'نمرات');
-        }
-        
-        const attendanceData = DATA.attendance.map(a => {
-            const s = getStudentById(a.studentId);
-            return {
-                'دانش‌آموز': s ? s.name : 'نامشخص',
-                'تاریخ': a.date,
-                'وضعیت': a.status,
-                'توضیحات': a.note || ''
-            };
-        });
-        if (attendanceData.length > 0) {
-            const ws5 = XLSX.utils.json_to_sheet(attendanceData);
-            XLSX.utils.book_append_sheet(wb, ws5, 'حضور و غیاب');
-        }
-        
-        const fileName = 'گزارش_کامل_مدرسه_' + new Date().toLocaleDateString('fa-IR') + '.xlsx';
+        const fileName = `گزارش_کامل_مدرسه_${new Date().toLocaleDateString('fa-IR')}.xlsx`;
         XLSX.writeFile(wb, fileName);
-        
-        showToast('✅ فایل کامل اکسل با موفقیت دانلود شد!', 'success');
+        showToast('✅ خروجی کامل دانلود شد!', 'success');
         addActivity('خروجی اکسل', 'خروجی کامل گرفته شد');
-        
     } catch (error) {
-        showToast('❌ خطا در ایجاد فایل اکسل: ' + error.message, 'error');
-        console.error(error);
+        showToast('❌ خطا: ' + error.message, 'error');
     }
 }
 
@@ -1587,35 +1522,31 @@ function exportAllToExcel() {
 function generateReport(type) {
     if (type === 'monthly') {
         let report = '📊 گزارش ماهانه مدرسه\n' + '='.repeat(50) + '\n\n';
-        report += '🏫 ' + DATA.settings.schoolName + '\n\n';
-        report += 'تعداد دانش‌آموزان: ' + DATA.students.length + '\n';
-        report += 'تعداد معلمان: ' + DATA.teachers.length + '\n';
-        report += 'تعداد دروس: ' + DATA.subjects.length + '\n';
+        report += `تعداد دانش‌آموزان: ${DATA.students.length}\n`;
+        report += `تعداد معلمان: ${DATA.teachers.length}\n`;
+        report += `تعداد کلاس‌ها: ${DATA.classes.length}\n`;
+        report += `تعداد دروس: ${DATA.subjects.length}\n`;
         let avgSum = 0; DATA.students.forEach(s => { if (s.average) avgSum += s.average; });
-        report += 'میانگین کل نمرات: ' + (avgSum / DATA.students.length || 0).toFixed(2) + '\n\n';
+        report += `میانگین کل نمرات: ${(avgSum / DATA.students.length || 0).toFixed(2)}\n\n`;
         report += '📋 لیست دانش‌آموزان:\n';
-        DATA.students.forEach(s => {
-            report += '- ' + s.name + ' (' + s.id + ') | میانگین: ' + (s.average || 0) + ' | وضعیت: ' + (s.status || 'نامشخص') + '\n';
-        });
+        DATA.students.forEach(s => { report += `- ${s.name} | میانگین: ${(s.average || 0).toFixed(1)} | ${s.status}\n`; });
+        downloadFile(report, `گزارش_ماهانه_${new Date().toLocaleDateString('fa-IR')}.txt`, 'text/plain');
         showToast('📄 گزارش ماهانه تولید شد', 'success');
-        downloadFile(report, 'گزارش_ماهانه_' + new Date().toLocaleDateString('fa-IR') + '.txt', 'text/plain');
     } else if (type === 'analytics') {
         let analysis = '📈 تحلیل آماری مدرسه\n' + '='.repeat(50) + '\n\n';
-        analysis += '🏫 ' + DATA.settings.schoolName + '\n\n';
-        const grades = DATA.grades;
-        if (grades.length > 0) {
-            const values = grades.map(g => g.value);
-            analysis += 'تعداد نمرات ثبت شده: ' + grades.length + '\n';
-            analysis += 'بیشترین نمره: ' + Math.max(...values) + '\n';
-            analysis += 'کمترین نمره: ' + Math.min(...values) + '\n';
-            analysis += 'میانگین نمرات: ' + (values.reduce((a,b) => a + b, 0) / values.length).toFixed(2) + '\n\n';
+        const values = DATA.grades.map(g => g.value);
+        if (values.length > 0) {
+            analysis += `تعداد نمرات: ${values.length}\n`;
+            analysis += `بیشترین نمره: ${Math.max(...values)}\n`;
+            analysis += `کمترین نمره: ${Math.min(...values)}\n`;
+            analysis += `میانگین نمرات: ${(values.reduce((a,b) => a+b, 0) / values.length).toFixed(2)}\n\n`;
+            analysis += '📊 توزیع نمرات:\n';
+            const ranges = {'۰-۱۰':0, '۱۰-۱۴':0, '۱۴-۱۷':0, '۱۷-۲۰':0};
+            values.forEach(v => { if (v < 10) ranges['۰-۱۰']++; else if (v < 14) ranges['۱۰-۱۴']++; else if (v < 17) ranges['۱۴-۱۷']++; else ranges['۱۷-۲۰']++; });
+            Object.entries(ranges).forEach(([r, c]) => { analysis += `- ${r}: ${c} نمره\n`; });
         }
-        analysis += '📊 توزیع نمرات:\n';
-        const ranges = {'۰-۱۰': 0, '۱۰-۱۴': 0, '۱۴-۱۷': 0, '۱۷-۲۰': 0};
-        grades.forEach(g => { if (g.value < 10) ranges['۰-۱۰']++; else if (g.value < 14) ranges['۱۰-۱۴']++; else if (g.value < 17) ranges['۱۴-۱۷']++; else ranges['۱۷-۲۰']++; });
-        Object.entries(ranges).forEach(([range, count]) => { analysis += '- ' + range + ': ' + count + ' نمره\n'; });
+        downloadFile(analysis, `تحلیل_آماری_${new Date().toLocaleDateString('fa-IR')}.txt`, 'text/plain');
         showToast('📊 تحلیل آماری تولید شد', 'info');
-        downloadFile(analysis, 'تحلیل_آماری_' + new Date().toLocaleDateString('fa-IR') + '.txt', 'text/plain');
     }
 }
 
@@ -1627,7 +1558,6 @@ function downloadFile(content, filename, mimeType) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(link.href);
 }
 
 function showReportCard(e) {
@@ -1635,13 +1565,44 @@ function showReportCard(e) {
     const studentId = document.getElementById('reportStudent').value;
     const student = getStudentById(studentId);
     if (!student) { showToast('❌ دانش‌آموز یافت نشد', 'error'); return; }
+    
     const grades = getStudentGrades(studentId);
     const avg = calculateAverage(grades);
-    let html = '<div style="padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--glass-border);"><h4 style="text-align: center; font-size: 20px; margin-bottom: 15px;">📜 کارنامه تحصیلی</h4><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;"><div><strong>نام:</strong> ' + student.name + '</div><div><strong>شناسه:</strong> ' + student.id + '</div><div><strong>پایه:</strong> ' + student.grade + '</div><div><strong>کلاس:</strong> ' + student.class + '</div></div><div style="text-align: center; padding: 15px; background: rgba(108,60,225,0.1); border-radius: 10px; margin-bottom: 15px;"><div style="font-size: 28px; font-weight: 700;">' + avg.toFixed(2) + '</div><div style="color: var(--text-secondary);">میانگین کل</div><div style="margin-top: 5px;"><span class="status-badge ' + (avg >= 18 ? 'active' : avg >= 10 ? 'pending' : 'inactive') + '">' + (avg >= 18 ? 'عالی' : avg >= 10 ? 'قبول' : 'مردود') + '</span></div></div><div style="margin-top: 15px;"><strong>📝 نمرات دروس:</strong><div style="margin-top: 10px;">';
-    if (grades.length === 0) { html += '<p class="text-muted">هیچ نمره‌ای ثبت نشده است</p>'; } else {
-        grades.forEach(g => { const sub = getSubjectById(g.subjectId); html += '<div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--glass-border);"><span>' + (sub ? sub.name : 'نامشخص') + '</span><span style="font-weight: 600; color: ' + (g.value >= 18 ? 'var(--success)' : g.value >= 10 ? 'var(--warning)' : 'var(--danger)') + ';">' + g.value + '</span></div>'; });
+    const cls = getClassById(student.classId);
+    
+    let html = `<div style="padding:18px; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid var(--glass-border);">
+        <h4 style="text-align:center; font-size:20px; margin-bottom:12px;">📜 کارنامه تحصیلی</h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+            <div><strong>نام:</strong> ${student.name}</div>
+            <div><strong>شناسه:</strong> ${student.id}</div>
+            <div><strong>کلاس:</strong> ${cls ? cls.name : 'ثبت نشده'}</div>
+            <div><strong>پایه:</strong> ${cls ? cls.grade : '-'}</div>
+        </div>
+        <div style="text-align:center; padding:12px; background:rgba(108,60,225,0.1); border-radius:8px; margin-bottom:12px;">
+            <div style="font-size:26px; font-weight:700;">${avg.toFixed(2)}</div>
+            <div class="text-muted">میانگین کل</div>
+            <div style="margin-top:4px;"><span class="status-badge ${avg >= 18 ? 'excellent' : avg >= 14 ? 'good' : avg >= 10 ? 'pending' : 'fail'}">${student.status}</span></div>
+        </div>`;
+    
+    if (grades.length === 0) {
+        html += '<p class="text-muted">هیچ نمره‌ای ثبت نشده است</p>';
+    } else {
+        html += '<div><strong>📝 نمرات دروس:</strong><div style="margin-top:8px;">';
+        grades.forEach(g => {
+            const sub = getSubjectById(g.subjectId);
+            const color = g.value >= 18 ? 'var(--success)' : g.value >= 14 ? 'var(--warning)' : g.value >= 10 ? '#FF9800' : 'var(--danger)';
+            html += `<div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--glass-border); font-size:13px;">
+                <span>${sub ? sub.name : 'نامشخص'}</span>
+                <span style="font-weight:600; color:${color};">${g.value}</span>
+            </div>`;
+        });
+        html += '</div></div>';
     }
-    html += '</div></div><div style="text-align: center; margin-top: 20px;"><button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> چاپ کارنامه</button></div></div>';
+    
+    html += `<div style="text-align:center; margin-top:15px;">
+        <button class="btn btn-primary btn-sm" onclick="window.print()"><i class="fas fa-print"></i> چاپ</button>
+    </div></div>`;
+    
     document.getElementById('reportCardResult').innerHTML = html;
     document.getElementById('reportCardResult').style.display = 'block';
     showToast('📄 کارنامه تولید شد', 'success');
@@ -1663,106 +1624,50 @@ document.querySelectorAll('.sidebar-menu li a').forEach(link => {
         if (panel) {
             panel.classList.add('active');
             const titles = {
-                'dashboard-home': ['🏠 <span>داشبورد</span>', 'خلاصه وضعیت مدرسه'],
-                'students': ['👨‍🎓 <span>دانش‌آموزان</span>', 'مدیریت دانش‌آموزان'],
-                'teachers': ['👨‍🏫 <span>معلمان</span>', 'مدیریت معلمان'],
-                'subjects': ['📚 <span>دروس</span>', 'مدیریت دروس'],
-                'grades': ['⭐ <span>نمرات</span>', 'مدیریت نمرات'],
-                'attendance': ['✅ <span>حضور و غیاب</span>', 'مدیریت حضور و غیاب'],
-                'reports': ['📊 <span>گزارشات</span>', 'گزارشات و تحلیل‌ها'],
-                'settings': ['⚙️ <span>تنظیمات</span>', 'تنظیمات سیستم'],
-                'about': ['🏛️ <span>درباره مدرسه</span>', 'اطلاعات مدرسه']
+                'dashboard-home': ['🏠 داشبورد', 'خلاصه وضعیت مدرسه'],
+                'students': ['👨‍🎓 دانش‌آموزان', 'مدیریت دانش‌آموزان'],
+                'teachers': ['👨‍🏫 معلمان', 'مدیریت معلمان'],
+                'classes': ['🏫 کلاس‌ها', 'مدیریت کلاس‌ها'],
+                'subjects': ['📚 دروس', 'مدیریت دروس'],
+                'grades': ['⭐ نمرات', 'مدیریت نمرات'],
+                'attendance': ['✅ حضور و غیاب', 'مدیریت حضور و غیاب'],
+                'reports': ['📊 گزارشات', 'گزارشات و تحلیل‌ها']
             };
             const title = titles[page] || ['صفحه', ''];
-            document.getElementById('pageTitle').innerHTML = title[0];
+            document.getElementById('pageTitle').textContent = title[0];
             document.getElementById('pageSubtitle').textContent = title[1];
-            
-            if (page === 'settings') {
-                document.getElementById('settingsSchoolName').value = DATA.settings.schoolName || '';
-                document.getElementById('settingsAdminName').value = DATA.settings.adminName || '';
-            }
         }
-        if (window.innerWidth <= 992) { document.getElementById('sidebar').classList.remove('open'); }
+        if (window.innerWidth <= 992) document.getElementById('sidebar').classList.remove('open');
     });
 });
 
-// ============================================================
-// ================ PARTICLES ==================================
-// ============================================================
-
-(function createParticles() {
-    const c = document.getElementById('particles');
-    for (let i = 0; i < 60; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.animationDuration = 15 + Math.random() * 25 + 's';
-        p.style.animationDelay = Math.random() * 25 + 's';
-        p.style.width = 2 + Math.random() * 5 + 'px';
-        p.style.height = p.style.width;
-        p.style.opacity = 0.1 + Math.random() * 0.3;
-        c.appendChild(p);
-    }
-})();
-
-function showNotifications() {
-    const count = DATA.alerts.filter(a => !a.resolved).length;
-    if (count === 0) { showToast('📬 هیچ اعلان جدیدی ندارید', 'info'); }
-    else { showToast('🔔 ' + count + ' اعلان جدید دارید', 'warning'); DATA.alerts.filter(a => !a.resolved).slice(0, 3).forEach(a => { showToast('⚠️ ' + a.message, 'error'); }); }
-}
-
-function toggleProfileMenu() { showToast('👤 ' + (DATA.currentUser?.name || 'کاربر') + ' | نقش: ' + (DATA.currentUser?.role === 'admin' ? 'مدیر' : 'معلم'), 'info'); }
-
-function viewStudent(id) { const s = getStudentById(id); if (s) showToast('👤 ' + s.name + ' - میانگین: ' + (s.average || 0) + ' - وضعیت: ' + (s.status || 'نامشخص'), 'info'); }
-
-// ============================================================
-// ================ TYPEWRITER =================================
-// ============================================================
-
-const welcomeTexts = ['🏫 به سیستم مدیریت مدرسه خوش آمدید', '📚 مدیریت هوشمند آموزش', '⭐ بهترین ابزار مدیریت آموزشی'];
-let textIndex = 0;
-
-function typeWriter() {
-    const subtitle = document.querySelector('.login-logo p');
-    if (!subtitle) return;
-    const text = welcomeTexts[textIndex % welcomeTexts.length];
-    subtitle.textContent = '';
-    subtitle.classList.add('typing-text');
-    let i = 0;
-    const interval = setInterval(() => {
-        if (i < text.length) { subtitle.textContent += text.charAt(i); i++; }
-        else { clearInterval(interval); subtitle.classList.remove('typing-text'); setTimeout(() => { textIndex++; typeWriter(); }, 3000); }
-    }, 80);
+function toggleProfileMenu() {
+    showToast(`👤 ${DATA.currentUser?.name || 'کاربر'} | نقش: ${DATA.currentUser?.role === 'admin' ? 'مدیر' : 'معلم'}`, 'info');
 }
 
 // ============================================================
-// ================ INITIALIZATION =============================
+// ================ KEYBOARD SHORTCUTS =========================
 // ============================================================
-
-initSystem();
-setTimeout(typeWriter, 500);
-loadAllData();
-updateDashboard();
 
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        const btn = document.getElementById('loginBtn');
-        if (btn && document.getElementById('loginPage').style.display !== 'none') btn.click();
-    }
     if (e.key === 'Escape') {
         document.querySelectorAll('.modal-overlay.active').forEach(el => el.classList.remove('active'));
-        document.getElementById('welcomeModal').classList.remove('active');
+    }
+    if (e.ctrlKey && e.key === 'l') {
+        e.preventDefault();
+        document.querySelector('.sidebar-menu li a[data-page="students"]')?.click();
     }
 });
 
-const styleShake = document.createElement('style');
-styleShake.textContent = '@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }';
-document.head.appendChild(styleShake);
+// ============================================================
+// ================ INIT =======================================
+// ============================================================
 
-console.log('🏫 سیستم مدیریت مدرسه');
+loadAllData();
+
+console.log('🏫 سیستم مدیریت مدرسه هوشمند');
 console.log('💻 ساخته شده توسط BitVolt.MTV');
-console.log('🔑 رمز پیش‌فرض: Admin@1404');
-console.log('👤 نام کاربری: admin');
+console.log('🔑 ورود: admin / Admin@1404');
 </script>
 </body>
 </html>
