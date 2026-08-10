@@ -5,16 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🏫 سیستم مدیریت مدرسه هوشمند - BitVolt</title>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    
-    <!-- QuaggaJS for Barcode Scanning -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     
     <style>
@@ -45,7 +38,6 @@
                         radial-gradient(ellipse at 80% 50%, rgba(0,212,255,0.08) 0%, transparent 60%);
         }
         
-        /* Login */
         .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .login-box {
             background: var(--dark-card); border-radius: var(--radius); padding: 50px 40px; max-width: 440px; width: 100%;
@@ -75,7 +67,6 @@
         }
         .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(108,60,225,0.4); }
         
-        /* Dashboard */
         .dashboard { display: none; min-height: 100vh; }
         .dashboard.active { display: flex; }
         
@@ -102,6 +93,7 @@
         .sidebar-menu li a:hover { background: rgba(108,60,225,0.12); color: var(--text); }
         .sidebar-menu li a.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 5px 20px rgba(108,60,225,0.3); }
         .sidebar-menu li a .badge { margin-right: auto; background: var(--danger); color: white; padding: 1px 10px; border-radius: 20px; font-size: 10px; }
+        .sidebar-menu li a.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
         
         .sidebar-footer { position: absolute; bottom: 20px; left: 16px; right: 16px; padding-top: 15px; border-top: 1px solid var(--glass-border); }
         .sidebar-footer a { display: flex; align-items: center; padding: 10px 16px; color: var(--text-secondary); text-decoration: none; border-radius: 10px; transition: var(--transition); font-size: 13px; cursor: pointer; gap: 12px; }
@@ -120,6 +112,9 @@
         .header-right .profile { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 14px; border-radius: 10px; transition: var(--transition); }
         .header-right .profile:hover { background: rgba(255,255,255,0.04); }
         .header-right .profile .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; }
+        .header-right .role-badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .role-badge.admin { background: rgba(108,60,225,0.3); color: var(--primary-light); }
+        .role-badge.teacher { background: rgba(0,212,255,0.2); color: var(--secondary); }
         
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 25px; }
         .stat-card {
@@ -161,6 +156,7 @@
         .btn-barcode:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,111,0,0.35); }
         .btn-bulk { background: linear-gradient(135deg, #0D47A1, #1565C0); color: white; }
         .btn-bulk:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(13,71,161,0.35); }
+        .btn-disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
         
         .table-container { background: var(--dark-card); border-radius: var(--radius); border: 1px solid var(--glass-border); overflow: hidden; overflow-x: auto; }
         .table-container table { width: 100%; border-collapse: collapse; min-width: 600px; }
@@ -180,8 +176,8 @@
         .actions-cell button { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px 8px; border-radius: 6px; transition: var(--transition); font-size: 14px; }
         .actions-cell button:hover { background: rgba(108,60,225,0.12); color: var(--primary); }
         .actions-cell button.danger:hover { background: rgba(255,23,68,0.12); color: var(--danger); }
+        .actions-cell button.disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
         
-        /* Barcode Scanner */
         .scanner-container {
             background: var(--dark-card);
             border: 2px solid var(--glass-border);
@@ -238,15 +234,7 @@
             border-radius: 6px;
             font-family: monospace;
         }
-        .scanner-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
         
-        /* Quick Entry */
         .quick-entry {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -258,15 +246,11 @@
             margin-bottom: 20px;
         }
         .quick-entry .form-group { margin-bottom: 0; }
-        .quick-entry .form-group input {
+        .quick-entry .form-group input, .quick-entry .form-group select {
             padding: 10px 14px;
             font-size: 13px;
         }
-        .quick-entry .actions {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-        }
+        .quick-entry .actions { display: flex; gap: 8px; align-items: flex-end; }
         
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -341,10 +325,13 @@
             min-height: 120px;
             resize: vertical;
         }
-        .bulk-import-area .hint {
-            color: var(--text-secondary);
-            font-size: 12px;
-            margin-top: 8px;
+        .bulk-import-area .hint { color: var(--text-secondary); font-size: 12px; margin-top: 8px; }
+        
+        .teacher-restricted {
+            border-right: 4px solid var(--secondary);
+            padding-right: 12px;
+            background: rgba(0,212,255,0.03);
+            border-radius: 8px;
         }
         
         @media (max-width: 992px) {
@@ -403,7 +390,7 @@
         <div class="login-logo">
             <div class="icon">🏫</div>
             <h1>مدیریت هوشمند مدرسه</h1>
-            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">سیستم جامع با قابلیت بارکدخوان</p>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">سیستم جامع با تفکیک دسترسی مدیر و معلم</p>
         </div>
         <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
@@ -445,11 +432,12 @@
             <h2>مدیریت مدرسه</h2>
             <div class="user-info" id="sidebarUserInfo">مدیر سیستم</div>
         </div>
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu" id="sidebarMenu">
             <li><a class="active" data-page="dashboard-home"><i class="fas fa-home"></i> داشبورد</a></li>
             <li><a data-page="students"><i class="fas fa-user-graduate"></i> دانش‌آموزان</a></li>
+            <li><a data-page="my-students" style="display:none;"><i class="fas fa-user-graduate"></i> دانش‌آموزان من</a></li>
             <li><a data-page="teachers"><i class="fas fa-chalkboard-teacher"></i> معلمان</a></li>
-            <li><a data-page="classes"><i class="fas fa-school"></i> کلاس‌ها <span class="badge">بارکد</span></a></li>
+            <li><a data-page="classes"><i class="fas fa-school"></i> کلاس‌ها</a></li>
             <li><a data-page="subjects"><i class="fas fa-book"></i> دروس</a></li>
             <li><a data-page="grades"><i class="fas fa-star"></i> نمرات</a></li>
             <li><a data-page="attendance"><i class="fas fa-check-circle"></i> حضور و غیاب</a></li>
@@ -471,8 +459,9 @@
                     <div class="avatar" id="userAvatar">AD</div>
                     <div>
                         <div class="text" id="userName" style="font-weight:600; font-size:14px;">مدیر سیستم</div>
-                        <div class="text-muted" id="userRole" style="font-size:12px;">مدیر</div>
+                        <div class="text-muted" id="userRoleDisplay" style="font-size:12px;">مدیر</div>
                     </div>
+                    <span class="role-badge admin" id="roleBadge">مدیر</span>
                 </div>
             </div>
         </header>
@@ -499,7 +488,7 @@
             </div>
         </div>
         
-        <!-- ===== STUDENTS ===== -->
+        <!-- ===== STUDENTS (Admin) ===== -->
         <div class="content-panel" id="panel-students">
             <div class="panel-header">
                 <h2>👨‍🎓 مدیریت دانش‌آموزان</h2>
@@ -511,11 +500,10 @@
                 </div>
             </div>
             
-            <!-- Quick Entry -->
             <div class="quick-entry" id="quickStudentEntry">
                 <div class="form-group">
                     <label><i class="fas fa-id-card"></i> شناسه دانش‌آموز (بارکد)</label>
-                    <input type="text" id="quickStudentId" placeholder="مثال: 14001 یا اسکن بارکد" onkeydown="if(event.key==='Enter') quickAddStudent()">
+                    <input type="text" id="quickStudentId" placeholder="مثال: 14001" onkeydown="if(event.key==='Enter') quickAddStudent()">
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-user"></i> نام کامل</label>
@@ -538,6 +526,28 @@
                 <table>
                     <thead><tr><th>شناسه</th><th>نام</th><th>کلاس</th><th>میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
                     <tbody id="studentsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- ===== MY STUDENTS (Teacher) ===== -->
+        <div class="content-panel" id="panel-my-students">
+            <div class="panel-header">
+                <h2>👨‍🎓 دانش‌آموزان من</h2>
+                <div class="actions">
+                    <button class="btn btn-barcode" onclick="openModal('scanStudentTeacher')"><i class="fas fa-qrcode"></i> اسکن بارکد</button>
+                    <button class="btn btn-primary" onclick="openModal('addGradeTeacher')"><i class="fas fa-star"></i> ثبت نمره</button>
+                    <button class="btn btn-success" onclick="openModal('addAttendanceTeacher')"><i class="fas fa-check-circle"></i> ثبت حضور</button>
+                </div>
+            </div>
+            <div class="teacher-restricted" style="padding:12px 16px; margin-bottom:16px; background:rgba(0,212,255,0.05); border-radius:10px; border:1px solid var(--secondary);">
+                <i class="fas fa-info-circle" style="color:var(--secondary);"></i>
+                <span style="color:var(--text-secondary);">شما فقط دانش‌آموزان کلاس‌های خود را مشاهده می‌کنید</span>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>شناسه</th><th>نام</th><th>کلاس</th><th>میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                    <tbody id="myStudentsTableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -570,11 +580,10 @@
                 </div>
             </div>
             
-            <!-- Quick Class Entry -->
             <div class="quick-entry" id="quickClassEntry">
                 <div class="form-group">
                     <label><i class="fas fa-id-card"></i> شناسه کلاس (بارکد)</label>
-                    <input type="text" id="quickClassId" placeholder="مثال: C001 یا اسکن بارکد" onkeydown="if(event.key==='Enter') quickAddClass()">
+                    <input type="text" id="quickClassId" placeholder="مثال: C001" onkeydown="if(event.key==='Enter') quickAddClass()">
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-school"></i> نام کلاس</label>
@@ -686,20 +695,15 @@
 
 <!-- ===== MODALS ===== -->
 
-<!-- Scan Student Barcode -->
+<!-- Scan Student (Admin) -->
 <div class="modal-overlay" id="modal-scanStudent">
     <div class="modal" style="max-width:550px;">
         <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن بارکد دانش‌آموز</h3><button class="close-modal" onclick="closeModal('scanStudent'); stopScanner();">&times;</button></div>
         <div class="scanner-container">
-            <div id="studentScanner" style="position:relative;">
-                <div class="scanner-overlay"></div>
-            </div>
-            <div class="scan-result" id="studentScanResult">
-                <i class="fas fa-camera"></i>
-                <span>دوربین را روی بارکد بگیرید...</span>
-            </div>
-            <div class="scanner-controls">
-                <button class="btn btn-barcode" onclick="startStudentScanner()"><i class="fas fa-play"></i> شروع اسکن</button>
+            <div id="studentScanner" style="position:relative;"><div class="scanner-overlay"></div></div>
+            <div class="scan-result" id="studentScanResult"><i class="fas fa-camera"></i><span>دوربین را روی بارکد بگیرید...</span></div>
+            <div class="scanner-controls" style="display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap;">
+                <button class="btn btn-barcode" onclick="startStudentScanner()"><i class="fas fa-play"></i> شروع</button>
                 <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
                 <button class="btn btn-outline" onclick="closeModal('scanStudent'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
             </div>
@@ -707,7 +711,7 @@
         <div id="scannedStudentInfo" style="display:none; background:rgba(0,212,255,0.05); border-radius:10px; padding:15px; margin-top:10px; border:1px solid var(--secondary);">
             <h4>✅ دانش‌آموز یافت شد:</h4>
             <div id="scannedStudentData"></div>
-            <div style="margin-top:10px; display:flex; gap:8px;">
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
                 <button class="btn btn-success btn-sm" onclick="useScannedStudent()"><i class="fas fa-check"></i> استفاده</button>
                 <button class="btn btn-primary btn-sm" onclick="editScannedStudent()"><i class="fas fa-edit"></i> ویرایش</button>
             </div>
@@ -715,20 +719,38 @@
     </div>
 </div>
 
-<!-- Scan Class Barcode -->
+<!-- Scan Student (Teacher) -->
+<div class="modal-overlay" id="modal-scanStudentTeacher">
+    <div class="modal" style="max-width:550px;">
+        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن بارکد دانش‌آموز</h3><button class="close-modal" onclick="closeModal('scanStudentTeacher'); stopScanner();">&times;</button></div>
+        <div class="scanner-container">
+            <div id="studentScannerTeacher" style="position:relative;"><div class="scanner-overlay"></div></div>
+            <div class="scan-result" id="studentScanResultTeacher"><i class="fas fa-camera"></i><span>دوربین را روی بارکد بگیرید...</span></div>
+            <div class="scanner-controls" style="display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap;">
+                <button class="btn btn-barcode" onclick="startStudentScannerTeacher()"><i class="fas fa-play"></i> شروع</button>
+                <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
+                <button class="btn btn-outline" onclick="closeModal('scanStudentTeacher'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
+            </div>
+        </div>
+        <div id="scannedStudentInfoTeacher" style="display:none; background:rgba(0,212,255,0.05); border-radius:10px; padding:15px; margin-top:10px; border:1px solid var(--secondary);">
+            <h4>✅ دانش‌آموز یافت شد:</h4>
+            <div id="scannedStudentDataTeacher"></div>
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn btn-success btn-sm" onclick="useScannedStudentTeacher()"><i class="fas fa-check"></i> استفاده</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scan Class -->
 <div class="modal-overlay" id="modal-scanClass">
     <div class="modal" style="max-width:550px;">
         <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن بارکد کلاس</h3><button class="close-modal" onclick="closeModal('scanClass'); stopScanner();">&times;</button></div>
         <div class="scanner-container">
-            <div id="classScanner" style="position:relative;">
-                <div class="scanner-overlay"></div>
-            </div>
-            <div class="scan-result" id="classScanResult">
-                <i class="fas fa-camera"></i>
-                <span>دوربین را روی بارکد بگیرید...</span>
-            </div>
-            <div class="scanner-controls">
-                <button class="btn btn-barcode" onclick="startClassScanner()"><i class="fas fa-play"></i> شروع اسکن</button>
+            <div id="classScanner" style="position:relative;"><div class="scanner-overlay"></div></div>
+            <div class="scan-result" id="classScanResult"><i class="fas fa-camera"></i><span>دوربین را روی بارکد بگیرید...</span></div>
+            <div class="scanner-controls" style="display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap;">
+                <button class="btn btn-barcode" onclick="startClassScanner()"><i class="fas fa-play"></i> شروع</button>
                 <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
                 <button class="btn btn-outline" onclick="closeModal('scanClass'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
             </div>
@@ -736,7 +758,7 @@
         <div id="scannedClassInfo" style="display:none; background:rgba(0,212,255,0.05); border-radius:10px; padding:15px; margin-top:10px; border:1px solid var(--secondary);">
             <h4>✅ کلاس یافت شد:</h4>
             <div id="scannedClassData"></div>
-            <div style="margin-top:10px; display:flex; gap:8px;">
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
                 <button class="btn btn-success btn-sm" onclick="useScannedClass()"><i class="fas fa-check"></i> استفاده</button>
                 <button class="btn btn-primary btn-sm" onclick="editScannedClass()"><i class="fas fa-edit"></i> ویرایش</button>
             </div>
@@ -744,20 +766,15 @@
     </div>
 </div>
 
-<!-- Scan Attendance Barcode -->
+<!-- Scan Attendance -->
 <div class="modal-overlay" id="modal-scanAttendance">
     <div class="modal" style="max-width:550px;">
         <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> اسکن برای حضور و غیاب</h3><button class="close-modal" onclick="closeModal('scanAttendance'); stopScanner();">&times;</button></div>
         <div class="scanner-container">
-            <div id="attendanceScanner" style="position:relative;">
-                <div class="scanner-overlay"></div>
-            </div>
-            <div class="scan-result" id="attendanceScanResult">
-                <i class="fas fa-camera"></i>
-                <span>بارکد دانش‌آموز را اسکن کنید...</span>
-            </div>
-            <div class="scanner-controls">
-                <button class="btn btn-barcode" onclick="startAttendanceScanner()"><i class="fas fa-play"></i> شروع اسکن</button>
+            <div id="attendanceScanner" style="position:relative;"><div class="scanner-overlay"></div></div>
+            <div class="scan-result" id="attendanceScanResult"><i class="fas fa-camera"></i><span>بارکد دانش‌آموز را اسکن کنید...</span></div>
+            <div class="scanner-controls" style="display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap;">
+                <button class="btn btn-barcode" onclick="startAttendanceScanner()"><i class="fas fa-play"></i> شروع</button>
                 <button class="btn btn-danger" onclick="stopScanner()"><i class="fas fa-stop"></i> توقف</button>
                 <button class="btn btn-outline" onclick="closeModal('scanAttendance'); stopScanner();"><i class="fas fa-times"></i> بستن</button>
             </div>
@@ -785,12 +802,8 @@
                 <br><span style="color:var(--text); font-family:monospace; font-size:12px;">شناسه, نام کامل, کلاس</span>
             </p>
             <textarea id="bulkStudentData" placeholder="مثال:&#10;S001, علی محمدی, C001&#10;S002, سارا احمدی, C001&#10;S003, رضا کریمی, C002"></textarea>
-            <div class="hint">
-                <i class="fas fa-lightbulb"></i> شناسه کلاس باید از قبل وجود داشته باشد
-            </div>
-            <button class="btn btn-success" style="margin-top:12px;" onclick="bulkImportStudents()">
-                <i class="fas fa-upload"></i> ثبت گروهی
-            </button>
+            <div class="hint"><i class="fas fa-lightbulb"></i> شناسه کلاس باید از قبل وجود داشته باشد</div>
+            <button class="btn btn-success" style="margin-top:12px;" onclick="bulkImportStudents()"><i class="fas fa-upload"></i> ثبت گروهی</button>
         </div>
     </div>
 </div>
@@ -874,7 +887,7 @@
     </div>
 </div>
 
-<!-- Add Grade -->
+<!-- Add Grade (Admin) -->
 <div class="modal-overlay" id="modal-addGrade">
     <div class="modal">
         <div class="modal-header"><h3>⭐ ثبت نمره</h3><button class="close-modal" onclick="closeModal('addGrade')">&times;</button></div>
@@ -890,7 +903,23 @@
     </div>
 </div>
 
-<!-- Add Attendance -->
+<!-- Add Grade (Teacher) -->
+<div class="modal-overlay" id="modal-addGradeTeacher">
+    <div class="modal">
+        <div class="modal-header"><h3>⭐ ثبت نمره برای دانش‌آموزان من</h3><button class="close-modal" onclick="closeModal('addGradeTeacher')">&times;</button></div>
+        <form onsubmit="addGradeTeacher(event)">
+            <div class="form-group"><label>دانش‌آموز</label><select id="gradeStudentTeacher" required><option value="">انتخاب دانش‌آموز...</option></select></div>
+            <div class="form-group"><label>درس</label><select id="gradeSubjectTeacher" required><option value="">انتخاب درس...</option></select></div>
+            <div class="form-row">
+                <div class="form-group"><label>نمره (۰-۲۰)</label><input type="number" id="gradeValueTeacher" min="0" max="20" step="0.25" required></div>
+                <div class="form-group"><label>نوع آزمون</label><select id="gradeExamTypeTeacher"><option value="quiz">آزمون کوتاه</option><option value="homework">تکلیف</option><option value="midterm">میان‌ترم</option><option value="final">پایان‌ترم</option></select></div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت نمره</button>
+        </form>
+    </div>
+</div>
+
+<!-- Add Attendance (Admin) -->
 <div class="modal-overlay" id="modal-addAttendance">
     <div class="modal">
         <div class="modal-header"><h3>✅ ثبت حضور</h3><button class="close-modal" onclick="closeModal('addAttendance')">&times;</button></div>
@@ -901,6 +930,22 @@
                 <div class="form-group"><label>وضعیت</label><select id="attendanceStatus"><option value="حاضر">حاضر</option><option value="غایب">غایب</option><option value="مرخصی">مرخصی</option><option value="تأخیر">تأخیر</option></select></div>
             </div>
             <div class="form-group"><label>توضیحات</label><textarea id="attendanceNote" placeholder="توضیحات اضافی..."></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت حضور</button>
+        </form>
+    </div>
+</div>
+
+<!-- Add Attendance (Teacher) -->
+<div class="modal-overlay" id="modal-addAttendanceTeacher">
+    <div class="modal">
+        <div class="modal-header"><h3>✅ ثبت حضور برای دانش‌آموزان من</h3><button class="close-modal" onclick="closeModal('addAttendanceTeacher')">&times;</button></div>
+        <form onsubmit="addAttendanceTeacher(event)">
+            <div class="form-group"><label>دانش‌آموز</label><select id="attendanceStudentTeacher" required><option value="">انتخاب دانش‌آموز...</option></select></div>
+            <div class="form-row">
+                <div class="form-group"><label>تاریخ</label><input type="date" id="attendanceDateTeacher" required></div>
+                <div class="form-group"><label>وضعیت</label><select id="attendanceStatusTeacher"><option value="حاضر">حاضر</option><option value="غایب">غایب</option><option value="مرخصی">مرخصی</option><option value="تأخیر">تأخیر</option></select></div>
+            </div>
+            <div class="form-group"><label>توضیحات</label><textarea id="attendanceNoteTeacher" placeholder="توضیحات اضافی..."></textarea></div>
             <button type="submit" class="btn btn-primary" style="width:100%;"><i class="fas fa-save"></i> ثبت حضور</button>
         </form>
     </div>
@@ -988,22 +1033,61 @@ function handleLogin(e) {
         showToast('✅ خوش آمدید ' + DATA.currentUser.name, 'success');
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('dashboard').classList.add('active');
-        document.getElementById('sidebarUserInfo').textContent = DATA.currentUser.role === 'admin' ? 'مدیر سیستم' : 'معلم';
-        document.getElementById('userName').textContent = DATA.currentUser.name;
-        document.getElementById('userRole').textContent = DATA.currentUser.role === 'admin' ? 'مدیر' : 'معلم';
-        document.getElementById('userAvatar').textContent = DATA.currentUser.avatar || DATA.currentUser.name.substring(0, 2);
+        setupUserInterface();
         loadAllData();
         updateDashboard();
-        if (DATA.currentUser.role === 'teacher') {
-            document.querySelectorAll('.sidebar-menu li a').forEach(a => {
-                if (['teachers', 'classes', 'subjects', 'reports'].includes(a.dataset.page)) a.style.display = 'none';
-            });
-        }
         addActivity('ورود به سیستم', 'کاربر ' + DATA.currentUser.name + ' وارد شد');
     } else {
         error.style.display = 'block';
         document.querySelector('.login-box').style.animation = 'shake 0.4s ease';
         setTimeout(() => document.querySelector('.login-box').style.animation = '', 500);
+    }
+}
+
+function setupUserInterface() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    const userInfo = document.getElementById('sidebarUserInfo');
+    const userName = document.getElementById('userName');
+    const userRoleDisplay = document.getElementById('userRoleDisplay');
+    const roleBadge = document.getElementById('roleBadge');
+    const avatar = document.getElementById('userAvatar');
+    
+    userInfo.textContent = isAdmin ? 'مدیر سیستم' : 'معلم';
+    userName.textContent = DATA.currentUser.name;
+    userRoleDisplay.textContent = isAdmin ? 'مدیر' : 'معلم';
+    roleBadge.textContent = isAdmin ? 'مدیر' : 'معلم';
+    roleBadge.className = 'role-badge ' + (isAdmin ? 'admin' : 'teacher');
+    avatar.textContent = DATA.currentUser.avatar || DATA.currentUser.name.substring(0, 2);
+    
+    // Show/hide menu items
+    const menuItems = document.querySelectorAll('.sidebar-menu li a');
+    menuItems.forEach(item => {
+        const page = item.dataset.page;
+        if (isAdmin) {
+            // Admin: show all
+            item.style.display = 'flex';
+            item.classList.remove('disabled');
+        } else {
+            // Teacher: hide admin-only items
+            if (['students', 'teachers', 'classes', 'subjects', 'reports'].includes(page)) {
+                item.style.display = 'none';
+            } else if (page === 'my-students') {
+                item.style.display = 'flex';
+                // If it's the active page, switch to it
+                if (item.classList.contains('active')) {
+                    document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+                    document.getElementById('panel-my-students').classList.add('active');
+                    document.getElementById('pageTitle').textContent = '👨‍🎓 دانش‌آموزان من';
+                    document.getElementById('pageSubtitle').textContent = 'دانش‌آموزان کلاس‌های شما';
+                }
+            }
+        }
+    });
+    
+    // Show my-students panel if teacher
+    if (!isAdmin) {
+        document.getElementById('panel-students').classList.remove('active');
+        document.getElementById('panel-my-students').classList.add('active');
     }
 }
 
@@ -1030,7 +1114,7 @@ function handleLogout() {
 
 function loadAllData() {
     try {
-        const saved = localStorage.getItem('schoolDataV2');
+        const saved = localStorage.getItem('schoolDataV3');
         if (saved) { Object.assign(DATA, JSON.parse(saved)); renderAll(); return; }
     } catch(e) {}
     
@@ -1066,7 +1150,7 @@ function loadAllData() {
     renderAll();
 }
 
-function saveData() { localStorage.setItem('schoolDataV2', JSON.stringify(DATA)); }
+function saveData() { localStorage.setItem('schoolDataV3', JSON.stringify(DATA)); }
 
 function getStudentById(id) { return DATA.students.find(s => s.id === id); }
 function getTeacherById(id) { return DATA.teachers.find(t => t.id === id); }
@@ -1075,6 +1159,20 @@ function getSubjectById(id) { return DATA.subjects.find(s => s.id === id); }
 function getStudentGrades(studentId) { return DATA.grades.filter(g => g.studentId === studentId); }
 function getClassStudents(classId) { return DATA.students.filter(s => s.classId === classId); }
 function getClassTeachers(classId) { return DATA.teachers.filter(t => t.classes && t.classes.includes(classId)); }
+
+function getTeacherClassIds(teacherId) {
+    const teacher = getTeacherById(teacherId);
+    return teacher ? teacher.classes || [] : [];
+}
+
+function getTeacherStudents(teacherId) {
+    const classIds = getTeacherClassIds(teacherId);
+    return DATA.students.filter(s => classIds.includes(s.classId));
+}
+
+function getTeacherSubjects(teacherId) {
+    return DATA.subjects.filter(s => s.teacherId === teacherId);
+}
 
 function calculateAverage(grades) {
     if (!grades || grades.length === 0) return 0;
@@ -1097,6 +1195,12 @@ function updateStudentAverages() {
 // ============================================================
 
 function quickAddStudent() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند دانش‌آموز اضافه کند', 'error');
+        return;
+    }
+    
     const id = document.getElementById('quickStudentId').value.trim();
     const name = document.getElementById('quickStudentName').value.trim();
     const classId = document.getElementById('quickStudentClass').value;
@@ -1129,6 +1233,12 @@ function quickAddStudent() {
 }
 
 function quickAddClass() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error');
+        return;
+    }
+    
     const id = document.getElementById('quickClassId').value.trim();
     const name = document.getElementById('quickClassName').value.trim();
     const grade = parseInt(document.getElementById('quickClassGrade').value);
@@ -1161,6 +1271,12 @@ function quickAddClass() {
 // ============================================================
 
 function bulkImportStudents() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند ثبت گروهی انجام دهد', 'error');
+        return;
+    }
+    
     const text = document.getElementById('bulkStudentData').value.trim();
     if (!text) {
         showToast('❌ لطفاً داده‌ها را وارد کنید', 'error');
@@ -1221,6 +1337,11 @@ function startStudentScanner() {
     startScanner('studentScanner', 'studentScanResult', handleStudentBarcode);
 }
 
+function startStudentScannerTeacher() {
+    scanMode = 'studentTeacher';
+    startScanner('studentScannerTeacher', 'studentScanResultTeacher', handleStudentBarcodeTeacher);
+}
+
 function startClassScanner() {
     scanMode = 'class';
     startScanner('classScanner', 'classScanResult', handleClassBarcode);
@@ -1232,16 +1353,14 @@ function startAttendanceScanner() {
 }
 
 function startScanner(containerId, resultId, callback) {
-    if (scannerActive) {
-        stopScanner();
-    }
+    if (scannerActive) stopScanner();
     
     const container = document.getElementById(containerId);
     const result = document.getElementById(resultId);
     result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال راه‌اندازی دوربین...';
     
     if (typeof Quagga === 'undefined') {
-        result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:var(--warning);"></i> کتابخانه بارکدخوان بارگذاری نشد. لطفاً اتصال اینترنت را بررسی کنید.';
+        result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:var(--warning);"></i> کتابخانه بارکدخوان بارگذاری نشد.';
         showToast('❌ خطا در بارگذاری بارکدخوان', 'error');
         return;
     }
@@ -1251,15 +1370,9 @@ function startScanner(containerId, resultId, callback) {
             name: "Live",
             type: "LiveStream",
             target: container,
-            constraints: {
-                width: 400,
-                height: 300,
-                facingMode: "environment"
-            }
+            constraints: { width: 400, height: 300, facingMode: "environment" }
         },
-        decoder: {
-            readers: ["ean_reader", "ean_8_reader", "code_128_reader", "code_39_reader", "upc_reader", "upc_e_reader"]
-        }
+        decoder: { readers: ["ean_reader", "ean_8_reader", "code_128_reader", "code_39_reader", "upc_reader", "upc_e_reader"] }
     }, function(err) {
         if (err) {
             result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:var(--danger);"></i> خطا: ' + err.message;
@@ -1284,15 +1397,11 @@ function startScanner(containerId, resultId, callback) {
 
 function stopScanner() {
     if (scannerActive) {
-        try {
-            Quagga.stop();
-            Quagga.offDetected();
-        } catch(e) {}
+        try { Quagga.stop(); Quagga.offDetected(); } catch(e) {}
         scannerActive = false;
         scanMode = null;
     }
-    // Clear all scanner containers
-    ['studentScanner', 'classScanner', 'attendanceScanner'].forEach(id => {
+    ['studentScanner', 'studentScannerTeacher', 'classScanner', 'attendanceScanner'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '';
     });
@@ -1335,6 +1444,49 @@ function handleStudentBarcode(code) {
         scannedStudentId = code;
         showToast('⚠️ دانش‌آموز یافت نشد، می‌توانید ثبت کنید', 'warning');
     }
+}
+
+function handleStudentBarcodeTeacher(code) {
+    const student = getStudentById(code);
+    const infoDiv = document.getElementById('scannedStudentInfoTeacher');
+    const dataDiv = document.getElementById('scannedStudentDataTeacher');
+    
+    if (!student) {
+        dataDiv.innerHTML = `<div style="margin-top:8px; color:var(--danger);"><i class="fas fa-exclamation-circle"></i> دانش‌آموزی با شناسه <strong>${code}</strong> یافت نشد.</div>`;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--danger)';
+        showToast('❌ دانش‌آموز یافت نشد', 'error');
+        return;
+    }
+    
+    const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+    if (!teacherClassIds.includes(student.classId)) {
+        dataDiv.innerHTML = `
+            <div style="margin-top:8px; color:var(--danger);">
+                <i class="fas fa-exclamation-circle"></i> 
+                دانش‌آموز <strong>${student.name}</strong> در کلاس‌های شما نیست.
+                <div>کلاس فعلی: ${getClassById(student.classId)?.name || 'نامشخص'}</div>
+            </div>
+        `;
+        infoDiv.style.display = 'block';
+        infoDiv.style.border = '2px solid var(--danger)';
+        showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+        return;
+    }
+    
+    const cls = getClassById(student.classId);
+    scannedStudentId = student.id;
+    dataDiv.innerHTML = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+            <div><strong>شناسه:</strong> ${student.id}</div>
+            <div><strong>نام:</strong> ${student.name}</div>
+            <div><strong>کلاس:</strong> ${cls ? cls.name : 'ثبت نشده'}</div>
+            <div><strong>میانگین:</strong> ${student.average.toFixed(1)}</div>
+        </div>
+    `;
+    infoDiv.style.display = 'block';
+    infoDiv.style.border = '2px solid var(--success)';
+    showToast('✅ دانش‌آموز یافت شد: ' + student.name, 'success');
 }
 
 function handleClassBarcode(code) {
@@ -1383,35 +1535,49 @@ function handleAttendanceBarcode(code) {
     const infoDiv = document.getElementById('scannedAttendanceInfo');
     const dataDiv = document.getElementById('scannedAttendanceData');
     
-    if (student) {
-        const cls = getClassById(student.classId);
-        scannedAttendanceId = student.id;
-        dataDiv.innerHTML = `
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
-                <div><strong>شناسه:</strong> ${student.id}</div>
-                <div><strong>نام:</strong> ${student.name}</div>
-                <div><strong>کلاس:</strong> ${cls ? cls.name : 'ثبت نشده'}</div>
-                <div><strong>وضعیت فعلی:</strong> <span style="color:var(--secondary);">در انتظار ثبت</span></div>
-            </div>
-        `;
-        infoDiv.style.display = 'block';
-        infoDiv.style.border = '2px solid var(--secondary)';
-        showToast('📋 دانش‌آموز: ' + student.name + ' - وضعیت را انتخاب کنید', 'info');
-    } else {
-        dataDiv.innerHTML = `
-            <div style="margin-top:8px; color:var(--danger);">
-                <i class="fas fa-exclamation-circle"></i> 
-                دانش‌آموزی با شناسه <strong>${code}</strong> یافت نشد.
-            </div>
-        `;
+    if (!student) {
+        dataDiv.innerHTML = `<div style="margin-top:8px; color:var(--danger);"><i class="fas fa-exclamation-circle"></i> دانش‌آموزی با شناسه <strong>${code}</strong> یافت نشد.</div>`;
         infoDiv.style.display = 'block';
         infoDiv.style.border = '2px solid var(--danger)';
         showToast('❌ دانش‌آموز یافت نشد', 'error');
+        return;
     }
+    
+    // Check if teacher has access to this student
+    if (DATA.currentUser.role === 'teacher') {
+        const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+        if (!teacherClassIds.includes(student.classId)) {
+            dataDiv.innerHTML = `
+                <div style="margin-top:8px; color:var(--danger);">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    دانش‌آموز <strong>${student.name}</strong> در کلاس‌های شما نیست.
+                </div>
+            `;
+            infoDiv.style.display = 'block';
+            infoDiv.style.border = '2px solid var(--danger)';
+            showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+            return;
+        }
+    }
+    
+    const cls = getClassById(student.classId);
+    scannedAttendanceId = student.id;
+    dataDiv.innerHTML = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+            <div><strong>شناسه:</strong> ${student.id}</div>
+            <div><strong>نام:</strong> ${student.name}</div>
+            <div><strong>کلاس:</strong> ${cls ? cls.name : 'ثبت نشده'}</div>
+            <div><strong>وضعیت فعلی:</strong> <span style="color:var(--secondary);">در انتظار ثبت</span></div>
+        </div>
+    `;
+    infoDiv.style.display = 'block';
+    infoDiv.style.border = '2px solid var(--secondary)';
+    showToast('📋 دانش‌آموز: ' + student.name + ' - وضعیت را انتخاب کنید', 'info');
 }
 
 function quickAddFromScan(code) {
     closeModal('scanStudent');
+    stopScanner();
     openModal('addStudent');
     document.getElementById('studentId').value = code;
     document.getElementById('studentName').focus();
@@ -1420,6 +1586,7 @@ function quickAddFromScan(code) {
 
 function quickAddClassFromScan(code) {
     closeModal('scanClass');
+    stopScanner();
     openModal('addClass');
     document.getElementById('classId').value = code;
     document.getElementById('className').focus();
@@ -1431,8 +1598,21 @@ function useScannedStudent() {
         closeModal('scanStudent');
         stopScanner();
         const student = getStudentById(scannedStudentId);
+        if (student) showToast('👤 ' + student.name + ' - میانگین: ' + student.average.toFixed(1), 'info');
+        scannedStudentId = null;
+    }
+}
+
+function useScannedStudentTeacher() {
+    if (scannedStudentId) {
+        closeModal('scanStudentTeacher');
+        stopScanner();
+        const student = getStudentById(scannedStudentId);
         if (student) {
             showToast('👤 ' + student.name + ' - میانگین: ' + student.average.toFixed(1), 'info');
+            // Open grade entry for this student
+            openModal('addGradeTeacher');
+            document.getElementById('gradeStudentTeacher').value = student.id;
         }
         scannedStudentId = null;
     }
@@ -1442,7 +1622,6 @@ function editScannedStudent() {
     if (scannedStudentId) {
         closeModal('scanStudent');
         stopScanner();
-        // Find student and open edit mode (we'll just show info)
         const student = getStudentById(scannedStudentId);
         if (student) {
             openModal('addStudent');
@@ -1451,26 +1630,20 @@ function editScannedStudent() {
             document.getElementById('studentName').value = student.name;
             document.getElementById('studentClassSelect').value = student.classId || '';
             document.getElementById('studentParentPhone').value = student.parentPhone || '';
-            // Change button text
             const btn = document.querySelector('#modal-addStudent form button');
             btn.textContent = '✏️ ویرایش دانش‌آموز';
             btn.onclick = function(e) {
                 e.preventDefault();
-                const name = document.getElementById('studentName').value.trim();
-                const classId = document.getElementById('studentClassSelect').value;
-                const parentPhone = document.getElementById('studentParentPhone').value.trim();
-                if (student) {
-                    student.name = name;
-                    student.classId = classId;
-                    student.parentPhone = parentPhone;
-                    saveData();
-                    renderAll();
-                    updateDashboard();
-                    closeModal('addStudent');
-                    document.getElementById('studentId').disabled = false;
-                    showToast('✅ دانش‌آموز ویرایش شد', 'success');
-                    addActivity('ویرایش دانش‌آموز', 'دانش‌آموز ' + name + ' ویرایش شد');
-                }
+                student.name = document.getElementById('studentName').value.trim();
+                student.classId = document.getElementById('studentClassSelect').value;
+                student.parentPhone = document.getElementById('studentParentPhone').value.trim();
+                saveData();
+                renderAll();
+                updateDashboard();
+                closeModal('addStudent');
+                document.getElementById('studentId').disabled = false;
+                showToast('✅ دانش‌آموز ویرایش شد', 'success');
+                addActivity('ویرایش دانش‌آموز', 'دانش‌آموز ' + student.name + ' ویرایش شد');
             };
         }
         scannedStudentId = null;
@@ -1482,9 +1655,7 @@ function useScannedClass() {
         closeModal('scanClass');
         stopScanner();
         const cls = getClassById(scannedClassId);
-        if (cls) {
-            showToast('🏫 ' + cls.name + ' - پایه: ' + cls.grade + ' - ' + getClassStudents(cls.id).length + ' دانش‌آموز', 'info');
-        }
+        if (cls) showToast('🏫 ' + cls.name + ' - ' + getClassStudents(cls.id).length + ' دانش‌آموز', 'info');
         scannedClassId = null;
     }
 }
@@ -1505,21 +1676,16 @@ function editScannedClass() {
             btn.textContent = '✏️ ویرایش کلاس';
             btn.onclick = function(e) {
                 e.preventDefault();
-                const name = document.getElementById('className').value.trim();
-                const grade = parseInt(document.getElementById('classGrade').value);
-                const capacity = parseInt(document.getElementById('classCapacity').value);
-                if (cls) {
-                    cls.name = name;
-                    cls.grade = grade;
-                    cls.capacity = capacity;
-                    saveData();
-                    renderAll();
-                    updateDashboard();
-                    closeModal('addClass');
-                    document.getElementById('classId').disabled = false;
-                    showToast('✅ کلاس ویرایش شد', 'success');
-                    addActivity('ویرایش کلاس', 'کلاس ' + name + ' ویرایش شد');
-                }
+                cls.name = document.getElementById('className').value.trim();
+                cls.grade = parseInt(document.getElementById('classGrade').value);
+                cls.capacity = parseInt(document.getElementById('classCapacity').value);
+                saveData();
+                renderAll();
+                updateDashboard();
+                closeModal('addClass');
+                document.getElementById('classId').disabled = false;
+                showToast('✅ کلاس ویرایش شد', 'success');
+                addActivity('ویرایش کلاس', 'کلاس ' + cls.name + ' ویرایش شد');
             };
         }
         scannedClassId = null;
@@ -1547,12 +1713,9 @@ function markAttendance(status) {
     showToast('✅ حضور ' + status + ' برای ' + student.name + ' ثبت شد', 'success');
     addActivity('ثبت حضور با بارکد', student.name + ' - ' + status);
     
-    // Reset for next scan
     scannedAttendanceId = null;
     document.getElementById('scannedAttendanceInfo').style.display = 'none';
     document.getElementById('attendanceScanResult').innerHTML = '<i class="fas fa-camera"></i> <span>بارکد بعدی را اسکن کنید...</span>';
-    
-    // Keep scanner running for next scan
 }
 
 // ============================================================
@@ -1561,6 +1724,12 @@ function markAttendance(status) {
 
 function addStudent(e) {
     e.preventDefault();
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند دانش‌آموز اضافه کند', 'error');
+        return;
+    }
+    
     const id = document.getElementById('studentId').value.trim();
     const name = document.getElementById('studentName').value.trim();
     const classId = document.getElementById('studentClassSelect').value;
@@ -1585,7 +1754,6 @@ function addStudent(e) {
     document.getElementById('studentName').value = '';
     document.getElementById('studentParentPhone').value = '';
     document.getElementById('studentId').disabled = false;
-    // Reset button
     const btn = document.querySelector('#modal-addStudent form button');
     btn.textContent = 'ثبت دانش‌آموز';
     btn.onclick = null;
@@ -1593,6 +1761,12 @@ function addStudent(e) {
 
 function addTeacher(e) {
     e.preventDefault();
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند معلم اضافه کند', 'error');
+        return;
+    }
+    
     const id = document.getElementById('teacherId').value.trim();
     const name = document.getElementById('teacherName').value.trim();
     const specialty = document.getElementById('teacherSpecialty').value.trim();
@@ -1619,6 +1793,12 @@ function addTeacher(e) {
 
 function addClass(e) {
     e.preventDefault();
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error');
+        return;
+    }
+    
     const id = document.getElementById('classId').value.trim();
     const name = document.getElementById('className').value.trim();
     const grade = parseInt(document.getElementById('classGrade').value);
@@ -1639,7 +1819,6 @@ function addClass(e) {
     document.getElementById('classGrade').value = '';
     document.getElementById('classCapacity').value = '30';
     document.getElementById('classId').disabled = false;
-    // Reset button
     const btn = document.querySelector('#modal-addClass form button');
     btn.textContent = 'ثبت کلاس';
     btn.onclick = null;
@@ -1647,6 +1826,12 @@ function addClass(e) {
 
 function addSubject(e) {
     e.preventDefault();
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند درس اضافه کند', 'error');
+        return;
+    }
+    
     const id = document.getElementById('subjectId').value.trim();
     const name = document.getElementById('subjectName').value.trim();
     const teacherId = document.getElementById('subjectTeacher').value;
@@ -1670,6 +1855,8 @@ function addSubject(e) {
 
 function addGrade(e) {
     e.preventDefault();
+    const isAdmin = DATA.currentUser.role === 'admin';
+    
     const studentId = document.getElementById('gradeStudent').value;
     const subjectId = document.getElementById('gradeSubject').value;
     const value = parseFloat(document.getElementById('gradeValue').value);
@@ -1678,6 +1865,22 @@ function addGrade(e) {
     
     if (!studentId || !subjectId) { showToast('❌ لطفاً دانش‌آموز و درس را انتخاب کنید', 'error'); return; }
     if (value < 0 || value > 20) { showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error'); return; }
+    
+    // If teacher, check if student is in their class
+    if (!isAdmin) {
+        const student = getStudentById(studentId);
+        const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+        if (!teacherClassIds.includes(student.classId)) {
+            showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+            return;
+        }
+        // Check if subject is taught by this teacher
+        const subject = getSubjectById(subjectId);
+        if (subject && subject.teacherId !== DATA.currentUser.username) {
+            showToast('❌ شما معلم این درس نیستید', 'error');
+            return;
+        }
+    }
     
     DATA.grades.push({ studentId, subjectId, value, examType, date });
     updateStudentAverages();
@@ -1690,8 +1893,47 @@ function addGrade(e) {
     document.getElementById('gradeValue').value = '';
 }
 
+function addGradeTeacher(e) {
+    e.preventDefault();
+    const studentId = document.getElementById('gradeStudentTeacher').value;
+    const subjectId = document.getElementById('gradeSubjectTeacher').value;
+    const value = parseFloat(document.getElementById('gradeValueTeacher').value);
+    const examType = document.getElementById('gradeExamTypeTeacher').value;
+    const date = new Date().toLocaleDateString('fa-IR');
+    
+    if (!studentId || !subjectId) { showToast('❌ لطفاً دانش‌آموز و درس را انتخاب کنید', 'error'); return; }
+    if (value < 0 || value > 20) { showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error'); return; }
+    
+    // Check if student is in teacher's classes
+    const student = getStudentById(studentId);
+    const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+    if (!teacherClassIds.includes(student.classId)) {
+        showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+        return;
+    }
+    
+    // Check if subject is taught by this teacher
+    const subject = getSubjectById(subjectId);
+    if (subject && subject.teacherId !== DATA.currentUser.username) {
+        showToast('❌ شما معلم این درس نیستید', 'error');
+        return;
+    }
+    
+    DATA.grades.push({ studentId, subjectId, value, examType, date });
+    updateStudentAverages();
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addGradeTeacher');
+    showToast('✅ نمره با موفقیت ثبت شد', 'success');
+    addActivity('ثبت نمره (معلم)', 'نمره ' + value + ' برای ' + student.name + ' ثبت شد');
+    document.getElementById('gradeValueTeacher').value = '';
+}
+
 function addAttendance(e) {
     e.preventDefault();
+    const isAdmin = DATA.currentUser.role === 'admin';
+    
     const studentId = document.getElementById('attendanceStudent').value;
     const date = document.getElementById('attendanceDate').value;
     const status = document.getElementById('attendanceStatus').value;
@@ -1699,6 +1941,16 @@ function addAttendance(e) {
     const persianDate = new Date(date).toLocaleDateString('fa-IR');
     
     if (!studentId) { showToast('❌ لطفاً دانش‌آموز را انتخاب کنید', 'error'); return; }
+    
+    // If teacher, check if student is in their class
+    if (!isAdmin) {
+        const student = getStudentById(studentId);
+        const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+        if (!teacherClassIds.includes(student.classId)) {
+            showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+            return;
+        }
+    }
     
     DATA.attendance.push({ studentId, date: persianDate, status, note });
     saveData();
@@ -1710,8 +1962,41 @@ function addAttendance(e) {
     document.getElementById('attendanceNote').value = '';
 }
 
+function addAttendanceTeacher(e) {
+    e.preventDefault();
+    const studentId = document.getElementById('attendanceStudentTeacher').value;
+    const date = document.getElementById('attendanceDateTeacher').value;
+    const status = document.getElementById('attendanceStatusTeacher').value;
+    const note = document.getElementById('attendanceNoteTeacher').value;
+    const persianDate = new Date(date).toLocaleDateString('fa-IR');
+    
+    if (!studentId) { showToast('❌ لطفاً دانش‌آموز را انتخاب کنید', 'error'); return; }
+    
+    const student = getStudentById(studentId);
+    const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+    if (!teacherClassIds.includes(student.classId)) {
+        showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+        return;
+    }
+    
+    DATA.attendance.push({ studentId, date: persianDate, status, note });
+    saveData();
+    renderAll();
+    updateDashboard();
+    closeModal('addAttendanceTeacher');
+    showToast('✅ حضور با موفقیت ثبت شد', 'success');
+    addActivity('ثبت حضور (معلم)', 'حضور ' + status + ' برای ' + student.name + ' ثبت شد');
+    document.getElementById('attendanceNoteTeacher').value = '';
+}
+
 // ===== DELETE FUNCTIONS =====
 function deleteStudent(id) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند دانش‌آموز حذف کند', 'error');
+        return;
+    }
+    
     showConfirm('حذف دانش‌آموز', 'آیا از حذف این دانش‌آموز اطمینان دارید؟', () => {
         DATA.students = DATA.students.filter(s => s.id !== id);
         DATA.grades = DATA.grades.filter(g => g.studentId !== id);
@@ -1726,6 +2011,12 @@ function deleteStudent(id) {
 }
 
 function deleteTeacher(id) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند معلم حذف کند', 'error');
+        return;
+    }
+    
     showConfirm('حذف معلم', 'آیا از حذف این معلم اطمینان دارید؟', () => {
         DATA.teachers = DATA.teachers.filter(t => t.id !== id);
         DATA.subjects = DATA.subjects.filter(s => s.teacherId !== id);
@@ -1738,6 +2029,12 @@ function deleteTeacher(id) {
 }
 
 function deleteClass(id) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند کلاس حذف کند', 'error');
+        return;
+    }
+    
     showConfirm('حذف کلاس', 'آیا از حذف این کلاس اطمینان دارید؟ دانش‌آموزان کلاس حذف نمی‌شوند.', () => {
         DATA.classes = DATA.classes.filter(c => c.id !== id);
         DATA.subjects = DATA.subjects.filter(s => s.classId !== id);
@@ -1750,6 +2047,12 @@ function deleteClass(id) {
 }
 
 function deleteSubject(id) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند درس حذف کند', 'error');
+        return;
+    }
+    
     showConfirm('حذف درس', 'آیا از حذف این درس اطمینان دارید؟', () => {
         DATA.subjects = DATA.subjects.filter(s => s.id !== id);
         DATA.grades = DATA.grades.filter(g => g.subjectId !== id);
@@ -1761,6 +2064,12 @@ function deleteSubject(id) {
 }
 
 function deleteGrade(index) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند نمره حذف کند', 'error');
+        return;
+    }
+    
     showConfirm('حذف نمره', 'آیا از حذف این نمره اطمینان دارید؟', () => {
         DATA.grades.splice(index, 1);
         updateStudentAverages();
@@ -1772,6 +2081,12 @@ function deleteGrade(index) {
 }
 
 function deleteAttendance(index) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند حضور حذف کند', 'error');
+        return;
+    }
+    
     showConfirm('حذف حضور', 'آیا از حذف این رکورد اطمینان دارید؟', () => {
         DATA.attendance.splice(index, 1);
         saveData();
@@ -1787,6 +2102,7 @@ function deleteAttendance(index) {
 
 function renderAll() {
     renderStudentsTable();
+    renderMyStudentsTable();
     renderTeachersTable();
     renderClassesGrid();
     renderSubjectsTable();
@@ -1797,7 +2113,14 @@ function renderAll() {
 }
 
 function renderStudentsTable() {
+    const isAdmin = DATA.currentUser.role === 'admin';
     const tbody = document.getElementById('studentsTableBody');
+    
+    if (!isAdmin) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">دسترسی محدود - فقط مدیر می‌تواند همه دانش‌آموزان را ببیند</td></tr>';
+        return;
+    }
+    
     if (DATA.students.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ دانش‌آموزی ثبت نشده است</td></tr>';
         return;
@@ -1819,8 +2142,45 @@ function renderStudentsTable() {
     }).join('');
 }
 
+function renderMyStudentsTable() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    const tbody = document.getElementById('myStudentsTableBody');
+    
+    if (isAdmin) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">مدیر همه دانش‌آموزان را می‌بیند</td></tr>';
+        return;
+    }
+    
+    const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+    if (teacherStudents.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ دانش‌آموزی در کلاس‌های شما ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = teacherStudents.map(s => {
+        const cls = getClassById(s.classId);
+        const statusClass = s.status === 'عالی' ? 'excellent' : s.status === 'خوب' ? 'good' : s.status === 'قبول' ? 'pending' : 'fail';
+        return `<tr>
+            <td><strong>${s.id}</strong></td>
+            <td>${s.name}</td>
+            <td>${cls ? cls.name : 'ثبت نشده'}</td>
+            <td>${s.average?.toFixed(1) || '0'}</td>
+            <td><span class="status-badge ${statusClass}">${s.status || 'نامشخص'}</span></td>
+            <td><div class="actions-cell">
+                <button onclick="viewStudent('${s.id}')" title="مشاهده"><i class="fas fa-eye"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
+}
+
 function renderTeachersTable() {
+    const isAdmin = DATA.currentUser.role === 'admin';
     const tbody = document.getElementById('teachersTableBody');
+    
+    if (!isAdmin) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">دسترسی محدود - فقط مدیر می‌تواند معلمان را ببیند</td></tr>';
+        return;
+    }
+    
     if (DATA.teachers.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ معلمی ثبت نشده است</td></tr>';
         return;
@@ -1841,7 +2201,14 @@ function renderTeachersTable() {
 }
 
 function renderClassesGrid() {
+    const isAdmin = DATA.currentUser.role === 'admin';
     const grid = document.getElementById('classesGrid');
+    
+    if (!isAdmin) {
+        grid.innerHTML = '<p class="text-muted text-center" style="padding:30px;">دسترسی محدود - فقط مدیر می‌تواند کلاس‌ها را ببیند</p>';
+        return;
+    }
+    
     if (DATA.classes.length === 0) {
         grid.innerHTML = '<p class="text-muted text-center" style="padding:30px;">هیچ کلاسی ثبت نشده است</p>';
         return;
@@ -1867,7 +2234,14 @@ function renderClassesGrid() {
 }
 
 function renderSubjectsTable() {
+    const isAdmin = DATA.currentUser.role === 'admin';
     const tbody = document.getElementById('subjectsTableBody');
+    
+    if (!isAdmin) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">دسترسی محدود - فقط مدیر می‌تواند دروس را ببیند</td></tr>';
+        return;
+    }
+    
     if (DATA.subjects.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ درسی ثبت نشده است</td></tr>';
         return;
@@ -1889,12 +2263,23 @@ function renderSubjectsTable() {
 }
 
 function renderGradesTable() {
+    const isAdmin = DATA.currentUser.role === 'admin';
     const tbody = document.getElementById('gradesTableBody');
-    if (DATA.grades.length === 0) {
+    
+    let gradesToShow = DATA.grades;
+    if (!isAdmin) {
+        const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+        const studentIds = teacherStudents.map(s => s.id);
+        const teacherSubjects = getTeacherSubjects(DATA.currentUser.username);
+        const subjectIds = teacherSubjects.map(s => s.id);
+        gradesToShow = DATA.grades.filter(g => studentIds.includes(g.studentId) || subjectIds.includes(g.subjectId));
+    }
+    
+    if (gradesToShow.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:25px;">هیچ نمره‌ای ثبت نشده است</td></tr>';
         return;
     }
-    tbody.innerHTML = DATA.grades.map((g, i) => {
+    tbody.innerHTML = gradesToShow.map((g, i) => {
         const student = getStudentById(g.studentId);
         const subject = getSubjectById(g.subjectId);
         const color = g.value >= 18 ? 'var(--success)' : g.value >= 14 ? 'var(--warning)' : g.value >= 10 ? '#FF9800' : 'var(--danger)';
@@ -1906,19 +2291,28 @@ function renderGradesTable() {
             <td>${examLabels[g.examType] || g.examType}</td>
             <td>${g.date}</td>
             <td><div class="actions-cell">
-                <button class="danger" onclick="deleteGrade(${i})" title="حذف"><i class="fas fa-trash"></i></button>
+                ${isAdmin ? `<button class="danger" onclick="deleteGrade(${DATA.grades.indexOf(g)})" title="حذف"><i class="fas fa-trash"></i></button>` : ''}
             </div></td>
         </tr>`;
     }).join('');
 }
 
 function renderAttendanceTable() {
+    const isAdmin = DATA.currentUser.role === 'admin';
     const tbody = document.getElementById('attendanceTableBody');
-    if (DATA.attendance.length === 0) {
+    
+    let attendanceToShow = DATA.attendance;
+    if (!isAdmin) {
+        const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+        const studentIds = teacherStudents.map(s => s.id);
+        attendanceToShow = DATA.attendance.filter(a => studentIds.includes(a.studentId));
+    }
+    
+    if (attendanceToShow.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5" class="text-muted text-center" style="padding:25px;">هیچ حضور و غیابی ثبت نشده است</td></tr>';
         return;
     }
-    tbody.innerHTML = DATA.attendance.map((a, i) => {
+    tbody.innerHTML = attendanceToShow.map((a, i) => {
         const student = getStudentById(a.studentId);
         const color = a.status === 'حاضر' ? 'var(--success)' : a.status === 'غایب' ? 'var(--danger)' : 'var(--warning)';
         return `<tr>
@@ -1927,13 +2321,15 @@ function renderAttendanceTable() {
             <td><span style="color:${color}; font-weight:600;">${a.status}</span></td>
             <td>${a.note || '-'}</td>
             <td><div class="actions-cell">
-                <button class="danger" onclick="deleteAttendance(${i})" title="حذف"><i class="fas fa-trash"></i></button>
+                ${isAdmin ? `<button class="danger" onclick="deleteAttendance(${DATA.attendance.indexOf(a)})" title="حذف"><i class="fas fa-trash"></i></button>` : ''}
             </div></td>
         </tr>`;
     }).join('');
 }
 
 function renderSelectOptions() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    
     // Quick student class
     const quickClass = document.getElementById('quickStudentClass');
     if (quickClass) {
@@ -1945,22 +2341,41 @@ function renderSelectOptions() {
         quickClass.value = val;
     }
     
-    // Students
+    // Students for admin panels
     ['gradeStudent', 'attendanceStudent', 'reportStudent'].forEach(id => {
         const select = document.getElementById(id);
         if (select) {
             const val = select.value;
             select.innerHTML = '<option value="">انتخاب دانش‌آموز...</option>';
-            DATA.students.forEach(s => {
+            let students = DATA.students;
+            if (!isAdmin) {
+                const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+                students = teacherStudents;
+            }
+            students.forEach(s => {
                 select.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
             });
             select.value = val;
         }
     });
     
-    // Classes for student
+    // Students for teacher panels
+    ['gradeStudentTeacher', 'attendanceStudentTeacher'].forEach(id => {
+        const select = document.getElementById(id);
+        if (select && !isAdmin) {
+            const val = select.value;
+            select.innerHTML = '<option value="">انتخاب دانش‌آموز...</option>';
+            const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+            teacherStudents.forEach(s => {
+                select.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
+            });
+            select.value = val;
+        }
+    });
+    
+    // Classes for student (admin only)
     const classSelect = document.getElementById('studentClassSelect');
-    if (classSelect) {
+    if (classSelect && isAdmin) {
         const val = classSelect.value;
         classSelect.innerHTML = '<option value="">انتخاب کلاس...</option>';
         DATA.classes.forEach(c => {
@@ -1969,9 +2384,36 @@ function renderSelectOptions() {
         classSelect.value = val;
     }
     
-    // Teachers for subject
+    // Subjects for admin grade
+    const gradeSubject = document.getElementById('gradeSubject');
+    if (gradeSubject) {
+        const val = gradeSubject.value;
+        gradeSubject.innerHTML = '<option value="">انتخاب درس...</option>';
+        let subjects = DATA.subjects;
+        if (!isAdmin) {
+            subjects = getTeacherSubjects(DATA.currentUser.username);
+        }
+        subjects.forEach(s => {
+            gradeSubject.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
+        });
+        gradeSubject.value = val;
+    }
+    
+    // Subjects for teacher grade
+    const gradeSubjectTeacher = document.getElementById('gradeSubjectTeacher');
+    if (gradeSubjectTeacher && !isAdmin) {
+        const val = gradeSubjectTeacher.value;
+        gradeSubjectTeacher.innerHTML = '<option value="">انتخاب درس...</option>';
+        const teacherSubjects = getTeacherSubjects(DATA.currentUser.username);
+        teacherSubjects.forEach(s => {
+            gradeSubjectTeacher.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
+        });
+        gradeSubjectTeacher.value = val;
+    }
+    
+    // Teachers for subject (admin only)
     const teacherSelect = document.getElementById('subjectTeacher');
-    if (teacherSelect) {
+    if (teacherSelect && isAdmin) {
         const val = teacherSelect.value;
         teacherSelect.innerHTML = '<option value="">انتخاب معلم...</option>';
         DATA.teachers.forEach(t => {
@@ -1980,9 +2422,9 @@ function renderSelectOptions() {
         teacherSelect.value = val;
     }
     
-    // Classes for subject
+    // Classes for subject (admin only)
     const classSubjectSelect = document.getElementById('subjectClass');
-    if (classSubjectSelect) {
+    if (classSubjectSelect && isAdmin) {
         const val = classSubjectSelect.value;
         classSubjectSelect.innerHTML = '<option value="">انتخاب کلاس...</option>';
         DATA.classes.forEach(c => {
@@ -1991,20 +2433,9 @@ function renderSelectOptions() {
         classSubjectSelect.value = val;
     }
     
-    // Subjects for grade
-    const gradeSubject = document.getElementById('gradeSubject');
-    if (gradeSubject) {
-        const val = gradeSubject.value;
-        gradeSubject.innerHTML = '<option value="">انتخاب درس...</option>';
-        DATA.subjects.forEach(s => {
-            gradeSubject.innerHTML += `<option value="${s.id}">${s.id} - ${s.name}</option>`;
-        });
-        gradeSubject.value = val;
-    }
-    
-    // Teacher classes (multi-select)
+    // Teacher classes (admin only)
     const teacherClasses = document.getElementById('teacherClasses');
-    if (teacherClasses) {
+    if (teacherClasses && isAdmin) {
         const val = Array.from(teacherClasses.selectedOptions).map(o => o.value);
         teacherClasses.innerHTML = '';
         DATA.classes.forEach(c => {
@@ -2016,9 +2447,9 @@ function renderSelectOptions() {
         });
     }
     
-    // Class teachers (multi-select)
+    // Class teachers (admin only)
     const classTeachers = document.getElementById('classTeachers');
-    if (classTeachers) {
+    if (classTeachers && isAdmin) {
         const val = Array.from(classTeachers.selectedOptions).map(o => o.value);
         classTeachers.innerHTML = '';
         DATA.teachers.forEach(t => {
@@ -2036,17 +2467,25 @@ function renderSelectOptions() {
 // ============================================================
 
 function updateDashboard() {
-    document.getElementById('statStudents').textContent = DATA.students.length;
+    const isAdmin = DATA.currentUser.role === 'admin';
+    
+    document.getElementById('statStudents').textContent = isAdmin ? DATA.students.length : getTeacherStudents(DATA.currentUser.username).length;
     document.getElementById('statTeachers').textContent = DATA.teachers.length;
-    document.getElementById('statClasses').textContent = DATA.classes.length;
-    document.getElementById('statSubjects').textContent = DATA.subjects.length;
+    document.getElementById('statClasses').textContent = isAdmin ? DATA.classes.length : getTeacherClassIds(DATA.currentUser.username).length;
+    document.getElementById('statSubjects').textContent = isAdmin ? DATA.subjects.length : getTeacherSubjects(DATA.currentUser.username).length;
     
     let avgSum = 0, avgCount = 0;
-    DATA.students.forEach(s => { if (s.average > 0) { avgSum += s.average; avgCount++; } });
+    const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
+    students.forEach(s => { if (s.average > 0) { avgSum += s.average; avgCount++; } });
     document.getElementById('statAverage').textContent = avgCount > 0 ? (avgSum / avgCount).toFixed(1) : '0';
     
-    let present = DATA.attendance.filter(a => a.status === 'حاضر').length;
-    document.getElementById('statAttendance').textContent = DATA.attendance.length > 0 ? Math.round((present / DATA.attendance.length) * 100) + '%' : '0%';
+    let present = 0;
+    const attendanceData = isAdmin ? DATA.attendance : DATA.attendance.filter(a => {
+        const student = getStudentById(a.studentId);
+        return student && getTeacherClassIds(DATA.currentUser.username).includes(student.classId);
+    });
+    attendanceData.forEach(a => { if (a.status === 'حاضر') present++; });
+    document.getElementById('statAttendance').textContent = attendanceData.length > 0 ? Math.round((present / attendanceData.length) * 100) + '%' : '0%';
     
     renderActivities();
     renderAlerts();
@@ -2100,7 +2539,9 @@ function viewStudent(id) {
 }
 
 function showRanking() {
-    const sorted = [...DATA.students].sort((a, b) => (b.average || 0) - (a.average || 0));
+    const isAdmin = DATA.currentUser.role === 'admin';
+    const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
+    const sorted = [...students].sort((a, b) => (b.average || 0) - (a.average || 0));
     if (sorted.length === 0) { showToast('❌ هیچ دانش‌آموزی برای رتبه‌بندی وجود ندارد', 'error'); return; }
     let msg = '🏆 رتبه‌بندی دانش‌آموزان:\n' + '='.repeat(40) + '\n';
     sorted.forEach((s, i) => {
@@ -2117,20 +2558,20 @@ function showRanking() {
 function openModal(name) {
     document.getElementById('modal-' + name).classList.add('active');
     renderSelectOptions();
-    if (name === 'addAttendance') {
-        document.getElementById('attendanceDate').value = new Date().toISOString().split('T')[0];
+    if (name === 'addAttendance' || name === 'addAttendanceTeacher') {
+        document.getElementById(name === 'addAttendance' ? 'attendanceDate' : 'attendanceDateTeacher').value = new Date().toISOString().split('T')[0];
     }
     if (name === 'addClass') {
         document.getElementById('classGrade').value = '';
     }
-    // Reset scanner modals when opened
-    if (name === 'scanStudent' || name === 'scanClass' || name === 'scanAttendance') {
-        // Clear previous scanner state
+    // Reset scanner modals
+    if (name === 'scanStudent' || name === 'scanStudentTeacher' || name === 'scanClass' || name === 'scanAttendance') {
         stopScanner();
         scannedStudentId = null;
         scannedClassId = null;
         scannedAttendanceId = null;
         document.getElementById('scannedStudentInfo').style.display = 'none';
+        document.getElementById('scannedStudentInfoTeacher').style.display = 'none';
         document.getElementById('scannedClassInfo').style.display = 'none';
         document.getElementById('scannedAttendanceInfo').style.display = 'none';
     }
@@ -2138,7 +2579,7 @@ function openModal(name) {
 
 function closeModal(name) {
     document.getElementById('modal-' + name).classList.remove('active');
-    if (name === 'scanStudent' || name === 'scanClass' || name === 'scanAttendance') {
+    if (name === 'scanStudent' || name === 'scanStudentTeacher' || name === 'scanClass' || name === 'scanAttendance') {
         stopScanner();
     }
 }
@@ -2148,7 +2589,7 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
         if (e.target === this) {
             const id = this.id.replace('modal-', '');
             closeModal(id);
-            if (id === 'scanStudent' || id === 'scanClass' || id === 'scanAttendance') {
+            if (id === 'scanStudent' || id === 'scanStudentTeacher' || id === 'scanClass' || id === 'scanAttendance') {
                 stopScanner();
             }
         }
@@ -2182,12 +2623,15 @@ function showToast(message, type) {
 // ============================================================
 
 function exportToExcel(type) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    
     try {
         let data = [];
         let sheetName = '';
         
         if (type === 'students' || type === 'all') {
-            data = DATA.students.map(s => {
+            const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
+            data = students.map(s => {
                 const cls = getClassById(s.classId);
                 return {
                     'شناسه': s.id,
@@ -2201,6 +2645,10 @@ function exportToExcel(type) {
         }
         
         if (type === 'teachers' || type === 'all') {
+            if (!isAdmin) {
+                showToast('❌ فقط مدیر می‌تواند خروجی معلمان بگیرد', 'error');
+                return;
+            }
             if (type === 'all') data = [];
             const teacherData = DATA.teachers.map(t => ({
                 'شناسه': t.id,
@@ -2214,6 +2662,10 @@ function exportToExcel(type) {
         }
         
         if (type === 'classes' || type === 'all') {
+            if (!isAdmin) {
+                showToast('❌ فقط مدیر می‌تواند خروجی کلاس‌ها بگیرد', 'error');
+                return;
+            }
             if (type === 'all' && data.length > 0) { exportAllToExcel(); return; }
             data = DATA.classes.map(c => ({
                 'شناسه': c.id,
@@ -2226,6 +2678,10 @@ function exportToExcel(type) {
         }
         
         if (type === 'subjects' || type === 'all') {
+            if (!isAdmin) {
+                showToast('❌ فقط مدیر می‌تواند خروجی دروس بگیرد', 'error');
+                return;
+            }
             if (type === 'all') { exportAllToExcel(); return; }
             data = DATA.subjects.map(s => {
                 const t = getTeacherById(s.teacherId);
@@ -2244,7 +2700,13 @@ function exportToExcel(type) {
         
         if (type === 'grades' || type === 'all') {
             if (type === 'all') { exportAllToExcel(); return; }
-            data = DATA.grades.map(g => {
+            let grades = DATA.grades;
+            if (!isAdmin) {
+                const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+                const studentIds = teacherStudents.map(s => s.id);
+                grades = DATA.grades.filter(g => studentIds.includes(g.studentId));
+            }
+            data = grades.map(g => {
                 const s = getStudentById(g.studentId);
                 const sub = getSubjectById(g.subjectId);
                 const labels = { quiz: 'آزمون کوتاه', homework: 'تکلیف', midterm: 'میان‌ترم', final: 'پایان‌ترم' };
@@ -2261,7 +2723,13 @@ function exportToExcel(type) {
         
         if (type === 'attendance' || type === 'all') {
             if (type === 'all') { exportAllToExcel(); return; }
-            data = DATA.attendance.map(a => {
+            let attendance = DATA.attendance;
+            if (!isAdmin) {
+                const teacherStudents = getTeacherStudents(DATA.currentUser.username);
+                const studentIds = teacherStudents.map(s => s.id);
+                attendance = DATA.attendance.filter(a => studentIds.includes(a.studentId));
+            }
+            data = attendance.map(a => {
                 const s = getStudentById(a.studentId);
                 return {
                     'دانش‌آموز': s ? s.name : 'نامشخص',
@@ -2292,6 +2760,12 @@ function exportToExcel(type) {
 }
 
 function exportAllToExcel() {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    if (!isAdmin) {
+        showToast('❌ فقط مدیر می‌تواند خروجی کامل بگیرد', 'error');
+        return;
+    }
+    
     try {
         const wb = XLSX.utils.book_new();
         
@@ -2325,21 +2799,33 @@ function exportAllToExcel() {
 // ============================================================
 
 function generateReport(type) {
+    const isAdmin = DATA.currentUser.role === 'admin';
+    
     if (type === 'monthly') {
+        const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
         let report = '📊 گزارش ماهانه مدرسه\n' + '='.repeat(50) + '\n\n';
-        report += `تعداد دانش‌آموزان: ${DATA.students.length}\n`;
-        report += `تعداد معلمان: ${DATA.teachers.length}\n`;
-        report += `تعداد کلاس‌ها: ${DATA.classes.length}\n`;
-        report += `تعداد دروس: ${DATA.subjects.length}\n`;
-        let avgSum = 0; DATA.students.forEach(s => { if (s.average) avgSum += s.average; });
-        report += `میانگین کل نمرات: ${(avgSum / DATA.students.length || 0).toFixed(2)}\n\n`;
+        report += `تعداد دانش‌آموزان: ${students.length}\n`;
+        if (isAdmin) {
+            report += `تعداد معلمان: ${DATA.teachers.length}\n`;
+            report += `تعداد کلاس‌ها: ${DATA.classes.length}\n`;
+            report += `تعداد دروس: ${DATA.subjects.length}\n`;
+        } else {
+            report += `تعداد کلاس‌های شما: ${getTeacherClassIds(DATA.currentUser.username).length}\n`;
+            report += `تعداد دروس شما: ${getTeacherSubjects(DATA.currentUser.username).length}\n`;
+        }
+        let avgSum = 0; students.forEach(s => { if (s.average) avgSum += s.average; });
+        report += `میانگین کل نمرات: ${(avgSum / students.length || 0).toFixed(2)}\n\n`;
         report += '📋 لیست دانش‌آموزان:\n';
-        DATA.students.forEach(s => { report += `- ${s.name} | میانگین: ${(s.average || 0).toFixed(1)} | ${s.status}\n`; });
+        students.forEach(s => { report += `- ${s.name} | میانگین: ${(s.average || 0).toFixed(1)} | ${s.status}\n`; });
         downloadFile(report, `گزارش_ماهانه_${new Date().toLocaleDateString('fa-IR')}.txt`, 'text/plain');
         showToast('📄 گزارش ماهانه تولید شد', 'success');
     } else if (type === 'analytics') {
+        const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
+        const studentIds = students.map(s => s.id);
+        const grades = DATA.grades.filter(g => studentIds.includes(g.studentId));
+        
         let analysis = '📈 تحلیل آماری مدرسه\n' + '='.repeat(50) + '\n\n';
-        const values = DATA.grades.map(g => g.value);
+        const values = grades.map(g => g.value);
         if (values.length > 0) {
             analysis += `تعداد نمرات: ${values.length}\n`;
             analysis += `بیشترین نمره: ${Math.max(...values)}\n`;
@@ -2349,6 +2835,8 @@ function generateReport(type) {
             const ranges = {'۰-۱۰':0, '۱۰-۱۴':0, '۱۴-۱۷':0, '۱۷-۲۰':0};
             values.forEach(v => { if (v < 10) ranges['۰-۱۰']++; else if (v < 14) ranges['۱۰-۱۴']++; else if (v < 17) ranges['۱۴-۱۷']++; else ranges['۱۷-۲۰']++; });
             Object.entries(ranges).forEach(([r, c]) => { analysis += `- ${r}: ${c} نمره\n`; });
+        } else {
+            analysis += 'هیچ نمره‌ای ثبت نشده است';
         }
         downloadFile(analysis, `تحلیل_آماری_${new Date().toLocaleDateString('fa-IR')}.txt`, 'text/plain');
         showToast('📊 تحلیل آماری تولید شد', 'info');
@@ -2370,6 +2858,15 @@ function showReportCard(e) {
     const studentId = document.getElementById('reportStudent').value;
     const student = getStudentById(studentId);
     if (!student) { showToast('❌ دانش‌آموز یافت نشد', 'error'); return; }
+    
+    // Check if teacher has access
+    if (DATA.currentUser.role === 'teacher') {
+        const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
+        if (!teacherClassIds.includes(student.classId)) {
+            showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
+            return;
+        }
+    }
     
     const grades = getStudentGrades(studentId);
     const avg = calculateAverage(grades);
@@ -2425,17 +2922,25 @@ document.querySelectorAll('.sidebar-menu li a').forEach(link => {
         this.classList.add('active');
         document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
         const page = this.dataset.page;
-        const panel = document.getElementById('panel-' + page);
+        let panelId = 'panel-' + page;
+        
+        // If teacher and page is students, redirect to my-students
+        if (DATA.currentUser && DATA.currentUser.role === 'teacher' && page === 'students') {
+            panelId = 'panel-my-students';
+        }
+        
+        const panel = document.getElementById(panelId);
         if (panel) {
             panel.classList.add('active');
             const titles = {
                 'dashboard-home': ['🏠 داشبورد', 'خلاصه وضعیت مدرسه'],
-                'students': ['👨‍🎓 دانش‌آموزان', 'مدیریت دانش‌آموزان با بارکد'],
-                'teachers': ['👨‍🏫 معلمان', 'مدیریت معلمان'],
-                'classes': ['🏫 کلاس‌ها', 'مدیریت کلاس‌ها با بارکد'],
-                'subjects': ['📚 دروس', 'مدیریت دروس'],
-                'grades': ['⭐ نمرات', 'مدیریت نمرات'],
-                'attendance': ['✅ حضور و غیاب', 'مدیریت حضور و غیاب با بارکد'],
+                'students': ['👨‍🎓 مدیریت دانش‌آموزان', 'مدیریت دانش‌آموزان'],
+                'my-students': ['👨‍🎓 دانش‌آموزان من', 'دانش‌آموزان کلاس‌های شما'],
+                'teachers': ['👨‍🏫 مدیریت معلمان', 'مدیریت معلمان'],
+                'classes': ['🏫 مدیریت کلاس‌ها', 'مدیریت کلاس‌ها'],
+                'subjects': ['📚 مدیریت دروس', 'مدیریت دروس'],
+                'grades': ['⭐ مدیریت نمرات', 'مدیریت نمرات'],
+                'attendance': ['✅ مدیریت حضور و غیاب', 'مدیریت حضور و غیاب'],
                 'reports': ['📊 گزارشات', 'گزارشات و تحلیل‌ها']
             };
             const title = titles[page] || ['صفحه', ''];
@@ -2459,14 +2964,15 @@ document.addEventListener('keydown', function(e) {
         document.querySelectorAll('.modal-overlay.active').forEach(el => {
             const id = el.id.replace('modal-', '');
             closeModal(id);
-            if (id === 'scanStudent' || id === 'scanClass' || id === 'scanAttendance') {
+            if (id === 'scanStudent' || id === 'scanStudentTeacher' || id === 'scanClass' || id === 'scanAttendance') {
                 stopScanner();
             }
         });
     }
     if (e.ctrlKey && e.key === 'l') {
         e.preventDefault();
-        document.querySelector('.sidebar-menu li a[data-page="students"]')?.click();
+        const page = DATA.currentUser?.role === 'admin' ? 'students' : 'my-students';
+        document.querySelector(`.sidebar-menu li a[data-page="${page}"]`)?.click();
     }
     if (e.ctrlKey && e.key === 'c') {
         e.preventDefault();
@@ -2480,11 +2986,12 @@ document.addEventListener('keydown', function(e) {
 
 loadAllData();
 
-console.log('🏫 سیستم مدیریت مدرسه هوشمند با بارکدخوان');
+console.log('🏫 سیستم مدیریت مدرسه هوشمند با تفکیک دسترسی');
+console.log('👑 مدیر: دسترسی کامل به همه بخش‌ها');
+console.log('👨‍🏫 معلم: فقط دانش‌آموزان و کلاس‌های خودش');
 console.log('💻 ساخته شده توسط BitVolt.MTV');
 console.log('🔑 ورود: admin / Admin@1404');
 console.log('📷 برای اسکن بارکد از دکمه‌های سبز رنگ استفاده کنید');
-console.log('⌨️ میانبرها: Ctrl+L = دانش‌آموزان, Ctrl+C = کلاس‌ها');
 </script>
 </body>
 </html>
