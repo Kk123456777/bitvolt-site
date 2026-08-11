@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🏫 مدرسه هوشمند - BitVolt</title>
+    <title>🏫 مدرسه هوشمند - نسخه نهایی</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1024,8 +1024,19 @@ const DATA = {
     currentUser: null
 };
 
+// استفاده از SHA-256 برای هش کردن رمز
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// هش مدیر (Admin@1404)
+const ADMIN_PASSWORD_HASH = "5d5f16e927f21c4671ddb4728a66c8cbe58ad4623f002cdcdbc54b522d689ec7"; // SHA-256 of "Admin@1404"
+
 const USERS = {
-    admin: { username: 'admin', password: btoa('Admin@1404'), name: 'مدیر سیستم', role: 'admin' }
+    admin: { username: 'admin', passwordHash: ADMIN_PASSWORD_HASH, name: 'مدیر سیستم', role: 'admin' }
 };
 
 const PAGINATION = {
@@ -1050,7 +1061,7 @@ let searchTimeout = null;
 // ================ AUTH =======================================
 // ============================================================
 
-function handleLogin(e) {
+async function handleLogin(e) {
     e.preventDefault();
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value;
@@ -1058,16 +1069,23 @@ function handleLogin(e) {
     const error = document.getElementById('loginError');
     
     let isValid = false;
+    
     // Check admin
-    if (role === 'admin' && USERS.admin.username === username && atob(USERS.admin.password) === password) {
-        isValid = true;
-        DATA.currentUser = { ...USERS.admin, role: 'admin' };
+    if (role === 'admin' && USERS.admin.username === username) {
+        const hashedInput = await hashPassword(password);
+        if (hashedInput === USERS.admin.passwordHash) {
+            isValid = true;
+            DATA.currentUser = { ...USERS.admin, role: 'admin' };
+        }
     } else {
         // Check teacher
-        const teacher = DATA.teachers.find(t => t.id === username && t.password === password);
+        const teacher = DATA.teachers.find(t => t.id === username);
         if (teacher) {
-            isValid = true;
-            DATA.currentUser = { ...teacher, role: 'teacher', username: teacher.id };
+            const hashedInput = await hashPassword(password);
+            if (hashedInput === teacher.passwordHash) {
+                isValid = true;
+                DATA.currentUser = { ...teacher, role: 'teacher', username: teacher.id };
+            }
         }
     }
     
@@ -1190,7 +1208,7 @@ function loadAllData() {
     }
     
     try {
-        const saved = localStorage.getItem('schoolDataV11');
+        const saved = localStorage.getItem('schoolDataV12');
         if (saved) { 
             const parsed = JSON.parse(saved);
             const user = DATA.currentUser;
@@ -1201,42 +1219,50 @@ function loadAllData() {
         }
     } catch(e) {}
     
-    // Sample Data
+    // Sample Data with hashed passwords
     DATA.classes = [
         { id: 'C001', name: '۱۰-الف', grade: 10, capacity: 30, teachers: ['T001'], students: [] },
         { id: 'C002', name: '۱۰-ب', grade: 10, capacity: 30, teachers: ['T002'], students: [] }
     ];
-    DATA.teachers = [
-        { id: 'T001', name: 'دکتر احمد نوری', specialty: 'ریاضی', phone: '09111111111', classes: ['C001'], password: 'Teacher@123' },
-        { id: 'T002', name: 'خانم زهرا رضوی', specialty: 'فیزیک', phone: '09112222222', classes: ['C002'], password: 'Teacher@456' }
-    ];
-    DATA.students = [
-        { id: 'S001', name: 'علی محمدی', classId: 'C001', parentPhone: '09121234567', average: 18, status: 'عالی' },
-        { id: 'S002', name: 'سارا احمدی', classId: 'C001', parentPhone: '09129876543', average: 15, status: 'قبول' },
-        { id: 'S003', name: 'رضا کریمی', classId: 'C002', parentPhone: '09123456789', average: 12, status: 'قبول' }
-    ];
-    DATA.subjects = [
-        { id: 'SUB001', name: 'ریاضی', teacherId: 'T001', classId: 'C001', units: 4, type: 'نظری' },
-        { id: 'SUB002', name: 'فیزیک', teacherId: 'T002', classId: 'C002', units: 3, type: 'نظری' }
-    ];
-    DATA.grades = [
-        { studentId: 'S001', subjectId: 'SUB001', value: 18, examType: 'midterm', date: '1403/08/15', teacherId: 'T001' },
-        { studentId: 'S002', subjectId: 'SUB001', value: 15, examType: 'midterm', date: '1403/08/15', teacherId: 'T001' }
-    ];
-    DATA.attendance = [
-        { studentId: 'S001', date: '1403/08/01', status: 'حاضر', note: '', teacherId: 'T001' },
-        { studentId: 'S002', date: '1403/08/01', status: 'غایب', note: 'مرخصی', teacherId: 'T001' }
-    ];
-    DATA.activities = [{ text: 'سیستم راه‌اندازی شد', time: new Date().toLocaleString('fa-IR') }];
-    updateStudentAverages();
-    saveData();
-    renderAll();
+    
+    // Hash teacher passwords
+    async function initTeachers() {
+        const hash1 = await hashPassword('Teacher@123');
+        const hash2 = await hashPassword('Teacher@456');
+        DATA.teachers = [
+            { id: 'T001', name: 'دکتر احمد نوری', specialty: 'ریاضی', phone: '09111111111', classes: ['C001'], passwordHash: hash1 },
+            { id: 'T002', name: 'خانم زهرا رضوی', specialty: 'فیزیک', phone: '09112222222', classes: ['C002'], passwordHash: hash2 }
+        ];
+        DATA.students = [
+            { id: 'S001', name: 'علی محمدی', classId: 'C001', parentPhone: '09121234567', average: 18, status: 'عالی' },
+            { id: 'S002', name: 'سارا احمدی', classId: 'C001', parentPhone: '09129876543', average: 15, status: 'قبول' },
+            { id: 'S003', name: 'رضا کریمی', classId: 'C002', parentPhone: '09123456789', average: 12, status: 'قبول' }
+        ];
+        DATA.subjects = [
+            { id: 'SUB001', name: 'ریاضی', teacherId: 'T001', classId: 'C001', units: 4, type: 'نظری' },
+            { id: 'SUB002', name: 'فیزیک', teacherId: 'T002', classId: 'C002', units: 3, type: 'نظری' }
+        ];
+        DATA.grades = [
+            { studentId: 'S001', subjectId: 'SUB001', value: 18, examType: 'midterm', date: '1403/08/15', teacherId: 'T001' },
+            { studentId: 'S002', subjectId: 'SUB001', value: 15, examType: 'midterm', date: '1403/08/15', teacherId: 'T001' }
+        ];
+        DATA.attendance = [
+            { studentId: 'S001', date: '1403/08/01', status: 'حاضر', note: '', teacherId: 'T001' },
+            { studentId: 'S002', date: '1403/08/01', status: 'غایب', note: 'مرخصی', teacherId: 'T001' }
+        ];
+        DATA.activities = [{ text: 'سیستم راه‌اندازی شد', time: new Date().toLocaleString('fa-IR') }];
+        updateStudentAverages();
+        saveData();
+        renderAll();
+    }
+    initTeachers();
 }
 
 function saveData() { 
     const dataToSave = { ...DATA };
-    // Don't save password in plain text - keep as is since we store plain text for teachers
-    localStorage.setItem('schoolDataV11', JSON.stringify(dataToSave)); 
+    // Remove currentUser from stored data
+    delete dataToSave.currentUser;
+    localStorage.setItem('schoolDataV12', JSON.stringify(dataToSave)); 
 }
 
 function getStudentById(id) { return DATA.students.find(s => s.id === id); }
@@ -1492,7 +1518,7 @@ function addStudent(e) {
     document.getElementById('studentParentPhone').value = '';
 }
 
-function addTeacher(e) {
+async function addTeacher(e) {
     e.preventDefault();
     if (DATA.currentUser.role !== 'admin') {
         showToast('❌ فقط مدیر می‌تواند معلم اضافه کند', 'error');
@@ -1510,7 +1536,8 @@ function addTeacher(e) {
     if (password.length < 6) { showToast('❌ رمز عبور حداقل ۶ کاراکتر', 'error'); return; }
     if (phone && !/^[0-9]{11}$/.test(phone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
     
-    DATA.teachers.push({ id, name, specialty, phone, classes, password });
+    const passwordHash = await hashPassword(password);
+    DATA.teachers.push({ id, name, specialty, phone, classes, passwordHash });
     // Sync class teachers
     classes.forEach(cid => {
         const cls = getClassById(cid);
@@ -1915,7 +1942,7 @@ function renderTeachersTable() {
                 <td>${escapeHtml(t.name)}</td>
                 <td>${escapeHtml(t.specialty)}</td>
                 <td>${escapeHtml(classes)}</td>
-                <td><span style="font-family:monospace; font-size:11px; background:var(--bg-input); padding:2px 8px; border-radius:4px;">${escapeHtml(t.password)}</span></td>
+                <td><span style="font-family:monospace; font-size:11px; background:var(--bg-input); padding:2px 8px; border-radius:4px;">●●●●●●</span></td>
                 <td><span class="status-badge active">فعال</span></td>
                 <td><div class="actions-cell">
                     <button class="danger" onclick="deleteTeacher('${t.id}')" title="حذف"><i class="fas fa-trash"></i></button>
@@ -2537,7 +2564,6 @@ function editScannedStudent() {
     if (scannedStudentId) {
         closeModal('scanStudent');
         stopScanner();
-        // Show edit modal
         const student = getStudentById(scannedStudentId);
         if (student) {
             showToast('✏️ در حال ویرایش ' + student.name, 'info');
@@ -3147,17 +3173,18 @@ document.addEventListener('keydown', function(e) {
 
 loadAllData();
 
-console.log('🏫 سیستم مدیریت مدرسه هوشمند - نسخه نهایی');
-console.log('✅ تمام مشکلات برطرف شد:');
-console.log('  🔒 رمز از فرم ورود حذف شد');
-console.log('  👨‍🏫 معلمان با رمز و کلاس‌ها');
+console.log('🏫 سیستم مدیریت مدرسه هوشمند - نسخه نهایی با امنیت بهبود یافته');
+console.log('✅ بهبودهای اعمال شده:');
+console.log('  🔒 رمزها با SHA-256 هش می‌شوند');
+console.log('  👨‍🏫 معلمان با هش رمز ذخیره می‌شوند');
 console.log('  📚 دروس کار میکند');
 console.log('  ⭐ نمرات کار میکند');
 console.log('  ✅ حضور کار میکند');
 console.log('  📊 گزارشات کار میکند');
-console.log('  💾 ذخیره‌سازی دائمی');
-console.log('🔑 ورود مدیر: admin / Admin@1404');
+console.log('  💾 ذخیره‌سازی دائمی با localStorage');
+console.log('🔑 ورود مدیر و معلمان');
 console.log('👨‍🏫 ورود معلم: شناسه معلم / رمز عبور');
+console.log('📱 برای استفاده روی گوشی: اسکن بارکد با دوربین');
 </script>
 </body>
 </html>
