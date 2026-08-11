@@ -1024,8 +1024,9 @@ const DATA = {
     currentUser: null
 };
 
-const USERS = {
-    admin: { username: 'admin', password: btoa('Admin@1404'), name: 'مدیر سیستم', role: 'admin' }
+const ADMIN_CREDENTIALS = {
+    username: 'admin',
+    password: 'Admin@1404'
 };
 
 const PAGINATION = {
@@ -1058,14 +1059,26 @@ function handleLogin(e) {
     const error = document.getElementById('loginError');
     
     let isValid = false;
-    if (role === 'admin' && USERS.admin.username === username && atob(USERS.admin.password) === password) {
+    
+    // Check admin
+    if (role === 'admin' && username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
         isValid = true;
-        DATA.currentUser = { ...USERS.admin, role: 'admin' };
+        DATA.currentUser = { 
+            username: ADMIN_CREDENTIALS.username, 
+            name: 'مدیر سیستم', 
+            role: 'admin' 
+        };
     } else {
+        // Check teacher
         const teacher = DATA.teachers.find(t => t.id === username && t.password === password);
         if (teacher) {
             isValid = true;
-            DATA.currentUser = { ...teacher, role: 'teacher', username: teacher.id };
+            DATA.currentUser = { 
+                username: teacher.id, 
+                name: teacher.name, 
+                role: 'teacher',
+                classes: teacher.classes || []
+            };
         }
     }
     
@@ -1074,7 +1087,7 @@ function handleLogin(e) {
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         setupUI();
-        loadAllData();
+        renderAll();
         updateDashboard();
         updateSetupWizard();
         addActivity('ورود', 'کاربر ' + DATA.currentUser.name + ' وارد شد');
@@ -1117,6 +1130,7 @@ function setupUI() {
     document.getElementById('roleBadge').className = 'role-badge ' + (isAdmin ? 'admin' : 'teacher');
     document.getElementById('userAvatar').textContent = DATA.currentUser.name.substring(0, 2);
     
+    // Sidebar visibility
     document.querySelectorAll('.sidebar-menu li a').forEach(item => {
         const page = item.dataset.page;
         if (isAdmin) {
@@ -1131,6 +1145,7 @@ function setupUI() {
         }
     });
     
+    // Bottom nav visibility
     document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
         const page = item.dataset.page;
         if (isAdmin) {
@@ -1433,6 +1448,7 @@ function addClass(e) {
     if (DATA.classes.find(c => c.id === id)) { showToast('❌ شناسه کلاس تکراری است!', 'error'); return; }
     
     DATA.classes.push({ id, name, grade, capacity, teachers, students: [] });
+    // Sync teacher classes
     teachers.forEach(tid => {
         const teacher = getTeacherById(tid);
         if (teacher && !teacher.classes.includes(id)) {
@@ -1504,6 +1520,7 @@ function addTeacher(e) {
     if (phone && !/^[0-9]{11}$/.test(phone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
     
     DATA.teachers.push({ id, name, specialty, phone, classes, password });
+    // Sync class teachers
     classes.forEach(cid => {
         const cls = getClassById(cid);
         if (cls && !cls.teachers.includes(id)) {
@@ -2530,7 +2547,9 @@ function editScannedStudent() {
         closeModal('scanStudent');
         stopScanner();
         const student = getStudentById(scannedStudentId);
-        if (student) showToast('✏️ در حال ویرایش ' + student.name, 'info');
+        if (student) {
+            showToast('✏️ در حال ویرایش ' + student.name, 'info');
+        }
         scannedStudentId = null;
     }
 }
@@ -2970,24 +2989,6 @@ function openModal(name) {
             select.innerHTML = '<option value="">ابتدا کلاس بسازید...</option>';
         }
     }
-    if (name === 'addSubject') {
-        const teacherSelect = document.getElementById('subjectTeacher');
-        const classSelect = document.getElementById('subjectClass');
-        teacherSelect.innerHTML = '<option value="">انتخاب...</option>';
-        DATA.teachers.forEach(t => {
-            const opt = document.createElement('option');
-            opt.value = t.id;
-            opt.textContent = t.id + ' - ' + t.name;
-            teacherSelect.appendChild(opt);
-        });
-        classSelect.innerHTML = '<option value="">انتخاب...</option>';
-        DATA.classes.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.id + ' - ' + c.name;
-            classSelect.appendChild(opt);
-        });
-    }
     if (name === 'scanStudent' || name === 'scanStudentTeacher' || name === 'scanClass') {
         stopScanner();
         scannedStudentId = null;
@@ -3155,8 +3156,10 @@ document.addEventListener('keydown', function(e) {
 loadAllData();
 
 console.log('🏫 سیستم مدیریت مدرسه هوشمند - نسخه نهایی');
-console.log('✅ تمام دکمه‌ها و بخش‌ها کار میکنند');
+console.log('✅ تمام مشکلات برطرف شد');
 console.log('🔑 ورود مدیر: admin / Admin@1404');
+console.log('👨‍🏫 ورود معلم: شناسه معلم / رمز عبور');
+console.log('📱 سازگار با موبایل و دسکتاپ');
 </script>
 </body>
 </html>
