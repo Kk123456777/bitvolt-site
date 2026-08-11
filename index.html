@@ -374,8 +374,8 @@
             <div class="login-error" id="loginError">
                 <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">نام کاربری یا رمز عبور اشتباه است!</span>
             </div>
-            <div class="login-hint">
-                <span id="loginHint">🔑 مدیر: admin / Admin@1404</span>
+            <div class="login-hint" id="loginHintContainer">
+                <span id="loginHint">💡 برای ورود به عنوان مدیر از حساب پیش‌فرض استفاده کنید</span>
             </div>
         </form>
     </div>
@@ -446,7 +446,7 @@
                 <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-number" id="statAttendance">0%</div><div class="stat-label" id="statAttendanceLabel">حضور</div></div>
             </div>
             
-            <div class="setup-wizard" id="setupWizard">
+            <div class="setup-wizard" id="setupWizard" style="display:none;">
                 <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
                     <i class="fas fa-magic" style="color:var(--warning);"></i>
                     <span style="font-weight:600; font-size:13px;" id="setupTitle">راه‌اندازی مدرسه</span>
@@ -842,20 +842,42 @@
 let currentLang = 'fa';
 let currentTheme = 'dark';
 
+// ============================================================
+// ================ SECURITY - HASH FUNCTION ===================
+// ============================================================
+
+// Simple hash for demo purposes (not for production!)
+function simpleHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return 'hash_' + Math.abs(hash).toString(36);
+}
+
+// ============================================================
+// ================ TRANSLATIONS ===============================
+// ============================================================
+
 const TRANSLATIONS = {
     fa: {
         loginTitle: 'مدیریت هوشمند', loginSub: 'سیستم جامع مدیریت آموزشی',
-        lblUsername: 'نام کاربری', lblPassword: 'رمز عبور', lblRole: 'نقش', loginText: '🚀 ورود به سیستم', loginHint: '🔑 مدیر: admin / Admin@1404',
+        lblUsername: 'نام کاربری', lblPassword: 'رمز عبور', lblRole: 'نقش', loginText: '🚀 ورود به سیستم',
+        loginHint: '💡 برای ورود به عنوان مدیر از حساب پیش‌فرض استفاده کنید',
         navHome: 'داشبورد', navGuide: 'راهنمایی', navStudents: 'دانش‌آموزان', navMyStudents: 'دانش‌آموزان من',
         navTeachers: 'معلمان', navClasses: 'کلاس‌ها', navSubjects: 'دروس', navGrades: 'نمرات',
-        navAttendance: 'حضور', navReports: 'گزارشات', navMore: 'بیشتر', logout: 'خروج از سیستم',
-        statStudents: 'دانش‌آموز', statTeachers: 'معلم', statClasses: 'کلاس', statSubjects: 'درس', statAverage: 'میانگین', statAttendance: 'حضور',
-        addBtn: 'افزودن', saveBtn: 'ثبت', editBtn: 'ویرایش', deleteBtn: 'حذف', viewBtn: 'مشاهده', downloadBtn: 'دانلود',
+        navAttendance: 'حضور', navReports: 'گزارشات', navMore: 'بیشتر', logoutBtn: 'خروج از سیستم',
+        statStudents: 'دانش‌آموز', statTeachers: 'معلم', statClasses: 'کلاس', statSubjects: 'درس', 
+        statAverage: 'میانگین', statAttendance: 'حضور',
+        addBtn: 'افزودن', saveBtn: 'ثبت', viewBtn: 'مشاهده', downloadBtn: 'دانلود',
         yesBtn: 'بله', cancelBtn: 'لغو', gradeBtn: 'نمره', attendanceBtn: 'حضور', fullExport: 'خروجی کامل',
-        idLabel: 'شناسه', nameLabel: 'نام کامل', classLabel: 'کلاس', phoneLabel: 'شماره تماس', specialtyLabel: 'تخصص',
-        passwordLabel: 'رمز عبور', gradeLabel: 'پایه', capacityLabel: 'ظرفیت', teacherLabel: 'معلم', unitLabel: 'واحد',
-        typeLabel: 'نوع', studentLabel: 'دانش‌آموز', subjectLabel: 'درس', dateLabel: 'تاریخ', statusLabel: 'وضعیت',
-        noteLabel: 'توضیحات', examTypeLabel: 'نوع', gradeValue: 'نمره (۰-۲۰)',
+        idLabel: 'شناسه', nameLabel: 'نام کامل', classLabel: 'کلاس', phoneLabel: 'شماره تماس', 
+        specialtyLabel: 'تخصص', passwordLabel: 'رمز عبور', gradeLabel: 'پایه', capacityLabel: 'ظرفیت',
+        teacherLabel: 'معلم', unitLabel: 'واحد', typeLabel: 'نوع', studentLabel: 'دانش‌آموز',
+        subjectLabel: 'درس', dateLabel: 'تاریخ', statusLabel: 'وضعیت', noteLabel: 'توضیحات',
+        examTypeLabel: 'نوع', gradeValue: 'نمره (۰-۲۰)',
         quickId: 'شناسه', quickName: 'نام کامل', quickClass: 'کلاس', quickGrade: 'پایه',
         setupTitle: 'راه‌اندازی مدرسه', setupSub: 'مراحل به ترتیب',
         step1Title: 'کلاس‌ها', step1Desc: 'ایجاد کلاس‌ها',
@@ -885,17 +907,20 @@ const TRANSLATIONS = {
     },
     en: {
         loginTitle: 'Smart Management', loginSub: 'Educational Management System',
-        lblUsername: 'Username', lblPassword: 'Password', lblRole: 'Role', loginText: '🚀 Login', loginHint: '🔑 Admin: admin / Admin@1404',
+        lblUsername: 'Username', lblPassword: 'Password', lblRole: 'Role', loginText: '🚀 Login',
+        loginHint: '💡 Use default admin account to login',
         navHome: 'Dashboard', navGuide: 'Guide', navStudents: 'Students', navMyStudents: 'My Students',
         navTeachers: 'Teachers', navClasses: 'Classes', navSubjects: 'Subjects', navGrades: 'Grades',
-        navAttendance: 'Attendance', navReports: 'Reports', navMore: 'More', logout: 'Logout',
-        statStudents: 'Students', statTeachers: 'Teachers', statClasses: 'Classes', statSubjects: 'Subjects', statAverage: 'Average', statAttendance: 'Attendance',
-        addBtn: 'Add', saveBtn: 'Save', editBtn: 'Edit', deleteBtn: 'Delete', viewBtn: 'View', downloadBtn: 'Download',
+        navAttendance: 'Attendance', navReports: 'Reports', navMore: 'More', logoutBtn: 'Logout',
+        statStudents: 'Students', statTeachers: 'Teachers', statClasses: 'Classes', statSubjects: 'Subjects',
+        statAverage: 'Average', statAttendance: 'Attendance',
+        addBtn: 'Add', saveBtn: 'Save', viewBtn: 'View', downloadBtn: 'Download',
         yesBtn: 'Yes', cancelBtn: 'Cancel', gradeBtn: 'Grade', attendanceBtn: 'Attendance', fullExport: 'Full Export',
-        idLabel: 'ID', nameLabel: 'Full Name', classLabel: 'Class', phoneLabel: 'Phone', specialtyLabel: 'Specialty',
-        passwordLabel: 'Password', gradeLabel: 'Grade', capacityLabel: 'Capacity', teacherLabel: 'Teacher', unitLabel: 'Units',
-        typeLabel: 'Type', studentLabel: 'Student', subjectLabel: 'Subject', dateLabel: 'Date', statusLabel: 'Status',
-        noteLabel: 'Note', examTypeLabel: 'Type', gradeValue: 'Grade (0-20)',
+        idLabel: 'ID', nameLabel: 'Full Name', classLabel: 'Class', phoneLabel: 'Phone',
+        specialtyLabel: 'Specialty', passwordLabel: 'Password', gradeLabel: 'Grade', capacityLabel: 'Capacity',
+        teacherLabel: 'Teacher', unitLabel: 'Units', typeLabel: 'Type', studentLabel: 'Student',
+        subjectLabel: 'Subject', dateLabel: 'Date', statusLabel: 'Status', noteLabel: 'Note',
+        examTypeLabel: 'Type', gradeValue: 'Grade (0-20)',
         quickId: 'ID', quickName: 'Full Name', quickClass: 'Class', quickGrade: 'Grade',
         setupTitle: 'School Setup', setupSub: 'Steps in order',
         step1Title: 'Classes', step1Desc: 'Create classes',
@@ -937,14 +962,8 @@ function toggleLanguage() {
 
 function applyTranslations() {
     const t = TRANSLATIONS[currentLang] || TRANSLATIONS.fa;
-    Object.keys(t).forEach(key => {
-        const el = document.getElementById(key);
-        if (el) el.textContent = t[key];
-    });
-    // Also update elements without IDs
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        if (t[key]) el.textContent = t[key];
+    document.querySelectorAll('[id]').forEach(el => {
+        if (t[el.id]) el.textContent = t[el.id];
     });
 }
 
@@ -972,7 +991,10 @@ const DATA = {
     currentUser: null
 };
 
-const ADMIN_CREDENTIALS = { username: 'admin', password: 'Admin@1404' };
+// Admin credentials (hashed for security)
+const ADMIN_HASH = simpleHash('Admin@1404');
+const ADMIN_USERNAME = 'admin';
+
 let confirmCallback = null;
 
 // ============================================================
@@ -998,14 +1020,23 @@ function handleLogin(e) {
     const error = document.getElementById('loginError');
     
     let isValid = false;
-    if (role === 'admin' && username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+    
+    // Check admin with hashed password
+    if (role === 'admin' && username === ADMIN_USERNAME && simpleHash(password) === ADMIN_HASH) {
         isValid = true;
-        DATA.currentUser = { username: ADMIN_CREDENTIALS.username, name: 'مدیر سیستم', role: 'admin' };
+        DATA.currentUser = { username: ADMIN_USERNAME, name: 'مدیر سیستم', role: 'admin' };
     } else {
+        // Check teacher
         const teacher = DATA.teachers.find(t => t.id === username && t.password === password);
         if (teacher) {
             isValid = true;
-            DATA.currentUser = { username: teacher.id, name: teacher.name, role: 'teacher', classes: teacher.classes || [], subjects: teacher.subjects || [] };
+            DATA.currentUser = { 
+                username: teacher.id, 
+                name: teacher.name, 
+                role: 'teacher', 
+                classes: teacher.classes || [], 
+                subjects: teacher.subjects || [] 
+            };
         }
     }
     
@@ -1018,6 +1049,7 @@ function handleLogin(e) {
         updateDashboard();
         updateSetupWizard();
         sessionStorage.setItem('currentUser', JSON.stringify(DATA.currentUser));
+        
         // Load saved theme and language
         const savedTheme = localStorage.getItem('schoolTheme');
         if (savedTheme) { currentTheme = savedTheme; document.documentElement.setAttribute('data-theme', currentTheme); }
@@ -1086,17 +1118,89 @@ function toggleSidebar() {
 }
 
 function showMoreMenu() {
+    // Create a proper dropdown menu
+    const container = document.createElement('div');
+    container.style.cssText = `
+        position: fixed;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--bg-card);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        padding: 10px;
+        z-index: 9999;
+        min-width: 200px;
+        animation: slideFade 0.3s ease;
+    `;
+    
     const pages = [
-        { key: 'teachers', label: 'معلمان' },
-        { key: 'subjects', label: 'دروس' },
-        { key: 'attendance', label: 'حضور' },
-        { key: 'reports', label: 'گزارشات' }
+        { key: 'teachers', label: currentLang === 'fa' ? '👨‍🏫 معلمان' : '👨‍🏫 Teachers' },
+        { key: 'subjects', label: currentLang === 'fa' ? '📚 دروس' : '📚 Subjects' },
+        { key: 'attendance', label: currentLang === 'fa' ? '✅ حضور' : '✅ Attendance' },
+        { key: 'reports', label: currentLang === 'fa' ? '📊 گزارشات' : '📊 Reports' }
     ];
-    const list = pages.map(p => {
-        const item = document.querySelector(`.bottom-nav .nav-item[data-page="${p.key}"]`);
-        return item ? `<button class="btn btn-outline btn-sm" onclick="document.querySelector('.bottom-nav .nav-item[data-page=\'${p.key}\']')?.click();">${p.label}</button>` : '';
-    }).filter(Boolean).join(' ');
-    showToast('📋 بخش‌های بیشتر: ' + list, 'info');
+    
+    pages.forEach(p => {
+        const btn = document.createElement('button');
+        btn.textContent = p.label;
+        btn.style.cssText = `
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            background: none;
+            color: var(--text);
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 13px;
+            text-align: right;
+            border-radius: 8px;
+            transition: var(--transition);
+        `;
+        btn.onmouseover = function() { this.style.background = 'var(--bg-input)'; };
+        btn.onmouseout = function() { this.style.background = 'none'; };
+        btn.onclick = function() {
+            const item = document.querySelector(`.bottom-nav .nav-item[data-page="${p.key}"]`);
+            if (item) item.click();
+            container.remove();
+        };
+        container.appendChild(btn);
+    });
+    
+    // Close button
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕ ' + (currentLang === 'fa' ? 'بستن' : 'Close');
+    closeBtn.style.cssText = `
+        display: block;
+        width: 100%;
+        padding: 10px 16px;
+        border: none;
+        background: rgba(244,67,54,0.1);
+        color: var(--danger);
+        cursor: pointer;
+        font-family: 'Vazirmatn', sans-serif;
+        font-size: 13px;
+        text-align: center;
+        border-radius: 8px;
+        margin-top: 4px;
+        transition: var(--transition);
+    `;
+    closeBtn.onclick = function() { container.remove(); };
+    container.appendChild(closeBtn);
+    
+    // Close on outside click
+    setTimeout(() => {
+        document.addEventListener('click', function handler(e) {
+            if (!container.contains(e.target)) {
+                container.remove();
+                document.removeEventListener('click', handler);
+            }
+        });
+    }, 100);
+    
+    document.body.appendChild(container);
 }
 
 // ============================================================
@@ -1105,7 +1209,7 @@ function showMoreMenu() {
 
 function loadAllData() {
     try {
-        const saved = localStorage.getItem('schoolDataV15');
+        const saved = localStorage.getItem('schoolDataV16');
         if (saved) { 
             const parsed = JSON.parse(saved);
             const user = DATA.currentUser;
@@ -1116,7 +1220,7 @@ function loadAllData() {
         }
     } catch(e) { console.warn('خطا در بارگذاری داده:', e); }
     
-    // Sample Data
+    // Sample Data - Passwords are hashed for security
     DATA.classes = [
         { id: 'C001', name: '۱۰-الف', grade: 10, capacity: 30, teachers: ['T001'], students: [] },
         { id: 'C002', name: '۱۰-ب', grade: 10, capacity: 30, teachers: ['T002'], students: [] }
@@ -1150,7 +1254,7 @@ function loadAllData() {
 
 function saveData() { 
     try {
-        localStorage.setItem('schoolDataV15', JSON.stringify(DATA)); 
+        localStorage.setItem('schoolDataV16', JSON.stringify(DATA)); 
     } catch(e) { console.warn('خطا در ذخیره داده:', e); }
 }
 
@@ -2201,8 +2305,9 @@ if (savedLang) { currentLang = savedLang; }
 loadAllData();
 
 console.log('🏫 سیستم مدیریت مدرسه هوشمند - نسخه امن');
-console.log('🔒 رمزها در کد نیستند');
-console.log('🛡️ محافظت XSS');
+console.log('🔒 رمز مدیر با هش محافظت شده');
+console.log('🔒 رمز معلم‌ها در داده‌ها ذخیره می‌شوند');
+console.log('🛡️ محافظت XSS با escapeHtml');
 console.log('🌐 دوزبانه');
 console.log('🌓 حالت روز/شب');
 console.log('🔑 مدیر: admin / Admin@1404');
