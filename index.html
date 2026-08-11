@@ -11,25 +11,13 @@
     
     <style>
         :root {
-            --primary: #6C3CE1;
-            --primary-dark: #5A2BCA;
-            --primary-light: #8B6CE6;
-            --secondary: #00D4FF;
-            --success: #00E676;
-            --warning: #FFD740;
-            --danger: #FF5252;
-            --bg: #0a0a1a;
-            --bg-card: #141430;
-            --bg-input: rgba(255,255,255,0.06);
-            --text: #FFFFFF;
-            --text-secondary: #9999bb;
-            --border: rgba(255,255,255,0.08);
-            --shadow: 0 20px 60px rgba(0,0,0,0.6);
-            --radius: 20px;
-            --radius-sm: 12px;
-            --transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-        }
-        [data-theme="light"] {
+            --primary: #7C4DFF;
+            --primary-dark: #651FFF;
+            --primary-light: #B388FF;
+            --secondary: #00BCD4;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
             --bg: #f0f2f5;
             --bg-card: #ffffff;
             --bg-input: #f5f5f5;
@@ -37,33 +25,42 @@
             --text-secondary: #666688;
             --border: rgba(0,0,0,0.08);
             --shadow: 0 8px 30px rgba(0,0,0,0.08);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+        }
+        [data-theme="dark"] {
+            --bg: #0a0a1a;
+            --bg-card: #12122a;
+            --bg-input: rgba(255,255,255,0.05);
+            --text: #FFFFFF;
+            --text-secondary: #9999bb;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 8px 30px rgba(0,0,0,0.4);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Vazirmatn', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; padding-bottom: 75px; transition: var(--transition); }
-        .bg-premium { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; background: radial-gradient(ellipse at 20% 30%, rgba(108,60,225,0.1) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(0,212,255,0.05) 0%, transparent 50%), var(--bg); transition: var(--transition); }
+        .bg-premium { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1; background: radial-gradient(ellipse at 20% 30%, rgba(124,77,255,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(0,188,212,0.05) 0%, transparent 50%), var(--bg); transition: var(--transition); }
         
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
         
         .login-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .login-box { background: var(--bg-card); border-radius: var(--radius); padding: 40px 30px; max-width: 420px; width: 100%; border: 1px solid var(--border); box-shadow: var(--shadow); transition: var(--transition); position: relative; overflow: hidden; }
-        .login-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent, rgba(108,60,225,0.05), transparent, rgba(0,212,255,0.05), transparent); animation: rotate 20s linear infinite; }
-        @keyframes rotate { to { transform: rotate(360deg); } }
-        .login-logo { text-align: center; margin-bottom: 30px; position: relative; z-index: 1; }
-        .login-logo .icon { font-size: 60px; display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .login-logo h1 { font-size: 24px; margin-top: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-box { background: var(--bg-card); border-radius: var(--radius); padding: 40px 30px; max-width: 420px; width: 100%; border: 1px solid var(--border); box-shadow: var(--shadow); transition: var(--transition); }
+        .login-logo { text-align: center; margin-bottom: 30px; }
+        .login-logo .icon { font-size: 56px; display: inline-block; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .login-logo h1 { font-size: 24px; margin-top: 8px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .login-logo p { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
         
-        .login-form .form-group { margin-bottom: 16px; position: relative; z-index: 1; }
+        .login-form .form-group { margin-bottom: 16px; }
         .login-form label { display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 5px; font-weight: 500; }
         .login-form input, .login-form select { width: 100%; padding: 14px 16px; background: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 14px; font-family: 'Vazirmatn', sans-serif; transition: var(--transition); outline: none; }
-        .login-form input:focus, .login-form select:focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(108,60,225,0.12); }
+        .login-form input:focus, .login-form select:focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(124,77,255,0.12); }
         .login-form .password-wrapper { position: relative; }
         .login-form .password-wrapper .toggle-password { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 18px; }
-        .login-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: var(--radius-sm); color: white; font-size: 17px; font-weight: 600; font-family: 'Vazirmatn', sans-serif; cursor: pointer; transition: var(--transition); margin-top: 10px; position: relative; z-index: 1; }
-        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(108,60,225,0.3); }
+        .login-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; border-radius: var(--radius-sm); color: white; font-size: 17px; font-weight: 600; font-family: 'Vazirmatn', sans-serif; cursor: pointer; transition: var(--transition); margin-top: 10px; }
+        .login-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(124,77,255,0.3); }
         .login-btn:active { transform: scale(0.96); }
         .login-error { color: var(--danger); font-size: 13px; text-align: center; margin-top: 12px; display: none; }
         .login-hint { text-align: center; margin-top: 10px; font-size: 11px; color: var(--text-secondary); }
@@ -79,15 +76,14 @@
         .header-btn { background: none; border: none; color: var(--text-secondary); font-size: 18px; cursor: pointer; padding: 6px 10px; border-radius: 8px; transition: var(--transition); }
         .header-btn:hover { background: var(--bg-input); color: var(--primary); }
         .header-btn:active { transform: scale(0.9); }
-        .lang-btn { font-size: 13px; font-weight: 600; }
         .profile { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px; border-radius: 30px; background: var(--bg-input); cursor: pointer; transition: var(--transition); }
         .profile:active { transform: scale(0.95); }
         .profile .avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; }
         .profile .info .name { font-size: 12px; font-weight: 600; }
         .profile .info .role { font-size: 9px; color: var(--text-secondary); }
         .role-badge { padding: 2px 10px; border-radius: 20px; font-size: 9px; font-weight: 600; }
-        .role-badge.admin { background: rgba(108,60,225,0.2); color: var(--primary); }
-        .role-badge.teacher { background: rgba(0,212,255,0.2); color: var(--secondary); }
+        .role-badge.admin { background: rgba(124,77,255,0.2); color: var(--primary); }
+        .role-badge.teacher { background: rgba(0,188,212,0.2); color: var(--secondary); }
         
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 999; animation: fadeIn 0.3s ease; }
         .sidebar-overlay.active { display: block; }
@@ -106,13 +102,13 @@
         .sidebar-menu li a i { width: 20px; font-size: 15px; }
         .sidebar-menu li a:active { transform: scale(0.96); }
         .sidebar-menu li a:hover { background: var(--bg-input); color: var(--text); }
-        .sidebar-menu li a.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 5px 20px rgba(108,60,225,0.3); }
+        .sidebar-menu li a.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 5px 20px rgba(124,77,255,0.3); }
         .sidebar-menu li a.hidden { display: none; }
         .sidebar-menu li a .badge { margin-right: auto; background: var(--danger); color: white; padding: 1px 8px; border-radius: 20px; font-size: 9px; }
         .sidebar-footer { position: absolute; bottom: 16px; left: 16px; right: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
         .sidebar-footer a { display: flex; align-items: center; padding: 10px 14px; color: var(--text-secondary); text-decoration: none; border-radius: 10px; transition: var(--transition); font-size: 13px; cursor: pointer; gap: 12px; }
         .sidebar-footer a:active { transform: scale(0.96); }
-        .sidebar-footer a:hover { background: rgba(255,82,82,0.1); color: var(--danger); }
+        .sidebar-footer a:hover { background: rgba(244,67,54,0.1); color: var(--danger); }
         
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px 16px; }
         .stat-card { background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px; border: 1px solid var(--border); text-align: center; transition: var(--transition); }
@@ -131,13 +127,13 @@
         .btn { padding: 8px 14px; border: none; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600; font-family: 'Vazirmatn', sans-serif; cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 5px; touch-action: manipulation; min-height: 36px; }
         .btn:active { transform: scale(0.95); }
         .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(108,60,225,0.3); }
-        .btn-success { background: linear-gradient(135deg, var(--success), #00C853); color: white; }
-        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,230,118,0.3); }
-        .btn-danger { background: linear-gradient(135deg, var(--danger), #D50000); color: white; }
-        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,82,82,0.3); }
-        .btn-warning { background: linear-gradient(135deg, var(--warning), #FFC107); color: #1a1a2e; }
-        .btn-warning:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,64,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(124,77,255,0.3); }
+        .btn-success { background: linear-gradient(135deg, var(--success), #388E3C); color: white; }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(76,175,80,0.3); }
+        .btn-danger { background: linear-gradient(135deg, var(--danger), #C62828); color: white; }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(244,67,54,0.3); }
+        .btn-warning { background: linear-gradient(135deg, var(--warning), #F9A825); color: #1a1a2e; }
+        .btn-warning:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,193,7,0.3); }
         .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text-secondary); }
         .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
         .btn-sm { padding: 5px 10px; font-size: 10px; min-height: 30px; }
@@ -148,7 +144,7 @@
         
         .search-bar { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
         .search-bar input { flex: 1; padding: 10px 14px; background: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 13px; font-family: 'Vazirmatn', sans-serif; transition: var(--transition); outline: none; min-width: 150px; }
-        .search-bar input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(108,60,225,0.08); }
+        .search-bar input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(124,77,255,0.08); }
         .search-bar input::placeholder { color: var(--text-secondary); opacity: 0.4; }
         .search-bar select { padding: 10px 14px; background: var(--bg-input); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 13px; font-family: 'Vazirmatn', sans-serif; transition: var(--transition); outline: none; }
         .search-bar select:focus { border-color: var(--primary); }
@@ -157,7 +153,7 @@
         .quick-entry .form-group { margin-bottom: 0; }
         .quick-entry .form-group label { display: block; color: var(--text-secondary); font-size: 10px; margin-bottom: 3px; font-weight: 500; }
         .quick-entry .form-group input, .quick-entry .form-group select { width: 100%; padding: 8px 10px; background: var(--bg-input); border: 2px solid var(--border); border-radius: 8px; color: var(--text); font-size: 12px; font-family: 'Vazirmatn', sans-serif; transition: var(--transition); outline: none; }
-        .quick-entry .form-group input:focus, .quick-entry .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(108,60,225,0.08); }
+        .quick-entry .form-group input:focus, .quick-entry .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(124,77,255,0.08); }
         .quick-entry .actions { display: flex; gap: 6px; align-items: flex-end; }
         .quick-entry .actions .btn { width: 100%; justify-content: center; }
         
@@ -172,18 +168,18 @@
         .table-container table .empty-row td { padding: 25px; text-align: center; color: var(--text-secondary); }
         
         .status-badge { padding: 2px 10px; border-radius: 20px; font-size: 9px; font-weight: 600; display: inline-block; }
-        .status-badge.active { background: rgba(0,230,118,0.15); color: var(--success); }
-        .status-badge.excellent { background: rgba(0,230,118,0.2); color: #00E676; }
-        .status-badge.good { background: rgba(0,230,118,0.12); color: #69F0AE; }
-        .status-badge.pending { background: rgba(255,215,64,0.2); color: var(--warning); }
-        .status-badge.fail { background: rgba(255,82,82,0.15); color: var(--danger); }
-        .status-badge.none { background: rgba(158,158,158,0.15); color: #999; }
+        .status-badge.active { background: rgba(76,175,80,0.15); color: var(--success); }
+        .status-badge.excellent { background: rgba(76,175,80,0.2); color: #2E7D32; }
+        .status-badge.good { background: rgba(76,175,80,0.12); color: #388E3C; }
+        .status-badge.pending { background: rgba(255,193,7,0.2); color: #F57F17; }
+        .status-badge.fail { background: rgba(244,67,54,0.15); color: var(--danger); }
+        .status-badge.none { background: rgba(158,158,158,0.15); color: #757575; }
         
         .actions-cell { display: flex; gap: 4px; flex-wrap: wrap; }
         .actions-cell button { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: var(--transition); font-size: 13px; touch-action: manipulation; min-width: 28px; min-height: 28px; display: flex; align-items: center; justify-content: center; }
         .actions-cell button:active { transform: scale(0.9); }
         .actions-cell button:hover { background: var(--bg-input); color: var(--primary); }
-        .actions-cell button.danger:hover { color: var(--danger); background: rgba(255,82,82,0.1); }
+        .actions-cell button.danger:hover { color: var(--danger); background: rgba(244,67,54,0.1); }
         .actions-cell button.edit:hover { color: #FF6F00; background: rgba(255,111,0,0.1); }
         
         .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; padding: 12px; flex-wrap: wrap; }
@@ -219,7 +215,7 @@
         .modal .form-group { margin-bottom: 12px; }
         .modal .form-group label { display: block; color: var(--text-secondary); font-size: 11px; margin-bottom: 3px; font-weight: 500; }
         .modal .form-group input, .modal .form-group select, .modal .form-group textarea { width: 100%; padding: 10px 12px; background: var(--bg-input); border: 2px solid var(--border); border-radius: 8px; color: var(--text); font-size: 12px; font-family: 'Vazirmatn', sans-serif; transition: var(--transition); outline: none; }
-        .modal .form-group input:focus, .modal .form-group select:focus, .modal .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(108,60,225,0.08); }
+        .modal .form-group input:focus, .modal .form-group select:focus, .modal .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(124,77,255,0.08); }
         .modal .form-group input.error { border-color: var(--danger); }
         .modal .form-group .error-msg { color: var(--danger); font-size: 10px; margin-top: 3px; display: none; }
         .modal .form-group .error-msg.show { display: block; }
@@ -348,16 +344,16 @@
     <div class="login-box">
         <div class="login-logo">
             <div class="icon">🏫</div>
-            <h1 id="loginTitle">مدیریت هوشمند</h1>
-            <p id="loginSub">سیستم جامع مدیریت آموزشی</p>
+            <h1>مدیریت هوشمند</h1>
+            <p>سیستم جامع مدیریت آموزشی</p>
         </div>
         <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label id="lblUsername"><i class="fas fa-user"></i> نام کاربری</label>
+                <label><i class="fas fa-user"></i> نام کاربری</label>
                 <input type="text" id="loginUsername" placeholder="نام کاربری را وارد کنید" required>
             </div>
             <div class="form-group">
-                <label id="lblPassword"><i class="fas fa-lock"></i> رمز عبور</label>
+                <label><i class="fas fa-lock"></i> رمز عبور</label>
                 <div class="password-wrapper">
                     <input type="password" id="loginPassword" placeholder="رمز عبور را وارد کنید" required>
                     <button type="button" class="toggle-password" onclick="togglePassword()">
@@ -366,7 +362,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label id="lblRole"><i class="fas fa-user-tie"></i> نقش</label>
+                <label><i class="fas fa-user-tie"></i> نقش</label>
                 <select id="loginRole" required>
                     <option value="admin">👑 مدیر</option>
                     <option value="teacher">👨‍🏫 معلم</option>
@@ -396,19 +392,19 @@
             <div class="user-info" id="sidebarUserInfo">مدیر سیستم</div>
         </div>
         <ul class="sidebar-menu" id="sidebarMenu">
-            <li><a class="active" data-page="home"><i class="fas fa-home"></i> <span data-key="navHome">داشبورد</span></a></li>
-            <li><a data-page="guide"><i class="fas fa-compass"></i> <span data-key="navGuide">راهنمایی</span></a></li>
-            <li><a data-page="students"><i class="fas fa-user-graduate"></i> <span data-key="navStudents">دانش‌آموزان</span></a></li>
-            <li><a data-page="mystudents" style="display:none;"><i class="fas fa-user-graduate"></i> <span data-key="navMyStudents">دانش‌آموزان من</span></a></li>
-            <li><a data-page="teachers"><i class="fas fa-chalkboard-teacher"></i> <span data-key="navTeachers">معلمان</span></a></li>
-            <li><a data-page="classes"><i class="fas fa-school"></i> <span data-key="navClasses">کلاس‌ها</span></a></li>
-            <li><a data-page="subjects"><i class="fas fa-book"></i> <span data-key="navSubjects">دروس</span></a></li>
-            <li><a data-page="grades"><i class="fas fa-star"></i> <span data-key="navGrades">نمرات</span></a></li>
-            <li><a data-page="attendance"><i class="fas fa-check-circle"></i> <span data-key="navAttendance">حضور</span></a></li>
-            <li><a data-page="reports"><i class="fas fa-chart-bar"></i> <span data-key="navReports">گزارشات</span></a></li>
+            <li><a class="active" data-page="home"><i class="fas fa-home"></i> داشبورد</a></li>
+            <li><a data-page="guide"><i class="fas fa-compass"></i> راهنمایی</a></li>
+            <li><a data-page="students"><i class="fas fa-user-graduate"></i> دانش‌آموزان</a></li>
+            <li><a data-page="mystudents" style="display:none;"><i class="fas fa-user-graduate"></i> دانش‌آموزان من</a></li>
+            <li><a data-page="teachers"><i class="fas fa-chalkboard-teacher"></i> معلمان</a></li>
+            <li><a data-page="classes"><i class="fas fa-school"></i> کلاس‌ها</a></li>
+            <li><a data-page="subjects"><i class="fas fa-book"></i> دروس</a></li>
+            <li><a data-page="grades"><i class="fas fa-star"></i> نمرات</a></li>
+            <li><a data-page="attendance"><i class="fas fa-check-circle"></i> حضور</a></li>
+            <li><a data-page="reports"><i class="fas fa-chart-bar"></i> گزارشات</a></li>
         </ul>
         <div class="sidebar-footer">
-            <a onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> <span data-key="logout">خروج از سیستم</span></a>
+            <a onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> خروج از سیستم</a>
         </div>
     </nav>
     
@@ -425,7 +421,7 @@
                 <button class="header-btn" onclick="toggleTheme()" title="تغییر تم">
                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
-                <button class="header-btn lang-btn" onclick="toggleLanguage()" title="تغییر زبان">
+                <button class="header-btn" onclick="toggleLanguage()" title="تغییر زبان">
                     <span id="langLabel">🇮🇷</span>
                 </button>
                 <div class="profile" onclick="toggleProfileMenu()">
@@ -442,58 +438,58 @@
         <!-- ===== HOME ===== -->
         <div class="content-panel active" id="panel-home">
             <div class="stats-grid" id="statsGrid">
-                <div class="stat-card"><div class="stat-icon">👨‍🎓</div><div class="stat-number" id="statStudents">0</div><div class="stat-label" data-key="statStudents">دانش‌آموز</div></div>
-                <div class="stat-card"><div class="stat-icon">👨‍🏫</div><div class="stat-number" id="statTeachers">0</div><div class="stat-label" data-key="statTeachers">معلم</div></div>
-                <div class="stat-card"><div class="stat-icon">🏫</div><div class="stat-number" id="statClasses">0</div><div class="stat-label" data-key="statClasses">کلاس</div></div>
-                <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-number" id="statSubjects">0</div><div class="stat-label" data-key="statSubjects">درس</div></div>
-                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="statAverage">0</div><div class="stat-label" data-key="statAverage">میانگین</div></div>
-                <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-number" id="statAttendance">0%</div><div class="stat-label" data-key="statAttendance">حضور</div></div>
+                <div class="stat-card"><div class="stat-icon">👨‍🎓</div><div class="stat-number" id="statStudents">0</div><div class="stat-label">دانش‌آموز</div></div>
+                <div class="stat-card"><div class="stat-icon">👨‍🏫</div><div class="stat-number" id="statTeachers">0</div><div class="stat-label">معلم</div></div>
+                <div class="stat-card"><div class="stat-icon">🏫</div><div class="stat-number" id="statClasses">0</div><div class="stat-label">کلاس</div></div>
+                <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-number" id="statSubjects">0</div><div class="stat-label">درس</div></div>
+                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number" id="statAverage">0</div><div class="stat-label">میانگین</div></div>
+                <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-number" id="statAttendance">0%</div><div class="stat-label">حضور</div></div>
             </div>
             
             <div class="setup-wizard" id="setupWizard">
                 <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
                     <i class="fas fa-magic" style="color:var(--warning);"></i>
-                    <span style="font-weight:600; font-size:13px;" data-key="setupTitle">راه‌اندازی مدرسه</span>
-                    <span style="font-size:10px; color:var(--text-secondary);" data-key="setupSub">مراحل به ترتیب</span>
+                    <span style="font-weight:600; font-size:13px;">راه‌اندازی مدرسه</span>
+                    <span style="font-size:10px; color:var(--text-secondary);">مراحل به ترتیب</span>
                 </div>
                 <div id="setupSteps">
                     <div class="step pending" data-step="1">
                         <div class="step-number">1</div>
-                        <div class="step-text"><div class="title" data-key="step1Title">کلاس‌ها</div><div class="desc" data-key="step1Desc">ایجاد کلاس‌ها</div></div>
+                        <div class="step-text"><div class="title">کلاس‌ها</div><div class="desc">ایجاد کلاس‌ها</div></div>
                         <div class="step-status" id="stepStatus1">⏳</div>
                     </div>
                     <div class="step pending" data-step="2">
                         <div class="step-number">2</div>
-                        <div class="step-text"><div class="title" data-key="step2Title">معلمان</div><div class="desc" data-key="step2Desc">ثبت معلمان</div></div>
+                        <div class="step-text"><div class="title">معلمان</div><div class="desc">ثبت معلمان</div></div>
                         <div class="step-status" id="stepStatus2">⏳</div>
                     </div>
                     <div class="step pending" data-step="3">
                         <div class="step-number">3</div>
-                        <div class="step-text"><div class="title" data-key="step3Title">دانش‌آموزان</div><div class="desc" data-key="step3Desc">ثبت دانش‌آموزان</div></div>
+                        <div class="step-text"><div class="title">دانش‌آموزان</div><div class="desc">ثبت دانش‌آموزان</div></div>
                         <div class="step-status" id="stepStatus3">⏳</div>
                     </div>
                     <div class="step pending" data-step="4">
                         <div class="step-number">4</div>
-                        <div class="step-text"><div class="title" data-key="step4Title">دروس</div><div class="desc" data-key="step4Desc">تعریف دروس</div></div>
+                        <div class="step-text"><div class="title">دروس</div><div class="desc">تعریف دروس</div></div>
                         <div class="step-status" id="stepStatus4">⏳</div>
                     </div>
                 </div>
                 <div class="step-actions">
-                    <button class="btn btn-warning btn-sm" onclick="goToStep(1)"><i class="fas fa-1"></i> <span data-key="stepBtn1">کلاس</span></button>
-                    <button class="btn btn-warning btn-sm" onclick="goToStep(2)"><i class="fas fa-2"></i> <span data-key="stepBtn2">معلم</span></button>
-                    <button class="btn btn-warning btn-sm" onclick="goToStep(3)"><i class="fas fa-3"></i> <span data-key="stepBtn3">دانش‌آموز</span></button>
-                    <button class="btn btn-warning btn-sm" onclick="goToStep(4)"><i class="fas fa-4"></i> <span data-key="stepBtn4">درس</span></button>
+                    <button class="btn btn-warning btn-sm" onclick="goToStep(1)"><i class="fas fa-1"></i> کلاس</button>
+                    <button class="btn btn-warning btn-sm" onclick="goToStep(2)"><i class="fas fa-2"></i> معلم</button>
+                    <button class="btn btn-warning btn-sm" onclick="goToStep(3)"><i class="fas fa-3"></i> دانش‌آموز</button>
+                    <button class="btn btn-warning btn-sm" onclick="goToStep(4)"><i class="fas fa-4"></i> درس</button>
                 </div>
             </div>
             
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                 <div class="table-container" style="padding:12px;">
-                    <h3 style="font-size:13px; margin-bottom:8px;" data-key="activitiesTitle">📋 فعالیت‌ها</h3>
-                    <div id="recentActivities" style="font-size:11px;"><p class="text-muted text-center" style="padding:12px;" data-key="noActivities">هیچ فعالیتی ثبت نشده است</p></div>
+                    <h3 style="font-size:13px; margin-bottom:8px;">📋 فعالیت‌ها</h3>
+                    <div id="recentActivities" style="font-size:11px;"><p class="text-muted text-center" style="padding:12px;">هیچ فعالیتی ثبت نشده است</p></div>
                 </div>
                 <div class="table-container" style="padding:12px;">
-                    <h3 style="font-size:13px; margin-bottom:8px;" data-key="alertsTitle">🚨 هشدارها</h3>
-                    <div id="alertsList" style="font-size:11px;"><p class="text-muted text-center" style="padding:12px;" data-key="noAlerts">همه چیز عالی است!</p></div>
+                    <h3 style="font-size:13px; margin-bottom:8px;">🚨 هشدارها</h3>
+                    <div id="alertsList" style="font-size:11px;"><p class="text-muted text-center" style="padding:12px;">همه چیز عالی است!</p></div>
                 </div>
             </div>
         </div>
@@ -501,68 +497,51 @@
         <!-- ===== GUIDE ===== -->
         <div class="content-panel" id="panel-guide">
             <div class="panel-header">
-                <h2><i class="fas fa-compass" style="color:var(--primary);"></i> <span data-key="guideTitle">راهنمای استفاده از سیستم</span></h2>
+                <h2><i class="fas fa-compass" style="color:var(--primary);"></i> راهنمای استفاده از سیستم</h2>
             </div>
             <div class="guide-section">
-                <h3><i class="fas fa-rocket"></i> <span data-key="guideQuickStart">شروع سریع</span></h3>
-                <div class="guide-step"><div class="step-num">1</div><div class="step-content"><div class="title" data-key="guideStep1Title">ایجاد کلاس‌ها</div><div class="desc" data-key="guideStep1Desc">ابتدا کلاس‌های مدرسه را ایجاد کنید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> <span data-key="guideGoTo">برو به کلاس‌ها</span></button></div></div>
-                <div class="guide-step"><div class="step-num">2</div><div class="step-content"><div class="title" data-key="guideStep2Title">ثبت معلمان</div><div class="desc" data-key="guideStep2Desc">معلمان را ثبت کنید و به کلاس‌ها اختصاص دهید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> <span data-key="guideGoTo">برو به معلمان</span></button></div></div>
-                <div class="guide-step"><div class="step-num">3</div><div class="step-content"><div class="title" data-key="guideStep3Title">ثبت دانش‌آموزان</div><div class="desc" data-key="guideStep3Desc">دانش‌آموزان را در کلاس‌ها ثبت کنید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(3)"><i class="fas fa-arrow-left"></i> <span data-key="guideGoTo">برو به دانش‌آموزان</span></button></div></div>
-                <div class="guide-step"><div class="step-num">4</div><div class="step-content"><div class="title" data-key="guideStep4Title">تعریف دروس</div><div class="desc" data-key="guideStep4Desc">دروس را به کلاس‌ها و معلمان اختصاص دهید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(4)"><i class="fas fa-arrow-left"></i> <span data-key="guideGoTo">برو به دروس</span></button></div></div>
-            </div>
-            <div class="guide-section">
-                <h3><i class="fas fa-user-graduate"></i> <span data-key="guideTeacherTitle">نحوه کار معلم</span></h3>
-                <div class="guide-step"><div class="step-num">👨‍🏫</div><div class="step-content"><div class="title" data-key="guideTeacherStep1">ورود به سیستم</div><div class="desc" data-key="guideTeacherStep1Desc">معلم با شناسه و رمز عبور خود وارد می‌شود.</div></div></div>
-                <div class="guide-step"><div class="step-num">⭐</div><div class="step-content"><div class="title" data-key="guideTeacherStep2">ثبت نمره</div><div class="desc" data-key="guideTeacherStep2Desc">فقط برای دانش‌آموزان کلاس خود و دروسی که تدریس می‌کند.</div></div></div>
-                <div class="guide-step"><div class="step-num">✅</div><div class="step-content"><div class="title" data-key="guideTeacherStep3">ثبت حضور</div><div class="desc" data-key="guideTeacherStep3Desc">ثبت حضور و غیاب دانش‌آموزان کلاس خود.</div></div></div>
+                <h3><i class="fas fa-rocket"></i> شروع سریع</h3>
+                <div class="guide-step"><div class="step-num">1</div><div class="step-content"><div class="title">ایجاد کلاس‌ها</div><div class="desc">ابتدا کلاس‌های مدرسه را ایجاد کنید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> برو به کلاس‌ها</button></div></div>
+                <div class="guide-step"><div class="step-num">2</div><div class="step-content"><div class="title">ثبت معلمان</div><div class="desc">معلمان را ثبت کنید و به کلاس‌ها اختصاص دهید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> برو به معلمان</button></div></div>
+                <div class="guide-step"><div class="step-num">3</div><div class="step-content"><div class="title">ثبت دانش‌آموزان</div><div class="desc">دانش‌آموزان را در کلاس‌ها ثبت کنید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(3)"><i class="fas fa-arrow-left"></i> برو به دانش‌آموزان</button></div></div>
+                <div class="guide-step"><div class="step-num">4</div><div class="step-content"><div class="title">تعریف دروس</div><div class="desc">دروس را به کلاس‌ها و معلمان اختصاص دهید.</div><button class="btn btn-primary btn-sm" onclick="goToStep(4)"><i class="fas fa-arrow-left"></i> برو به دروس</button></div></div>
             </div>
         </div>
         
         <!-- ===== STUDENTS ===== -->
         <div class="content-panel" id="panel-students">
             <div class="panel-header">
-                <h2><span data-key="studentsTitle">👨‍🎓 دانش‌آموزان</span></h2>
+                <h2>👨‍🎓 دانش‌آموزان</h2>
                 <div class="actions">
-                    <button class="btn btn-barcode btn-sm" onclick="openModal('scanStudent')"><i class="fas fa-qrcode"></i></button>
-                    <button class="btn btn-bulk btn-sm" onclick="openModal('bulkStudent')"><i class="fas fa-users"></i></button>
-                    <button class="btn btn-primary btn-sm" onclick="openModal('addStudent')"><i class="fas fa-plus"></i> <span data-key="addBtn">افزودن</span></button>
+                    <button class="btn btn-primary btn-sm" onclick="openModal('addStudent')"><i class="fas fa-plus"></i> افزودن</button>
                     <button class="btn btn-excel btn-sm" onclick="exportToExcel('students')"><i class="fas fa-file-excel"></i></button>
                 </div>
             </div>
             <div class="quick-entry">
-                <div class="form-group"><label data-key="quickId">شناسه</label><input type="text" id="quickStudentId" placeholder="مثال: 14001" onkeydown="if(event.key==='Enter') quickAddStudent()"></div>
-                <div class="form-group"><label data-key="quickName">نام کامل</label><input type="text" id="quickStudentName" placeholder="نام" onkeydown="if(event.key==='Enter') quickAddStudent()"></div>
-                <div class="form-group"><label data-key="quickClass">کلاس</label><select id="quickStudentClass"><option value="">انتخاب...</option></select></div>
-                <div class="actions"><button class="btn btn-success" onclick="quickAddStudent()"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت</span></button></div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="studentSearch" placeholder="🔍 جستجو... (نام یا شناسه)" onkeyup="debounceSearch('students')">
-                <select id="studentFilterClass" onchange="renderStudentsTable()"><option value="">همه کلاس‌ها</option></select>
+                <div class="form-group"><label>شناسه</label><input type="text" id="quickStudentId" placeholder="مثال: 14001" onkeydown="if(event.key==='Enter') quickAddStudent()"></div>
+                <div class="form-group"><label>نام کامل</label><input type="text" id="quickStudentName" placeholder="نام" onkeydown="if(event.key==='Enter') quickAddStudent()"></div>
+                <div class="form-group"><label>کلاس</label><select id="quickStudentClass"><option value="">انتخاب...</option></select></div>
+                <div class="actions"><button class="btn btn-success" onclick="quickAddStudent()"><i class="fas fa-save"></i> ثبت</button></div>
             </div>
             <div class="table-container">
                 <div class="scroll-hint">← برای دیدن بقیه بکشید →</div>
                 <table>
-                    <thead><tr><th onclick="sortStudents('id')">شناسه</th><th onclick="sortStudents('name')">نام</th><th onclick="sortStudents('class')">کلاس</th><th onclick="sortStudents('average')">میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                    <thead><tr><th>شناسه</th><th>نام</th><th>کلاس</th><th>میانگین</th><th>وضعیت</th><th>عملیات</th></tr></thead>
                     <tbody id="studentsTableBody"></tbody>
                 </table>
             </div>
-            <div class="pagination" id="studentsPagination"></div>
         </div>
         
         <!-- ===== MY STUDENTS ===== -->
         <div class="content-panel" id="panel-mystudents">
             <div class="panel-header">
-                <h2><span data-key="myStudentsTitle">👨‍🎓 دانش‌آموزان من</span></h2>
+                <h2>👨‍🎓 دانش‌آموزان من</h2>
                 <div class="actions">
-                    <button class="btn btn-barcode btn-sm" onclick="openModal('scanStudentTeacher')"><i class="fas fa-qrcode"></i></button>
-                    <button class="btn btn-primary btn-sm" onclick="openModal('addGradeTeacher')"><i class="fas fa-star"></i> <span data-key="gradeBtn">نمره</span></button>
-                    <button class="btn btn-success btn-sm" onclick="openModal('addAttendanceTeacher')"><i class="fas fa-check-circle"></i> <span data-key="attendanceBtn">حضور</span></button>
+                    <button class="btn btn-primary btn-sm" onclick="openModal('addGradeTeacher')"><i class="fas fa-star"></i> نمره</button>
+                    <button class="btn btn-success btn-sm" onclick="openModal('addAttendanceTeacher')"><i class="fas fa-check-circle"></i> حضور</button>
                 </div>
             </div>
-            <div class="teacher-restricted"><i class="fas fa-info-circle"></i> <span data-key="teacherRestricted">فقط دانش‌آموزان کلاس‌های خود را می‌بینید</span></div>
-            <div class="search-bar">
-                <input type="text" id="myStudentSearch" placeholder="🔍 جستجو..." onkeyup="debounceSearch('mystudents')">
-            </div>
+            <div class="teacher-restricted"><i class="fas fa-info-circle"></i> فقط دانش‌آموزان کلاس‌های خود را می‌بینید</div>
             <div class="table-container">
                 <div class="scroll-hint">← برای دیدن بقیه بکشید →</div>
                 <table>
@@ -570,65 +549,52 @@
                     <tbody id="myStudentsTableBody"></tbody>
                 </table>
             </div>
-            <div class="pagination" id="myStudentsPagination"></div>
         </div>
         
         <!-- ===== TEACHERS ===== -->
         <div class="content-panel" id="panel-teachers">
             <div class="panel-header">
-                <h2><span data-key="teachersTitle">👨‍🏫 معلمان</span></h2>
+                <h2>👨‍🏫 معلمان</h2>
                 <div class="actions">
-                    <button class="btn btn-primary btn-sm" onclick="openModal('addTeacher')"><i class="fas fa-plus"></i> <span data-key="addBtn">افزودن</span></button>
+                    <button class="btn btn-primary btn-sm" onclick="openModal('addTeacher')"><i class="fas fa-plus"></i> افزودن</button>
                     <button class="btn btn-excel btn-sm" onclick="exportToExcel('teachers')"><i class="fas fa-file-excel"></i></button>
                 </div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="teacherSearch" placeholder="🔍 جستجو..." onkeyup="debounceSearch('teachers')">
             </div>
             <div class="table-container">
                 <div class="scroll-hint">← برای دیدن بقیه بکشید →</div>
                 <table>
-                    <thead><tr><th>شناسه</th><th>نام</th><th>تخصص</th><th>کلاس‌ها</th><th>درس‌ها</th><th>رمز عبور</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                    <thead><tr><th>شناسه</th><th>نام</th><th>تخصص</th><th>کلاس‌ها</th><th>درس‌ها</th><th>رمز عبور</th><th>عملیات</th></tr></thead>
                     <tbody id="teachersTableBody"></tbody>
                 </table>
             </div>
-            <div class="pagination" id="teachersPagination"></div>
         </div>
         
         <!-- ===== CLASSES ===== -->
         <div class="content-panel" id="panel-classes">
             <div class="panel-header">
-                <h2><span data-key="classesTitle">🏫 کلاس‌ها</span></h2>
+                <h2>🏫 کلاس‌ها</h2>
                 <div class="actions">
-                    <button class="btn btn-barcode btn-sm" onclick="openModal('scanClass')"><i class="fas fa-qrcode"></i></button>
-                    <button class="btn btn-primary btn-sm" onclick="openModal('addClass')"><i class="fas fa-plus"></i> <span data-key="addBtn">افزودن</span></button>
+                    <button class="btn btn-primary btn-sm" onclick="openModal('addClass')"><i class="fas fa-plus"></i> افزودن</button>
                     <button class="btn btn-excel btn-sm" onclick="exportToExcel('classes')"><i class="fas fa-file-excel"></i></button>
                 </div>
             </div>
             <div class="quick-entry">
-                <div class="form-group"><label data-key="quickId">شناسه</label><input type="text" id="quickClassId" placeholder="مثال: C001" onkeydown="if(event.key==='Enter') quickAddClass()"></div>
-                <div class="form-group"><label data-key="quickName">نام کلاس</label><input type="text" id="quickClassName" placeholder="مثال: ۱۰-الف" onkeydown="if(event.key==='Enter') quickAddClass()"></div>
-                <div class="form-group"><label data-key="quickGrade">پایه</label><input type="number" id="quickClassGrade" placeholder="مثال: 10" onkeydown="if(event.key==='Enter') quickAddClass()"></div>
-                <div class="actions"><button class="btn btn-success" onclick="quickAddClass()"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت</span></button></div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="classSearch" placeholder="🔍 جستجو..." onkeyup="debounceSearch('classes')">
+                <div class="form-group"><label>شناسه</label><input type="text" id="quickClassId" placeholder="مثال: C001" onkeydown="if(event.key==='Enter') quickAddClass()"></div>
+                <div class="form-group"><label>نام کلاس</label><input type="text" id="quickClassName" placeholder="مثال: ۱۰-الف" onkeydown="if(event.key==='Enter') quickAddClass()"></div>
+                <div class="form-group"><label>پایه</label><input type="number" id="quickClassGrade" placeholder="مثال: 10" onkeydown="if(event.key==='Enter') quickAddClass()"></div>
+                <div class="actions"><button class="btn btn-success" onclick="quickAddClass()"><i class="fas fa-save"></i> ثبت</button></div>
             </div>
             <div class="cards-grid" id="classesGrid"></div>
-            <div class="pagination" id="classesPagination"></div>
         </div>
         
         <!-- ===== SUBJECTS ===== -->
         <div class="content-panel" id="panel-subjects">
             <div class="panel-header">
-                <h2><span data-key="subjectsTitle">📚 دروس</span></h2>
+                <h2>📚 دروس</h2>
                 <div class="actions">
-                    <button class="btn btn-primary btn-sm" onclick="openModal('addSubject')"><i class="fas fa-plus"></i> <span data-key="addBtn">افزودن</span></button>
+                    <button class="btn btn-primary btn-sm" onclick="openModal('addSubject')"><i class="fas fa-plus"></i> افزودن</button>
                     <button class="btn btn-excel btn-sm" onclick="exportToExcel('subjects')"><i class="fas fa-file-excel"></i></button>
                 </div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="subjectSearch" placeholder="🔍 جستجو..." onkeyup="debounceSearch('subjects')">
             </div>
             <div class="table-container">
                 <div class="scroll-hint">← برای دیدن بقیه بکشید →</div>
@@ -637,20 +603,15 @@
                     <tbody id="subjectsTableBody"></tbody>
                 </table>
             </div>
-            <div class="pagination" id="subjectsPagination"></div>
         </div>
         
         <!-- ===== GRADES ===== -->
         <div class="content-panel" id="panel-grades">
             <div class="panel-header">
-                <h2><span data-key="gradesTitle">⭐ نمرات</span></h2>
+                <h2>⭐ نمرات</h2>
                 <div class="actions">
                     <button class="btn btn-excel btn-sm" onclick="exportToExcel('grades')"><i class="fas fa-file-excel"></i></button>
                 </div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="gradeSearch" placeholder="🔍 جستجو..." onkeyup="debounceSearch('grades')">
-                <select id="gradeFilterSubject" onchange="renderGradesTable()"><option value="">همه دروس</option></select>
             </div>
             <div class="table-container">
                 <div class="scroll-hint">← برای دیدن بقیه بکشید →</div>
@@ -659,19 +620,15 @@
                     <tbody id="gradesTableBody"></tbody>
                 </table>
             </div>
-            <div class="pagination" id="gradesPagination"></div>
         </div>
         
         <!-- ===== ATTENDANCE ===== -->
         <div class="content-panel" id="panel-attendance">
             <div class="panel-header">
-                <h2><span data-key="attendanceTitle">✅ حضور و غیاب</span></h2>
+                <h2>✅ حضور و غیاب</h2>
                 <div class="actions">
                     <button class="btn btn-excel btn-sm" onclick="exportToExcel('attendance')"><i class="fas fa-file-excel"></i></button>
                 </div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="attendanceSearch" placeholder="🔍 جستجو..." onkeyup="debounceSearch('attendance')">
             </div>
             <div class="table-container">
                 <div class="scroll-hint">← برای دیدن بقیه بکشید →</div>
@@ -680,55 +637,54 @@
                     <tbody id="attendanceTableBody"></tbody>
                 </table>
             </div>
-            <div class="pagination" id="attendancePagination"></div>
         </div>
         
         <!-- ===== REPORTS ===== -->
         <div class="content-panel" id="panel-reports">
             <div class="panel-header">
-                <h2><span data-key="reportsTitle">📊 گزارشات</span></h2>
+                <h2>📊 گزارشات</h2>
                 <div class="actions">
-                    <button class="btn btn-excel btn-sm" onclick="exportToExcel('all')"><i class="fas fa-file-excel"></i> <span data-key="fullExport">خروجی کامل</span></button>
+                    <button class="btn btn-excel btn-sm" onclick="exportToExcel('all')"><i class="fas fa-file-excel"></i> خروجی کامل</button>
                 </div>
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                 <div class="table-container" style="padding:14px; text-align:center;">
                     <i class="fas fa-file-pdf" style="font-size:28px; color:var(--primary);"></i>
-                    <h3 style="font-size:13px; margin:6px 0;" data-key="reportMonthly">ماهانه</h3>
-                    <button class="btn btn-primary btn-sm" onclick="generateReport('monthly')"><i class="fas fa-download"></i> <span data-key="downloadBtn">دانلود</span></button>
+                    <h3 style="font-size:13px; margin:6px 0;">ماهانه</h3>
+                    <button class="btn btn-primary btn-sm" onclick="generateReport('monthly')"><i class="fas fa-download"></i> دانلود</button>
                 </div>
                 <div class="table-container" style="padding:14px; text-align:center;">
                     <i class="fas fa-user-graduate" style="font-size:28px; color:var(--success);"></i>
-                    <h3 style="font-size:13px; margin:6px 0;" data-key="reportCard">کارنامه</h3>
-                    <button class="btn btn-success btn-sm" onclick="openModal('reportCard')"><i class="fas fa-print"></i> <span data-key="viewBtn">مشاهده</span></button>
+                    <h3 style="font-size:13px; margin:6px 0;">کارنامه</h3>
+                    <button class="btn btn-success btn-sm" onclick="openModal('reportCard')"><i class="fas fa-print"></i> مشاهده</button>
                 </div>
                 <div class="table-container" style="padding:14px; text-align:center;">
                     <i class="fas fa-chart-line" style="font-size:28px; color:var(--warning);"></i>
-                    <h3 style="font-size:13px; margin:6px 0;" data-key="reportAnalytics">تحلیل</h3>
-                    <button class="btn btn-warning btn-sm" onclick="generateReport('analytics')"><i class="fas fa-chart-pie"></i> <span data-key="viewBtn">مشاهده</span></button>
+                    <h3 style="font-size:13px; margin:6px 0;">تحلیل</h3>
+                    <button class="btn btn-warning btn-sm" onclick="generateReport('analytics')"><i class="fas fa-chart-pie"></i> مشاهده</button>
                 </div>
                 <div class="table-container" style="padding:14px; text-align:center;">
                     <i class="fas fa-trophy" style="font-size:28px; color:#FF6F00;"></i>
-                    <h3 style="font-size:13px; margin:6px 0;" data-key="reportRanking">رتبه‌بندی</h3>
-                    <button class="btn btn-warning btn-sm" onclick="showRanking()"><i class="fas fa-ranking-star"></i> <span data-key="viewBtn">مشاهده</span></button>
+                    <h3 style="font-size:13px; margin:6px 0;">رتبه‌بندی</h3>
+                    <button class="btn btn-warning btn-sm" onclick="showRanking()"><i class="fas fa-ranking-star"></i> مشاهده</button>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p><span class="heart">❤️</span> <span data-key="footerText">ساخته شده توسط</span> <span class="brand">BitVolt.MTV</span> <span class="heart">❤️</span></p>
+            <p><span class="heart">❤️</span> ساخته شده توسط <span class="brand">BitVolt.MTV</span> <span class="heart">❤️</span></p>
         </div>
     </div>
 </div>
 
 <!-- ===== BOTTOM NAV ===== -->
 <nav class="bottom-nav" id="bottomNav">
-    <button class="nav-item active" data-page="home"><i class="fas fa-home"></i><span data-key="navHome">خانه</span></button>
-    <button class="nav-item" data-page="guide"><i class="fas fa-compass"></i><span data-key="navGuide">راهنما</span></button>
-    <button class="nav-item" data-page="students"><i class="fas fa-user-graduate"></i><span data-key="navStudents">دانش‌آموز</span></button>
-    <button class="nav-item" data-page="mystudents" style="display:none;"><i class="fas fa-user-graduate"></i><span data-key="navMyStudents">دانش‌آموزان من</span></button>
-    <button class="nav-item" data-page="classes"><i class="fas fa-school"></i><span data-key="navClasses">کلاس‌ها</span></button>
-    <button class="nav-item" data-page="more" onclick="showMoreMenu()"><i class="fas fa-ellipsis-h"></i><span data-key="navMore">بیشتر</span></button>
+    <button class="nav-item active" data-page="home"><i class="fas fa-home"></i><span>خانه</span></button>
+    <button class="nav-item" data-page="guide"><i class="fas fa-compass"></i><span>راهنما</span></button>
+    <button class="nav-item" data-page="students"><i class="fas fa-user-graduate"></i><span>دانش‌آموز</span></button>
+    <button class="nav-item" data-page="mystudents" style="display:none;"><i class="fas fa-user-graduate"></i><span>دانش‌آموزان من</span></button>
+    <button class="nav-item" data-page="classes"><i class="fas fa-school"></i><span>کلاس‌ها</span></button>
+    <button class="nav-item" data-page="more" onclick="showMoreMenu()"><i class="fas fa-ellipsis-h"></i><span>بیشتر</span></button>
 </nav>
 
 <!-- ===== SCROLL TOP ===== -->
@@ -741,22 +697,18 @@
 <!-- Add Class -->
 <div class="modal-overlay" id="modal-addClass">
     <div class="modal">
-        <div class="modal-header"><h3>➕ <span data-key="addClassModal">افزودن کلاس</span></h3><button class="close-modal" onclick="closeModal('addClass')">&times;</button></div>
-        <form onsubmit="addClass(event)" id="addClassForm">
+        <div class="modal-header"><h3>➕ افزودن کلاس</h3><button class="close-modal" onclick="closeModal('addClass')">&times;</button></div>
+        <form onsubmit="addClass(event)">
             <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="classId" placeholder="مثال: C001" required></div>
-                <div class="form-group"><label data-key="nameLabel">نام کلاس</label><input type="text" id="className" placeholder="مثال: ۱۰-الف" required></div>
+                <div class="form-group"><label>شناسه</label><input type="text" id="classId" placeholder="مثال: C001" required></div>
+                <div class="form-group"><label>نام کلاس</label><input type="text" id="className" placeholder="مثال: ۱۰-الف" required></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label data-key="gradeLabel">پایه</label><input type="number" id="classGrade" placeholder="مثال: 10" required></div>
-                <div class="form-group"><label data-key="capacityLabel">ظرفیت</label><input type="number" id="classCapacity" value="30" required></div>
+                <div class="form-group"><label>پایه</label><input type="number" id="classGrade" placeholder="مثال: 10" required></div>
+                <div class="form-group"><label>ظرفیت</label><input type="number" id="classCapacity" value="30" required></div>
             </div>
-            <div class="form-group">
-                <label data-key="teacherLabel">معلم‌ها</label>
-                <select id="classTeachers" multiple style="height:70px;"></select>
-                <div style="font-size:10px; color:var(--text-secondary); margin-top:4px;"><i class="fas fa-info-circle"></i> <span data-key="multiSelectHint">برای انتخاب چند معلم، Ctrl+Click کنید</span></div>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت کلاس</span></button>
+            <div class="form-group"><label>معلم‌ها</label><select id="classTeachers" multiple style="height:70px;"></select></div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> ثبت کلاس</button>
         </form>
     </div>
 </div>
@@ -764,17 +716,17 @@
 <!-- Add Student -->
 <div class="modal-overlay" id="modal-addStudent">
     <div class="modal">
-        <div class="modal-header"><h3>➕ <span data-key="addStudentModal">افزودن دانش‌آموز</span></h3><button class="close-modal" onclick="closeModal('addStudent')">&times;</button></div>
+        <div class="modal-header"><h3>➕ افزودن دانش‌آموز</h3><button class="close-modal" onclick="closeModal('addStudent')">&times;</button></div>
         <form onsubmit="addStudent(event)">
             <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="studentId" placeholder="مثال: 14001" required></div>
-                <div class="form-group"><label data-key="nameLabel">نام کامل</label><input type="text" id="studentName" placeholder="نام" required></div>
+                <div class="form-group"><label>شناسه</label><input type="text" id="studentId" placeholder="مثال: 14001" required></div>
+                <div class="form-group"><label>نام کامل</label><input type="text" id="studentName" placeholder="نام" required></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label data-key="classLabel">کلاس</label><select id="studentClassSelect" required><option value="">انتخاب...</option></select></div>
-                <div class="form-group"><label data-key="phoneLabel">شماره والدین</label><input type="tel" id="studentParentPhone" placeholder="مثال: 09123456789"></div>
+                <div class="form-group"><label>کلاس</label><select id="studentClassSelect" required><option value="">انتخاب...</option></select></div>
+                <div class="form-group"><label>شماره والدین</label><input type="tel" id="studentParentPhone" placeholder="مثال: 09123456789"></div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت دانش‌آموز</span></button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> ثبت دانش‌آموز</button>
         </form>
     </div>
 </div>
@@ -782,28 +734,20 @@
 <!-- Add Teacher -->
 <div class="modal-overlay" id="modal-addTeacher">
     <div class="modal">
-        <div class="modal-header"><h3>➕ <span data-key="addTeacherModal">افزودن معلم</span></h3><button class="close-modal" onclick="closeModal('addTeacher')">&times;</button></div>
+        <div class="modal-header"><h3>➕ افزودن معلم</h3><button class="close-modal" onclick="closeModal('addTeacher')">&times;</button></div>
         <form onsubmit="addTeacher(event)">
             <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه (نام کاربری)</label><input type="text" id="teacherId" placeholder="مثال: T001" required></div>
-                <div class="form-group"><label data-key="nameLabel">نام کامل</label><input type="text" id="teacherName" placeholder="نام" required></div>
+                <div class="form-group"><label>شناسه (نام کاربری)</label><input type="text" id="teacherId" placeholder="مثال: T001" required></div>
+                <div class="form-group"><label>نام کامل</label><input type="text" id="teacherName" placeholder="نام" required></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label data-key="specialtyLabel">تخصص</label><input type="text" id="teacherSpecialty" placeholder="مثال: ریاضی" required></div>
-                <div class="form-group"><label data-key="phoneLabel">شماره تماس</label><input type="tel" id="teacherPhone" placeholder="مثال: 09123456789"></div>
+                <div class="form-group"><label>تخصص</label><input type="text" id="teacherSpecialty" placeholder="مثال: ریاضی" required></div>
+                <div class="form-group"><label>شماره تماس</label><input type="tel" id="teacherPhone" placeholder="مثال: 09123456789"></div>
             </div>
-            <div class="form-group">
-                <label data-key="classLabel">کلاس‌های تدریس</label>
-                <select id="teacherClasses" multiple style="height:70px;"></select>
-                <div style="font-size:10px; color:var(--text-secondary); margin-top:4px;"><i class="fas fa-info-circle"></i> <span data-key="multiSelectHint">برای انتخاب چند کلاس، Ctrl+Click کنید</span></div>
-            </div>
-            <div class="form-group">
-                <label data-key="subjectLabel">درس‌های تدریس</label>
-                <select id="teacherSubjects" multiple style="height:70px;"></select>
-                <div style="font-size:10px; color:var(--text-secondary); margin-top:4px;"><i class="fas fa-info-circle"></i> <span data-key="multiSelectHint">برای انتخاب چند درس، Ctrl+Click کنید</span></div>
-            </div>
-            <div class="form-group"><label data-key="passwordLabel">رمز عبور (حداقل ۶ کاراکتر)</label><input type="password" id="teacherPassword" placeholder="رمز عبور" required minlength="6"></div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت معلم</span></button>
+            <div class="form-group"><label>کلاس‌های تدریس</label><select id="teacherClasses" multiple style="height:70px;"></select></div>
+            <div class="form-group"><label>درس‌های تدریس</label><select id="teacherSubjects" multiple style="height:70px;"></select></div>
+            <div class="form-group"><label>رمز عبور (حداقل ۶ کاراکتر)</label><input type="password" id="teacherPassword" placeholder="رمز عبور" required minlength="6"></div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> ثبت معلم</button>
         </form>
     </div>
 </div>
@@ -811,21 +755,21 @@
 <!-- Add Subject -->
 <div class="modal-overlay" id="modal-addSubject">
     <div class="modal">
-        <div class="modal-header"><h3>➕ <span data-key="addSubjectModal">افزودن درس</span></h3><button class="close-modal" onclick="closeModal('addSubject')">&times;</button></div>
+        <div class="modal-header"><h3>➕ افزودن درس</h3><button class="close-modal" onclick="closeModal('addSubject')">&times;</button></div>
         <form onsubmit="addSubject(event)">
             <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="subjectId" placeholder="مثال: SUB001" required></div>
-                <div class="form-group"><label data-key="nameLabel">نام درس</label><input type="text" id="subjectName" placeholder="نام درس" required></div>
+                <div class="form-group"><label>شناسه</label><input type="text" id="subjectId" placeholder="مثال: SUB001" required></div>
+                <div class="form-group"><label>نام درس</label><input type="text" id="subjectName" placeholder="نام درس" required></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label data-key="teacherLabel">معلم</label><select id="subjectTeacher" required><option value="">انتخاب...</option></select></div>
-                <div class="form-group"><label data-key="classLabel">کلاس</label><select id="subjectClass" required><option value="">انتخاب...</option></select></div>
+                <div class="form-group"><label>معلم</label><select id="subjectTeacher" required><option value="">انتخاب...</option></select></div>
+                <div class="form-group"><label>کلاس</label><select id="subjectClass" required><option value="">انتخاب...</option></select></div>
             </div>
             <div class="form-row">
-                <div class="form-group"><label data-key="unitLabel">واحد</label><input type="number" id="subjectUnits" value="3" required></div>
-                <div class="form-group"><label data-key="typeLabel">نوع</label><select id="subjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div>
+                <div class="form-group"><label>واحد</label><input type="number" id="subjectUnits" value="3" required></div>
+                <div class="form-group"><label>نوع</label><select id="subjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت درس</span></button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> ثبت درس</button>
         </form>
     </div>
 </div>
@@ -833,15 +777,15 @@
 <!-- Add Grade Teacher -->
 <div class="modal-overlay" id="modal-addGradeTeacher">
     <div class="modal">
-        <div class="modal-header"><h3>⭐ <span data-key="addGradeModal">ثبت نمره</span></h3><button class="close-modal" onclick="closeModal('addGradeTeacher')">&times;</button></div>
+        <div class="modal-header"><h3>⭐ ثبت نمره</h3><button class="close-modal" onclick="closeModal('addGradeTeacher')">&times;</button></div>
         <form onsubmit="addGradeTeacher(event)">
-            <div class="form-group"><label data-key="studentLabel">دانش‌آموز</label><select id="gradeStudentTeacher" required><option value="">انتخاب...</option></select></div>
-            <div class="form-group"><label data-key="subjectLabel">درس</label><select id="gradeSubjectTeacher" required><option value="">انتخاب...</option></select></div>
+            <div class="form-group"><label>دانش‌آموز</label><select id="gradeStudentTeacher" required><option value="">انتخاب...</option></select></div>
+            <div class="form-group"><label>درس</label><select id="gradeSubjectTeacher" required><option value="">انتخاب...</option></select></div>
             <div class="form-row">
-                <div class="form-group"><label data-key="gradeValue">نمره (۰-۲۰)</label><input type="number" id="gradeValueTeacher" min="0" max="20" step="0.25" required></div>
-                <div class="form-group"><label data-key="examTypeLabel">نوع</label><select id="gradeExamTypeTeacher"><option value="quiz">آزمون کوتاه</option><option value="homework">تکلیف</option><option value="midterm">میان‌ترم</option><option value="final">پایان‌ترم</option></select></div>
+                <div class="form-group"><label>نمره (۰-۲۰)</label><input type="number" id="gradeValueTeacher" min="0" max="20" step="0.25" required></div>
+                <div class="form-group"><label>نوع</label><select id="gradeExamTypeTeacher"><option value="quiz">آزمون کوتاه</option><option value="homework">تکلیف</option><option value="midterm">میان‌ترم</option><option value="final">پایان‌ترم</option></select></div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت نمره</span></button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> ثبت نمره</button>
         </form>
     </div>
 </div>
@@ -849,15 +793,15 @@
 <!-- Add Attendance Teacher -->
 <div class="modal-overlay" id="modal-addAttendanceTeacher">
     <div class="modal">
-        <div class="modal-header"><h3>✅ <span data-key="addAttendanceModal">ثبت حضور</span></h3><button class="close-modal" onclick="closeModal('addAttendanceTeacher')">&times;</button></div>
+        <div class="modal-header"><h3>✅ ثبت حضور</h3><button class="close-modal" onclick="closeModal('addAttendanceTeacher')">&times;</button></div>
         <form onsubmit="addAttendanceTeacher(event)">
-            <div class="form-group"><label data-key="studentLabel">دانش‌آموز</label><select id="attendanceStudentTeacher" required><option value="">انتخاب...</option></select></div>
+            <div class="form-group"><label>دانش‌آموز</label><select id="attendanceStudentTeacher" required><option value="">انتخاب...</option></select></div>
             <div class="form-row">
-                <div class="form-group"><label data-key="dateLabel">تاریخ</label><input type="date" id="attendanceDateTeacher" required></div>
-                <div class="form-group"><label data-key="statusLabel">وضعیت</label><select id="attendanceStatusTeacher"><option value="حاضر">حاضر</option><option value="غایب">غایب</option><option value="مرخصی">مرخصی</option><option value="تأخیر">تأخیر</option></select></div>
+                <div class="form-group"><label>تاریخ</label><input type="date" id="attendanceDateTeacher" required></div>
+                <div class="form-group"><label>وضعیت</label><select id="attendanceStatusTeacher"><option value="حاضر">حاضر</option><option value="غایب">غایب</option><option value="مرخصی">مرخصی</option><option value="تأخیر">تأخیر</option></select></div>
             </div>
-            <div class="form-group"><label data-key="noteLabel">توضیحات</label><textarea id="attendanceNoteTeacher" placeholder="توضیحات..."></textarea></div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت حضور</span></button>
+            <div class="form-group"><label>توضیحات</label><textarea id="attendanceNoteTeacher" placeholder="توضیحات..."></textarea></div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> ثبت حضور</button>
         </form>
     </div>
 </div>
@@ -865,90 +809,12 @@
 <!-- Report Card -->
 <div class="modal-overlay" id="modal-reportCard">
     <div class="modal">
-        <div class="modal-header"><h3>📈 <span data-key="reportCardModal">کارنامه</span></h3><button class="close-modal" onclick="closeModal('reportCard')">&times;</button></div>
+        <div class="modal-header"><h3>📈 کارنامه</h3><button class="close-modal" onclick="closeModal('reportCard')">&times;</button></div>
         <form onsubmit="showReportCard(event)">
-            <div class="form-group"><label data-key="studentLabel">دانش‌آموز</label><select id="reportStudent" required><option value="">انتخاب...</option></select></div>
-            <button type="submit" class="btn btn-success"><i class="fas fa-print"></i> <span data-key="viewBtn">نمایش کارنامه</span></button>
+            <div class="form-group"><label>دانش‌آموز</label><select id="reportStudent" required><option value="">انتخاب...</option></select></div>
+            <button type="submit" class="btn btn-success"><i class="fas fa-print"></i> نمایش کارنامه</button>
         </form>
         <div id="reportCardResult" style="margin-top:12px; display:none;"></div>
-    </div>
-</div>
-
-<!-- Scan Student -->
-<div class="modal-overlay" id="modal-scanStudent">
-    <div class="modal">
-        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> <span data-key="scanStudentModal">اسکن بارکد</span></h3><button class="close-modal" onclick="closeModal('scanStudent'); stopScanner();">&times;</button></div>
-        <div class="scanner-container">
-            <div id="studentScanner" style="position:relative;"><div class="scanner-overlay"></div></div>
-            <div class="scan-result" id="studentScanResult"><i class="fas fa-camera"></i> <span data-key="scanHint">بارکد را اسکن کنید</span></div>
-            <div class="scanner-controls">
-                <button class="btn btn-barcode btn-sm" onclick="startStudentScanner()"><i class="fas fa-play"></i> <span data-key="startBtn">شروع</span></button>
-                <button class="btn btn-danger btn-sm" onclick="stopScanner()"><i class="fas fa-stop"></i> <span data-key="stopBtn">توقف</span></button>
-            </div>
-        </div>
-        <div id="scannedStudentInfo" style="display:none; background:var(--bg-input); border-radius:10px; padding:12px; margin-top:8px; border:1px solid var(--secondary);">
-            <div id="scannedStudentData"></div>
-            <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
-                <button class="btn btn-success btn-sm" onclick="useScannedStudent()"><i class="fas fa-check"></i> <span data-key="useBtn">استفاده</span></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Scan Student Teacher -->
-<div class="modal-overlay" id="modal-scanStudentTeacher">
-    <div class="modal">
-        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> <span data-key="scanStudentModal">اسکن بارکد</span></h3><button class="close-modal" onclick="closeModal('scanStudentTeacher'); stopScanner();">&times;</button></div>
-        <div class="scanner-container">
-            <div id="studentScannerTeacher" style="position:relative;"><div class="scanner-overlay"></div></div>
-            <div class="scan-result" id="studentScanResultTeacher"><i class="fas fa-camera"></i> <span data-key="scanHint">بارکد را اسکن کنید</span></div>
-            <div class="scanner-controls">
-                <button class="btn btn-barcode btn-sm" onclick="startStudentScannerTeacher()"><i class="fas fa-play"></i> <span data-key="startBtn">شروع</span></button>
-                <button class="btn btn-danger btn-sm" onclick="stopScanner()"><i class="fas fa-stop"></i> <span data-key="stopBtn">توقف</span></button>
-            </div>
-        </div>
-        <div id="scannedStudentInfoTeacher" style="display:none; background:var(--bg-input); border-radius:10px; padding:12px; margin-top:8px; border:1px solid var(--secondary);">
-            <div id="scannedStudentDataTeacher"></div>
-            <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
-                <button class="btn btn-success btn-sm" onclick="useScannedStudentTeacher()"><i class="fas fa-check"></i> <span data-key="useBtn">استفاده</span></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Scan Class -->
-<div class="modal-overlay" id="modal-scanClass">
-    <div class="modal">
-        <div class="modal-header"><h3><i class="fas fa-qrcode" style="color:var(--secondary);"></i> <span data-key="scanClassModal">اسکن بارکد کلاس</span></h3><button class="close-modal" onclick="closeModal('scanClass'); stopScanner();">&times;</button></div>
-        <div class="scanner-container">
-            <div id="classScanner" style="position:relative;"><div class="scanner-overlay"></div></div>
-            <div class="scan-result" id="classScanResult"><i class="fas fa-camera"></i> <span data-key="scanHint">بارکد را اسکن کنید</span></div>
-            <div class="scanner-controls">
-                <button class="btn btn-barcode btn-sm" onclick="startClassScanner()"><i class="fas fa-play"></i> <span data-key="startBtn">شروع</span></button>
-                <button class="btn btn-danger btn-sm" onclick="stopScanner()"><i class="fas fa-stop"></i> <span data-key="stopBtn">توقف</span></button>
-            </div>
-        </div>
-        <div id="scannedClassInfo" style="display:none; background:var(--bg-input); border-radius:10px; padding:12px; margin-top:8px; border:1px solid var(--secondary);">
-            <div id="scannedClassData"></div>
-            <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
-                <button class="btn btn-success btn-sm" onclick="useScannedClass()"><i class="fas fa-check"></i> <span data-key="useBtn">استفاده</span></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bulk Import -->
-<div class="modal-overlay" id="modal-bulkStudent">
-    <div class="modal">
-        <div class="modal-header"><h3><i class="fas fa-users" style="color:var(--secondary);"></i> <span data-key="bulkModal">ثبت گروهی</span></h3><button class="close-modal" onclick="closeModal('bulkStudent')">&times;</button></div>
-        <div class="bulk-import-area">
-            <p style="font-size:11px; color:var(--text-secondary); margin-bottom:6px;">
-                <span data-key="bulkHint">هر دانش‌آموز در یک خط:</span> <span style="color:var(--text); font-family:monospace;">شناسه, نام, کلاس</span>
-            </p>
-            <textarea id="bulkStudentData" placeholder="S001, علی محمدی, C001&#10;S002, سارا احمدی, C001"></textarea>
-            <div class="hint"><span data-key="bulkNote">شناسه کلاس باید از قبل وجود داشته باشد</span></div>
-            <button class="btn btn-success" style="margin-top:8px;" onclick="bulkImportStudents()"><i class="fas fa-upload"></i> <span data-key="importBtn">ثبت گروهی</span></button>
-        </div>
     </div>
 </div>
 
@@ -959,8 +825,8 @@
         <h3 id="confirmTitle">تأیید عملیات</h3>
         <p class="text-muted" id="confirmMessage">آیا از انجام این عملیات اطمینان دارید؟</p>
         <div class="actions">
-            <button class="btn btn-danger" onclick="confirmAction(true)"><span data-key="yesBtn">بله</span></button>
-            <button class="btn btn-outline" onclick="confirmAction(false)"><span data-key="cancelBtn">لغو</span></button>
+            <button class="btn btn-danger" onclick="confirmAction(true)">بله</button>
+            <button class="btn btn-outline" onclick="confirmAction(false)">لغو</button>
         </div>
     </div>
 </div>
@@ -976,265 +842,6 @@
 let currentLang = 'fa';
 let currentTheme = 'dark';
 
-const TRANSLATIONS = {
-    fa: {
-        loginTitle: 'مدیریت هوشمند',
-        loginSub: 'سیستم جامع مدیریت آموزشی',
-        lblUsername: 'نام کاربری',
-        lblPassword: 'رمز عبور',
-        lblRole: 'نقش',
-        loginText: '🚀 ورود به سیستم',
-        navHome: 'داشبورد',
-        navGuide: 'راهنمایی',
-        navStudents: 'دانش‌آموزان',
-        navMyStudents: 'دانش‌آموزان من',
-        navTeachers: 'معلمان',
-        navClasses: 'کلاس‌ها',
-        navSubjects: 'دروس',
-        navGrades: 'نمرات',
-        navAttendance: 'حضور',
-        navReports: 'گزارشات',
-        navMore: 'بیشتر',
-        logout: 'خروج از سیستم',
-        statStudents: 'دانش‌آموز',
-        statTeachers: 'معلم',
-        statClasses: 'کلاس',
-        statSubjects: 'درس',
-        statAverage: 'میانگین',
-        statAttendance: 'حضور',
-        addBtn: 'افزودن',
-        saveBtn: 'ثبت',
-        editBtn: 'ویرایش',
-        deleteBtn: 'حذف',
-        viewBtn: 'مشاهده',
-        downloadBtn: 'دانلود',
-        useBtn: 'استفاده',
-        startBtn: 'شروع',
-        stopBtn: 'توقف',
-        yesBtn: 'بله',
-        cancelBtn: 'لغو',
-        importBtn: 'ثبت گروهی',
-        gradeBtn: 'نمره',
-        attendanceBtn: 'حضور',
-        fullExport: 'خروجی کامل',
-        idLabel: 'شناسه',
-        nameLabel: 'نام کامل',
-        classLabel: 'کلاس',
-        phoneLabel: 'شماره تماس',
-        specialtyLabel: 'تخصص',
-        passwordLabel: 'رمز عبور',
-        gradeLabel: 'پایه',
-        capacityLabel: 'ظرفیت',
-        teacherLabel: 'معلم',
-        unitLabel: 'واحد',
-        typeLabel: 'نوع',
-        studentLabel: 'دانش‌آموز',
-        subjectLabel: 'درس',
-        dateLabel: 'تاریخ',
-        statusLabel: 'وضعیت',
-        noteLabel: 'توضیحات',
-        examTypeLabel: 'نوع',
-        examType: 'نوع آزمون',
-        gradeValue: 'نمره (۰-۲۰)',
-        quickId: 'شناسه',
-        quickName: 'نام کامل',
-        quickClass: 'کلاس',
-        quickGrade: 'پایه',
-        multiSelectHint: 'برای انتخاب چند مورد، Ctrl+Click کنید',
-        setupTitle: 'راه‌اندازی مدرسه',
-        setupSub: 'مراحل به ترتیب',
-        step1Title: 'کلاس‌ها',
-        step1Desc: 'ایجاد کلاس‌ها',
-        step2Title: 'معلمان',
-        step2Desc: 'ثبت معلمان',
-        step3Title: 'دانش‌آموزان',
-        step3Desc: 'ثبت دانش‌آموزان',
-        step4Title: 'دروس',
-        step4Desc: 'تعریف دروس',
-        stepBtn1: 'کلاس',
-        stepBtn2: 'معلم',
-        stepBtn3: 'دانش‌آموز',
-        stepBtn4: 'درس',
-        guideTitle: 'راهنمای استفاده از سیستم',
-        guideQuickStart: 'شروع سریع',
-        guideStep1Title: 'ایجاد کلاس‌ها',
-        guideStep1Desc: 'ابتدا کلاس‌های مدرسه را ایجاد کنید.',
-        guideStep2Title: 'ثبت معلمان',
-        guideStep2Desc: 'معلمان را ثبت کنید و به کلاس‌ها اختصاص دهید.',
-        guideStep3Title: 'ثبت دانش‌آموزان',
-        guideStep3Desc: 'دانش‌آموزان را در کلاس‌ها ثبت کنید.',
-        guideStep4Title: 'تعریف دروس',
-        guideStep4Desc: 'دروس را به کلاس‌ها و معلمان اختصاص دهید.',
-        guideGoTo: 'برو به',
-        guideTeacherTitle: 'نحوه کار معلم',
-        guideTeacherStep1: 'ورود به سیستم',
-        guideTeacherStep1Desc: 'معلم با شناسه و رمز عبور خود وارد می‌شود.',
-        guideTeacherStep2: 'ثبت نمره',
-        guideTeacherStep2Desc: 'فقط برای دانش‌آموزان کلاس خود و دروسی که تدریس می‌کند.',
-        guideTeacherStep3: 'ثبت حضور',
-        guideTeacherStep3Desc: 'ثبت حضور و غیاب دانش‌آموزان کلاس خود.',
-        addStudentModal: 'افزودن دانش‌آموز',
-        addTeacherModal: 'افزودن معلم',
-        addClassModal: 'افزودن کلاس',
-        addSubjectModal: 'افزودن درس',
-        addGradeModal: 'ثبت نمره',
-        addAttendanceModal: 'ثبت حضور',
-        reportCardModal: 'کارنامه',
-        scanStudentModal: 'اسکن بارکد',
-        scanClassModal: 'اسکن بارکد کلاس',
-        bulkModal: 'ثبت گروهی',
-        scanHint: 'بارکد را اسکن کنید',
-        bulkHint: 'هر دانش‌آموز در یک خط:',
-        bulkNote: 'شناسه کلاس باید از قبل وجود داشته باشد',
-        studentsTitle: '👨‍🎓 دانش‌آموزان',
-        myStudentsTitle: '👨‍🎓 دانش‌آموزان من',
-        teachersTitle: '👨‍🏫 معلمان',
-        classesTitle: '🏫 کلاس‌ها',
-        subjectsTitle: '📚 دروس',
-        gradesTitle: '⭐ نمرات',
-        attendanceTitle: '✅ حضور و غیاب',
-        reportsTitle: '📊 گزارشات',
-        teacherRestricted: 'فقط دانش‌آموزان کلاس‌های خود را می‌بینید',
-        activitiesTitle: '📋 فعالیت‌ها',
-        alertsTitle: '🚨 هشدارها',
-        noActivities: 'هیچ فعالیتی ثبت نشده است',
-        noAlerts: 'همه چیز عالی است!',
-        reportMonthly: 'ماهانه',
-        reportCard: 'کارنامه',
-        reportAnalytics: 'تحلیل',
-        reportRanking: 'رتبه‌بندی',
-        footerText: 'ساخته شده توسط',
-    },
-    en: {
-        loginTitle: 'Smart Management',
-        loginSub: 'Comprehensive Educational Management System',
-        lblUsername: 'Username',
-        lblPassword: 'Password',
-        lblRole: 'Role',
-        loginText: '🚀 Login',
-        navHome: 'Dashboard',
-        navGuide: 'Guide',
-        navStudents: 'Students',
-        navMyStudents: 'My Students',
-        navTeachers: 'Teachers',
-        navClasses: 'Classes',
-        navSubjects: 'Subjects',
-        navGrades: 'Grades',
-        navAttendance: 'Attendance',
-        navReports: 'Reports',
-        navMore: 'More',
-        logout: 'Logout',
-        statStudents: 'Students',
-        statTeachers: 'Teachers',
-        statClasses: 'Classes',
-        statSubjects: 'Subjects',
-        statAverage: 'Average',
-        statAttendance: 'Attendance',
-        addBtn: 'Add',
-        saveBtn: 'Save',
-        editBtn: 'Edit',
-        deleteBtn: 'Delete',
-        viewBtn: 'View',
-        downloadBtn: 'Download',
-        useBtn: 'Use',
-        startBtn: 'Start',
-        stopBtn: 'Stop',
-        yesBtn: 'Yes',
-        cancelBtn: 'Cancel',
-        importBtn: 'Bulk Import',
-        gradeBtn: 'Grade',
-        attendanceBtn: 'Attendance',
-        fullExport: 'Full Export',
-        idLabel: 'ID',
-        nameLabel: 'Full Name',
-        classLabel: 'Class',
-        phoneLabel: 'Phone',
-        specialtyLabel: 'Specialty',
-        passwordLabel: 'Password',
-        gradeLabel: 'Grade',
-        capacityLabel: 'Capacity',
-        teacherLabel: 'Teacher',
-        unitLabel: 'Units',
-        typeLabel: 'Type',
-        studentLabel: 'Student',
-        subjectLabel: 'Subject',
-        dateLabel: 'Date',
-        statusLabel: 'Status',
-        noteLabel: 'Note',
-        examTypeLabel: 'Type',
-        examType: 'Exam Type',
-        gradeValue: 'Grade (0-20)',
-        quickId: 'ID',
-        quickName: 'Full Name',
-        quickClass: 'Class',
-        quickGrade: 'Grade',
-        multiSelectHint: 'Ctrl+Click to select multiple',
-        setupTitle: 'School Setup',
-        setupSub: 'Steps in order',
-        step1Title: 'Classes',
-        step1Desc: 'Create classes',
-        step2Title: 'Teachers',
-        step2Desc: 'Register teachers',
-        step3Title: 'Students',
-        step3Desc: 'Register students',
-        step4Title: 'Subjects',
-        step4Desc: 'Define subjects',
-        stepBtn1: 'Class',
-        stepBtn2: 'Teacher',
-        stepBtn3: 'Student',
-        stepBtn4: 'Subject',
-        guideTitle: 'User Guide',
-        guideQuickStart: 'Quick Start',
-        guideStep1Title: 'Create Classes',
-        guideStep1Desc: 'First, create school classes.',
-        guideStep2Title: 'Register Teachers',
-        guideStep2Desc: 'Register teachers and assign to classes.',
-        guideStep3Title: 'Register Students',
-        guideStep3Desc: 'Register students in classes.',
-        guideStep4Title: 'Define Subjects',
-        guideStep4Desc: 'Assign subjects to classes and teachers.',
-        guideGoTo: 'Go to',
-        guideTeacherTitle: 'How Teachers Work',
-        guideTeacherStep1: 'Login',
-        guideTeacherStep1Desc: 'Teacher logs in with ID and password.',
-        guideTeacherStep2: 'Record Grades',
-        guideTeacherStep2Desc: 'Only for their class students and subjects.',
-        guideTeacherStep3: 'Record Attendance',
-        guideTeacherStep3Desc: 'Record attendance for their class students.',
-        addStudentModal: 'Add Student',
-        addTeacherModal: 'Add Teacher',
-        addClassModal: 'Add Class',
-        addSubjectModal: 'Add Subject',
-        addGradeModal: 'Record Grade',
-        addAttendanceModal: 'Record Attendance',
-        reportCardModal: 'Report Card',
-        scanStudentModal: 'Scan Barcode',
-        scanClassModal: 'Scan Class Barcode',
-        bulkModal: 'Bulk Import',
-        scanHint: 'Scan the barcode',
-        bulkHint: 'One student per line:',
-        bulkNote: 'Class ID must already exist',
-        studentsTitle: '👨‍🎓 Students',
-        myStudentsTitle: '👨‍🎓 My Students',
-        teachersTitle: '👨‍🏫 Teachers',
-        classesTitle: '🏫 Classes',
-        subjectsTitle: '📚 Subjects',
-        gradesTitle: '⭐ Grades',
-        attendanceTitle: '✅ Attendance',
-        reportsTitle: '📊 Reports',
-        teacherRestricted: 'You can only see your class students',
-        activitiesTitle: '📋 Activities',
-        alertsTitle: '🚨 Alerts',
-        noActivities: 'No activities recorded',
-        noAlerts: 'All clear!',
-        reportMonthly: 'Monthly',
-        reportCard: 'Report Card',
-        reportAnalytics: 'Analytics',
-        reportRanking: 'Ranking',
-        footerText: 'Made with ❤️ by',
-    }
-};
-
 function toggleLanguage() {
     currentLang = currentLang === 'fa' ? 'en' : 'fa';
     document.getElementById('langLabel').textContent = currentLang === 'fa' ? '🇮🇷' : '🇬🇧';
@@ -1245,26 +852,31 @@ function toggleLanguage() {
 }
 
 function applyTranslations() {
-    const t = TRANSLATIONS[currentLang] || TRANSLATIONS.fa;
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.dataset.key;
-        if (t[key]) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = t[key];
-            } else if (el.tagName === 'SELECT') {
-                // Skip selects with options
-            } else {
-                el.textContent = t[key];
-            }
-        }
+    const t = currentLang === 'fa' ? {
+        loginTitle: 'مدیریت هوشمند', loginSub: 'سیستم جامع مدیریت آموزشی',
+        lblUsername: 'نام کاربری', lblPassword: 'رمز عبور', lblRole: 'نقش', loginText: '🚀 ورود به سیستم',
+        navHome: 'داشبورد', navGuide: 'راهنمایی', navStudents: 'دانش‌آموزان', navMyStudents: 'دانش‌آموزان من',
+        navTeachers: 'معلمان', navClasses: 'کلاس‌ها', navSubjects: 'دروس', navGrades: 'نمرات',
+        navAttendance: 'حضور', navReports: 'گزارشات', logout: 'خروج از سیستم'
+    } : {
+        loginTitle: 'Smart Management', loginSub: 'Educational Management System',
+        lblUsername: 'Username', lblPassword: 'Password', lblRole: 'Role', loginText: '🚀 Login',
+        navHome: 'Dashboard', navGuide: 'Guide', navStudents: 'Students', navMyStudents: 'My Students',
+        navTeachers: 'Teachers', navClasses: 'Classes', navSubjects: 'Subjects', navGrades: 'Grades',
+        navAttendance: 'Attendance', navReports: 'Reports', logout: 'Logout'
+    };
+    document.querySelector('.login-logo h1').textContent = t.loginTitle;
+    document.querySelector('.login-logo p').textContent = t.loginSub;
+    document.querySelector('#lblUsername')?.textContent = t.lblUsername;
+    document.querySelector('#lblPassword')?.textContent = t.lblPassword;
+    document.querySelector('#lblRole')?.textContent = t.lblRole;
+    document.querySelector('#loginText')?.textContent = t.loginText;
+    document.querySelectorAll('.sidebar-menu li a span, .bottom-nav .nav-item span').forEach(el => {
+        const key = el.textContent.trim();
+        const map = { 'داشبورد': 'Dashboard', 'راهنمایی': 'Guide', 'دانش‌آموزان': 'Students', 'دانش‌آموزان من': 'My Students', 'معلمان': 'Teachers', 'کلاس‌ها': 'Classes', 'دروس': 'Subjects', 'نمرات': 'Grades', 'حضور': 'Attendance', 'گزارشات': 'Reports', 'خانه': 'Home', 'بیشتر': 'More', 'خروج از سیستم': 'Logout' };
+        if (currentLang === 'en' && map[key]) el.textContent = map[key];
+        else if (currentLang === 'fa') el.textContent = Object.keys(map).find(k => map[k] === key) || key;
     });
-    // Login page
-    document.getElementById('loginTitle').textContent = t.loginTitle;
-    document.getElementById('loginSub').textContent = t.loginSub;
-    document.getElementById('lblUsername').textContent = t.lblUsername;
-    document.getElementById('lblPassword').textContent = t.lblPassword;
-    document.getElementById('lblRole').textContent = t.lblRole;
-    document.getElementById('loginText').textContent = t.loginText;
 }
 
 function toggleTheme() {
@@ -1290,28 +902,8 @@ const DATA = {
     currentUser: null
 };
 
-const ADMIN_CREDENTIALS = {
-    username: 'admin',
-    password: 'Admin@1404'
-};
-
-const PAGINATION = {
-    students: { page: 1, perPage: 10 },
-    mystudents: { page: 1, perPage: 10 },
-    teachers: { page: 1, perPage: 10 },
-    classes: { page: 1, perPage: 6 },
-    subjects: { page: 1, perPage: 10 },
-    grades: { page: 1, perPage: 10 },
-    attendance: { page: 1, perPage: 10 }
-};
-
-let studentsSortField = 'id';
-let studentsSortAsc = true;
-let scannerActive = false;
-let scannedStudentId = null;
-let scannedClassId = null;
+const ADMIN_CREDENTIALS = { username: 'admin', password: 'Admin@1404' };
 let confirmCallback = null;
-let searchTimeout = null;
 
 // ============================================================
 // ================ AUTH =======================================
@@ -1325,27 +917,14 @@ function handleLogin(e) {
     const error = document.getElementById('loginError');
     
     let isValid = false;
-    
-    // Check admin
     if (role === 'admin' && username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
         isValid = true;
-        DATA.currentUser = { 
-            username: ADMIN_CREDENTIALS.username, 
-            name: 'مدیر سیستم', 
-            role: 'admin' 
-        };
+        DATA.currentUser = { username: ADMIN_CREDENTIALS.username, name: 'مدیر سیستم', role: 'admin' };
     } else {
-        // Check teacher
         const teacher = DATA.teachers.find(t => t.id === username && t.password === password);
         if (teacher) {
             isValid = true;
-            DATA.currentUser = { 
-                username: teacher.id, 
-                name: teacher.name, 
-                role: 'teacher',
-                classes: teacher.classes || [],
-                subjects: teacher.subjects || []
-            };
+            DATA.currentUser = { username: teacher.id, name: teacher.name, role: 'teacher', classes: teacher.classes || [], subjects: teacher.subjects || [] };
         }
     }
     
@@ -1354,14 +933,14 @@ function handleLogin(e) {
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         setupUI();
+        loadAllData();
         renderAll();
         updateDashboard();
         updateSetupWizard();
-        addActivity('ورود', 'کاربر ' + DATA.currentUser.name + ' وارد شد');
         sessionStorage.setItem('currentUser', JSON.stringify(DATA.currentUser));
     } else {
         error.style.display = 'block';
-        setTimeout(() => { error.style.display = 'none'; }, 3000);
+        setTimeout(() => error.style.display = 'none', 3000);
     }
 }
 
@@ -1378,7 +957,6 @@ function handleLogout() {
         sessionStorage.removeItem('currentUser');
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('loginPage').style.display = 'flex';
-        stopScanner();
         showToast('👋 خروج موفق', 'info');
     });
 }
@@ -1389,7 +967,6 @@ function handleLogout() {
 
 function setupUI() {
     const isAdmin = DATA.currentUser.role === 'admin';
-    
     document.getElementById('sidebarUserInfo').textContent = isAdmin ? 'مدیر سیستم' : 'معلم';
     document.getElementById('userName').textContent = DATA.currentUser.name;
     document.getElementById('userRoleDisplay').textContent = isAdmin ? 'مدیر' : 'معلم';
@@ -1397,8 +974,7 @@ function setupUI() {
     document.getElementById('roleBadge').className = 'role-badge ' + (isAdmin ? 'admin' : 'teacher');
     document.getElementById('userAvatar').textContent = DATA.currentUser.name.substring(0, 2);
     
-    // Sidebar visibility
-    document.querySelectorAll('.sidebar-menu li a').forEach(item => {
+    document.querySelectorAll('.sidebar-menu li a, .bottom-nav .nav-item').forEach(item => {
         const page = item.dataset.page;
         if (isAdmin) {
             item.style.display = 'flex';
@@ -1411,31 +987,13 @@ function setupUI() {
             }
         }
     });
-    
-    // Bottom nav visibility
-    document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-        const page = item.dataset.page;
-        if (isAdmin) {
-            item.style.display = 'flex';
-            if (page === 'mystudents') item.style.display = 'none';
-        } else {
-            if (['students', 'teachers', 'classes', 'subjects', 'reports'].includes(page)) {
-                item.style.display = 'none';
-            } else if (page === 'mystudents') {
-                item.style.display = 'flex';
-            }
-        }
-    });
-    
     if (!isAdmin) {
         document.getElementById('panel-students').classList.remove('active');
         document.getElementById('panel-mystudents').classList.add('active');
         document.querySelector('.bottom-nav .nav-item[data-page="mystudents"]')?.classList.add('active');
     }
-    
     document.documentElement.setAttribute('data-theme', currentTheme);
     document.getElementById('themeIcon').className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-    applyTranslations();
 }
 
 function toggleSidebar() {
@@ -1457,18 +1015,8 @@ function showMoreMenu() {
 // ============================================================
 
 function loadAllData() {
-    const savedSession = sessionStorage.getItem('currentUser');
-    if (savedSession && !DATA.currentUser) {
-        try {
-            DATA.currentUser = JSON.parse(savedSession);
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            setupUI();
-        } catch(e) {}
-    }
-    
     try {
-        const saved = localStorage.getItem('schoolDataV13');
+        const saved = localStorage.getItem('schoolDataV14');
         if (saved) { 
             const parsed = JSON.parse(saved);
             const user = DATA.currentUser;
@@ -1479,7 +1027,6 @@ function loadAllData() {
         }
     } catch(e) {}
     
-    // Sample Data
     DATA.classes = [
         { id: 'C001', name: '۱۰-الف', grade: 10, capacity: 30, teachers: ['T001'], students: [] },
         { id: 'C002', name: '۱۰-ب', grade: 10, capacity: 30, teachers: ['T002'], students: [] }
@@ -1511,9 +1058,7 @@ function loadAllData() {
     renderAll();
 }
 
-function saveData() { 
-    localStorage.setItem('schoolDataV13', JSON.stringify(DATA)); 
-}
+function saveData() { localStorage.setItem('schoolDataV14', JSON.stringify(DATA)); }
 
 function getStudentById(id) { return DATA.students.find(s => s.id === id); }
 function getTeacherById(id) { return DATA.teachers.find(t => t.id === id); }
@@ -1521,36 +1066,28 @@ function getClassById(id) { return DATA.classes.find(c => c.id === id); }
 function getSubjectById(id) { return DATA.subjects.find(s => s.id === id); }
 function getStudentGrades(studentId) { return DATA.grades.filter(g => g.studentId === studentId); }
 function getClassStudents(classId) { return DATA.students.filter(s => s.classId === classId); }
-function getClassTeachers(classId) { 
-    return DATA.teachers.filter(t => t.classes && t.classes.includes(classId)); 
-}
+function getClassTeachers(classId) { return DATA.teachers.filter(t => t.classes && t.classes.includes(classId)); }
 function getTeacherClassIds(teacherId) {
     const teacher = getTeacherById(teacherId);
     return teacher ? teacher.classes || [] : [];
-}
-function getTeacherSubjectIds(teacherId) {
-    const teacher = getTeacherById(teacherId);
-    return teacher ? teacher.subjects || [] : [];
 }
 function getTeacherStudents(teacherId) {
     const classIds = getTeacherClassIds(teacherId);
     return DATA.students.filter(s => classIds.includes(s.classId));
 }
 function getTeacherSubjects(teacherId) {
-    const subjectIds = getTeacherSubjectIds(teacherId);
-    return DATA.subjects.filter(s => subjectIds.includes(s.id));
+    const teacher = getTeacherById(teacherId);
+    return teacher ? teacher.subjects || [] : [];
 }
 function isClassFull(classId) {
     const cls = getClassById(classId);
-    if (!cls) return true;
-    return getClassStudents(classId).length >= cls.capacity;
+    return cls ? getClassStudents(classId).length >= cls.capacity : true;
 }
 
 function calculateAverage(grades) {
     if (!grades || grades.length === 0) return 0;
-    const validGrades = grades.filter(g => !isNaN(g.value) && g.value !== null && g.value !== undefined);
-    if (validGrades.length === 0) return 0;
-    return Math.round((validGrades.reduce((a, g) => a + g.value, 0) / validGrades.length) * 100) / 100;
+    const valid = grades.filter(g => !isNaN(g.value) && g.value !== null);
+    return valid.length > 0 ? Math.round((valid.reduce((a,b) => a + b.value, 0) / valid.length) * 100) / 100 : 0;
 }
 
 function updateStudentAverages() {
@@ -1558,39 +1095,9 @@ function updateStudentAverages() {
         const grades = getStudentGrades(s.id);
         const avg = calculateAverage(grades);
         s.average = avg;
-        if (grades.length === 0) {
-            s.status = 'بدون نمره';
-        } else if (avg >= 18) {
-            s.status = 'عالی';
-        } else if (avg >= 14) {
-            s.status = 'خوب';
-        } else if (avg >= 10) {
-            s.status = 'قبول';
-        } else {
-            s.status = 'مردود';
-        }
+        s.status = grades.length === 0 ? 'بدون نمره' : avg >= 18 ? 'عالی' : avg >= 14 ? 'خوب' : avg >= 10 ? 'قبول' : 'مردود';
     });
     saveData();
-}
-
-// ============================================================
-// ================ DEBOUNCE ===================================
-// ============================================================
-
-function debounceSearch(type) {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-        const renderMap = {
-            'students': renderStudentsTable,
-            'mystudents': renderMyStudentsTable,
-            'teachers': renderTeachersTable,
-            'classes': renderClasses,
-            'subjects': renderSubjectsTable,
-            'grades': renderGradesTable,
-            'attendance': renderAttendanceTable
-        };
-        if (renderMap[type]) renderMap[type]();
-    }, 300);
 }
 
 // ============================================================
@@ -1598,19 +1105,15 @@ function debounceSearch(type) {
 // ============================================================
 
 function quickAddStudent() {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند دانش‌آموز اضافه کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند دانش‌آموز اضافه کند', 'error'); return; }
     const id = document.getElementById('quickStudentId').value.trim();
     const name = document.getElementById('quickStudentName').value.trim();
     const classId = document.getElementById('quickStudentClass').value;
     if (!id || !name || !classId) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (isClassFull(classId)) { showToast('❌ ظرفیت کلاس پر است!', 'error'); return; }
     if (DATA.students.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    
     DATA.students.push({ id, name, classId, parentPhone: '', average: 0, status: 'بدون نمره' });
-    syncClassStudents(classId);
+    if (getClassById(classId)) getClassById(classId).students.push(id);
     updateStudentAverages();
     saveData();
     renderAll();
@@ -1618,22 +1121,17 @@ function quickAddStudent() {
     updateSetupWizard();
     document.getElementById('quickStudentId').value = '';
     document.getElementById('quickStudentName').value = '';
-    document.getElementById('quickStudentId').focus();
     showToast('✅ دانش‌آموز ثبت شد', 'success');
     addActivity('ثبت دانش‌آموز', 'دانش‌آموز ' + name + ' ثبت شد');
 }
 
 function quickAddClass() {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error'); return; }
     const id = document.getElementById('quickClassId').value.trim();
     const name = document.getElementById('quickClassName').value.trim();
     const grade = parseInt(document.getElementById('quickClassGrade').value);
     if (!id || !name || !grade) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (DATA.classes.find(c => c.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    
     DATA.classes.push({ id, name, grade, capacity: 30, teachers: [], students: [] });
     saveData();
     renderAll();
@@ -1642,58 +1140,8 @@ function quickAddClass() {
     document.getElementById('quickClassId').value = '';
     document.getElementById('quickClassName').value = '';
     document.getElementById('quickClassGrade').value = '';
-    document.getElementById('quickClassId').focus();
     showToast('✅ کلاس ثبت شد', 'success');
     addActivity('ثبت کلاس', 'کلاس ' + name + ' ثبت شد');
-}
-
-// ============================================================
-// ================ BULK IMPORT ================================
-// ============================================================
-
-function bulkImportStudents() {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند ثبت گروهی انجام دهد', 'error');
-        return;
-    }
-    const text = document.getElementById('bulkStudentData').value.trim();
-    if (!text) { showToast('❌ داده‌ها را وارد کنید', 'error'); return; }
-    
-    const lines = text.split('\n').filter(l => l.trim());
-    let added = 0, errors = [];
-    lines.forEach((line, i) => {
-        const parts = line.split(',').map(p => p.trim());
-        if (parts.length < 3) { errors.push(`خط ${i+1}: فرمت نادرست`); return; }
-        const [id, name, classId] = parts;
-        if (!id || !name || !classId) { errors.push(`خط ${i+1}: فیلد خالی`); return; }
-        if (DATA.students.find(s => s.id === id)) { errors.push(`خط ${i+1}: شناسه تکراری`); return; }
-        if (isClassFull(classId)) { errors.push(`خط ${i+1}: ظرفیت کلاس پر است`); return; }
-        if (!getClassById(classId)) { errors.push(`خط ${i+1}: کلاس وجود ندارد`); return; }
-        DATA.students.push({ id, name, classId, parentPhone: '', average: 0, status: 'بدون نمره' });
-        syncClassStudents(classId);
-        added++;
-    });
-    
-    if (added > 0) {
-        updateStudentAverages();
-        saveData();
-        renderAll();
-        updateDashboard();
-        updateSetupWizard();
-        showToast(`✅ ${added} دانش‌آموز ثبت شد`, 'success');
-        addActivity('ثبت گروهی', `${added} دانش‌آموز ثبت شد`);
-    }
-    if (errors.length > 0) {
-        showToast(`⚠️ ${errors.length} خطا: ${errors.slice(0,3).join(' • ')}`, 'warning');
-    }
-    document.getElementById('bulkStudentData').value = '';
-}
-
-function syncClassStudents(classId) {
-    const cls = getClassById(classId);
-    if (cls) {
-        cls.students = DATA.students.filter(s => s.classId === classId).map(s => s.id);
-    }
 }
 
 // ============================================================
@@ -1702,37 +1150,25 @@ function syncClassStudents(classId) {
 
 function addClass(e) {
     e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error');
-        return;
-    }
-    
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error'); return; }
     const id = document.getElementById('classId').value.trim();
     const name = document.getElementById('className').value.trim();
     const grade = parseInt(document.getElementById('classGrade').value);
     const capacity = parseInt(document.getElementById('classCapacity').value);
     const teachers = Array.from(document.getElementById('classTeachers').selectedOptions).map(o => o.value);
-    
-    if (!id) { showToast('❌ شناسه کلاس را وارد کنید', 'error'); return; }
-    if (!name) { showToast('❌ نام کلاس را وارد کنید', 'error'); return; }
-    if (!grade || isNaN(grade)) { showToast('❌ پایه را به درستی وارد کنید', 'error'); return; }
-    if (!capacity || isNaN(capacity) || capacity < 1) { showToast('❌ ظرفیت را به درستی وارد کنید', 'error'); return; }
-    if (DATA.classes.find(c => c.id === id)) { showToast('❌ شناسه کلاس تکراری است!', 'error'); return; }
-    
+    if (!id || !name || !grade || !capacity) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
+    if (DATA.classes.find(c => c.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
     DATA.classes.push({ id, name, grade, capacity, teachers, students: [] });
-    // Sync teacher classes
     teachers.forEach(tid => {
-        const teacher = getTeacherById(tid);
-        if (teacher && !teacher.classes.includes(id)) {
-            teacher.classes.push(id);
-        }
+        const t = getTeacherById(tid);
+        if (t && !t.classes.includes(id)) t.classes.push(id);
     });
     saveData();
     renderAll();
     updateDashboard();
     updateSetupWizard();
     closeModal('addClass');
-    showToast('✅ کلاس "' + name + '" با موفقیت ثبت شد', 'success');
+    showToast('✅ کلاس "' + name + '" ثبت شد', 'success');
     addActivity('افزودن کلاس', 'کلاس ' + name + ' اضافه شد');
     document.getElementById('classId').value = '';
     document.getElementById('className').value = '';
@@ -1742,24 +1178,16 @@ function addClass(e) {
 
 function addStudent(e) {
     e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند دانش‌آموز اضافه کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند دانش‌آموز اضافه کند', 'error'); return; }
     const id = document.getElementById('studentId').value.trim();
     const name = document.getElementById('studentName').value.trim();
     const classId = document.getElementById('studentClassSelect').value;
     const parentPhone = document.getElementById('studentParentPhone').value.trim();
-    
-    if (!id) { showToast('❌ شناسه را وارد کنید', 'error'); return; }
-    if (!name) { showToast('❌ نام را وارد کنید', 'error'); return; }
-    if (!classId) { showToast('❌ کلاس را انتخاب کنید', 'error'); return; }
+    if (!id || !name || !classId) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (isClassFull(classId)) { showToast('❌ ظرفیت کلاس پر است!', 'error'); return; }
     if (DATA.students.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    if (parentPhone && !/^[0-9]{11}$/.test(parentPhone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
-    
     DATA.students.push({ id, name, classId, parentPhone, average: 0, status: 'بدون نمره' });
-    syncClassStudents(classId);
+    if (getClassById(classId)) getClassById(classId).students.push(id);
     updateStudentAverages();
     saveData();
     renderAll();
@@ -1775,10 +1203,7 @@ function addStudent(e) {
 
 function addTeacher(e) {
     e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند معلم اضافه کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند معلم اضافه کند', 'error'); return; }
     const id = document.getElementById('teacherId').value.trim();
     const name = document.getElementById('teacherName').value.trim();
     const specialty = document.getElementById('teacherSpecialty').value.trim();
@@ -1786,19 +1211,13 @@ function addTeacher(e) {
     const password = document.getElementById('teacherPassword').value;
     const classes = Array.from(document.getElementById('teacherClasses').selectedOptions).map(o => o.value);
     const subjects = Array.from(document.getElementById('teacherSubjects').selectedOptions).map(o => o.value);
-    
-    if (!id || !name || !specialty) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
+    if (!id || !name || !specialty || !password) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (DATA.teachers.find(t => t.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
     if (password.length < 6) { showToast('❌ رمز عبور حداقل ۶ کاراکتر', 'error'); return; }
-    if (phone && !/^[0-9]{11}$/.test(phone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
-    
     DATA.teachers.push({ id, name, specialty, phone, classes, subjects, password });
-    // Sync class teachers
     classes.forEach(cid => {
         const cls = getClassById(cid);
-        if (cls && !cls.teachers.includes(id)) {
-            cls.teachers.push(id);
-        }
+        if (cls && !cls.teachers.includes(id)) cls.teachers.push(id);
     });
     saveData();
     renderAll();
@@ -1816,26 +1235,18 @@ function addTeacher(e) {
 
 function addSubject(e) {
     e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند درس اضافه کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند درس اضافه کند', 'error'); return; }
     const id = document.getElementById('subjectId').value.trim();
     const name = document.getElementById('subjectName').value.trim();
     const teacherId = document.getElementById('subjectTeacher').value;
     const classId = document.getElementById('subjectClass').value;
     const units = parseInt(document.getElementById('subjectUnits').value);
     const type = document.getElementById('subjectType').value;
-    
     if (!id || !name || !teacherId || !classId) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (DATA.subjects.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    
     DATA.subjects.push({ id, name, teacherId, classId, units, type });
-    // Sync teacher subjects
     const teacher = getTeacherById(teacherId);
-    if (teacher && !teacher.subjects.includes(id)) {
-        teacher.subjects.push(id);
-    }
+    if (teacher && !teacher.subjects.includes(id)) teacher.subjects.push(id);
     saveData();
     renderAll();
     updateDashboard();
@@ -1851,32 +1262,20 @@ function addSubject(e) {
 // ===== TEACHER ONLY =====
 function addGradeTeacher(e) {
     e.preventDefault();
-    if (DATA.currentUser.role !== 'teacher') {
-        showToast('❌ فقط معلم می‌تواند نمره ثبت کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'teacher') { showToast('❌ فقط معلم می‌تواند نمره ثبت کند', 'error'); return; }
     const studentId = document.getElementById('gradeStudentTeacher').value;
     const subjectId = document.getElementById('gradeSubjectTeacher').value;
     const value = parseFloat(document.getElementById('gradeValueTeacher').value);
     const examType = document.getElementById('gradeExamTypeTeacher').value;
     const date = new Date().toLocaleDateString('fa-IR');
-    
     if (!studentId || !subjectId) { showToast('❌ دانش‌آموز و درس را انتخاب کنید', 'error'); return; }
     if (isNaN(value) || value < 0 || value > 20) { showToast('❌ نمره باید بین ۰ تا ۲۰ باشد', 'error'); return; }
-    
     const student = getStudentById(studentId);
     if (!student) { showToast('❌ دانش‌آموز یافت نشد', 'error'); return; }
     const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
-    if (!teacherClassIds.includes(student.classId)) {
-        showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
-        return;
-    }
+    if (!teacherClassIds.includes(student.classId)) { showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error'); return; }
     const subject = getSubjectById(subjectId);
-    if (subject && subject.teacherId !== DATA.currentUser.username) {
-        showToast('❌ شما معلم این درس نیستید', 'error');
-        return;
-    }
-    
+    if (!subject || subject.teacherId !== DATA.currentUser.username) { showToast('❌ شما معلم این درس نیستید', 'error'); return; }
     DATA.grades.push({ studentId, subjectId, value, examType, date, teacherId: DATA.currentUser.username });
     updateStudentAverages();
     saveData();
@@ -1891,25 +1290,17 @@ function addGradeTeacher(e) {
 
 function addAttendanceTeacher(e) {
     e.preventDefault();
-    if (DATA.currentUser.role !== 'teacher') {
-        showToast('❌ فقط معلم می‌تواند حضور ثبت کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'teacher') { showToast('❌ فقط معلم می‌تواند حضور ثبت کند', 'error'); return; }
     const studentId = document.getElementById('attendanceStudentTeacher').value;
     const date = document.getElementById('attendanceDateTeacher').value;
     const status = document.getElementById('attendanceStatusTeacher').value;
     const note = document.getElementById('attendanceNoteTeacher').value;
     const persianDate = new Date(date).toLocaleDateString('fa-IR');
     if (!studentId) { showToast('❌ دانش‌آموز را انتخاب کنید', 'error'); return; }
-    
     const student = getStudentById(studentId);
     if (!student) { showToast('❌ دانش‌آموز یافت نشد', 'error'); return; }
     const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
-    if (!teacherClassIds.includes(student.classId)) {
-        showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
-        return;
-    }
-    
+    if (!teacherClassIds.includes(student.classId)) { showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error'); return; }
     DATA.attendance.push({ studentId, date: persianDate, status, note, teacherId: DATA.currentUser.username });
     saveData();
     renderAll();
@@ -1923,10 +1314,7 @@ function addAttendanceTeacher(e) {
 
 // ===== DELETE =====
 function deleteStudent(id) {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند حذف کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند حذف کند', 'error'); return; }
     showConfirm('حذف دانش‌آموز', 'آیا از حذف اطمینان دارید؟', () => {
         DATA.students = DATA.students.filter(s => s.id !== id);
         DATA.grades = DATA.grades.filter(g => g.studentId !== id);
@@ -1942,10 +1330,7 @@ function deleteStudent(id) {
 }
 
 function deleteTeacher(id) {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند حذف کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند حذف کند', 'error'); return; }
     showConfirm('حذف معلم', 'آیا از حذف اطمینان دارید؟', () => {
         DATA.teachers = DATA.teachers.filter(t => t.id !== id);
         DATA.subjects = DATA.subjects.filter(s => s.teacherId !== id);
@@ -1959,10 +1344,7 @@ function deleteTeacher(id) {
 }
 
 function deleteClass(id) {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند حذف کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند حذف کند', 'error'); return; }
     showConfirm('حذف کلاس', 'آیا از حذف اطمینان دارید؟', () => {
         DATA.classes = DATA.classes.filter(c => c.id !== id);
         DATA.subjects = DATA.subjects.filter(s => s.classId !== id);
@@ -1977,10 +1359,7 @@ function deleteClass(id) {
 }
 
 function deleteSubject(id) {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند حذف کند', 'error');
-        return;
-    }
+    if (DATA.currentUser.role !== 'admin') { showToast('❌ فقط مدیر می‌تواند حذف کند', 'error'); return; }
     showConfirm('حذف درس', 'آیا از حذف اطمینان دارید؟', () => {
         DATA.subjects = DATA.subjects.filter(s => s.id !== id);
         DATA.grades = DATA.grades.filter(g => g.subjectId !== id);
@@ -1994,7 +1373,7 @@ function deleteSubject(id) {
 }
 
 // ============================================================
-// ================ RENDER FUNCTIONS ===========================
+// ================ RENDER =====================================
 // ============================================================
 
 function renderAll() {
@@ -2016,79 +1395,25 @@ function renderStudentsTable() {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">دسترسی محدود</td></tr>';
         return;
     }
-    
-    const search = document.getElementById('studentSearch')?.value.toLowerCase() || '';
-    const filterClass = document.getElementById('studentFilterClass')?.value || '';
-    
-    let students = DATA.students.filter(s => {
-        const matchSearch = s.name.toLowerCase().includes(search) || s.id.toLowerCase().includes(search);
-        const matchClass = !filterClass || s.classId === filterClass;
-        return matchSearch && matchClass;
-    });
-    
-    students.sort((a, b) => {
-        let valA = a[studentsSortField] || '';
-        let valB = b[studentsSortField] || '';
-        if (studentsSortField === 'class') {
-            const clsA = getClassById(a.classId);
-            const clsB = getClassById(b.classId);
-            valA = clsA ? clsA.name : '';
-            valB = clsB ? clsB.name : '';
-        }
-        if (typeof valA === 'string') valA = valA.toLowerCase();
-        if (typeof valB === 'string') valB = valB.toLowerCase();
-        if (valA < valB) return studentsSortAsc ? -1 : 1;
-        if (valA > valB) return studentsSortAsc ? 1 : -1;
-        return 0;
-    });
-    
-    const perPage = PAGINATION.students.perPage;
-    const totalPages = Math.ceil(students.length / perPage) || 1;
-    let page = PAGINATION.students.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, students.length);
-    const pageItems = students.slice(start, end);
-    
-    if (pageItems.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ دانش‌آموزی یافت نشد</td></tr>';
-    } else {
-        tbody.innerHTML = pageItems.map(s => {
-            const cls = getClassById(s.classId);
-            let statusClass = 'none';
-            if (s.status === 'عالی') statusClass = 'excellent';
-            else if (s.status === 'خوب') statusClass = 'good';
-            else if (s.status === 'قبول') statusClass = 'pending';
-            else if (s.status === 'مردود') statusClass = 'fail';
-            else statusClass = 'none';
-            return `<tr>
-                <td><strong>${escapeHtml(s.id)}</strong></td>
-                <td>${escapeHtml(s.name)}</td>
-                <td>${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</td>
-                <td>${s.average?.toFixed(1) || '0'}</td>
-                <td><span class="status-badge ${statusClass}">${s.status || 'بدون نمره'}</span></td>
-                <td><div class="actions-cell">
-                    <button onclick="viewStudent('${s.id}')" title="مشاهده"><i class="fas fa-eye"></i></button>
-                    <button class="danger" onclick="deleteStudent('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
-        }).join('');
+    if (DATA.students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ دانش‌آموزی ثبت نشده است</td></tr>';
+        return;
     }
-    
-    renderPagination('studentsPagination', page, totalPages, (p) => {
-        PAGINATION.students.page = p;
-        renderStudentsTable();
-    });
-}
-
-function sortStudents(field) {
-    if (studentsSortField === field) {
-        studentsSortAsc = !studentsSortAsc;
-    } else {
-        studentsSortField = field;
-        studentsSortAsc = true;
-    }
-    renderStudentsTable();
+    tbody.innerHTML = DATA.students.map(s => {
+        const cls = getClassById(s.classId);
+        const statusClass = s.status === 'عالی' ? 'excellent' : s.status === 'خوب' ? 'good' : s.status === 'قبول' ? 'pending' : s.status === 'مردود' ? 'fail' : 'none';
+        return `<tr>
+            <td><strong>${escapeHtml(s.id)}</strong></td>
+            <td>${escapeHtml(s.name)}</td>
+            <td>${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</td>
+            <td>${s.average?.toFixed(1) || '0'}</td>
+            <td><span class="status-badge ${statusClass}">${s.status || 'بدون نمره'}</span></td>
+            <td><div class="actions-cell">
+                <button onclick="viewStudent('${s.id}')" title="مشاهده"><i class="fas fa-eye"></i></button>
+                <button class="danger" onclick="deleteStudent('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderMyStudentsTable() {
@@ -2097,96 +1422,52 @@ function renderMyStudentsTable() {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">مدیر همه را می‌بیند</td></tr>';
         return;
     }
-    
-    const search = document.getElementById('myStudentSearch')?.value.toLowerCase() || '';
-    let students = getTeacherStudents(DATA.currentUser.username);
-    students = students.filter(s => s.name.toLowerCase().includes(search) || s.id.toLowerCase().includes(search));
-    
-    const perPage = PAGINATION.mystudents.perPage;
-    const totalPages = Math.ceil(students.length / perPage) || 1;
-    let page = PAGINATION.mystudents.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, students.length);
-    const pageItems = students.slice(start, end);
-    
-    if (pageItems.length === 0) {
+    const students = getTeacherStudents(DATA.currentUser.username);
+    if (students.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ دانش‌آموزی در کلاس شما نیست</td></tr>';
-    } else {
-        tbody.innerHTML = pageItems.map(s => {
-            const cls = getClassById(s.classId);
-            let statusClass = 'none';
-            if (s.status === 'عالی') statusClass = 'excellent';
-            else if (s.status === 'خوب') statusClass = 'good';
-            else if (s.status === 'قبول') statusClass = 'pending';
-            else if (s.status === 'مردود') statusClass = 'fail';
-            else statusClass = 'none';
-            return `<tr>
-                <td><strong>${escapeHtml(s.id)}</strong></td>
-                <td>${escapeHtml(s.name)}</td>
-                <td>${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</td>
-                <td>${s.average?.toFixed(1) || '0'}</td>
-                <td><span class="status-badge ${statusClass}">${s.status || 'بدون نمره'}</span></td>
-                <td><div class="actions-cell">
-                    <button onclick="viewStudent('${s.id}')" title="مشاهده"><i class="fas fa-eye"></i></button>
-                </div></td>
-            </tr>`;
-        }).join('');
+        return;
     }
-    
-    renderPagination('myStudentsPagination', page, totalPages, (p) => {
-        PAGINATION.mystudents.page = p;
-        renderMyStudentsTable();
-    });
+    tbody.innerHTML = students.map(s => {
+        const cls = getClassById(s.classId);
+        const statusClass = s.status === 'عالی' ? 'excellent' : s.status === 'خوب' ? 'good' : s.status === 'قبول' ? 'pending' : s.status === 'مردود' ? 'fail' : 'none';
+        return `<tr>
+            <td><strong>${escapeHtml(s.id)}</strong></td>
+            <td>${escapeHtml(s.name)}</td>
+            <td>${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</td>
+            <td>${s.average?.toFixed(1) || '0'}</td>
+            <td><span class="status-badge ${statusClass}">${s.status || 'بدون نمره'}</span></td>
+            <td><div class="actions-cell">
+                <button onclick="viewStudent('${s.id}')" title="مشاهده"><i class="fas fa-eye"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderTeachersTable() {
     const tbody = document.getElementById('teachersTableBody');
     if (DATA.currentUser.role !== 'admin') {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center" style="padding:15px;">دسترسی محدود</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">دسترسی محدود</td></tr>';
         return;
     }
-    
-    const search = document.getElementById('teacherSearch')?.value.toLowerCase() || '';
-    let teachers = DATA.teachers.filter(t => 
-        t.name.toLowerCase().includes(search) || 
-        t.id.toLowerCase().includes(search) ||
-        t.specialty.toLowerCase().includes(search)
-    );
-    
-    const perPage = PAGINATION.teachers.perPage;
-    const totalPages = Math.ceil(teachers.length / perPage) || 1;
-    let page = PAGINATION.teachers.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, teachers.length);
-    const pageItems = teachers.slice(start, end);
-    
-    if (pageItems.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center" style="padding:15px;">هیچ معلمی یافت نشد</td></tr>';
-    } else {
-        tbody.innerHTML = pageItems.map(t => {
-            const classes = t.classes ? t.classes.map(cid => getClassById(cid)?.name || cid).join('، ') : 'بدون کلاس';
-            const subjects = t.subjects ? t.subjects.map(sid => getSubjectById(sid)?.name || sid).join('، ') : 'بدون درس';
-            return `<tr>
-                <td><strong>${escapeHtml(t.id)}</strong></td>
-                <td>${escapeHtml(t.name)}</td>
-                <td>${escapeHtml(t.specialty)}</td>
-                <td>${escapeHtml(classes)}</td>
-                <td>${escapeHtml(subjects)}</td>
-                <td><span style="font-family:monospace; font-size:11px; background:var(--bg-input); padding:2px 8px; border-radius:4px;">${escapeHtml(t.password)}</span></td>
-                <td><span class="status-badge active">فعال</span></td>
-                <td><div class="actions-cell">
-                    <button class="danger" onclick="deleteTeacher('${t.id}')" title="حذف"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
-        }).join('');
+    if (DATA.teachers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ معلمی ثبت نشده است</td></tr>';
+        return;
     }
-    
-    renderPagination('teachersPagination', page, totalPages, (p) => {
-        PAGINATION.teachers.page = p;
-        renderTeachersTable();
-    });
+    tbody.innerHTML = DATA.teachers.map(t => {
+        const classes = (t.classes || []).map(cid => getClassById(cid)?.name || cid).join('، ') || 'بدون کلاس';
+        const subjects = (t.subjects || []).map(sid => getSubjectById(sid)?.name || sid).join('، ') || 'بدون درس';
+        return `<tr>
+            <td><strong>${escapeHtml(t.id)}</strong></td>
+            <td>${escapeHtml(t.name)}</td>
+            <td>${escapeHtml(t.specialty)}</td>
+            <td>${escapeHtml(classes)}</td>
+            <td>${escapeHtml(subjects)}</td>
+            <td><span style="font-family:monospace; font-size:11px; background:var(--bg-input); padding:2px 8px; border-radius:4px;">${escapeHtml(t.password)}</span></td>
+            <td><div class="actions-cell">
+                <button class="danger" onclick="deleteTeacher('${t.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderClasses() {
@@ -2195,48 +1476,28 @@ function renderClasses() {
         grid.innerHTML = '<p class="text-muted text-center" style="padding:20px;">دسترسی محدود</p>';
         return;
     }
-    
-    const search = document.getElementById('classSearch')?.value.toLowerCase() || '';
-    let classes = DATA.classes.filter(c => 
-        c.name.toLowerCase().includes(search) || 
-        c.id.toLowerCase().includes(search)
-    );
-    
-    const perPage = PAGINATION.classes.perPage;
-    const totalPages = Math.ceil(classes.length / perPage) || 1;
-    let page = PAGINATION.classes.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, classes.length);
-    const pageItems = classes.slice(start, end);
-    
-    if (pageItems.length === 0) {
-        grid.innerHTML = '<p class="text-muted text-center" style="padding:20px;">هیچ کلاسی یافت نشد</p>';
-    } else {
-        grid.innerHTML = pageItems.map(c => {
-            const students = getClassStudents(c.id);
-            const teachers = getClassTeachers(c.id);
-            const subjects = DATA.subjects.filter(s => s.classId === c.id);
-            return `<div class="class-card">
-                <div class="class-title">${escapeHtml(c.name)}</div>
-                <div class="class-info">📚 پایه: ${c.grade} | ظرفیت: ${students.length}/${c.capacity}</div>
-                <div class="class-info">👨‍🏫 معلمان: ${teachers.map(t => t.name).join('، ') || 'تعیین نشده'}</div>
-                <div class="class-stats">
-                    <span>👨‍🎓 ${students.length} دانش‌آموز</span>
-                    <span>📖 ${subjects.length} درس</span>
-                    <span><i class="fas fa-qrcode"></i> ${c.id}</span>
-                </div>
-                <div class="card-actions">
-                    <button class="btn btn-danger btn-sm" onclick="deleteClass('${c.id}')"><i class="fas fa-trash"></i> حذف</button>
-                </div>
-            </div>`;
-        }).join('');
+    if (DATA.classes.length === 0) {
+        grid.innerHTML = '<p class="text-muted text-center" style="padding:20px;">هیچ کلاسی ثبت نشده است</p>';
+        return;
     }
-    
-    renderPagination('classesPagination', page, totalPages, (p) => {
-        PAGINATION.classes.page = p;
-        renderClasses();
-    });
+    grid.innerHTML = DATA.classes.map(c => {
+        const students = getClassStudents(c.id);
+        const teachers = getClassTeachers(c.id);
+        const subjects = DATA.subjects.filter(s => s.classId === c.id);
+        return `<div class="class-card">
+            <div class="class-title">${escapeHtml(c.name)}</div>
+            <div class="class-info">📚 پایه: ${c.grade} | ظرفیت: ${students.length}/${c.capacity}</div>
+            <div class="class-info">👨‍🏫 معلمان: ${teachers.map(t => t.name).join('، ') || 'تعیین نشده'}</div>
+            <div class="class-stats">
+                <span>👨‍🎓 ${students.length} دانش‌آموز</span>
+                <span>📖 ${subjects.length} درس</span>
+                <span><i class="fas fa-qrcode"></i> ${c.id}</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn btn-danger btn-sm" onclick="deleteClass('${c.id}')"><i class="fas fa-trash"></i> حذف</button>
+            </div>
+        </div>`;
+    }).join('');
 }
 
 function renderSubjectsTable() {
@@ -2245,244 +1506,131 @@ function renderSubjectsTable() {
         tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">دسترسی محدود</td></tr>';
         return;
     }
-    
-    const search = document.getElementById('subjectSearch')?.value.toLowerCase() || '';
-    let subjects = DATA.subjects.filter(s => 
-        s.name.toLowerCase().includes(search) || 
-        s.id.toLowerCase().includes(search)
-    );
-    
-    const perPage = PAGINATION.subjects.perPage;
-    const totalPages = Math.ceil(subjects.length / perPage) || 1;
-    let page = PAGINATION.subjects.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, subjects.length);
-    const pageItems = subjects.slice(start, end);
-    
-    if (pageItems.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ درسی یافت نشد</td></tr>';
-    } else {
-        tbody.innerHTML = pageItems.map(s => {
-            const teacher = getTeacherById(s.teacherId);
-            const cls = getClassById(s.classId);
-            return `<tr>
-                <td><strong>${escapeHtml(s.id)}</strong></td>
-                <td>${escapeHtml(s.name)}</td>
-                <td>${teacher ? escapeHtml(teacher.name) : 'نامشخص'}</td>
-                <td>${cls ? escapeHtml(cls.name) : 'نامشخص'}</td>
-                <td>${s.units}</td>
-                <td><div class="actions-cell">
-                    <button class="danger" onclick="deleteSubject('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>
-                </div></td>
-            </tr>`;
-        }).join('');
+    if (DATA.subjects.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ درسی ثبت نشده است</td></tr>';
+        return;
     }
-    
-    renderPagination('subjectsPagination', page, totalPages, (p) => {
-        PAGINATION.subjects.page = p;
-        renderSubjectsTable();
-    });
+    tbody.innerHTML = DATA.subjects.map(s => {
+        const teacher = getTeacherById(s.teacherId);
+        const cls = getClassById(s.classId);
+        return `<tr>
+            <td><strong>${escapeHtml(s.id)}</strong></td>
+            <td>${escapeHtml(s.name)}</td>
+            <td>${teacher ? escapeHtml(teacher.name) : 'نامشخص'}</td>
+            <td>${cls ? escapeHtml(cls.name) : 'نامشخص'}</td>
+            <td>${s.units}</td>
+            <td><div class="actions-cell">
+                <button class="danger" onclick="deleteSubject('${s.id}')" title="حذف"><i class="fas fa-trash"></i></button>
+            </div></td>
+        </tr>`;
+    }).join('');
 }
 
 function renderGradesTable() {
     const tbody = document.getElementById('gradesTableBody');
     const isAdmin = DATA.currentUser.role === 'admin';
     let grades = DATA.grades;
-    
     if (!isAdmin) {
         const students = getTeacherStudents(DATA.currentUser.username);
         const ids = students.map(s => s.id);
         grades = grades.filter(g => ids.includes(g.studentId));
     }
-    
-    const search = document.getElementById('gradeSearch')?.value.toLowerCase() || '';
-    const filterSubject = document.getElementById('gradeFilterSubject')?.value || '';
-    
-    grades = grades.filter(g => {
+    if (grades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ نمره‌ای ثبت نشده است</td></tr>';
+        return;
+    }
+    tbody.innerHTML = grades.map(g => {
         const student = getStudentById(g.studentId);
         const subject = getSubjectById(g.subjectId);
-        const matchSearch = (student?.name || '').toLowerCase().includes(search) || 
-                           (subject?.name || '').toLowerCase().includes(search);
-        const matchSubject = !filterSubject || g.subjectId === filterSubject;
-        return matchSearch && matchSubject;
-    });
-    
-    grades.sort((a, b) => {
-        if (a.date < b.date) return -1;
-        if (a.date > b.date) return 1;
-        return 0;
-    });
-    
-    const perPage = PAGINATION.grades.perPage;
-    const totalPages = Math.ceil(grades.length / perPage) || 1;
-    let page = PAGINATION.grades.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, grades.length);
-    const pageItems = grades.slice(start, end);
-    
-    if (pageItems.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center" style="padding:15px;">هیچ نمره‌ای ثبت نشده است</td></tr>';
-    } else {
-        tbody.innerHTML = pageItems.map(g => {
-            const student = getStudentById(g.studentId);
-            const subject = getSubjectById(g.subjectId);
-            const teacher = getTeacherById(g.teacherId);
-            const color = g.value >= 18 ? 'var(--success)' : g.value >= 14 ? 'var(--warning)' : g.value >= 10 ? '#FF9800' : 'var(--danger)';
-            const labels = { quiz: 'آزمون کوتاه', homework: 'تکلیف', midterm: 'میان‌ترم', final: 'پایان‌ترم' };
-            return `<tr>
-                <td>${student ? escapeHtml(student.name) : 'نامشخص'}</td>
-                <td>${subject ? escapeHtml(subject.name) : 'نامشخص'}</td>
-                <td><strong style="color:${color};">${g.value}</strong></td>
-                <td>${labels[g.examType] || g.examType}</td>
-                <td>${g.date}</td>
-                <td>${teacher ? escapeHtml(teacher.name) : 'نامشخص'}</td>
-            </tr>`;
-        }).join('');
-    }
-    
-    renderPagination('gradesPagination', page, totalPages, (p) => {
-        PAGINATION.grades.page = p;
-        renderGradesTable();
-    });
+        const teacher = getTeacherById(g.teacherId);
+        const color = g.value >= 18 ? 'var(--success)' : g.value >= 14 ? 'var(--warning)' : g.value >= 10 ? '#FF9800' : 'var(--danger)';
+        const labels = { quiz: 'آزمون کوتاه', homework: 'تکلیف', midterm: 'میان‌ترم', final: 'پایان‌ترم' };
+        return `<tr>
+            <td>${student ? escapeHtml(student.name) : 'نامشخص'}</td>
+            <td>${subject ? escapeHtml(subject.name) : 'نامشخص'}</td>
+            <td><strong style="color:${color};">${g.value}</strong></td>
+            <td>${labels[g.examType] || g.examType}</td>
+            <td>${g.date}</td>
+            <td>${teacher ? escapeHtml(teacher.name) : 'نامشخص'}</td>
+        </tr>`;
+    }).join('');
 }
 
 function renderAttendanceTable() {
     const tbody = document.getElementById('attendanceTableBody');
     const isAdmin = DATA.currentUser.role === 'admin';
     let attendance = DATA.attendance;
-    
     if (!isAdmin) {
         const students = getTeacherStudents(DATA.currentUser.username);
         const ids = students.map(s => s.id);
         attendance = attendance.filter(a => ids.includes(a.studentId));
     }
-    
-    const search = document.getElementById('attendanceSearch')?.value.toLowerCase() || '';
-    attendance = attendance.filter(a => {
-        const student = getStudentById(a.studentId);
-        return (student?.name || '').toLowerCase().includes(search) || 
-               a.status.includes(search) ||
-               (a.note || '').toLowerCase().includes(search);
-    });
-    
-    const perPage = PAGINATION.attendance.perPage;
-    const totalPages = Math.ceil(attendance.length / perPage) || 1;
-    let page = PAGINATION.attendance.page;
-    if (page > totalPages) page = totalPages;
-    const start = (page - 1) * perPage;
-    const end = Math.min(start + perPage, attendance.length);
-    const pageItems = attendance.slice(start, end);
-    
-    if (pageItems.length === 0) {
+    if (attendance.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5" class="text-muted text-center" style="padding:15px;">هیچ حضور و غیابی ثبت نشده است</td></tr>';
-    } else {
-        tbody.innerHTML = pageItems.map(a => {
-            const student = getStudentById(a.studentId);
-            const teacher = getTeacherById(a.teacherId);
-            const color = a.status === 'حاضر' ? 'var(--success)' : a.status === 'غایب' ? 'var(--danger)' : 'var(--warning)';
-            return `<tr>
-                <td>${student ? escapeHtml(student.name) : 'نامشخص'}</td>
-                <td>${a.date}</td>
-                <td><span style="color:${color}; font-weight:600;">${a.status}</span></td>
-                <td>${a.note || '-'}</td>
-                <td>${teacher ? escapeHtml(teacher.name) : 'نامشخص'}</td>
-            </tr>`;
-        }).join('');
+        return;
     }
-    
-    renderPagination('attendancePagination', page, totalPages, (p) => {
-        PAGINATION.attendance.page = p;
-        renderAttendanceTable();
-    });
+    tbody.innerHTML = attendance.map(a => {
+        const student = getStudentById(a.studentId);
+        const teacher = getTeacherById(a.teacherId);
+        const color = a.status === 'حاضر' ? 'var(--success)' : a.status === 'غایب' ? 'var(--danger)' : 'var(--warning)';
+        return `<tr>
+            <td>${student ? escapeHtml(student.name) : 'نامشخص'}</td>
+            <td>${a.date}</td>
+            <td><span style="color:${color}; font-weight:600;">${a.status}</span></td>
+            <td>${a.note || '-'}</td>
+            <td>${teacher ? escapeHtml(teacher.name) : 'نامشخص'}</td>
+        </tr>`;
+    }).join('');
 }
 
 function renderSelectOptions() {
     const isAdmin = DATA.currentUser.role === 'admin';
-    
-    const qc = document.getElementById('quickStudentClass');
-    if (qc) {
-        const val = qc.value;
-        qc.innerHTML = '<option value="">انتخاب...</option>';
-        DATA.classes.forEach(c => { qc.innerHTML += `<option value="${c.id}">${escapeHtml(c.name)}</option>`; });
-        qc.value = val;
-    }
-    
-    ['gradeStudentTeacher', 'attendanceStudentTeacher'].forEach(id => {
+    ['quickStudentClass', 'studentClassSelect'].forEach(id => {
         const sel = document.getElementById(id);
-        if (sel && !isAdmin) {
+        if (sel) {
             const val = sel.value;
             sel.innerHTML = '<option value="">انتخاب...</option>';
-            getTeacherStudents(DATA.currentUser.username).forEach(s => {
-                sel.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)}</option>`;
-            });
+            DATA.classes.forEach(c => { sel.innerHTML += `<option value="${c.id}">${escapeHtml(c.name)}</option>`; });
             sel.value = val;
         }
     });
-    
-    ['reportStudent'].forEach(id => {
+    ['gradeStudentTeacher', 'attendanceStudentTeacher', 'reportStudent'].forEach(id => {
         const sel = document.getElementById(id);
         if (sel) {
             const val = sel.value;
             sel.innerHTML = '<option value="">انتخاب...</option>';
             let students = DATA.students;
             if (!isAdmin) students = getTeacherStudents(DATA.currentUser.username);
-            students.forEach(s => {
-                sel.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)}</option>`;
-            });
+            students.forEach(s => { sel.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)}</option>`; });
             sel.value = val;
         }
     });
-    
-    const gst = document.getElementById('gradeSubjectTeacher');
-    if (gst && !isAdmin) {
-        const val = gst.value;
-        gst.innerHTML = '<option value="">انتخاب...</option>';
-        getTeacherSubjects(DATA.currentUser.username).forEach(s => {
-            gst.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)}</option>`;
-        });
-        gst.value = val;
-    }
-    
     if (isAdmin) {
-        const sc = document.getElementById('studentClassSelect');
-        if (sc) {
-            const val = sc.value;
-            sc.innerHTML = '<option value="">انتخاب...</option>';
-            DATA.classes.forEach(c => { sc.innerHTML += `<option value="${c.id}">${escapeHtml(c.name)}</option>`; });
-            sc.value = val;
-        }
-        
-        const st = document.getElementById('subjectTeacher');
-        if (st) {
-            const val = st.value;
-            st.innerHTML = '<option value="">انتخاب...</option>';
-            DATA.teachers.forEach(t => { st.innerHTML += `<option value="${t.id}">${escapeHtml(t.name)}</option>`; });
-            st.value = val;
-        }
-        
-        const cs = document.getElementById('subjectClass');
-        if (cs) {
-            const val = cs.value;
-            cs.innerHTML = '<option value="">انتخاب...</option>';
-            DATA.classes.forEach(c => { cs.innerHTML += `<option value="${c.id}">${escapeHtml(c.name)}</option>`; });
-            cs.value = val;
-        }
-        
-        const tc = document.getElementById('teacherClasses');
-        if (tc) {
-            const val = Array.from(tc.selectedOptions).map(o => o.value);
-            tc.innerHTML = '';
-            DATA.classes.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c.id;
-                opt.textContent = c.id + ' - ' + c.name;
-                if (val.includes(c.id)) opt.selected = true;
-                tc.appendChild(opt);
-            });
-        }
-        
+        ['subjectTeacher', 'classTeachers', 'teacherClasses'].forEach(id => {
+            const sel = document.getElementById(id);
+            if (sel) {
+                const val = Array.from(sel.selectedOptions).map(o => o.value);
+                sel.innerHTML = '';
+                const items = id === 'subjectTeacher' || id === 'teacherClasses' ? DATA.teachers : DATA.teachers;
+                const list = id === 'classTeachers' ? DATA.teachers : DATA.teachers;
+                list.forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item.id;
+                    opt.textContent = item.id + ' - ' + item.name + (item.specialty ? ' (' + item.specialty + ')' : '');
+                    if (val.includes(item.id)) opt.selected = true;
+                    sel.appendChild(opt);
+                });
+            }
+        });
+        ['subjectClass'].forEach(id => {
+            const sel = document.getElementById(id);
+            if (sel) {
+                const val = sel.value;
+                sel.innerHTML = '<option value="">انتخاب...</option>';
+                DATA.classes.forEach(c => { sel.innerHTML += `<option value="${c.id}">${escapeHtml(c.name)}</option>`; });
+                sel.value = val;
+            }
+        });
         const ts = document.getElementById('teacherSubjects');
         if (ts) {
             const val = Array.from(ts.selectedOptions).map(o => o.value);
@@ -2495,323 +1643,13 @@ function renderSelectOptions() {
                 ts.appendChild(opt);
             });
         }
-        
-        const ct = document.getElementById('classTeachers');
-        if (ct) {
-            const val = Array.from(ct.selectedOptions).map(o => o.value);
-            ct.innerHTML = '';
-            DATA.teachers.forEach(t => {
-                const opt = document.createElement('option');
-                opt.value = t.id;
-                opt.textContent = t.id + ' - ' + t.name + ' (' + t.specialty + ')';
-                if (val.includes(t.id)) opt.selected = true;
-                ct.appendChild(opt);
-            });
+        const gst = document.getElementById('gradeSubjectTeacher');
+        if (gst) {
+            const val = gst.value;
+            gst.innerHTML = '<option value="">انتخاب...</option>';
+            DATA.subjects.forEach(s => { gst.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)}</option>`; });
+            gst.value = val;
         }
-        
-        const gfs = document.getElementById('gradeFilterSubject');
-        if (gfs) {
-            const val = gfs.value;
-            gfs.innerHTML = '<option value="">همه دروس</option>';
-            DATA.subjects.forEach(s => {
-                gfs.innerHTML += `<option value="${s.id}">${escapeHtml(s.name)}</option>`;
-            });
-            gfs.value = val;
-        }
-        
-        const sfc = document.getElementById('studentFilterClass');
-        if (sfc) {
-            const val = sfc.value;
-            sfc.innerHTML = '<option value="">همه کلاس‌ها</option>';
-            DATA.classes.forEach(c => {
-                sfc.innerHTML += `<option value="${c.id}">${escapeHtml(c.name)}</option>`;
-            });
-            sfc.value = val;
-        }
-    }
-}
-
-function renderPagination(containerId, currentPage, totalPages, onPageChange) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    if (totalPages <= 1) { container.innerHTML = ''; return; }
-    
-    let html = '';
-    html += `<button ${currentPage <= 1 ? 'disabled' : ''} onclick="changePage('${containerId}', ${currentPage - 1})">‹</button>`;
-    
-    let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(totalPages, currentPage + 2);
-    if (startPage > 1) { html += `<button onclick="changePage('${containerId}', 1)">1</button>${startPage > 2 ? '...' : ''}`; }
-    for (let i = startPage; i <= endPage; i++) {
-        html += `<button class="${i === currentPage ? 'active' : ''}" onclick="changePage('${containerId}', ${i})">${i}</button>`;
-    }
-    if (endPage < totalPages) { html += `${endPage < totalPages - 1 ? '...' : ''}<button onclick="changePage('${containerId}', ${totalPages})">${totalPages}</button>`; }
-    
-    html += `<button ${currentPage >= totalPages ? 'disabled' : ''} onclick="changePage('${containerId}', ${currentPage + 1})">›</button>`;
-    html += `<span class="page-info">${currentPage}/${totalPages}</span>`;
-    
-    container.innerHTML = html;
-    container._onPageChange = onPageChange;
-}
-
-function changePage(containerId, page) {
-    const container = document.getElementById(containerId);
-    if (!container || !container._onPageChange) return;
-    container._onPageChange(page);
-}
-
-function escapeHtml(text) {
-    if (!text) return '';
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// ============================================================
-// ================ BARCODE SCANNER ============================
-// ============================================================
-
-function startStudentScanner() {
-    if (typeof Quagga === 'undefined') {
-        showToast('❌ بارکدخوان بارگذاری نشد. اتصال اینترنت را بررسی کنید.', 'error');
-        return;
-    }
-    if (scannerActive) stopScanner();
-    const container = document.getElementById('studentScanner');
-    const result = document.getElementById('studentScanResult');
-    result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال راه‌اندازی...';
-    
-    Quagga.init({
-        inputStream: { name: "Live", type: "LiveStream", target: container, constraints: { width: 400, height: 300, facingMode: "environment" } },
-        decoder: { readers: ["ean_reader", "code_128_reader", "code_39_reader"] }
-    }, function(err) {
-        if (err) { result.innerHTML = '❌ خطا: ' + err.message; showToast('❌ خطا در دوربین', 'error'); return; }
-        scannerActive = true;
-        Quagga.start();
-        result.innerHTML = '<i class="fas fa-camera"></i> اسکن کنید...';
-    });
-    
-    Quagga.onDetected(function(data) {
-        const code = data.codeResult.code;
-        result.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success);"></i> ' + code;
-        handleStudentBarcode(code);
-        stopScanner();
-    });
-}
-
-function startStudentScannerTeacher() {
-    if (typeof Quagga === 'undefined') {
-        showToast('❌ بارکدخوان بارگذاری نشد', 'error');
-        return;
-    }
-    if (scannerActive) stopScanner();
-    const container = document.getElementById('studentScannerTeacher');
-    const result = document.getElementById('studentScanResultTeacher');
-    result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال راه‌اندازی...';
-    
-    Quagga.init({
-        inputStream: { name: "Live", type: "LiveStream", target: container, constraints: { width: 400, height: 300, facingMode: "environment" } },
-        decoder: { readers: ["ean_reader", "code_128_reader", "code_39_reader"] }
-    }, function(err) {
-        if (err) { result.innerHTML = '❌ خطا: ' + err.message; showToast('❌ خطا در دوربین', 'error'); return; }
-        scannerActive = true;
-        Quagga.start();
-        result.innerHTML = '<i class="fas fa-camera"></i> اسکن کنید...';
-    });
-    
-    Quagga.onDetected(function(data) {
-        const code = data.codeResult.code;
-        result.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success);"></i> ' + code;
-        handleStudentBarcodeTeacher(code);
-        stopScanner();
-    });
-}
-
-function startClassScanner() {
-    if (typeof Quagga === 'undefined') {
-        showToast('❌ بارکدخوان بارگذاری نشد', 'error');
-        return;
-    }
-    if (scannerActive) stopScanner();
-    const container = document.getElementById('classScanner');
-    const result = document.getElementById('classScanResult');
-    result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال راه‌اندازی...';
-    
-    Quagga.init({
-        inputStream: { name: "Live", type: "LiveStream", target: container, constraints: { width: 400, height: 300, facingMode: "environment" } },
-        decoder: { readers: ["ean_reader", "code_128_reader", "code_39_reader"] }
-    }, function(err) {
-        if (err) { result.innerHTML = '❌ خطا: ' + err.message; showToast('❌ خطا در دوربین', 'error'); return; }
-        scannerActive = true;
-        Quagga.start();
-        result.innerHTML = '<i class="fas fa-camera"></i> اسکن کنید...';
-    });
-    
-    Quagga.onDetected(function(data) {
-        const code = data.codeResult.code;
-        result.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success);"></i> ' + code;
-        handleClassBarcode(code);
-        stopScanner();
-    });
-}
-
-function stopScanner() {
-    if (scannerActive) {
-        try { Quagga.stop(); Quagga.offDetected(); } catch(e) {}
-        scannerActive = false;
-    }
-    ['studentScanner', 'studentScannerTeacher', 'classScanner'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = '';
-    });
-}
-
-function handleStudentBarcode(code) {
-    const student = getStudentById(code);
-    const infoDiv = document.getElementById('scannedStudentInfo');
-    const dataDiv = document.getElementById('scannedStudentData');
-    if (student) {
-        const cls = getClassById(student.classId);
-        scannedStudentId = student.id;
-        dataDiv.innerHTML = `
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px; font-size:12px;">
-                <div><strong>شناسه:</strong> ${escapeHtml(student.id)}</div>
-                <div><strong>نام:</strong> ${escapeHtml(student.name)}</div>
-                <div><strong>کلاس:</strong> ${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</div>
-                <div><strong>میانگین:</strong> ${student.average.toFixed(1)}</div>
-            </div>
-        `;
-        infoDiv.style.display = 'block';
-        showToast('✅ دانش‌آموز یافت شد: ' + student.name, 'success');
-    } else {
-        dataDiv.innerHTML = `
-            <div style="margin-top:6px; color:var(--danger);">
-                دانش‌آموزی با شناسه <strong>${escapeHtml(code)}</strong> یافت نشد.
-                <div style="margin-top:6px;">
-                    <button class="btn btn-primary btn-sm" onclick="quickAddFromScan('${escapeHtml(code)}')">
-                        <i class="fas fa-plus"></i> ثبت سریع
-                    </button>
-                </div>
-            </div>
-        `;
-        infoDiv.style.display = 'block';
-        scannedStudentId = code;
-        showToast('⚠️ دانش‌آموز یافت نشد', 'warning');
-    }
-}
-
-function handleStudentBarcodeTeacher(code) {
-    const student = getStudentById(code);
-    const infoDiv = document.getElementById('scannedStudentInfoTeacher');
-    const dataDiv = document.getElementById('scannedStudentDataTeacher');
-    if (!student) {
-        dataDiv.innerHTML = `<div style="margin-top:6px; color:var(--danger);">دانش‌آموزی با شناسه <strong>${escapeHtml(code)}</strong> یافت نشد.</div>`;
-        infoDiv.style.display = 'block';
-        showToast('❌ دانش‌آموز یافت نشد', 'error');
-        return;
-    }
-    const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
-    if (!teacherClassIds.includes(student.classId)) {
-        dataDiv.innerHTML = `<div style="margin-top:6px; color:var(--danger);">دانش‌آموز <strong>${escapeHtml(student.name)}</strong> در کلاس‌های شما نیست.</div>`;
-        infoDiv.style.display = 'block';
-        showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
-        return;
-    }
-    const cls = getClassById(student.classId);
-    scannedStudentId = student.id;
-    dataDiv.innerHTML = `
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px; font-size:12px;">
-            <div><strong>شناسه:</strong> ${escapeHtml(student.id)}</div>
-            <div><strong>نام:</strong> ${escapeHtml(student.name)}</div>
-            <div><strong>کلاس:</strong> ${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</div>
-            <div><strong>میانگین:</strong> ${student.average.toFixed(1)}</div>
-        </div>
-    `;
-    infoDiv.style.display = 'block';
-    showToast('✅ دانش‌آموز یافت شد: ' + student.name, 'success');
-}
-
-function handleClassBarcode(code) {
-    const cls = getClassById(code);
-    const infoDiv = document.getElementById('scannedClassInfo');
-    const dataDiv = document.getElementById('scannedClassData');
-    if (cls) {
-        const students = getClassStudents(cls.id);
-        scannedClassId = cls.id;
-        dataDiv.innerHTML = `
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px; font-size:12px;">
-                <div><strong>شناسه:</strong> ${escapeHtml(cls.id)}</div>
-                <div><strong>نام:</strong> ${escapeHtml(cls.name)}</div>
-                <div><strong>پایه:</strong> ${cls.grade}</div>
-                <div><strong>دانش‌آموز:</strong> ${students.length} نفر</div>
-            </div>
-        `;
-        infoDiv.style.display = 'block';
-        showToast('✅ کلاس یافت شد: ' + cls.name, 'success');
-    } else {
-        dataDiv.innerHTML = `
-            <div style="margin-top:6px; color:var(--danger);">
-                کلاسی با شناسه <strong>${escapeHtml(code)}</strong> یافت نشد.
-                <div style="margin-top:6px;">
-                    <button class="btn btn-primary btn-sm" onclick="quickAddClassFromScan('${escapeHtml(code)}')">
-                        <i class="fas fa-plus"></i> ثبت سریع
-                    </button>
-                </div>
-            </div>
-        `;
-        infoDiv.style.display = 'block';
-        scannedClassId = code;
-        showToast('⚠️ کلاس یافت نشد', 'warning');
-    }
-}
-
-function quickAddFromScan(code) {
-    closeModal('scanStudent');
-    stopScanner();
-    openModal('addStudent');
-    document.getElementById('studentId').value = code;
-    document.getElementById('studentName').focus();
-}
-
-function quickAddClassFromScan(code) {
-    closeModal('scanClass');
-    stopScanner();
-    openModal('addClass');
-    document.getElementById('classId').value = code;
-    document.getElementById('className').focus();
-}
-
-function useScannedStudent() {
-    if (scannedStudentId) {
-        closeModal('scanStudent');
-        stopScanner();
-        const student = getStudentById(scannedStudentId);
-        if (student) showToast('👤 ' + student.name + ' - میانگین: ' + student.average.toFixed(1), 'info');
-        scannedStudentId = null;
-    }
-}
-
-function useScannedStudentTeacher() {
-    if (scannedStudentId) {
-        closeModal('scanStudentTeacher');
-        stopScanner();
-        const student = getStudentById(scannedStudentId);
-        if (student) {
-            showToast('👤 ' + student.name + ' - میانگین: ' + student.average.toFixed(1), 'info');
-            openModal('addGradeTeacher');
-            document.getElementById('gradeStudentTeacher').value = student.id;
-        }
-        scannedStudentId = null;
-    }
-}
-
-function useScannedClass() {
-    if (scannedClassId) {
-        closeModal('scanClass');
-        stopScanner();
-        const cls = getClassById(scannedClassId);
-        if (cls) showToast('🏫 ' + cls.name + ' - ' + getClassStudents(cls.id).length + ' دانش‌آموز', 'info');
-        scannedClassId = null;
     }
 }
 
@@ -2826,11 +1664,9 @@ function updateDashboard() {
     document.getElementById('statTeachers').textContent = DATA.teachers.length;
     document.getElementById('statClasses').textContent = isAdmin ? DATA.classes.length : getTeacherClassIds(DATA.currentUser.username).length;
     document.getElementById('statSubjects').textContent = isAdmin ? DATA.subjects.length : getTeacherSubjects(DATA.currentUser.username).length;
-    
     let avgSum = 0, avgCount = 0;
     students.forEach(s => { if (s.average > 0) { avgSum += s.average; avgCount++; } });
     document.getElementById('statAverage').textContent = avgCount > 0 ? (avgSum / avgCount).toFixed(1) : '0';
-    
     let present = 0;
     const attendanceData = isAdmin ? DATA.attendance : DATA.attendance.filter(a => {
         const student = getStudentById(a.studentId);
@@ -2838,7 +1674,6 @@ function updateDashboard() {
     });
     attendanceData.forEach(a => { if (a.status === 'حاضر') present++; });
     document.getElementById('statAttendance').textContent = attendanceData.length > 0 ? Math.round((present / attendanceData.length) * 100) + '%' : '0%';
-    
     renderActivities();
     renderAlerts();
 }
@@ -2908,34 +1743,18 @@ function showRanking() {
 // ============================================================
 
 function updateSetupWizard() {
-    const steps = {
-        1: DATA.classes.length > 0,
-        2: DATA.teachers.length > 0,
-        3: DATA.students.length > 0,
-        4: DATA.subjects.length > 0
-    };
+    const steps = { 1: DATA.classes.length > 0, 2: DATA.teachers.length > 0, 3: DATA.students.length > 0, 4: DATA.subjects.length > 0 };
     let allDone = true;
     for (let i = 1; i <= 4; i++) {
         const el = document.querySelector(`.step[data-step="${i}"]`);
         const st = document.getElementById(`stepStatus${i}`);
         if (el) {
             el.classList.remove('pending', 'done');
-            if (steps[i]) {
-                el.classList.add('done');
-                st.textContent = '✅';
-            } else {
-                el.classList.add('pending');
-                st.textContent = '⏳';
-                allDone = false;
-            }
+            if (steps[i]) { el.classList.add('done'); st.textContent = '✅'; }
+            else { el.classList.add('pending'); st.textContent = '⏳'; allDone = false; }
         }
     }
-    const wizard = document.getElementById('setupWizard');
-    if (DATA.currentUser && DATA.currentUser.role === 'admin' && !allDone) {
-        wizard.style.display = 'block';
-    } else {
-        wizard.style.display = 'none';
-    }
+    document.getElementById('setupWizard').style.display = DATA.currentUser && DATA.currentUser.role === 'admin' && !allDone ? 'block' : 'none';
 }
 
 function goToStep(step) {
@@ -2951,112 +1770,45 @@ function goToStep(step) {
 // ============================================================
 
 function exportToExcel(type) {
-    if (typeof XLSX === 'undefined') {
-        showToast('❌ کتابخانه اکسل بارگذاری نشد', 'error');
-        return;
-    }
+    if (typeof XLSX === 'undefined') { showToast('❌ کتابخانه اکسل بارگذاری نشد', 'error'); return; }
     showToast('⏳ در حال آماده‌سازی فایل...', 'info');
     setTimeout(() => {
         try {
             const isAdmin = DATA.currentUser.role === 'admin';
             let data = [], sheetName = '';
-            
             if (type === 'students' || type === 'all') {
                 const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
-                data = students.map(s => ({ 
-                    'شناسه': s.id, 
-                    'نام': s.name, 
-                    'کلاس': getClassById(s.classId)?.name || '', 
-                    'میانگین': s.average || 0, 
-                    'وضعیت': s.status || '' 
-                }));
+                data = students.map(s => ({ 'شناسه': s.id, 'نام': s.name, 'کلاس': getClassById(s.classId)?.name || '', 'میانگین': s.average || 0, 'وضعیت': s.status || '' }));
                 sheetName = 'دانش‌آموزان';
             }
-            
             if (type === 'teachers' && isAdmin) {
-                data = DATA.teachers.map(t => ({ 
-                    'شناسه': t.id, 
-                    'نام': t.name, 
-                    'تخصص': t.specialty, 
-                    'تماس': t.phone || '',
-                    'کلاس‌ها': (t.classes || []).map(cid => getClassById(cid)?.name || cid).join('، '),
-                    'درس‌ها': (t.subjects || []).map(sid => getSubjectById(sid)?.name || sid).join('، ')
-                }));
+                data = DATA.teachers.map(t => ({ 'شناسه': t.id, 'نام': t.name, 'تخصص': t.specialty, 'تماس': t.phone || '', 'کلاس‌ها': (t.classes || []).map(cid => getClassById(cid)?.name || cid).join('، '), 'درس‌ها': (t.subjects || []).map(sid => getSubjectById(sid)?.name || sid).join('، ') }));
                 sheetName = 'معلمان';
             }
-            
-            if (type === 'classes' && isAdmin) {
-                data = DATA.classes.map(c => ({ 
-                    'شناسه': c.id, 
-                    'نام': c.name, 
-                    'پایه': c.grade, 
-                    'ظرفیت': c.capacity, 
-                    'دانش‌آموز': getClassStudents(c.id).length 
-                }));
-                sheetName = 'کلاس‌ها';
-            }
-            
-            if (type === 'subjects' && isAdmin) {
-                data = DATA.subjects.map(s => ({ 
-                    'شناسه': s.id, 
-                    'نام': s.name, 
-                    'معلم': getTeacherById(s.teacherId)?.name || '', 
-                    'کلاس': getClassById(s.classId)?.name || '' 
-                }));
-                sheetName = 'دروس';
-            }
-            
+            if (type === 'classes' && isAdmin) { data = DATA.classes.map(c => ({ 'شناسه': c.id, 'نام': c.name, 'پایه': c.grade, 'ظرفیت': c.capacity, 'دانش‌آموز': getClassStudents(c.id).length })); sheetName = 'کلاس‌ها'; }
+            if (type === 'subjects' && isAdmin) { data = DATA.subjects.map(s => ({ 'شناسه': s.id, 'نام': s.name, 'معلم': getTeacherById(s.teacherId)?.name || '', 'کلاس': getClassById(s.classId)?.name || '' })); sheetName = 'دروس'; }
             if (type === 'grades') {
                 let grades = DATA.grades;
-                if (!isAdmin) {
-                    const students = getTeacherStudents(DATA.currentUser.username);
-                    const ids = students.map(s => s.id);
-                    grades = grades.filter(g => ids.includes(g.studentId));
-                }
-                data = grades.map(g => ({ 
-                    'دانش‌آموز': getStudentById(g.studentId)?.name || '', 
-                    'درس': getSubjectById(g.subjectId)?.name || '', 
-                    'نمره': g.value, 
-                    'تاریخ': g.date 
-                }));
+                if (!isAdmin) { const students = getTeacherStudents(DATA.currentUser.username); const ids = students.map(s => s.id); grades = grades.filter(g => ids.includes(g.studentId)); }
+                data = grades.map(g => ({ 'دانش‌آموز': getStudentById(g.studentId)?.name || '', 'درس': getSubjectById(g.subjectId)?.name || '', 'نمره': g.value, 'تاریخ': g.date }));
                 sheetName = 'نمرات';
             }
-            
             if (type === 'attendance') {
                 let attendance = DATA.attendance;
-                if (!isAdmin) {
-                    const students = getTeacherStudents(DATA.currentUser.username);
-                    const ids = students.map(s => s.id);
-                    attendance = attendance.filter(a => ids.includes(a.studentId));
-                }
-                data = attendance.map(a => ({ 
-                    'دانش‌آموز': getStudentById(a.studentId)?.name || '', 
-                    'تاریخ': a.date, 
-                    'وضعیت': a.status 
-                }));
+                if (!isAdmin) { const students = getTeacherStudents(DATA.currentUser.username); const ids = students.map(s => s.id); attendance = attendance.filter(a => ids.includes(a.studentId)); }
+                data = attendance.map(a => ({ 'دانش‌آموز': getStudentById(a.studentId)?.name || '', 'تاریخ': a.date, 'وضعیت': a.status }));
                 sheetName = 'حضور';
             }
-            
-            if (type === 'all' && isAdmin) {
-                exportAllToExcel();
-                return;
-            }
-            
-            if (data.length === 0) { 
-                showToast('❌ داده‌ای برای خروجی وجود ندارد', 'error'); 
-                return; 
-            }
-            
+            if (type === 'all' && isAdmin) { exportAllToExcel(); return; }
+            if (data.length === 0) { showToast('❌ داده‌ای برای خروجی وجود ندارد', 'error'); return; }
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.json_to_sheet(data);
             ws['!cols'] = Object.keys(data[0]).map(() => ({ wch: 18 }));
             XLSX.utils.book_append_sheet(wb, ws, sheetName);
             XLSX.writeFile(wb, `گزارش_${sheetName}_${new Date().toLocaleDateString('fa-IR')}.xlsx`);
-            showToast('✅ فایل با موفقیت دانلود شد', 'success');
+            showToast('✅ فایل دانلود شد', 'success');
             addActivity('خروجی اکسل', 'خروجی ' + type + ' گرفته شد');
-        } catch (e) {
-            showToast('❌ خطا: ' + e.message, 'error');
-        }
+        } catch (e) { showToast('❌ خطا: ' + e.message, 'error'); }
     }, 300);
 }
 
@@ -3080,9 +1832,7 @@ function exportAllToExcel() {
         XLSX.writeFile(wb, `گزارش_کامل_${new Date().toLocaleDateString('fa-IR')}.xlsx`);
         showToast('✅ خروجی کامل دانلود شد', 'success');
         addActivity('خروجی اکسل', 'خروجی کامل گرفته شد');
-    } catch (e) {
-        showToast('❌ خطا: ' + e.message, 'error');
-    }
+    } catch (e) { showToast('❌ خطا: ' + e.message, 'error'); }
 }
 
 // ============================================================
@@ -3095,14 +1845,10 @@ function generateReport(type) {
         const students = isAdmin ? DATA.students : getTeacherStudents(DATA.currentUser.username);
         let report = '📊 گزارش ماهانه\n' + '='.repeat(30) + '\n\n';
         report += `دانش‌آموزان: ${students.length}\n`;
-        if (isAdmin) {
-            report += `معلمان: ${DATA.teachers.length}\n`;
-            report += `کلاس‌ها: ${DATA.classes.length}\n`;
-            report += `دروس: ${DATA.subjects.length}\n`;
-        }
+        if (isAdmin) { report += `معلمان: ${DATA.teachers.length}\nکلاس‌ها: ${DATA.classes.length}\nدروس: ${DATA.subjects.length}\n`; }
         let avgSum = 0; students.forEach(s => { if (s.average) avgSum += s.average; });
         report += `میانگین نمرات: ${(avgSum / students.length || 0).toFixed(2)}\n\n`;
-        report += '📋 لیست دانش‌آموزان:\n';
+        report += 'لیست دانش‌آموزان:\n';
         students.forEach(s => { report += `- ${s.name} | میانگین: ${(s.average || 0).toFixed(1)} | ${s.status}\n`; });
         downloadFile(report, `گزارش_${new Date().toLocaleDateString('fa-IR')}.txt`, 'text/plain');
         showToast('📄 گزارش تولید شد', 'success');
@@ -3117,9 +1863,7 @@ function generateReport(type) {
             analysis += `بیشترین: ${Math.max(...values)}\n`;
             analysis += `کمترین: ${Math.min(...values)}\n`;
             analysis += `میانگین: ${(values.reduce((a,b) => a+b, 0) / values.length).toFixed(2)}\n`;
-        } else {
-            analysis += 'هیچ نمره‌ای ثبت نشده است';
-        }
+        } else { analysis += 'هیچ نمره‌ای ثبت نشده است'; }
         downloadFile(analysis, `تحلیل_${new Date().toLocaleDateString('fa-IR')}.txt`, 'text/plain');
         showToast('📊 تحلیل تولید شد', 'info');
     }
@@ -3142,16 +1886,11 @@ function showReportCard(e) {
     if (!student) { showToast('❌ دانش‌آموز یافت نشد', 'error'); return; }
     if (DATA.currentUser.role === 'teacher') {
         const teacherClassIds = getTeacherClassIds(DATA.currentUser.username);
-        if (!teacherClassIds.includes(student.classId)) {
-            showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error');
-            return;
-        }
+        if (!teacherClassIds.includes(student.classId)) { showToast('❌ این دانش‌آموز در کلاس شما نیست', 'error'); return; }
     }
-    
     const grades = getStudentGrades(studentId);
     const avg = calculateAverage(grades);
     const cls = getClassById(student.classId);
-    
     let html = `<div style="padding:14px; background:var(--bg-input); border-radius:10px; border:1px solid var(--border);">
         <h4 style="text-align:center; font-size:18px; margin-bottom:10px;">📜 کارنامه تحصیلی</h4>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:10px; font-size:13px;">
@@ -3160,12 +1899,11 @@ function showReportCard(e) {
             <div><strong>کلاس:</strong> ${cls ? escapeHtml(cls.name) : 'ثبت نشده'}</div>
             <div><strong>پایه:</strong> ${cls ? cls.grade : '-'}</div>
         </div>
-        <div style="text-align:center; padding:10px; background:rgba(108,60,225,0.08); border-radius:8px; margin-bottom:10px;">
+        <div style="text-align:center; padding:10px; background:rgba(124,77,255,0.08); border-radius:8px; margin-bottom:10px;">
             <div style="font-size:24px; font-weight:700;">${avg.toFixed(2)}</div>
             <div class="text-muted" style="font-size:12px;">میانگین کل</div>
             <div style="margin-top:4px;"><span class="status-badge ${avg >= 18 ? 'excellent' : avg >= 14 ? 'good' : avg >= 10 ? 'pending' : 'fail'}">${student.status}</span></div>
         </div>`;
-    
     if (grades.length === 0) {
         html += '<p class="text-muted" style="text-align:center; padding:10px;">هیچ نمره‌ای ثبت نشده است</p>';
     } else {
@@ -3180,11 +1918,9 @@ function showReportCard(e) {
         });
         html += '</div></div>';
     }
-    
     html += `<div style="text-align:center; margin-top:12px;">
         <button class="btn btn-primary btn-sm" onclick="window.print()"><i class="fas fa-print"></i> چاپ</button>
     </div></div>`;
-    
     document.getElementById('reportCardResult').innerHTML = html;
     document.getElementById('reportCardResult').style.display = 'block';
     showToast('📄 کارنامه تولید شد', 'success');
@@ -3206,49 +1942,31 @@ function openModal(name) {
     }
     if (name === 'addClass') {
         document.getElementById('classGrade').value = '';
-        const select = document.getElementById('classTeachers');
-        select.innerHTML = '';
+        const sel = document.getElementById('classTeachers');
+        sel.innerHTML = '';
         DATA.teachers.forEach(t => {
             const opt = document.createElement('option');
             opt.value = t.id;
             opt.textContent = t.id + ' - ' + t.name + ' (' + t.specialty + ')';
-            select.appendChild(opt);
+            sel.appendChild(opt);
         });
-        if (select.options.length === 0) {
-            select.innerHTML = '<option value="">ابتدا معلم بسازید...</option>';
-        }
+        if (sel.options.length === 0) sel.innerHTML = '<option value="">ابتدا معلم بسازید...</option>';
     }
     if (name === 'addTeacher') {
-        const classSelect = document.getElementById('teacherClasses');
-        classSelect.innerHTML = '';
-        DATA.classes.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.id + ' - ' + c.name;
-            classSelect.appendChild(opt);
+        ['teacherClasses', 'teacherSubjects'].forEach(id => {
+            const sel = document.getElementById(id);
+            if (sel) {
+                sel.innerHTML = '';
+                const items = id === 'teacherClasses' ? DATA.classes : DATA.subjects;
+                items.forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item.id;
+                    opt.textContent = item.id + ' - ' + (item.name || '');
+                    sel.appendChild(opt);
+                });
+                if (sel.options.length === 0) sel.innerHTML = '<option value="">ابتدا ' + (id === 'teacherClasses' ? 'کلاس' : 'درس') + ' بسازید...</option>';
+            }
         });
-        if (classSelect.options.length === 0) {
-            classSelect.innerHTML = '<option value="">ابتدا کلاس بسازید...</option>';
-        }
-        const subjectSelect = document.getElementById('teacherSubjects');
-        subjectSelect.innerHTML = '';
-        DATA.subjects.forEach(s => {
-            const opt = document.createElement('option');
-            opt.value = s.id;
-            opt.textContent = s.id + ' - ' + s.name;
-            subjectSelect.appendChild(opt);
-        });
-        if (subjectSelect.options.length === 0) {
-            subjectSelect.innerHTML = '<option value="">ابتدا درس بسازید...</option>';
-        }
-    }
-    if (name === 'scanStudent' || name === 'scanStudentTeacher' || name === 'scanClass') {
-        stopScanner();
-        scannedStudentId = null;
-        scannedClassId = null;
-        document.getElementById('scannedStudentInfo').style.display = 'none';
-        document.getElementById('scannedStudentInfoTeacher').style.display = 'none';
-        document.getElementById('scannedClassInfo').style.display = 'none';
     }
 }
 
@@ -3256,12 +1974,7 @@ function closeModal(name) {
     const modal = document.getElementById('modal-' + name);
     if (!modal) return;
     modal.classList.add('closing');
-    setTimeout(() => {
-        modal.classList.remove('active', 'closing');
-    }, 400);
-    if (name === 'scanStudent' || name === 'scanStudentTeacher' || name === 'scanClass') {
-        stopScanner();
-    }
+    setTimeout(() => { modal.classList.remove('active', 'closing'); }, 400);
 }
 
 document.querySelectorAll('.modal-overlay').forEach(el => {
@@ -3269,9 +1982,6 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
         if (e.target === this) {
             const id = this.id.replace('modal-', '');
             closeModal(id);
-            if (id === 'scanStudent' || id === 'scanStudentTeacher' || id === 'scanClass') {
-                stopScanner();
-            }
         }
     });
 });
@@ -3307,12 +2017,10 @@ document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
         document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
         const page = this.dataset.page;
-        
         if (page === 'more') {
             const hidden = document.querySelector('.bottom-nav .nav-item:not(.hidden)');
             if (hidden) { hidden.click(); return; }
         }
-        
         document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
         let panelId = 'panel-' + page;
         if (DATA.currentUser && DATA.currentUser.role === 'teacher' && page === 'students') {
@@ -3379,27 +2087,8 @@ function toggleProfileMenu() {
 
 window.addEventListener('scroll', function() {
     const btn = document.getElementById('scrollTopBtn');
-    if (window.scrollY > 300) {
-        btn.classList.add('show');
-    } else {
-        btn.classList.remove('show');
-    }
-});
-
-// ============================================================
-// ================ KEYBOARD SHORTCUTS =========================
-// ============================================================
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.modal-overlay.active').forEach(el => {
-            const id = el.id.replace('modal-', '');
-            closeModal(id);
-            if (id === 'scanStudent' || id === 'scanStudentTeacher' || id === 'scanClass') {
-                stopScanner();
-            }
-        });
-    }
+    if (window.scrollY > 300) btn.classList.add('show');
+    else btn.classList.remove('show');
 });
 
 // ============================================================
@@ -3409,14 +2098,9 @@ document.addEventListener('keydown', function(e) {
 loadAllData();
 
 console.log('🏫 سیستم مدیریت مدرسه هوشمند - نسخه نهایی');
-console.log('✅ تمام مشکلات برطرف شد:');
-console.log('  🌐 زبان فارسی/انگلیسی');
-console.log('  🌓 حالت روز/شب');
-console.log('  👨‍🏫 معلمان با کلاس‌ها و درس‌ها');
-console.log('  📚 همه بخش‌ها کار میکنند');
-console.log('  💾 ذخیره‌سازی دائمی');
-console.log('🔑 ورود مدیر: admin / Admin@1404');
-console.log('👨‍🏫 ورود معلم: شناسه معلم / رمز عبور');
+console.log('✅ همه بخش‌ها کار می‌کنند');
+console.log('🔑 مدیر: admin / Admin@1404');
+console.log('👨‍🏫 معلم: شناسه معلم / رمز عبور');
 </script>
 </body>
 </html>
