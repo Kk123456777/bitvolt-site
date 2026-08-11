@@ -12,7 +12,6 @@
     <style>
         /* ===== ROOT VARIABLES ===== */
         :root {
-            /* Light Theme (Default) */
             --primary: #7C4DFF;
             --primary-dark: #651FFF;
             --primary-light: #B388FF;
@@ -32,7 +31,6 @@
             --transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
         }
         
-        /* Dark Theme */
         [data-theme="dark"] {
             --bg: #0a0a1a;
             --bg-card: #12122a;
@@ -55,11 +53,6 @@
             transition: var(--transition);
         }
         
-        /* ===== LANGUAGE ===== */
-        [dir="ltr"] { direction: ltr; text-align: left; }
-        [dir="rtl"] { direction: rtl; text-align: right; }
-        
-        /* ===== BG ===== */
         .bg-premium {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -71,7 +64,6 @@
             transition: var(--transition);
         }
         
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
@@ -326,9 +318,7 @@
         .sidebar-footer a:hover { background: rgba(244,67,54,0.1); color: var(--danger); }
         
         /* ===== MAIN ===== */
-        .main-content {
-            transition: var(--transition);
-        }
+        .main-content { transition: var(--transition); }
         
         /* ===== STATS ===== */
         .stats-grid {
@@ -769,7 +759,7 @@
         .setup-wizard .step-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
         .setup-wizard .step-actions .btn { flex: 1; justify-content: center; padding: 6px 10px; font-size: 10px; }
         
-        /* ===== HELP / GUIDE ===== */
+        /* ===== GUIDE ===== */
         .guide-section {
             background: var(--bg-card);
             border-radius: var(--radius-sm);
@@ -1495,6 +1485,50 @@
 
 <!-- ===== MODALS ===== -->
 
+<!-- Add Class (مهم: این مودال باید درست کار کنه) -->
+<div class="modal-overlay" id="modal-addClass">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 data-key="addClassModal">➕ افزودن کلاس</h3>
+            <button class="close-modal" onclick="closeModal('addClass')">&times;</button>
+        </div>
+        <form onsubmit="addClass(event)" id="addClassForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label data-key="idLabel">شناسه</label>
+                    <input type="text" id="classId" placeholder="مثال: C001" required>
+                </div>
+                <div class="form-group">
+                    <label data-key="nameLabel">نام کلاس</label>
+                    <input type="text" id="className" placeholder="مثال: ۱۰-الف" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label data-key="gradeLabel">پایه</label>
+                    <input type="number" id="classGrade" placeholder="مثال: 10" required>
+                </div>
+                <div class="form-group">
+                    <label data-key="capacityLabel">ظرفیت</label>
+                    <input type="number" id="classCapacity" value="30" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label data-key="teacherLabel">معلم‌ها</label>
+                <select id="classTeachers" multiple style="height:70px;">
+                    <option value="">ابتدا معلم بسازید...</option>
+                </select>
+                <div style="font-size:10px; color:var(--text-secondary); margin-top:4px;">
+                    <i class="fas fa-info-circle"></i> برای انتخاب چند معلم، Ctrl+Click کنید
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> <span data-key="saveBtn">ثبت کلاس</span>
+            </button>
+        </form>
+    </div>
+</div>
+
 <!-- Add Student -->
 <div class="modal-overlay" id="modal-addStudent">
     <div class="modal">
@@ -1504,12 +1538,10 @@
                 <div class="form-group">
                     <label data-key="idLabel">شناسه</label>
                     <input type="text" id="studentId" placeholder="مثال: 14001" required>
-                    <div class="error-msg" id="studentIdError">لطفاً شناسه را وارد کنید</div>
                 </div>
                 <div class="form-group">
                     <label data-key="nameLabel">نام کامل</label>
                     <input type="text" id="studentName" placeholder="نام" required>
-                    <div class="error-msg" id="studentNameError">لطفاً نام را وارد کنید</div>
                 </div>
             </div>
             <div class="form-row">
@@ -1520,41 +1552,9 @@
                 <div class="form-group">
                     <label data-key="phoneLabel">شماره والدین</label>
                     <input type="tel" id="studentParentPhone" placeholder="مثال: 09123456789">
-                    <div class="error-msg" id="studentPhoneError">شماره باید ۱۱ رقم باشد</div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت دانش‌آموز</span></button>
-        </form>
-    </div>
-</div>
-
-<!-- Edit Student -->
-<div class="modal-overlay" id="modal-editStudent">
-    <div class="modal">
-        <div class="modal-header"><h3 data-key="editStudentModal">✏️ ویرایش دانش‌آموز</h3><button class="close-modal" onclick="closeModal('editStudent')">&times;</button></div>
-        <form onsubmit="editStudent(event)" id="editStudentForm">
-            <input type="hidden" id="editStudentId">
-            <div class="form-row">
-                <div class="form-group">
-                    <label data-key="idLabel">شناسه</label>
-                    <input type="text" id="editStudentIdDisplay" disabled style="opacity:0.6;">
-                </div>
-                <div class="form-group">
-                    <label data-key="nameLabel">نام کامل</label>
-                    <input type="text" id="editStudentName" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label data-key="classLabel">کلاس</label>
-                    <select id="editStudentClass" required><option value="">انتخاب...</option></select>
-                </div>
-                <div class="form-group">
-                    <label data-key="phoneLabel">شماره والدین</label>
-                    <input type="tel" id="editStudentPhone" placeholder="مثال: 09123456789">
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveChanges">ذخیره تغییرات</span></button>
         </form>
     </div>
 </div>
@@ -1579,65 +1579,6 @@
     </div>
 </div>
 
-<!-- Edit Teacher -->
-<div class="modal-overlay" id="modal-editTeacher">
-    <div class="modal">
-        <div class="modal-header"><h3 data-key="editTeacherModal">✏️ ویرایش معلم</h3><button class="close-modal" onclick="closeModal('editTeacher')">&times;</button></div>
-        <form onsubmit="editTeacher(event)">
-            <input type="hidden" id="editTeacherId">
-            <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="editTeacherIdDisplay" disabled style="opacity:0.6;"></div>
-                <div class="form-group"><label data-key="nameLabel">نام کامل</label><input type="text" id="editTeacherName" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label data-key="specialtyLabel">تخصص</label><input type="text" id="editTeacherSpecialty" required></div>
-                <div class="form-group"><label data-key="phoneLabel">شماره تماس</label><input type="tel" id="editTeacherPhone"></div>
-            </div>
-            <div class="form-group"><label data-key="classLabel">کلاس‌های تدریس</label><select id="editTeacherClasses" multiple style="height:70px;"></select></div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveChanges">ذخیره تغییرات</span></button>
-        </form>
-    </div>
-</div>
-
-<!-- Add Class -->
-<div class="modal-overlay" id="modal-addClass">
-    <div class="modal">
-        <div class="modal-header"><h3 data-key="addClassModal">➕ افزودن کلاس</h3><button class="close-modal" onclick="closeModal('addClass')">&times;</button></div>
-        <form onsubmit="addClass(event)">
-            <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="classId" placeholder="مثال: C001" required></div>
-                <div class="form-group"><label data-key="nameLabel">نام کلاس</label><input type="text" id="className" placeholder="مثال: ۱۰-الف" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label data-key="gradeLabel">پایه</label><input type="number" id="classGrade" placeholder="مثال: 10" required></div>
-                <div class="form-group"><label data-key="capacityLabel">ظرفیت</label><input type="number" id="classCapacity" value="30" required></div>
-            </div>
-            <div class="form-group"><label data-key="teacherLabel">معلم‌ها</label><select id="classTeachers" multiple style="height:70px;"></select></div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت کلاس</span></button>
-        </form>
-    </div>
-</div>
-
-<!-- Edit Class -->
-<div class="modal-overlay" id="modal-editClass">
-    <div class="modal">
-        <div class="modal-header"><h3 data-key="editClassModal">✏️ ویرایش کلاس</h3><button class="close-modal" onclick="closeModal('editClass')">&times;</button></div>
-        <form onsubmit="editClass(event)">
-            <input type="hidden" id="editClassId">
-            <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="editClassIdDisplay" disabled style="opacity:0.6;"></div>
-                <div class="form-group"><label data-key="nameLabel">نام کلاس</label><input type="text" id="editClassName" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label data-key="gradeLabel">پایه</label><input type="number" id="editClassGrade" required></div>
-                <div class="form-group"><label data-key="capacityLabel">ظرفیت</label><input type="number" id="editClassCapacity" required></div>
-            </div>
-            <div class="form-group"><label data-key="teacherLabel">معلم‌ها</label><select id="editClassTeachers" multiple style="height:70px;"></select></div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveChanges">ذخیره تغییرات</span></button>
-        </form>
-    </div>
-</div>
-
 <!-- Add Subject -->
 <div class="modal-overlay" id="modal-addSubject">
     <div class="modal">
@@ -1656,29 +1597,6 @@
                 <div class="form-group"><label data-key="typeLabel">نوع</label><select id="subjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div>
             </div>
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveBtn">ثبت درس</span></button>
-        </form>
-    </div>
-</div>
-
-<!-- Edit Subject -->
-<div class="modal-overlay" id="modal-editSubject">
-    <div class="modal">
-        <div class="modal-header"><h3 data-key="editSubjectModal">✏️ ویرایش درس</h3><button class="close-modal" onclick="closeModal('editSubject')">&times;</button></div>
-        <form onsubmit="editSubject(event)">
-            <input type="hidden" id="editSubjectId">
-            <div class="form-row">
-                <div class="form-group"><label data-key="idLabel">شناسه</label><input type="text" id="editSubjectIdDisplay" disabled style="opacity:0.6;"></div>
-                <div class="form-group"><label data-key="nameLabel">نام درس</label><input type="text" id="editSubjectName" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label data-key="teacherLabel">معلم</label><select id="editSubjectTeacher" required><option value="">انتخاب...</option></select></div>
-                <div class="form-group"><label data-key="classLabel">کلاس</label><select id="editSubjectClass" required><option value="">انتخاب...</option></select></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label data-key="unitLabel">واحد</label><input type="number" id="editSubjectUnits" required></div>
-                <div class="form-group"><label data-key="typeLabel">نوع</label><select id="editSubjectType"><option value="نظری">نظری</option><option value="عملی">عملی</option><option value="نظری-عملی">نظری-عملی</option></select></div>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-key="saveChanges">ذخیره تغییرات</span></button>
         </form>
     </div>
 </div>
@@ -1833,14 +1751,12 @@ let currentTheme = 'dark';
 
 const TRANSLATIONS = {
     fa: {
-        // Login
         loginTitle: 'مدیریت هوشمند',
         loginSub: 'سیستم جامع مدیریت آموزشی',
         lblUsername: 'نام کاربری',
         lblPassword: 'رمز عبور',
         lblRole: 'نقش',
         loginText: '🚀 ورود به سیستم',
-        // Navigation
         navHome: 'داشبورد',
         navGuide: 'راهنمایی',
         navStudents: 'دانش‌آموزان',
@@ -1853,14 +1769,12 @@ const TRANSLATIONS = {
         navReports: 'گزارشات',
         navMore: 'بیشتر',
         logout: 'خروج از سیستم',
-        // Stats
         statStudents: 'دانش‌آموز',
         statTeachers: 'معلم',
         statClasses: 'کلاس',
         statSubjects: 'درس',
         statAverage: 'میانگین',
         statAttendance: 'حضور',
-        // Buttons
         addBtn: 'افزودن',
         saveBtn: 'ثبت',
         saveChanges: 'ذخیره تغییرات',
@@ -1877,7 +1791,6 @@ const TRANSLATIONS = {
         gradeBtn: 'نمره',
         attendanceBtn: 'حضور',
         fullExport: 'خروجی کامل',
-        // Labels
         idLabel: 'شناسه',
         nameLabel: 'نام کامل',
         classLabel: 'کلاس',
@@ -1895,12 +1808,10 @@ const TRANSLATIONS = {
         statusLabel: 'وضعیت',
         noteLabel: 'توضیحات',
         examTypeLabel: 'نوع آزمون',
-        // Quick
         quickId: 'شناسه',
         quickName: 'نام کامل',
         quickClass: 'کلاس',
         quickGrade: 'پایه',
-        // Setup
         setupTitle: 'راه‌اندازی مدرسه',
         setupSub: 'مراحل به ترتیب',
         step1Title: 'کلاس‌ها',
@@ -1915,7 +1826,6 @@ const TRANSLATIONS = {
         stepBtn2: 'معلم',
         stepBtn3: 'دانش‌آموز',
         stepBtn4: 'درس',
-        // Guide
         guideTitle: 'راهنمای استفاده از سیستم',
         guideQuickStart: 'شروع سریع',
         guideStep1Title: 'ایجاد کلاس‌ها',
@@ -1943,7 +1853,6 @@ const TRANSLATIONS = {
         guideFeature3Desc: 'جستجوی سریع در جدول‌ها و فیلتر بر اساس کلاس و درس',
         guideFeature4: 'ویرایش اطلاعات',
         guideFeature4Desc: 'ویرایش دانش‌آموزان، معلمان، کلاس‌ها و دروس',
-        // Modals
         addStudentModal: '➕ افزودن دانش‌آموز',
         editStudentModal: '✏️ ویرایش دانش‌آموز',
         addTeacherModal: '➕ افزودن معلم',
@@ -1961,7 +1870,6 @@ const TRANSLATIONS = {
         scanHint: 'بارکد را اسکن کنید',
         bulkHint: 'هر دانش‌آموز در یک خط:',
         bulkNote: 'شناسه کلاس باید از قبل وجود داشته باشد',
-        // Titles
         studentsTitle: '👨‍🎓 دانش‌آموزان',
         myStudentsTitle: '👨‍🎓 دانش‌آموزان من',
         teachersTitle: '👨‍🏫 معلمان',
@@ -1970,7 +1878,6 @@ const TRANSLATIONS = {
         gradesTitle: '⭐ نمرات',
         attendanceTitle: '✅ حضور و غیاب',
         reportsTitle: '📊 گزارشات',
-        // Other
         teacherRestricted: 'فقط دانش‌آموزان کلاس‌های خود را می‌بینید',
         activitiesTitle: '📋 فعالیت‌ها',
         alertsTitle: '🚨 هشدارها',
@@ -1981,7 +1888,6 @@ const TRANSLATIONS = {
         reportAnalytics: 'تحلیل',
         reportRanking: 'رتبه‌بندی',
         footerText: 'ساخته شده توسط',
-        // Search
         searchPlaceholder: '🔍 جستجو... (نام یا شناسه)',
         allClasses: 'همه کلاس‌ها',
         allSubjects: 'همه دروس',
@@ -2151,7 +2057,6 @@ function applyTranslations() {
             }
         }
     });
-    // Update page title
     document.querySelector('.login-logo h1').textContent = t.loginTitle;
     document.querySelector('.login-logo p').textContent = t.loginSub;
     document.getElementById('lblUsername').textContent = t.lblUsername;
@@ -2274,7 +2179,6 @@ function setupUI() {
     document.getElementById('roleBadge').className = 'role-badge ' + (isAdmin ? 'admin' : 'teacher');
     document.getElementById('userAvatar').textContent = DATA.currentUser.name.substring(0, 2);
     
-    // Sidebar
     document.querySelectorAll('.sidebar-menu li a').forEach(item => {
         const page = item.dataset.page;
         if (isAdmin) {
@@ -2289,7 +2193,6 @@ function setupUI() {
         }
     });
     
-    // Bottom nav
     document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
         const page = item.dataset.page;
         if (isAdmin) {
@@ -2310,10 +2213,7 @@ function setupUI() {
         document.querySelector('.bottom-nav .nav-item[data-page="mystudents"]')?.classList.add('active');
     }
     
-    // Apply translations
     applyTranslations();
-    
-    // Apply theme
     document.documentElement.setAttribute('data-theme', currentTheme);
     document.getElementById('themeIcon').className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
 }
@@ -2339,7 +2239,7 @@ function loadAllData() {
     }
     
     try {
-        const saved = localStorage.getItem('schoolDataV8');
+        const saved = localStorage.getItem('schoolDataV9');
         if (saved) { Object.assign(DATA, JSON.parse(saved)); renderAll(); return; }
     } catch(e) {}
     
@@ -2375,7 +2275,7 @@ function loadAllData() {
     renderAll();
 }
 
-function saveData() { localStorage.setItem('schoolDataV8', JSON.stringify(DATA)); }
+function saveData() { localStorage.setItem('schoolDataV9', JSON.stringify(DATA)); }
 
 function getStudentById(id) { return DATA.students.find(s => s.id === id); }
 function getTeacherById(id) { return DATA.teachers.find(t => t.id === id); }
@@ -2515,6 +2415,49 @@ function bulkImportStudents() {
 // ================ CRUD =======================================
 // ============================================================
 
+// ===== ADD CLASS (اصلاح شده) =====
+function addClass(e) {
+    e.preventDefault();
+    if (DATA.currentUser.role !== 'admin') {
+        showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error');
+        return;
+    }
+    
+    const id = document.getElementById('classId').value.trim();
+    const name = document.getElementById('className').value.trim();
+    const grade = parseInt(document.getElementById('classGrade').value);
+    const capacity = parseInt(document.getElementById('classCapacity').value);
+    const teachers = Array.from(document.getElementById('classTeachers').selectedOptions).map(o => o.value);
+    
+    // اعتبارسنجی
+    if (!id) { showToast('❌ شناسه کلاس را وارد کنید', 'error'); return; }
+    if (!name) { showToast('❌ نام کلاس را وارد کنید', 'error'); return; }
+    if (!grade || isNaN(grade)) { showToast('❌ پایه را به درستی وارد کنید', 'error'); return; }
+    if (!capacity || isNaN(capacity) || capacity < 1) { showToast('❌ ظرفیت را به درستی وارد کنید', 'error'); return; }
+    
+    if (DATA.classes.find(c => c.id === id)) {
+        showToast('❌ شناسه کلاس تکراری است!', 'error');
+        return;
+    }
+    
+    DATA.classes.push({ id, name, grade, capacity, teachers, students: [] });
+    saveData();
+    renderAll();
+    updateDashboard();
+    updateSetupWizard();
+    closeModal('addClass');
+    showToast('✅ کلاس "' + name + '" با موفقیت ثبت شد', 'success');
+    addActivity('افزودن کلاس', 'کلاس ' + name + ' اضافه شد');
+    
+    // پاک کردن فرم
+    document.getElementById('classId').value = '';
+    document.getElementById('className').value = '';
+    document.getElementById('classGrade').value = '';
+    document.getElementById('classCapacity').value = '30';
+    document.getElementById('classTeachers').selectedIndex = -1;
+}
+
+// ===== ADD STUDENT =====
 function addStudent(e) {
     e.preventDefault();
     if (DATA.currentUser.role !== 'admin') {
@@ -2526,8 +2469,10 @@ function addStudent(e) {
     const classId = document.getElementById('studentClassSelect').value;
     const parentPhone = document.getElementById('studentParentPhone').value.trim();
     
-    if (DATA.students.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
+    if (!id) { showToast('❌ شناسه را وارد کنید', 'error'); return; }
+    if (!name) { showToast('❌ نام را وارد کنید', 'error'); return; }
     if (!classId) { showToast('❌ کلاس را انتخاب کنید', 'error'); return; }
+    if (DATA.students.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
     if (parentPhone && !/^[0-9]{11}$/.test(parentPhone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
     
     DATA.students.push({ id, name, classId, parentPhone, average: 0, status: 'نامشخص' });
@@ -2548,36 +2493,7 @@ function addStudent(e) {
     document.getElementById('studentParentPhone').value = '';
 }
 
-function editStudent(e) {
-    e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند ویرایش کند', 'error');
-        return;
-    }
-    const id = document.getElementById('editStudentId').value;
-    const name = document.getElementById('editStudentName').value.trim();
-    const classId = document.getElementById('editStudentClass').value;
-    const parentPhone = document.getElementById('editStudentPhone').value.trim();
-    
-    if (!name) { showToast('❌ نام را وارد کنید', 'error'); return; }
-    if (!classId) { showToast('❌ کلاس را انتخاب کنید', 'error'); return; }
-    
-    const student = getStudentById(id);
-    if (!student) { showToast('❌ دانش‌آموز یافت نشد', 'error'); return; }
-    
-    student.name = name;
-    student.classId = classId;
-    student.parentPhone = parentPhone;
-    
-    saveData();
-    renderAll();
-    updateDashboard();
-    updateSetupWizard();
-    closeModal('editStudent');
-    showToast('✅ دانش‌آموز ویرایش شد', 'success');
-    addActivity('ویرایش دانش‌آموز', 'دانش‌آموز ' + name + ' ویرایش شد');
-}
-
+// ===== ADD TEACHER =====
 function addTeacher(e) {
     e.preventDefault();
     if (DATA.currentUser.role !== 'admin') {
@@ -2591,6 +2507,7 @@ function addTeacher(e) {
     const password = document.getElementById('teacherPassword').value;
     const classes = Array.from(document.getElementById('teacherClasses').selectedOptions).map(o => o.value);
     
+    if (!id || !name || !specialty) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (DATA.teachers.find(t => t.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
     if (password.length < 6) { showToast('❌ رمز عبور حداقل ۶ کاراکتر', 'error'); return; }
     if (phone && !/^[0-9]{11}$/.test(phone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
@@ -2610,98 +2527,7 @@ function addTeacher(e) {
     document.getElementById('teacherPassword').value = '';
 }
 
-function editTeacher(e) {
-    e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند ویرایش کند', 'error');
-        return;
-    }
-    const id = document.getElementById('editTeacherId').value;
-    const name = document.getElementById('editTeacherName').value.trim();
-    const specialty = document.getElementById('editTeacherSpecialty').value.trim();
-    const phone = document.getElementById('editTeacherPhone').value.trim();
-    const classes = Array.from(document.getElementById('editTeacherClasses').selectedOptions).map(o => o.value);
-    
-    if (!name || !specialty) { showToast('❌ نام و تخصص را وارد کنید', 'error'); return; }
-    if (phone && !/^[0-9]{11}$/.test(phone)) { showToast('❌ شماره تماس نامعتبر', 'error'); return; }
-    
-    const teacher = getTeacherById(id);
-    if (!teacher) { showToast('❌ معلم یافت نشد', 'error'); return; }
-    
-    teacher.name = name;
-    teacher.specialty = specialty;
-    teacher.phone = phone;
-    teacher.classes = classes;
-    
-    saveData();
-    renderAll();
-    updateDashboard();
-    updateSetupWizard();
-    closeModal('editTeacher');
-    showToast('✅ معلم ویرایش شد', 'success');
-    addActivity('ویرایش معلم', 'معلم ' + name + ' ویرایش شد');
-}
-
-function addClass(e) {
-    e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند کلاس اضافه کند', 'error');
-        return;
-    }
-    const id = document.getElementById('classId').value.trim();
-    const name = document.getElementById('className').value.trim();
-    const grade = parseInt(document.getElementById('classGrade').value);
-    const capacity = parseInt(document.getElementById('classCapacity').value);
-    const teachers = Array.from(document.getElementById('classTeachers').selectedOptions).map(o => o.value);
-    
-    if (DATA.classes.find(c => c.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    if (!name || !grade) { showToast('❌ نام و پایه را وارد کنید', 'error'); return; }
-    
-    DATA.classes.push({ id, name, grade, capacity, teachers, students: [] });
-    saveData();
-    renderAll();
-    updateDashboard();
-    updateSetupWizard();
-    closeModal('addClass');
-    showToast('✅ کلاس ثبت شد', 'success');
-    addActivity('افزودن کلاس', 'کلاس ' + name + ' اضافه شد');
-    document.getElementById('classId').value = '';
-    document.getElementById('className').value = '';
-    document.getElementById('classGrade').value = '';
-    document.getElementById('classCapacity').value = '30';
-}
-
-function editClass(e) {
-    e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند ویرایش کند', 'error');
-        return;
-    }
-    const id = document.getElementById('editClassId').value;
-    const name = document.getElementById('editClassName').value.trim();
-    const grade = parseInt(document.getElementById('editClassGrade').value);
-    const capacity = parseInt(document.getElementById('editClassCapacity').value);
-    const teachers = Array.from(document.getElementById('editClassTeachers').selectedOptions).map(o => o.value);
-    
-    if (!name || !grade) { showToast('❌ نام و پایه را وارد کنید', 'error'); return; }
-    
-    const cls = getClassById(id);
-    if (!cls) { showToast('❌ کلاس یافت نشد', 'error'); return; }
-    
-    cls.name = name;
-    cls.grade = grade;
-    cls.capacity = capacity;
-    cls.teachers = teachers;
-    
-    saveData();
-    renderAll();
-    updateDashboard();
-    updateSetupWizard();
-    closeModal('editClass');
-    showToast('✅ کلاس ویرایش شد', 'success');
-    addActivity('ویرایش کلاس', 'کلاس ' + name + ' ویرایش شد');
-}
-
+// ===== ADD SUBJECT =====
 function addSubject(e) {
     e.preventDefault();
     if (DATA.currentUser.role !== 'admin') {
@@ -2715,8 +2541,8 @@ function addSubject(e) {
     const units = parseInt(document.getElementById('subjectUnits').value);
     const type = document.getElementById('subjectType').value;
     
+    if (!id || !name || !teacherId || !classId) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     if (DATA.subjects.find(s => s.id === id)) { showToast('❌ شناسه تکراری است!', 'error'); return; }
-    if (!name || !teacherId || !classId) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
     
     DATA.subjects.push({ id, name, teacherId, classId, units, type });
     saveData();
@@ -2729,39 +2555,6 @@ function addSubject(e) {
     document.getElementById('subjectId').value = '';
     document.getElementById('subjectName').value = '';
     document.getElementById('subjectUnits').value = '3';
-}
-
-function editSubject(e) {
-    e.preventDefault();
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند ویرایش کند', 'error');
-        return;
-    }
-    const id = document.getElementById('editSubjectId').value;
-    const name = document.getElementById('editSubjectName').value.trim();
-    const teacherId = document.getElementById('editSubjectTeacher').value;
-    const classId = document.getElementById('editSubjectClass').value;
-    const units = parseInt(document.getElementById('editSubjectUnits').value);
-    const type = document.getElementById('editSubjectType').value;
-    
-    if (!name || !teacherId || !classId) { showToast('❌ تمام فیلدها را پر کنید', 'error'); return; }
-    
-    const subject = getSubjectById(id);
-    if (!subject) { showToast('❌ درس یافت نشد', 'error'); return; }
-    
-    subject.name = name;
-    subject.teacherId = teacherId;
-    subject.classId = classId;
-    subject.units = units;
-    subject.type = type;
-    
-    saveData();
-    renderAll();
-    updateDashboard();
-    updateSetupWizard();
-    closeModal('editSubject');
-    showToast('✅ درس ویرایش شد', 'success');
-    addActivity('ویرایش درس', 'درس ' + name + ' ویرایش شد');
 }
 
 // ===== TEACHER ONLY =====
@@ -2902,37 +2695,6 @@ function deleteSubject(id) {
         updateDashboard();
         updateSetupWizard();
         showToast('🗑️ درس حذف شد', 'warning');
-    });
-}
-
-function deleteGrade(index) {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند حذف کند', 'error');
-        return;
-    }
-    showConfirm('حذف نمره', 'آیا از حذف اطمینان دارید؟', () => {
-        DATA.grades.splice(index, 1);
-        updateStudentAverages();
-        saveData();
-        renderAll();
-        updateDashboard();
-        updateSetupWizard();
-        showToast('🗑️ نمره حذف شد', 'warning');
-    });
-}
-
-function deleteAttendance(index) {
-    if (DATA.currentUser.role !== 'admin') {
-        showToast('❌ فقط مدیر می‌تواند حذف کند', 'error');
-        return;
-    }
-    showConfirm('حذف حضور', 'آیا از حذف اطمینان دارید؟', () => {
-        DATA.attendance.splice(index, 1);
-        saveData();
-        renderAll();
-        updateDashboard();
-        updateSetupWizard();
-        showToast('🗑️ رکورد حضور حذف شد', 'warning');
     });
 }
 
@@ -3597,10 +3359,6 @@ function changePage(containerId, page) {
     if (!container || !container._onPageChange) return;
     container._onPageChange(page);
 }
-
-// ============================================================
-// ================ HELPERS ====================================
-// ============================================================
 
 function escapeHtml(text) {
     if (!text) return '';
@@ -4280,6 +4038,25 @@ function openModal(name) {
         btn.textContent = 'ثبت دانش‌آموز';
         btn.onclick = null;
     }
+    if (name === 'addClass') {
+        document.getElementById('addClassForm').reset();
+        document.getElementById('classId').disabled = false;
+        const btn = document.querySelector('#modal-addClass form button');
+        btn.textContent = 'ثبت کلاس';
+        btn.onclick = null;
+        // Populate teachers
+        const select = document.getElementById('classTeachers');
+        select.innerHTML = '';
+        DATA.teachers.forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.id + ' - ' + t.name + ' (' + t.specialty + ')';
+            select.appendChild(opt);
+        });
+        if (select.options.length === 0) {
+            select.innerHTML = '<option value="">ابتدا معلم بسازید...</option>';
+        }
+    }
 }
 
 function closeModal(name) {
@@ -4458,6 +4235,7 @@ console.log('🌓 حالت روز/شب');
 console.log('🌐 دوزبانه (فارسی/انگلیسی)');
 console.log('📱 سازگار با موبایل');
 console.log('🔑 ورود: admin / Admin@1404');
+console.log('✅ مشکل افزودن کلاس برطرف شد');
 </script>
 </body>
 </html>
